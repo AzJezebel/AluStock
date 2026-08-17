@@ -1,3 +1,4 @@
+Setup Trello
 Trying to end up on a good MCD, MLD
 Use cases
 Question for qty of item, deployement, budget, arborescence, disponibilite catalogue
