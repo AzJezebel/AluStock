@@ -1,0 +1,8 @@
+Trying to end up on a good MCD, MLD
+Use cases
+Question for qty of item, deployement, budget, arborescence, disponibilite catalogue
+MCD, MLD, Use Cases, SQL script in Docs/
+
+composer global require laravel/installer
+composer create-project laravel/laravel alustock-catalogue
+npm install && npm run build
