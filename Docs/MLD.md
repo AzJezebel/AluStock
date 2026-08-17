@@ -1,5 +1,5 @@
 GAMME (id, nom, slug, description, image_cover, ordre_affichage, timestamps)
-  1,n ──┬── 1,1 MODELE (id, reference, nom, slug, gamme_id, type_ouvrage_id, description_courte, 
+  1,n  ──┬── 1,1 MODELE (id, reference, nom, slug, gamme_id, type_ouvrage_id, description_courte, 
          │                    description_technique, largeur_min_mm, largeur_max_mm, 
          │                    hauteur_min_mm, hauteur_max_mm, performance_thermique, 
          │                    performance_acoustique, image_principale, est_actif, timestamps)
@@ -31,3 +31,4 @@ MEDIA (id, chemin_fichier, titre, description, type_media, est_principal, timest
 DOCUMENT (id, chemin_fichier, titre, description, type_document, taille_octets, timestamps)
   ── DOCUMENT_ASSOCIATION (document_id, modele_id, piece_id, timestamps)
   ── (0,n) MODELE / PIECE
+
