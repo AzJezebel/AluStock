@@ -77,3 +77,49 @@ public function home()
     $featured = Realisation::where('is_featured', true)->first();
     return view('pages.home', compact('realisations', 'featured'));
 }
+
+[REALISATION]
+- id (PK)
+- title
+- slug (UK)
+- description
+- category
+- images (multivalué)
+- videos (multivalué)
+- model_3d_url
+- is_featured
+- order
+- created_at
+- updated_at
+
+REALISATION (id, title, slug, description, category, images, videos, model_3d_url, is_featured, order, created_at, updated_at)
+
+Acteur: Visiteur
+
+1. Consulter l'accueil
+   - Voir la Hero avec vidéo/3D
+   - Voir les réalisations en grille
+   - Filtrer par catégorie (JS)
+
+2. Consulter une réalisation
+   - Voir les images/vidéos
+   - Visualiser le modèle 3D interactif
+
+3. Consulter "Nos savoir-faire"
+   - Voir les compétences de l'entreprise
+
+4. Navigation
+   - Menu responsive
+   - Scroll fluide
+
+
+   /* Palette Aluminium */
+--primary: #2C3E50;      /* Gris anthracite */
+--secondary: #5D6D7E;     /* Gris aluminium */
+--accent: #E74C3C;        /* Rouge pour les CTA */
+--light: #ECF0F1;         /* Fond clair */
+--dark: #1A252F;          /* Fond sombre pour Hero */
+
+/* Typographie */
+--font-heading: 'Playfair Display', serif;
+--font-body: 'Inter', sans-serif;
