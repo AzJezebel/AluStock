@@ -208,6 +208,22 @@ Les tables `medias` et `documents` utilisent le pattern **polymorphique** de Lar
 9	  Implémenter le système EAV pour caractéristiques	  ☐
 10  Tester les performances (requêtes N+1)	            ☐
 
+Jour 22-23 : Tests & Responsive
+Vérifier sur mobile/tablet/desktop
+
+Tester les performances Lighthouse
+
+Ajouter meta tags OG pour partage
+
+Jour 24-25 : Documentation & Livraison
+README avec installation
+
+Commentaires dans le code
+
+Vidéo de démonstration (optionnel)
+
+
+
 Tous les specs ds CARACTERISTIQUE ou garder approcher hybride (need catalogue)
 
 Aspect	                          Colonnes fixes	                                  EAV
