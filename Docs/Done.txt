@@ -1,3 +1,4 @@
+17/07
 Setup Trello
 Trying to end up on a good MCD, MLD
 Use cases
@@ -11,3 +12,20 @@ npm install && npm run build
 Maquette catalogue portion liste une categorie
 Maquette page details dun item
 https://www.figma.com/make/7RGRWzyCfux4n64bfUV5Xa/Catalogue-site-design?fullscreen=1&t=EXfNIDNd9Llx9lvL-1&code-node-id=0-6
+
+--------------------------------------------------------------------------------------------------------------------------------
+18/07
+docs: Add initial documentation and diagrams for the project
+- Created state diagram for model lifecycle in "Diagramme d'état (Modele).md"
+- Added class diagram for technical catalog in "Diagramme de classes.md"
+- Introduced deployment diagram in "Diagramme de deploiement.md"
+- Developed sequence diagram for model technical sheet in "Diagramme de sequence.md"
+- Established use case diagram for the project in "Diagramme use cases.md"
+
+Debating route setup between RESTful and Metier
+Added Page dacceuil sur maquette Figma pour le site Catalogue
+Recherche sur piste d'hebergement et deploiement
+
+--------------------------------------------------------------------------------------------------------------------------------
+19/07
+Add tasks to Trello and update it
