@@ -12,12 +12,12 @@
 │ - image_cover : STR │          │ - icone : VARCHAR   │          │ - timestamps        │
 │ - ordre : INT       │          │ - timestamps        │          │                     │
 │ - timestamps        │          │                     │          │                     │
-└──────────┬──────────┘          └──────────┬──────────┘          └──────────┬──────────┘
-           │ 1                               │ 1                               │ 1
-           │                                 │                                 │
-           │ 0..*                            │ 0..*                            │ 0..*
-           │                                 │                                 │
-           ▼                                 ▼                                 ▼
+└──────────┬──────────┘          └───────────┬─────────┘          └──────────┬──────────┘
+           │ 1 (une gamme)                   │ 1 (un type)                   │ 1 (un type)
+           │                                 │                               │
+           │ 0..* (plusieurs modèles)        │ 0..* (plusieurs modèles)      │ 0..* (plusieurs pièces)
+           │                                 │                               │
+           ▼                                 ▼                               ▼
 ┌────────────────────────────────────────────────────────────────────────────────────┐
 │                                     MODELE                                         │
 ├────────────────────────────────────────────────────────────────────────────────────┤
@@ -38,10 +38,11 @@
 │ - image_principale : VARCHAR(255)                                                  │
 │ - est_actif : BOOLEAN                                                              │
 │ - timestamps                                                                       │
-└──────────┬──────────────────────────────────────────────────────┬──────────────────┘
-           │ 1                                                   │ 0..*
-           │                                                     │
-           │ 0..*                                                │ 1..*
+└──────────┬─────────────────────────────────────────────────────┬───────────────────┘
+           │ 1 (un modèle)                                       │ 0..* (une pièce
+           │                                                     │  peut être dans
+           │ 0..* (une pièce peut                                │  plusieurs modèles)
+           │  être dans plusieurs modèles)                       │
            │                                                     │
            ▼                                                     ▼
 ┌─────────────────────────────┐                    ┌─────────────────────────────┐
@@ -67,9 +68,10 @@
                                                    │ - est_disponible : BOOLEAN  │
                                                    │ - timestamps                │
                                                    └──────────────┬──────────────┘
-                                                                  │ 1
+                                                                  │ 1 (une pièce)
                                                                   │
-                                                                  │ 0..*
+                                                                  │ 0..* (plusieurs
+                                                                  │ caractéristiques)
                                                                   ▼
                                                    ┌─────────────────────────────┐
                                                    │    CARACTERISTIQUE (EAV)    │
@@ -82,6 +84,7 @@
                                                    │ - ordre_affichage : INT     │
                                                    │ - timestamps                │
                                                    └─────────────────────────────┘
+
 
 ┌─────────────────────────────┐          ┌─────────────────────────────────────────────┐
 │         FINITION            │          │       PIECE_FINITION                        │
@@ -123,3 +126,13 @@
 │ - taille_octets : INT       │
 │ - timestamps                │
 └─────────────────────────────┘
+
+Relation	Cardinalité	Signification
+GAMME → MODELE	(1) → (0,n)	Une gamme contient plusieurs modèles. Un modèle appartient à une gamme.
+TYPE_OUVRAGE → MODELE	(1) → (0,n)	Un type regroupe plusieurs modèles. Un modèle est d'un seul type.
+MODELE ↔ PIECE (via COMPOSITION)	(1,n) ↔ (1,n)	Un modèle est composé de plusieurs pièces. Une pièce peut être dans plusieurs modèles.
+TYPE_PIECE → PIECE	(1) → (0,n)	Un type de pièce regroupe plusieurs pièces. Une pièce a un seul type.
+PIECE ↔ FINITION (via PIECE_FINITION)	(0,n) ↔ (0,n)	Une pièce peut avoir plusieurs finitions. Une finition peut s'appliquer à plusieurs pièces.
+PIECE → CARACTERISTIQUE	(1) → (0,n)	Une pièce a plusieurs caractéristiques. Une caractéristique appartient à une pièce.
+MEDIA ↔ ENTITÉS (via MEDIA_MORPH)	(0,n) ↔ (0,n)	Un média peut être rattaché à plusieurs entités. Une entité peut avoir plusieurs médias.
+DOCUMENT ↔ MODELE/PIECE (via DOCUMENT_ASSOCIATION)	(0,n) ↔ (0,n)	Un document peut être associé à plusieurs entités. Une entité peut avoir plusieurs documents.

@@ -197,14 +197,22 @@ Les tables `medias` et `documents` utilisent le pattern **polymorphique** de Lar
 ============================================================================================================================================================================================================================================================
 
 
-Étape	Description	Statut
-1	Créer les migrations à partir du script SQL	☐
-2	Créer les modèles Eloquent avec relations	☐
-3	Implémenter les Seeders (gammes, types, finitions)	☐
-4	Créer les contrôleurs CRUD pour le backoffice	☐
-5	Implémenter la recherche de pièces (scope + index)	☐
-6	Implémenter les filtres (gamme, type, finition)	☐
-7	Créer les vues du catalogue (listing + fiche)	☐
-8	Ajouter l'upload de médias et documents	☐
-9	Implémenter le système EAV pour caractéristiques	☐
-10	Tester les performances (requêtes N+1)	☐
+1	  Créer les migrations à partir du script SQL	        ☐
+2	  Créer les modèles Eloquent avec relations	          ☐
+3	  Implémenter les Seeders (gammes, types, finitions)	☐
+4	  Créer les contrôleurs CRUD pour le backoffice	      ☐
+5	  Implémenter la recherche de pièces (scope + index)	☐
+6	  Implémenter les filtres (gamme, type, finition)	    ☐
+7	  Créer les vues du catalogue (listing + fiche)	      ☐
+8	  Ajouter l'upload de médias et documents	            ☐
+9	  Implémenter le système EAV pour caractéristiques	  ☐
+10  Tester les performances (requêtes N+1)	            ☐
+
+Tous les specs ds CARACTERISTIQUE ou garder approcher hybride (need catalogue)
+
+Aspect	                          Colonnes fixes	                                  EAV
+Performance des filtres	     ⭐⭐⭐⭐⭐ (index direct)	                ⭐⭐ (jointure + condition sur clé/valeur)
+Lisibilité du code	         $piece->poids_lineaire_kg_m	                $piece->caracteristiques()->where('cle','poids')->first()->valeur
+Validation	                 Native (type DECIMAL, INT)                   À gérer manuellement
+Évolution	                   Ajout d'une colonne = migration	            Ajout d'une ligne = simple seed
+Intégrité des données	       Garantie par le SGBD	                        À garantir par le code

@@ -20,7 +20,7 @@ Ingénieur          Contrôleur          Modele           Composition      Piece
    │                  │<────────────────────────────────────│              │
    │                  │                  │                  │              │
    │                  │                  │                  │ 6. getPiece()│
-   │                  │                  │                  │─────────────>│           A savoir si hybride : Socle commun en colonnes fixes + EAV pour les spécificités. (Modele, Piece ont deja bcp de colonnes specifique a leur caracteristique)
+   │                  │                  │                  │─────────────>│           A savoir si hybride : Socle commun en colonnes fixes + EAV pour les spécificités. (Modele, Piece ont deja bcp de colonnes specifiques a leur caracteristique)
    │                  │                  │                  │              │           Ou EAV pur et tout les spec rentrent dans la table Caracteristique
    │                  │                  │                  │ 7. Pièce     │
    │                  │                  │                  │<─────────────│
