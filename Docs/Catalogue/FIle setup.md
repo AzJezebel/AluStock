@@ -1,3 +1,5 @@
+# Catalogue
+
 resources/views/
 ├── gammes/
 │   └── show.blade.php          # Couche haute

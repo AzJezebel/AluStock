@@ -1,3 +1,5 @@
+# Catalogue
+
 # Guide de démarrage — Sites profilés aluminium (stage dev web)
 
 ## 0. Contexte retenu

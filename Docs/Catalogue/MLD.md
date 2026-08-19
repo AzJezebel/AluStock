@@ -1,3 +1,5 @@
+# Catalogue
+
 GAMME (id, nom, slug, description, image_cover, ordre_affichage, timestamps)
   1,n  ──┬── 1,1 MODELE (id, reference, nom, slug, gamme_id, type_ouvrage_id, description_courte, 
          │                    description_technique, largeur_min_mm, largeur_max_mm, 

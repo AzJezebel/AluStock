@@ -1,3 +1,5 @@
+# Catalogue
+
 Acteurs du Système
 Acteur	Description
 Visiteur	Utilisateur non authentifié, consulte le site vitrine et le catalogue public
