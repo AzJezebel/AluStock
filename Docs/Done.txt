@@ -28,4 +28,23 @@ Recherche sur piste d'hebergement et deploiement
 
 --------------------------------------------------------------------------------------------------------------------------------
 19/07
-Add tasks to Trello and update it
+Todo : Add tasks to Trello and update it
+
+feat: Add detailed use cases for visitors, engineers, and administrators in the catalogue documentation
+
+chore: Remove outdated routes documentation files
+
+feat: Create migration files for gammes, categories, types_composant, ouvrages, composants, and their relationships
+
+feat: Implement migration for composition_ouvrage, finitions, and their associations
+
+feat: Add media and document management migrations with necessary relationships
+
+docs: Add more info on relations/deletions rule for tables
+
+feat: Add Seeders.md with placeholder data to split in files
+
+--------------------------------------------------------------------------------------------------------------------------------
+20/07
+
+Todo : database-setup.sql and check for good practices securing it early
