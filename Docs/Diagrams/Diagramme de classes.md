@@ -1,9 +1,10 @@
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
-│                     DIAGRAMME DE CLASSES - CATALOGUE TECHNIQUE                      │
+│                     DIAGRAMME DE CLASSES - CATALOGUE TECHNIQUE                      │  
+│     Légende : (1,n) = One to Many    (0,n) = Zero to Many    (1,1) = One to One     │ 
 └─────────────────────────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────┐          ┌─────────────────────┐          ┌─────────────────────┐
-│       GAMME         │          │    TYPE_OUVRAGE     │          │     TYPE_PIECE      │
+│       GAMME         │          │    CATEGORIE        │          │   TYPE_COMPOSANT    │
 ├─────────────────────┤          ├─────────────────────┤          ├─────────────────────┤
 │ - id : INT          │          │ - id : INT          │          │ - id : INT          │
 │ - nom : VARCHAR     │          │ - nom : VARCHAR     │          │ - nom : VARCHAR     │
@@ -19,7 +20,7 @@
            │                                 │                               │
            ▼                                 ▼                               ▼
 ┌────────────────────────────────────────────────────────────────────────────────────┐
-│                                     MODELE                                         │
+│                                     OUVRAGE                                        │
 ├────────────────────────────────────────────────────────────────────────────────────┤
 │ - id : INT                                                                         │
 │ - reference : VARCHAR(50) UNIQUE                                                   │
@@ -46,13 +47,13 @@
            │                                                     │
            ▼                                                     ▼
 ┌─────────────────────────────┐                    ┌─────────────────────────────┐
-│   COMPOSITION_MODELE        │                    │          PIECE              │
+│   COMPOSITION_OUVRAGE       │                    │          COMPOSANT          │
 │  (Table d'association)      │                    ├─────────────────────────────┤
 ├─────────────────────────────┤                    │ - id : INT                  │
-│ - modele_id : INT (FK)      │◄───────────────────│ - reference : VARCHAR(50)   │
-│ - piece_id : INT (FK)       │                    │ - designation : VARCHAR(200)│
+│ - ouvrage_id : INT (FK)     │◄───────────────────│ - reference : VARCHAR(50)   │
+│ - composant_id : INT (FK)   │                    │ - designation : VARCHAR(200)│
 │ - quantite : DECIMAL(10,2)  │                    │ - slug : VARCHAR(220)       │
-│ - unite : VARCHAR(20)       │                    │ - type_piece_id : INT (FK)  │
+│ - unite : VARCHAR(20)       │                    │ - type_composant_id :INT(FK)│
 │ - ordre : INT               │                    │ - gamme_id : INT (FK)       │
 │ - longueur_coupe_mm : INT   │                    │ - matiere : VARCHAR(100)    │
 │ - commentaire : TEXT        │                    │ - longueur_barre_mm : INT   │
@@ -77,7 +78,7 @@
                                                    │    CARACTERISTIQUE (EAV)    │
                                                    ├─────────────────────────────┤
                                                    │ - id : INT                  │
-                                                   │ - piece_id : INT (FK)       │
+                                                   │ - composant_id : INT (FK)   │
                                                    │ - cle : VARCHAR(100)        │
                                                    │ - valeur : VARCHAR(255)     │
                                                    │ - unite : VARCHAR(20)       │
@@ -87,10 +88,10 @@
 
 
 ┌─────────────────────────────┐          ┌─────────────────────────────────────────────┐
-│         FINITION            │          │       PIECE_FINITION                        │
+│         FINITION            │          │       COMPOSANT_FINITION                    │
 ├─────────────────────────────┤          │   (Table d'association)                     │
 │ - id : INT                  │          ├─────────────────────────────────────────────┤
-│ - nom : VARCHAR(100)        │◄─────────│ - piece_id : INT (FK)                       │
+│ - nom : VARCHAR(100)        │◄─────────│ - composant_id : INT (FK)                   │
 │ - slug : VARCHAR(120)       │          │ - finition_id : INT (FK)                    │
 │ - code_ral : VARCHAR(10)    │          │ - est_par_defaut : BOOLEAN                  │
 │ - type_finition : ENUM      │          │ - timestamps                                │
@@ -111,7 +112,7 @@
 │ - timestamps                │          └─────────────────────────────────────────────┘
 └─────────────────────────────┘                         │
                                                         │
-                                                        │  (GAMME, TYPE_OUVRAGE, MODELE, PIECE)
+                                                        │  (GAMME, TYPE_OUVRAGE, OUVRAGE, COMPOSANT)
                                                         │  via mediable_type + mediable_id
 
 
@@ -119,8 +120,8 @@
 │         DOCUMENT            │          │      DOCUMENT_ASSOCIATION                   │
 ├─────────────────────────────┤          ├─────────────────────────────────────────────┤
 │ - id : INT                  │◄─────────│ - document_id : INT (FK)                    │
-│ - chemin_fichier : VARCHAR  │          │ - modele_id : INT (FK) NULL                 │
-│ - titre : VARCHAR(200)      │          │ - piece_id : INT (FK) NULL                  │
+│ - chemin_fichier : VARCHAR  │          │ - ouvrage_id : INT (FK) NULL                │
+│ - titre : VARCHAR(200)      │          │ - composant_id : INT (FK) NULL              │
 │ - description : TEXT        │          │ - timestamps                                │
 │ - type_document : ENUM      │          └─────────────────────────────────────────────┘
 │ - taille_octets : INT       │
@@ -128,11 +129,11 @@
 └─────────────────────────────┘
 
 Relation	Cardinalité	Signification
-GAMME → MODELE	(1) → (0,n)	Une gamme contient plusieurs modèles. Un modèle appartient à une gamme.
-TYPE_OUVRAGE → MODELE	(1) → (0,n)	Un type regroupe plusieurs modèles. Un modèle est d'un seul type.
-MODELE ↔ PIECE (via COMPOSITION)	(1,n) ↔ (1,n)	Un modèle est composé de plusieurs pièces. Une pièce peut être dans plusieurs modèles.
-TYPE_PIECE → PIECE	(1) → (0,n)	Un type de pièce regroupe plusieurs pièces. Une pièce a un seul type.
-PIECE ↔ FINITION (via PIECE_FINITION)	(0,n) ↔ (0,n)	Une pièce peut avoir plusieurs finitions. Une finition peut s'appliquer à plusieurs pièces.
-PIECE → CARACTERISTIQUE	(1) → (0,n)	Une pièce a plusieurs caractéristiques. Une caractéristique appartient à une pièce.
+GAMME → OUVRAGE	(1) → (0,n)	Une gamme contient plusieurs modèles. Un modèle appartient à une gamme.
+CATEGORIE → OUVRAGE	(1) → (0,n)	Un type regroupe plusieurs modèles. Un modèle est d'un seul type.
+OUVRAGE ↔ COMPOSANT (via COMPOSITION)	(1,n) ↔ (1,n)	Un modèle est composé de plusieurs pièces. Une pièce peut être dans plusieurs modèles.
+TYPE_COMPOSANT → COMPOSANT	(1) → (0,n)	Un type de pièce regroupe plusieurs pièces. Une pièce a un seul type.
+COMPOSANT ↔ FINITION (via COMPOSANT_FINITION)	(0,n) ↔ (0,n)	Une pièce peut avoir plusieurs finitions. Une finition peut s'appliquer à plusieurs pièces.
+COMPOSANT → CARACTERISTIQUE	(1) → (0,n)	Une pièce a plusieurs caractéristiques. Une caractéristique appartient à une pièce.
 MEDIA ↔ ENTITÉS (via MEDIA_MORPH)	(0,n) ↔ (0,n)	Un média peut être rattaché à plusieurs entités. Une entité peut avoir plusieurs médias.
-DOCUMENT ↔ MODELE/PIECE (via DOCUMENT_ASSOCIATION)	(0,n) ↔ (0,n)	Un document peut être associé à plusieurs entités. Une entité peut avoir plusieurs documents.
+DOCUMENT ↔ OUVRAGE/COMPOSANT (via DOCUMENT_ASSOCIATION)	(0,n) ↔ (0,n)	Un document peut être associé à plusieurs entités. Une entité peut avoir plusieurs documents.
