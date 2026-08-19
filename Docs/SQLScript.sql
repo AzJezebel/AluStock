@@ -1,4 +1,10 @@
--- 1. GAMME
+-- ================================================================
+-- SCRIPT SQL - CATALOGUE TECHNIQUE ALUSTOCK
+-- Tables : Gamme, Categorie, Ouvrage, Composant, Finition, etc.
+-- Version : V2 (orientée métier)
+-- ================================================================
+
+-- 1. GAMME (famille de produits)
 CREATE TABLE gammes (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(100) NOT NULL UNIQUE,
@@ -10,8 +16,8 @@ CREATE TABLE gammes (
     updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP
 );
 
--- 2. TYPE_OUVRAGE
-CREATE TABLE types_ouvrage (
+-- 2. CATEGORIE (type d'ouvrage fonctionnel)
+CREATE TABLE categories (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(100) NOT NULL UNIQUE,
     slug VARCHAR(120) NOT NULL UNIQUE,
@@ -21,14 +27,24 @@ CREATE TABLE types_ouvrage (
     updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP
 );
 
--- 3. MODELE
-CREATE TABLE modeles (
+-- 3. TYPE_COMPOSANT (nature du composant)
+CREATE TABLE types_composant (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nom VARCHAR(100) NOT NULL UNIQUE,
+    slug VARCHAR(120) NOT NULL UNIQUE,
+    description TEXT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- 4. OUVRAGE (produit fini)
+CREATE TABLE ouvrages (
     id INT PRIMARY KEY AUTO_INCREMENT,
     reference VARCHAR(50) NOT NULL UNIQUE,
     nom VARCHAR(200) NOT NULL,
     slug VARCHAR(220) NOT NULL UNIQUE,
     gamme_id INT NOT NULL,
-    type_ouvrage_id INT NOT NULL,
+    categorie_id INT NOT NULL,
     description_courte TEXT NULL,
     description_technique LONGTEXT NULL,
     largeur_min_mm INT NULL,
@@ -42,31 +58,22 @@ CREATE TABLE modeles (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (gamme_id) REFERENCES gammes(id) ON DELETE CASCADE,
-    FOREIGN KEY (type_ouvrage_id) REFERENCES types_ouvrage(id) ON DELETE CASCADE
+    FOREIGN KEY (categorie_id) REFERENCES categories(id) ON DELETE CASCADE
 );
 
--- Index pour modeles
-CREATE INDEX idx_modeles_gamme ON modeles(gamme_id);
-CREATE INDEX idx_modeles_type ON modeles(type_ouvrage_id);
-CREATE INDEX idx_modeles_actif ON modeles(est_actif);
+-- Index pour ouvrages
+CREATE INDEX idx_ouvrages_gamme ON ouvrages(gamme_id);
+CREATE INDEX idx_ouvrages_categorie ON ouvrages(categorie_id);
+CREATE INDEX idx_ouvrages_actif ON ouvrages(est_actif);
+CREATE INDEX idx_ouvrages_reference ON ouvrages(reference);
 
--- 4. TYPE_PIECE
-CREATE TABLE types_piece (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nom VARCHAR(100) NOT NULL UNIQUE,
-    slug VARCHAR(120) NOT NULL UNIQUE,
-    description TEXT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP
-);
-
--- 5. PIECE
-CREATE TABLE pieces (
+-- 5. COMPOSANT (pièce technique)
+CREATE TABLE composants (
     id INT PRIMARY KEY AUTO_INCREMENT,
     reference VARCHAR(50) NOT NULL UNIQUE,
     designation VARCHAR(200) NOT NULL,
     slug VARCHAR(220) NOT NULL UNIQUE,
-    type_piece_id INT NOT NULL,
+    type_composant_id INT NOT NULL,
     gamme_id INT NULL,
     matiere VARCHAR(100) NULL,
     longueur_barre_mm INT NULL,
@@ -82,20 +89,20 @@ CREATE TABLE pieces (
     est_disponible BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (type_piece_id) REFERENCES types_piece(id) ON DELETE CASCADE,
+    FOREIGN KEY (type_composant_id) REFERENCES types_composant(id) ON DELETE CASCADE,
     FOREIGN KEY (gamme_id) REFERENCES gammes(id) ON DELETE SET NULL
 );
 
--- Index pour pieces
-CREATE INDEX idx_pieces_type ON pieces(type_piece_id);
-CREATE INDEX idx_pieces_gamme ON pieces(gamme_id);
-CREATE INDEX idx_pieces_disponible ON pieces(est_disponible);
-CREATE INDEX idx_pieces_reference ON pieces(reference);
+-- Index pour composants
+CREATE INDEX idx_composants_type ON composants(type_composant_id);
+CREATE INDEX idx_composants_gamme ON composants(gamme_id);
+CREATE INDEX idx_composants_disponible ON composants(est_disponible);
+CREATE INDEX idx_composants_reference ON composants(reference);
 
--- 6. COMPOSITION_MODELE
-CREATE TABLE composition_modele (
-    modele_id INT NOT NULL,
-    piece_id INT NOT NULL,
+-- 6. COMPOSITION_OUVRAGE (table de liaison Ouvrage ↔ Composant)
+CREATE TABLE composition_ouvrage (
+    ouvrage_id INT NOT NULL,
+    composant_id INT NOT NULL,
     quantite DECIMAL(10,2) NOT NULL DEFAULT 1,
     unite VARCHAR(20) NOT NULL DEFAULT 'u',
     ordre INT DEFAULT 0,
@@ -103,9 +110,9 @@ CREATE TABLE composition_modele (
     commentaire TEXT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (modele_id, piece_id),
-    FOREIGN KEY (modele_id) REFERENCES modeles(id) ON DELETE CASCADE,
-    FOREIGN KEY (piece_id) REFERENCES pieces(id) ON DELETE CASCADE
+    PRIMARY KEY (ouvrage_id, composant_id),
+    FOREIGN KEY (ouvrage_id) REFERENCES ouvrages(id) ON DELETE CASCADE,
+    FOREIGN KEY (composant_id) REFERENCES composants(id) ON DELETE CASCADE
 );
 
 -- 7. FINITION
@@ -120,32 +127,32 @@ CREATE TABLE finitions (
     updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP
 );
 
--- 8. PIECE_FINITION
-CREATE TABLE piece_finition (
-    piece_id INT NOT NULL,
+-- 8. COMPOSANT_FINITION (table de liaison Composant ↔ Finition)
+CREATE TABLE composant_finition (
+    composant_id INT NOT NULL,
     finition_id INT NOT NULL,
     est_par_defaut BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (piece_id, finition_id),
-    FOREIGN KEY (piece_id) REFERENCES pieces(id) ON DELETE CASCADE,
+    PRIMARY KEY (composant_id, finition_id),
+    FOREIGN KEY (composant_id) REFERENCES composants(id) ON DELETE CASCADE,
     FOREIGN KEY (finition_id) REFERENCES finitions(id) ON DELETE CASCADE
 );
 
--- 9. CARACTERISTIQUE (EAV)
+-- 9. CARACTERISTIQUE (EAV - Entité Attribut Valeur)
 CREATE TABLE caracteristiques (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    piece_id INT NOT NULL,
+    composant_id INT NOT NULL,
     cle VARCHAR(100) NOT NULL,
     valeur VARCHAR(255) NOT NULL,
     unite VARCHAR(20) NULL,
     ordre_affichage INT DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (piece_id) REFERENCES pieces(id) ON DELETE CASCADE
+    FOREIGN KEY (composant_id) REFERENCES composants(id) ON DELETE CASCADE
 );
 
 -- Index pour caracteristiques
-CREATE INDEX idx_caracteristiques_piece ON caracteristiques(piece_id);
+CREATE INDEX idx_caracteristiques_composant ON caracteristiques(composant_id);
 CREATE INDEX idx_caracteristiques_cle ON caracteristiques(cle);
 
 -- 10. MEDIA
@@ -189,15 +196,15 @@ CREATE TABLE documents (
 -- 13. DOCUMENT_ASSOCIATION
 CREATE TABLE document_association (
     document_id INT NOT NULL,
-    modele_id INT NULL,
-    piece_id INT NULL,
+    ouvrage_id INT NULL,
+    composant_id INT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (document_id) REFERENCES documents(id) ON DELETE CASCADE,
-    FOREIGN KEY (modele_id) REFERENCES modeles(id) ON DELETE CASCADE,
-    FOREIGN KEY (piece_id) REFERENCES pieces(id) ON DELETE CASCADE,
-    CHECK (modele_id IS NOT NULL OR piece_id IS NOT NULL)
+    FOREIGN KEY (ouvrage_id) REFERENCES ouvrages(id) ON DELETE CASCADE,
+    FOREIGN KEY (composant_id) REFERENCES composants(id) ON DELETE CASCADE,
+    CHECK (ouvrage_id IS NOT NULL OR composant_id IS NOT NULL)
 );
 
 -- Index pour document_association
-CREATE INDEX idx_doc_assoc_modele ON document_association(modele_id);
-CREATE INDEX idx_doc_assoc_piece ON document_association(piece_id);
+CREATE INDEX idx_doc_assoc_ouvrage ON document_association(ouvrage_id);
+CREATE INDEX idx_doc_assoc_composant ON document_association(composant_id);
