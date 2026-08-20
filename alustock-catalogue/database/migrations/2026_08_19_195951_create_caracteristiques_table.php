@@ -17,7 +17,6 @@ return new class extends Migration
             $table->integer('ordre_affichage')->default(0);
             $table->timestamps();
 
-            $table->index(['caracterisable_type', 'caracterisable_id']);
             $table->index(['caracterisable_id', 'cle']);
             $table->index('cle');
         });

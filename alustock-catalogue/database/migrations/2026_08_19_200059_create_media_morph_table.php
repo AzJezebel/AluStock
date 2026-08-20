@@ -17,7 +17,6 @@ return new class extends Migration
             $table->timestamps();
 
             $table->primary(['media_id', 'mediable_id', 'mediable_type']);
-            $table->index(['mediable_id', 'mediable_type']);
         });
     }
 
