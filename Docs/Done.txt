@@ -48,3 +48,19 @@ feat: Add Seeders.md with placeholder data to split in files
 20/07
 
 Todo : database-setup.sql and check for good practices securing it early
+
+- Created database-setup.sql for initial database setup and user permissions.
+
+feat: Add seeders for database initialization
+
+- Created CaracteristiqueSeeder to populate characteristics for components and works.
+- Added CategorieSeeder for categories related to works.
+- Implemented ComposantFinitionSeeder for component finishes.
+- Developed ComposantSeeder to insert various components with attributes.
+- Introduced CompositionOuvrageSeeder for the composition of works.
+- Added FinitionSeeder for different finishes available.
+- Created GammeSeeder for product ranges.
+- Implemented OuvrageSeeder for different types of works.
+- Added TypeComposantSeeder for component types.
+
+Run all migrations + seed + check DB 
