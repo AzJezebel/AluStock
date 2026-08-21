@@ -64,3 +64,11 @@ feat: Add seeders for database initialization
 - Added TypeComposantSeeder for component types.
 
 Run all migrations + seed + check DB 
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+21/07
+
+Recherche Laracasts + review cours / workshops
+feat: Add models and views structure for Catalogue including Gamme, Categorie, Composant, and related entities
+feat: Implement GammeController with CRUD operations foir admin and reorder functionality
