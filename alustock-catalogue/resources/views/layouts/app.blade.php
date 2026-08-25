@@ -23,30 +23,23 @@
                         sans: ['Inter', 'sans-serif'],
                     },
                     colors: {
-                        primary: {
-                            50: '#eff6ff',
-                            100: '#dbeafe',
-                            200: '#bfdbfe',
-                            300: '#93c5fd',
-                            400: '#60a5fa',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                            800: '#1e40af',
-                            900: '#1e3a8a',
+                        // Anthracite chaud - fond du bandeau utilitaire, du header "hero" et du footer.
+                        // Valeurs approximées visuellement depuis la maquette, à corriger si tu as les hex définitifs.
+                        ink: {
+                            50:  '#f7f5f3',
+                            100: '#eeebe7',
+                            200: '#ddd6cf',
+                            300: '#c2b8ac',
+                            400: '#9c8f80',
+                            500: '#786c5e',
+                            600: '#5c5245',
+                            700: '#453d33',
+                            800: '#2e2822',
+                            900: '#1c1713',
+                            950: '#0f0c0a',
                         },
-                        aluminum: {
-                            50: '#f8fafc',
-                            100: '#f1f5f9',
-                            200: '#e2e8f0',
-                            300: '#cbd5e1',
-                            400: '#94a3b8',
-                            500: '#64748b',
-                            600: '#475569',
-                            700: '#334155',
-                            800: '#1e293b',
-                            900: '#0f172a',
-                        }
+                        // L'accent ambre utilise directement la palette "amber" par défaut de Tailwind
+                        // (amber-600 / 700 / 800) : pas besoin de la redéfinir.
                     }
                 }
             }
@@ -55,102 +48,99 @@
 
     @stack('styles')
 </head>
-<body class="font-sans antialiased bg-aluminum-50 text-aluminum-800">
+<body class="font-sans antialiased bg-ink-50 text-ink-800">
 
     {{-- ============================================================
-         HEADER INDUSTRIEL
+         BANDEAU UTILITAIRE (commun à toutes les pages)
          ============================================================ --}}
-    <header class="bg-white border-b border-aluminum-200 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between py-4 gap-4">
-                
-                {{-- Logo --}}
-                <div class="flex items-center">
-                    <a href="{{ route('home') }}" class="flex items-center space-x-3">
-                        <div class="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">
-                            A
-                        </div>
-                        <div>
-                            <span class="text-xl font-bold text-aluminum-900 tracking-tight">Alu<span class="text-primary-600">Stock</span></span>
-                            <span class="block text-[10px] uppercase tracking-widest text-aluminum-400 font-medium">Distribution industrielle</span>
-                        </div>
-                    </a>
-                </div>
+    <div class="bg-ink-950 text-ink-300 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between">
+            <span class="hidden sm:inline truncate">Catalogue de référence — aluminium industriel et profilés structuraux</span>
+            <div class="flex items-center gap-4 ml-auto">
+                <a href="#" class="hover:text-white transition">Documentation technique</a>
+                <a href="#" class="hover:text-white transition">Contact</a>
+            </div>
+        </div>
+    </div>
 
-                {{-- Barre de recherche --}}
-                <div class="flex-1 max-w-2xl mx-auto md:mx-4 w-full">
-                    <form action="#" method="GET" class="relative">
-                        <input type="text" 
-                               name="q" 
-                               placeholder="Rechercher par référence, alliage, dimension..." 
-                               class="w-full px-4 py-2.5 bg-aluminum-50 border border-aluminum-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition">
-                        <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2 text-aluminum-400 hover:text-primary-600">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                            </svg>
-                        </button>
-                    </form>
-                </div>
+    {{-- ============================================================
+         EN-TÊTE — deux variantes selon la page :
+         - si la vue définit @section('hero') -> header sombre + hero (home uniquement)
+         - sinon -> header clair compact + nav catégories + fil d'Ariane
+         ============================================================ --}}
+    @hasSection('hero')
+        <header class="bg-ink-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between">
+                @include('partials.logo', ['dark' => true])
 
-                {{-- Actions --}}
-                <div class="flex items-center space-x-4">
-                    <a href="#" class="text-aluminum-400 hover:text-primary-600 transition text-sm">
+                <a href="#" class="hidden sm:inline-flex items-center px-4 py-2 border border-white/20 text-white text-sm font-medium rounded-lg hover:bg-white/10 transition">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                    </svg>
+                    Catalogue PDF
+                </a>
+            </div>
+
+            @yield('hero')
+        </header>
+    @else
+        <header class="bg-white border-b border-ink-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row md:items-center gap-4">
+                @include('partials.logo')
+
+                <form action="#" method="GET" class="relative flex-1 max-w-2xl mx-auto w-full">
+                    <input type="text"
+                           name="q"
+                           placeholder="Rechercher par référence, alliage, dimension..."
+                           class="w-full px-4 py-2.5 bg-ink-50 border border-ink-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-600 focus:border-transparent transition">
+                    <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2 text-ink-400 hover:text-amber-700">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
-                    </a>
-                    @auth
-                        <a href="#" class="text-sm font-medium text-primary-600 hover:text-primary-800 transition">
-                            Admin
+                    </button>
+                </form>
+
+                <a href="#" class="inline-flex items-center justify-center px-4 py-2 bg-amber-700 text-white text-sm font-medium rounded-lg hover:bg-amber-800 transition whitespace-nowrap">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                    </svg>
+                    Catalogue PDF
+                </a>
+            </div>
+        </header>
+
+        {{-- Navigation par catégories (dynamique).
+             $navCategories doit être disponible sur toutes les pages internes :
+             le plus simple est un View Composer partagé (voir note de fin de réponse). --}}
+        <nav class="bg-white border-b border-ink-200 sticky top-0 z-40 shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center space-x-1 md:space-x-8 overflow-x-auto py-3 scrollbar-hide">
+                    @foreach(($navCategories ?? []) as $navCategory)
+                        <a href="{{ route('categories.show', $navCategory->slug) }}"
+                           class="whitespace-nowrap text-sm font-medium {{ (($category->slug ?? null) === $navCategory->slug) ? 'text-amber-700' : 'text-ink-600 hover:text-amber-700' }} transition">
+                            {{ $navCategory->nom }}
                         </a>
-                    @endauth
+                    @endforeach
                 </div>
             </div>
-        </div>
-    </header>
+        </nav>
 
-    {{-- ============================================================
-         NAVIGATION PRINCIPALE
-         ============================================================ --}}
-    <nav class="bg-white border-b border-aluminum-200 sticky top-0 z-40 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center space-x-1 md:space-x-6 overflow-x-auto py-3 scrollbar-hide">
-                <a href="{{ route('home') }}" 
-                   class="whitespace-nowrap text-sm font-medium {{ request()->routeIs('home') ? 'text-primary-600' : 'text-aluminum-600 hover:text-primary-600' }} transition">
-                    Accueil
-                </a>
-                <a href="{{ route('gammes.index') }}" 
-                   class="whitespace-nowrap text-sm font-medium {{ request()->routeIs('gammes.*') ? 'text-primary-600' : 'text-aluminum-600 hover:text-primary-600' }} transition">
-                    Gammes
-                </a>
-                <a href="#" 
-                   class="whitespace-nowrap text-sm font-medium {{ request()->routeIs('categories.*') ? 'text-primary-600' : 'text-aluminum-600 hover:text-primary-600' }} transition">
-                    Catégories
-                </a>
-                <a href="#" 
-                   class="whitespace-nowrap text-sm font-medium {{ request()->routeIs('ouvrages.*') ? 'text-primary-600' : 'text-aluminum-600 hover:text-primary-600' }} transition">
-                    Ouvrages
-                </a>
-                <a href="#" 
-                   class="whitespace-nowrap text-sm font-medium {{ request()->routeIs('composants.*') ? 'text-primary-600' : 'text-aluminum-600 hover:text-primary-600' }} transition">
-                    Composants
-                </a>
-                <span class="text-aluminum-300">|</span>
-                <a href="#" 
-                   class="whitespace-nowrap text-sm font-medium text-aluminum-600 hover:text-primary-600 transition">
-                    🔍 Recherche
-                </a>
+        {{-- Fil d'Ariane — chaque page interne définit @section('breadcrumb') si besoin --}}
+        @hasSection('breadcrumb')
+            <div class="bg-white border-b border-ink-100">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-sm text-ink-500">
+                    @yield('breadcrumb')
+                </div>
             </div>
-        </div>
-    </nav>
+        @endif
+    @endif
 
     {{-- ============================================================
          CONTENU PRINCIPAL
          ============================================================ --}}
-    <main class="py-8">
+    <main class="py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            {{-- Messages flash --}}
+
             @if(session('success'))
                 <div class="mb-6 p-4 bg-green-50 border-l-4 border-green-500 text-green-700 rounded" role="alert">
                     {{ session('success') }}
@@ -169,42 +159,26 @@
                 </div>
             @endif
 
-            {{-- Entête de page --}}
-            @hasSection('page-header')
-                @yield('page-header')
-            @else
-                @hasSection('page-title')
-                    <div class="mb-8">
-                        <h1 class="text-3xl font-bold text-aluminum-900 tracking-tight">@yield('page-title')</h1>
-                        @hasSection('page-subtitle')
-                            <p class="text-aluminum-500 mt-1">@yield('page-subtitle')</p>
-                        @endif
-                    </div>
-                @endif
-            @endif
-
-            {{-- Contenu de la page --}}
             @yield('content')
         </div>
     </main>
 
     {{-- ============================================================
-         PIED DE PAGE INDUSTRIEL
+         PIED DE PAGE
          ============================================================ --}}
-    <footer class="bg-aluminum-900 text-aluminum-300 mt-auto">
+    <footer class="bg-ink-950 text-ink-300 mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
                 <div>
-                    <span class="text-lg font-bold text-white">Alu<span class="text-primary-400">Stock</span></span>
-                    <p class="text-sm text-aluminum-400 mt-2">Distribution industrielle d'aluminium et profilés structuraux depuis xxxx.</p>
+                    <span class="text-lg font-bold text-white">Alu<span class="text-amber-500">Stock</span></span>
+                    <p class="text-sm text-ink-400 mt-2">Distribution industrielle d'aluminium et profilés structuraux depuis 2024.</p>
                 </div>
                 <div>
                     <h4 class="text-white font-medium text-sm uppercase tracking-wider">Navigation</h4>
                     <ul class="mt-2 space-y-1 text-sm">
-                        <li><a href="{{ route('gammes.index') }}" class="hover:text-white transition">Gammes</a></li>
-                        <li><a href="#" class="hover:text-white transition">Catégories</a></li>
-                        <li><a href="#" class="hover:text-white transition">Ouvrages</a></li>
-                        <li><a href="#" class="hover:text-white transition">Composants</a></li>
+                        @foreach(($navCategories ?? []) as $navCategory)
+                            <li><a href="{{ route('categories.show', $navCategory->slug) }}" class="hover:text-white transition">{{ $navCategory->nom }}</a></li>
+                        @endforeach
                     </ul>
                 </div>
                 <div>
@@ -217,12 +191,12 @@
                 <div>
                     <h4 class="text-white font-medium text-sm uppercase tracking-wider">Contact</h4>
                     <ul class="mt-2 space-y-1 text-sm">
-                        <li class="text-aluminum-400">contact@alustock.fr</li>
-                        <li class="text-aluminum-400">0696 96 96 96</li>
+                        <li class="text-ink-400">contact@alustock.fr</li>
+                        <li class="text-ink-400">+33 (0)1 23 45 67 89</li>
                     </ul>
                 </div>
             </div>
-            <div class="border-t border-aluminum-800 mt-6 pt-4 text-center text-sm text-aluminum-500">
+            <div class="border-t border-ink-800 mt-6 pt-4 text-center text-sm text-ink-500">
                 &copy; {{ date('Y') }} AluStock. Tous droits réservés. Catalogue de référence — aluminium industriel et profilés structuraux.
             </div>
         </div>
@@ -232,7 +206,6 @@
          SCRIPTS
          ============================================================ --}}
     <script>
-        // Scrollbar hide pour la navigation
         document.addEventListener('DOMContentLoaded', function() {
             const nav = document.querySelector('nav .overflow-x-auto');
             if (nav) {
