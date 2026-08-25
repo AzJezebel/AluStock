@@ -72,3 +72,15 @@ Run all migrations + seed + check DB
 Recherche Laracasts + review cours / workshops
 feat: Add models and views structure for Catalogue including Gamme, Categorie, Composant, and related entities
 feat: Implement GammeController with CRUD operations foir admin and reorder functionality
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+24/07
+
+feat: Add CatalogueController and GammeController with CRUD operations, update routes and views for gammes
+Added views with a bit of style to start and have a feel for the home screen and Gammes listing
+Review of routes practice et names 
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+25/07

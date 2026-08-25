@@ -1,0 +1,45 @@
+// Accueil
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Gammes
+Route::prefix('gammes')->name('gammes.')->group(function () {
+    Route::get('/', [PublicGammeController::class, 'index'])->name('index');
+    Route::get('/{gamme:slug}', [PublicGammeController::class, 'show'])->name('show');
+    Route::get('/{gamme:slug}/ouvrages', [PublicGammeController::class, 'ouvrages'])->name('ouvrages');
+    Route::get('/{gamme:slug}/composants', [PublicGammeController::class, 'composants'])->name('composants');
+});
+
+// Catégories
+Route::prefix('categories')->name('categories.')->group(function () {
+    Route::get('/', [PublicCategorieController::class, 'index'])->name('index');
+    Route::get('/{categorie:slug}', [PublicCategorieController::class, 'show'])->name('show');
+    Route::get('/{categorie:slug}/ouvrages', [PublicCategorieController::class, 'ouvrages'])->name('ouvrages');
+});
+
+// Ouvrages
+Route::prefix('ouvrages')->name('ouvrages.')->group(function () {
+    Route::get('/', [PublicOuvrageController::class, 'index'])->name('index');
+    Route::get('/{ouvrage:slug}', [PublicOuvrageController::class, 'show'])->name('show');
+    Route::get('/{ouvrage:slug}/composition', [PublicOuvrageController::class, 'composition'])->name('composition');
+    Route::get('/{ouvrage:slug}/print', [PublicOuvrageController::class, 'print'])->name('print');
+});
+
+// Composants
+Route::prefix('composants')->name('composants.')->group(function () {
+    Route::get('/', [PublicComposantController::class, 'index'])->name('index');
+    Route::get('/{composant:slug}', [PublicComposantController::class, 'show'])->name('show');
+});
+
+// Recherche
+Route::get('/recherche', [SearchController::class, 'index'])->name('search.index');
+Route::post('/recherche/autocomplete', [SearchController::class, 'autocomplete'])->name('search.autocomplete');
+
+// Documents
+Route::get('/documents/{document}/telecharger', [DocumentController::class, 'download'])->name('documents.download');
+
+// Exports
+Route::prefix('exports')->name('exports.')->group(function () {
+    Route::get('/gammes', [ExportController::class, 'gammes'])->name('gammes');
+    Route::get('/ouvrages', [ExportController::class, 'ouvrages'])->name('ouvrages');
+    Route::get('/composants', [ExportController::class, 'composants'])->name('composants');
+});
