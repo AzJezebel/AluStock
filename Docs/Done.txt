@@ -84,3 +84,13 @@ Review of routes practice et names
 
 --------------------------------------------------------------------------------------------------------------------------------
 25/07
+
+Commencer a edit les 2 views actuelles a se rapprocher de la maquette visuelle
+Call Benjamin
+Recherche deploiement / hebergement / good practices
+Views layouts/app, gammes/index, partials/logo edited pour etre proche dun rendu confort (GAMMES ? CATEGORIES? BOTH?)
+Refonte MLD? Renommage probable
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+26/07
