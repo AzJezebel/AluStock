@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Composant extends Model
 {
+    protected $table = 'composants';
     protected $fillable = [
         'reference',
         'designation',
@@ -57,7 +58,14 @@ class Composant extends Model
 
     public function medias()
     {
-        return $this->morphMany(Media::class, 'mediable');
+        return $this->morphToMany(
+            Media::class,
+            'mediable',
+            'media_morph',
+            'mediable_id',
+            'media_id'
+        )->withPivot('ordre')
+         ->orderBy('pivot_ordre');
     }
 
     public function documents()

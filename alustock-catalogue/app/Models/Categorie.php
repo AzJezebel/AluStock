@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Categorie extends Model
 {
+    protected $table = 'categories';
     protected $fillable = [
         'nom',
         'slug',
@@ -21,7 +22,14 @@ class Categorie extends Model
 
     public function medias()
     {
-        return $this->morphMany(Media::class, 'mediable');
+        return $this->morphToMany(
+            Media::class,
+            'mediable',
+            'media_morph',
+            'mediable_id',
+            'media_id'
+        )->withPivot('ordre')
+         ->orderBy('pivot_ordre');
     }
 
     public function getRouteKeyName()

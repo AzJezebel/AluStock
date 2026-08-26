@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Finition extends Model
 {
+    protected $table = 'finitions';
     protected $fillable = [
         'nom',
         'slug',

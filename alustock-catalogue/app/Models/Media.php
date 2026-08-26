@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Media extends Model
 {
+    protected $table = 'medias';
     protected $fillable = [
         'chemin_fichier',
         'titre',

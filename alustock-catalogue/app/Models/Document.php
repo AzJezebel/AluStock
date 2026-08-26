@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Document extends Model
 {
+    protected $table = 'documents';
     protected $fillable = [
         'chemin_fichier',
         'titre',

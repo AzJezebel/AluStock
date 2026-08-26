@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Ouvrage extends Model
 {
+    protected $table = 'ouvrages';
     protected $fillable = [
         'reference',
         'nom',
@@ -50,7 +51,14 @@ class Ouvrage extends Model
 
     public function medias()
     {
-        return $this->morphMany(Media::class, 'mediable');
+        return $this->morphToMany(
+            Media::class,          // Modèle cible
+            'mediable',            // Nom de la relation polymorphique
+            'media_morph',         // Nom de la table pivot
+            'mediable_id',         // Clé étrangère sur l'entité cible (dans media_morph)
+            'media_id'             // Clé étrangère sur le média (dans media_morph)
+        )->withPivot('ordre')      // Attribut supplémentaire dans la table pivot
+         ->orderBy('pivot_ordre'); // Ordre par la colonne pivot
     }
 
     public function documents()

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TypeComposant extends Model
 {
+    protected $table = 'types_composant';
     protected $fillable = [
         'nom',
         'slug',

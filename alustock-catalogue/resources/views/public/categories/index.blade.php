@@ -1,15 +1,3 @@
-//ON HOLD PROLLY REMOVING GAMME AS A CONCEPT
-
-
-
-
-
-
-
-
-
-
-
 {{-- resources/views/public/categories/index.blade.php --}}
 @extends('layouts.app')
 
@@ -81,8 +69,8 @@
     </h2>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        @forelse($gammes as $category)
-            <a href="{{ route('gammes.show', $category->slug) }}"
+        @forelse($categories as $category)
+            <a href="{{ route('categories.show', $category->slug) }}"
                class="group bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-ink-200 hover:border-amber-300 flex flex-col">
 
                 <div class="h-36 bg-ink-100 overflow-hidden">

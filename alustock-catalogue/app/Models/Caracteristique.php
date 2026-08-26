@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Caracteristique extends Model
 {
+    protected $table = 'caracteristiques';
     protected $fillable = [
         'caracterisable_id',
         'caracterisable_type',
