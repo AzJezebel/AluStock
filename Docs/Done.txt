@@ -94,3 +94,17 @@ Refonte MLD? Renommage probable
 
 --------------------------------------------------------------------------------------------------------------------------------
 26/07
+
+Add category and component views with detailed layouts
+
+- Created `show.blade.php` for displaying category details and associated works.
+- Added `index.blade.php` and `show.blade.php` for components, including filtering and detailed views.
+- Implemented `composition.blade.php` for displaying the composition of works.
+- Developed `index.blade.php` and `show.blade.php` for works, featuring pagination, filtering, and detailed descriptions.
+- Enhanced UI with responsive design and improved navigation elements.
+feat: views more in tune with mockup, should keep gamme? or only category, precisions in models for table names, added views index
+ and show for composants, ouvrages, categories, tweak on media/mediamorph table logic in models
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+27/07
