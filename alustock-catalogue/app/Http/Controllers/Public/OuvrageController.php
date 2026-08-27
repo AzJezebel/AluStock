@@ -110,16 +110,46 @@ class OuvrageController extends Controller
     /**
      * Affiche la composition détaillée d'un ouvrage
      */
+    // public function composition(Ouvrage $ouvrage)
+    // {
+    //     $composition = $ouvrage->composants()
+    //         ->with(['finitions', 'typeComposant'])
+    //         ->orderBy('pivot_ordre')
+    //         ->get();
+
+    //     return view('public.ouvrages.composition', compact('ouvrage', 'composition'));
+    // }
+
+    /**
+ * Affiche la composition détaillée d'un ouvrage
+ */
     public function composition(Ouvrage $ouvrage)
     {
         $composition = $ouvrage->composants()
-            ->with(['finitions', 'typeComposant'])
+            ->with([
+                'typeComposant',
+                'finitions' => function ($query) {
+                    $query->where('est_par_defaut', true);
+                },
+                'caracteristiques' => function ($query) {
+                    $query->orderBy('ordre_affichage');
+                },
+            ])
             ->orderBy('pivot_ordre')
             ->get();
-
-        return view('public.ouvrages.composition', compact('ouvrage', 'composition'));
+    
+        // Calcul du poids total estimé
+        $poidsTotal = 0;
+        foreach ($composition as $composant) {
+            if ($composant->poids_lineaire_kg_m && $composant->pivot->longueur_coupe_mm) {
+                $poidsTotal += ($composant->poids_lineaire_kg_m * $composant->pivot->longueur_coupe_mm / 1000) * $composant->pivot->quantite;
+            } elseif ($composant->poids_lineaire_kg_m) {
+                $poidsTotal += ($composant->poids_lineaire_kg_m * ($composant->longueur_barre_mm ?? 6000) / 1000) * $composant->pivot->quantite;
+            }
+        }
+    
+        return view('public.ouvrages.composition', compact('ouvrage', 'composition', 'poidsTotal'));
     }
-
     /**
      * Version imprimable de la fiche ouvrage
      */

@@ -1,14 +1,14 @@
 <?php
 
 use App\Http\Controllers\Public\CategorieController;
+use App\Http\Controllers\Public\ComposantController;
 use App\Http\Controllers\Public\GammeController;
 use App\Http\Controllers\Public\OuvrageController;
-use App\Http\Controllers\Public\ComposantController;
 
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('catergories.index');
 })->name('home');
 
 Route::get('/gammes', [GammeController::class, 'index'])->name('gammes.index');

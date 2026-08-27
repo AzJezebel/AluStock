@@ -43,3 +43,5 @@ Route::prefix('exports')->name('exports.')->group(function () {
     Route::get('/ouvrages', [ExportController::class, 'ouvrages'])->name('ouvrages');
     Route::get('/composants', [ExportController::class, 'composants'])->name('composants');
 });
+
+

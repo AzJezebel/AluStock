@@ -1,31 +1,30 @@
-{{-- resources/views/public/categories/show.blade.php --}}
+{{-- resources/views/public/gammes/show.blade.php --}}
 @extends('layouts.app')
 
-@section('title', $categorie->nom . ' - AluStock')
+@section('title', $gamme->nom . ' - AluStock')
 
 @section('breadcrumb')
     <a href="{{ route('home') }}" class="hover:text-ink-700">Accueil</a>
     <span class="mx-2">›</span>
-    <a href="{{ route('categories.index') }}" class="hover:text-ink-700">Catégories</a>
+    <a href="{{ route('gammes.index') }}" class="hover:text-ink-700">Gammes</a>
     <span class="mx-2">›</span>
-    <span class="text-ink-700 font-medium">{{ $categorie->nom }}</span>
+    <span class="text-ink-700 font-medium">{{ $gamme->nom }}</span>
 @endsection
 
 @section('content')
 <div>
+    {{-- En-tête --}}
     <div class="mb-6">
-        <h1 class="text-2xl font-bold text-ink-900 flex items-center gap-3">
-            @if($categorie->icone)<span>{{ $categorie->icone }}</span>@endif
-            {{ $categorie->nom }}
-        </h1>
-        @if($categorie->description)
-            <p class="text-ink-500 text-sm mt-1">{{ $categorie->description }}</p>
+        <h1 class="text-2xl font-bold text-ink-900">{{ $gamme->nom }}</h1>
+        @if($gamme->description)
+            <p class="text-ink-500 text-sm mt-1">{{ $gamme->description }}</p>
         @endif
         <div class="mt-2 text-sm text-ink-400">
             <span class="font-medium text-ink-700">{{ $ouvrages->total() }}</span> ouvrage(s)
         </div>
     </div>
 
+    {{-- Ouvrages de la gamme --}}
     @if($ouvrages->count())
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach($ouvrages as $ouvrage)
@@ -41,7 +40,7 @@
                             <p class="text-sm text-ink-500 mt-2 line-clamp-2">{{ $ouvrage->description_courte }}</p>
                         @endif
                         <div class="flex items-center justify-between mt-4 pt-3 border-t border-ink-100">
-                            <span class="text-xs text-ink-400">{{ $ouvrage->gamme?->nom ?? 'Sans gamme' }}</span>
+                            <span class="text-xs text-ink-400">{{ $ouvrage->created_at?->format('d/m/Y') ?? 'N/A' }}</span>
                             <a href="{{ route('ouvrages.show', $ouvrage->slug) }}" 
                                class="inline-flex items-center text-sm font-medium text-amber-700 hover:text-amber-800 transition">
                                 Voir détails
@@ -57,7 +56,7 @@
         <div class="mt-6">{{ $ouvrages->links() }}</div>
     @else
         <div class="text-center py-12 bg-white rounded-xl border border-ink-200">
-            <p class="text-ink-500">Aucun ouvrage dans cette catégorie.</p>
+            <p class="text-ink-500">Aucun ouvrage dans cette gamme.</p>
         </div>
     @endif
 </div>

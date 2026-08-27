@@ -108,3 +108,5 @@ feat: views more in tune with mockup, should keep gamme? or only category, preci
 
 --------------------------------------------------------------------------------------------------------------------------------
 27/07
+
+Bloquage ds le linkage de ServiceProvider into app/config et view composer

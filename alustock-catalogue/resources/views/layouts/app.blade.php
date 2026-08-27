@@ -23,8 +23,6 @@
                         sans: ['Inter', 'sans-serif'],
                     },
                     colors: {
-                        // Anthracite chaud - fond du bandeau utilitaire, du header "hero" et du footer.
-                        // Valeurs approximées visuellement depuis la maquette, à corriger si tu as les hex définitifs.
                         ink: {
                             50:  '#f7f5f3',
                             100: '#eeebe7',
@@ -38,8 +36,6 @@
                             900: '#1c1713',
                             950: '#0f0c0a',
                         },
-                        // L'accent ambre utilise directement la palette "amber" par défaut de Tailwind
-                        // (amber-600 / 700 / 800) : pas besoin de la redéfinir.
                     }
                 }
             }
@@ -51,7 +47,7 @@
 <body class="font-sans antialiased bg-ink-50 text-ink-800">
 
     {{-- ============================================================
-         BANDEAU UTILITAIRE (commun à toutes les pages)
+         BANDEAU UTILITAIRE
          ============================================================ --}}
     <div class="bg-ink-950 text-ink-300 text-xs">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between">
@@ -64,9 +60,7 @@
     </div>
 
     {{-- ============================================================
-         EN-TÊTE — deux variantes selon la page :
-         - si la vue définit @section('hero') -> header sombre + hero (home uniquement)
-         - sinon -> header clair compact + nav catégories + fil d'Ariane
+         EN-TÊTE
          ============================================================ --}}
     @hasSection('hero')
         <header class="bg-ink-900">
@@ -108,60 +102,65 @@
                 </a>
             </div>
         </header>
-
-        {{-- Navigation par catégories (dynamique).
-             $navCategories doit être disponible sur toutes les pages internes :
-             le plus simple est un View Composer partagé (voir note de fin de réponse). --}}
-        <nav class="bg-white border-b border-ink-200 sticky top-0 z-40 shadow-sm">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center space-x-1 md:space-x-8 overflow-x-auto py-3 scrollbar-hide">
-                    @foreach(($navCategories ?? []) as $navCategory)
-                        <a href="{{ route('categories.show', $navCategory->slug) }}"
-                           class="whitespace-nowrap text-sm font-medium {{ (($category->slug ?? null) === $navCategory->slug) ? 'text-amber-700' : 'text-ink-600 hover:text-amber-700' }} transition">
-                            {{ $navCategory->nom }}
-                        </a>
-                    @endforeach
-                </div>
-            </div>
-        </nav>
-
-        {{-- Fil d'Ariane — chaque page interne définit @section('breadcrumb') si besoin --}}
-        @hasSection('breadcrumb')
-            <div class="bg-white border-b border-ink-100">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-sm text-ink-500">
-                    @yield('breadcrumb')
-                </div>
-            </div>
-        @endif
     @endif
 
     {{-- ============================================================
-         CONTENU PRINCIPAL
+         CONTENU PRINCIPAL AVEC SIDEBAR
          ============================================================ --}}
-    <main class="py-6">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 gap-6">
+        
+        {{-- SIDEBAR GAUCHE --}}
+        <aside class="md:w-64 lg:w-72 flex-shrink-0">
+            <div class="sticky top-20 max-h-[calc(100vh-8rem)] overflow-y-auto bg-white rounded-xl shadow-sm border border-ink-200 p-3">
+                
+                {{-- Bouton de bascule mobile --}}
+                <button class="md:hidden w-full flex items-center justify-between text-left text-sm font-medium text-ink-700 p-2 hover:bg-ink-50 rounded-lg" 
+                        onclick="document.getElementById('sidebar-menu').classList.toggle('hidden')">
+                    <span>Menu</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
 
+                {{-- Menu --}}
+                <nav id="sidebar-menu" class="hidden md:block mt-2 space-y-1 text-sm">
+                    @include('partials.sidebar-menu')
+                </nav>
+            </div>
+        </aside>
+
+        {{-- CONTENU PRINCIPAL --}}
+        <main class="flex-1 min-w-0">
+            {{-- Fil d'Ariane (si défini) --}}
+            @hasSection('breadcrumb')
+                <div class="mb-4 text-sm text-ink-500">
+                    @yield('breadcrumb')
+                </div>
+            @endif
+
+            {{-- Messages flash --}}
             @if(session('success'))
-                <div class="mb-6 p-4 bg-green-50 border-l-4 border-green-500 text-green-700 rounded" role="alert">
+                <div class="mb-4 p-4 bg-green-50 border-l-4 border-green-500 text-green-700 rounded" role="alert">
                     {{ session('success') }}
                 </div>
             @endif
 
             @if(session('error'))
-                <div class="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded" role="alert">
+                <div class="mb-4 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded" role="alert">
                     {{ session('error') }}
                 </div>
             @endif
 
             @if(session('warning'))
-                <div class="mb-6 p-4 bg-yellow-50 border-l-4 border-yellow-500 text-yellow-700 rounded" role="alert">
+                <div class="mb-4 p-4 bg-yellow-50 border-l-4 border-yellow-500 text-yellow-700 rounded" role="alert">
                     {{ session('warning') }}
                 </div>
             @endif
 
+            {{-- Contenu de la page --}}
             @yield('content')
-        </div>
-    </main>
+        </main>
+    </div>
 
     {{-- ============================================================
          PIED DE PAGE
@@ -177,7 +176,7 @@
                     <h4 class="text-white font-medium text-sm uppercase tracking-wider">Navigation</h4>
                     <ul class="mt-2 space-y-1 text-sm">
                         @foreach(($navCategories ?? []) as $navCategory)
-                            <li><a href="{{ route('categories.show', $navCategory->slug) }}" class="hover:text-white transition">{{ $navCategory->nom }}</a></li>
+                            <li><a href="{{ route('ouvrages.index', ['categorie' => $navCategory->slug]) }}" class="hover:text-white transition">{{ $navCategory->nom }}</a></li>
                         @endforeach
                     </ul>
                 </div>
