@@ -110,3 +110,17 @@ feat: views more in tune with mockup, should keep gamme? or only category, preci
 27/07
 
 Bloquage ds le linkage de ServiceProvider into app/config et view composer
+
+Refactor ouvrage views and sidebar for improved navigation and styling
+
+- Updated index view to handle both categories and ranges in the breadcrumb and title.
+- Enhanced the display of filters and the number of ouvrages in the index view.
+- Improved styling consistency across the index and show views for ouvrages.
+- Added a new SidebarComposer to manage categories and ranges for sidebar rendering.
+- Created a sidebar menu partial to display categories and ranges with counts.
+- Introduced a new show view for gammes to display associated ouvrages.
+- Adjusted routes to ensure proper navigation and view rendering.
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+28/07
