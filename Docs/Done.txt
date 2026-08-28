@@ -1,4 +1,4 @@
-17/07
+17/08
 Setup Trello
 Trying to end up on a good MCD, MLD
 Use cases
@@ -27,7 +27,7 @@ Added Page dacceuil sur maquette Figma pour le site Catalogue
 Recherche sur piste d'hebergement et deploiement
 
 --------------------------------------------------------------------------------------------------------------------------------
-19/07
+19/08
 Todo : Add tasks to Trello and update it
 
 feat: Add detailed use cases for visitors, engineers, and administrators in the catalogue documentation
@@ -45,7 +45,7 @@ docs: Add more info on relations/deletions rule for tables
 feat: Add Seeders.md with placeholder data to split in files
 
 --------------------------------------------------------------------------------------------------------------------------------
-20/07
+20/08
 
 Todo : database-setup.sql and check for good practices securing it early
 
@@ -67,7 +67,7 @@ Run all migrations + seed + check DB
 
 
 --------------------------------------------------------------------------------------------------------------------------------
-21/07
+21/08
 
 Recherche Laracasts + review cours / workshops
 feat: Add models and views structure for Catalogue including Gamme, Categorie, Composant, and related entities
@@ -75,7 +75,7 @@ feat: Implement GammeController with CRUD operations foir admin and reorder func
 
 
 --------------------------------------------------------------------------------------------------------------------------------
-24/07
+24/08
 
 feat: Add CatalogueController and GammeController with CRUD operations, update routes and views for gammes
 Added views with a bit of style to start and have a feel for the home screen and Gammes listing
@@ -83,7 +83,7 @@ Review of routes practice et names
 
 
 --------------------------------------------------------------------------------------------------------------------------------
-25/07
+25/08
 
 Commencer a edit les 2 views actuelles a se rapprocher de la maquette visuelle
 Call Benjamin
@@ -93,7 +93,7 @@ Refonte MLD? Renommage probable
 
 
 --------------------------------------------------------------------------------------------------------------------------------
-26/07
+26/08
 
 Add category and component views with detailed layouts
 
@@ -107,7 +107,7 @@ feat: views more in tune with mockup, should keep gamme? or only category, preci
 
 
 --------------------------------------------------------------------------------------------------------------------------------
-27/07
+27/08
 
 Bloquage ds le linkage de ServiceProvider into app/config et view composer
 
@@ -123,4 +123,27 @@ Refactor ouvrage views and sidebar for improved navigation and styling
 
 
 --------------------------------------------------------------------------------------------------------------------------------
-28/07
+28/08
+
+feat: Add HomeController and home view with featured categories and gammes
+
+- Implemented HomeController to fetch featured categories and gammes for the homepage.
+- Created a new home.blade.php view to display the hero section, featured categories, and gammes.
+- Anim and effects on home view
+- Updated routes to point the home page to the new HomeController.
+- Added global styles for sticky footer and sidebar in app.blade.php.
+- Enhanced Categorie and Gamme models with a method to count associated composants.
+- Updated categories and gammes index views to reflect new data structure and routes.
+- Improved search form actions in various views to use named routes.
+
+feat: Implement search functionality with autocomplete and advanced filters
+
+- Added SearchController to handle search queries and autocomplete requests.
+- Created routes for search index and autocomplete.
+- Developed search index view with filters for categories and gammes.
+- Enhanced search results display for ouvrages and composants.
+- Implemented AJAX for autocomplete suggestions in the search bar.
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+31/08
