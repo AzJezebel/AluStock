@@ -99,6 +99,27 @@
                 max-height: none;
             }
         }
+
+        /* Styles pour l'autocomplétion */
+        #search-results {
+            max-height: 400px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+        }
+        #search-results::-webkit-scrollbar {
+            width: 4px;
+        }
+        #search-results::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        #search-results::-webkit-scrollbar-thumb {
+            background: #c2b8ac;
+            border-radius: 4px;
+        }
+        #search-results::-webkit-scrollbar-thumb:hover {
+            background: #9c8f80;
+        }
     </style>
 
     @stack('styles')
@@ -141,12 +162,24 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row md:items-center gap-4">
                 @include('partials.logo')
 
-                <form action="{{ route('search.index') }}" method="GET" class="relative flex-1 max-w-2xl mx-auto w-full">
+                {{-- Barre de recherche avec autocomplétion --}}
+                <form action="{{ route('search.index') }}" method="GET" class="relative flex-1 max-w-2xl mx-auto w-full" id="search-form">
                     <input type="text"
                            name="q"
+                           id="search-input"
                            placeholder="Rechercher par référence, alliage, dimension..."
-                           class="w-full px-4 py-2.5 bg-ink-50 border border-ink-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-600 focus:border-transparent transition">
-                    <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2 text-ink-400 hover:text-amber-700">
+                           class="w-full px-4 py-2.5 bg-ink-50 border border-ink-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-600 focus:border-transparent transition"
+                           autocomplete="off">
+                    
+                    {{-- Résultats autocomplétion --}}
+                    <div id="search-results" class="absolute left-0 right-0 top-full mt-1 bg-white rounded-xl shadow-lg border border-ink-200 overflow-hidden hidden z-50">
+                        <div id="search-results-list" class="divide-y divide-ink-100 max-h-80 overflow-y-auto"></div>
+                        <div class="px-4 py-2 bg-ink-50 text-xs text-ink-400 text-center border-t border-ink-100">
+                            Appuyez sur Entrée pour voir tous les résultats
+                        </div>
+                    </div>
+
+                    <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2 text-ink-400 hover:text-amber-700 transition">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
@@ -261,7 +294,7 @@
     </footer>
 
     {{-- ============================================================
-         SCRIPTS
+         SCRIPTS (inclut l'autocomplétion)
          ============================================================ --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -270,8 +303,165 @@
             if (nav) {
                 nav.classList.add('scrollbar-hide');
             }
+
+            // ============================================================
+            // AUTOCOMPLÉTION — barre de recherche
+            // ============================================================
+            const searchInput = document.getElementById('search-input');
+            const resultsContainer = document.getElementById('search-results');
+            const resultsList = document.getElementById('search-results-list');
+            let searchTimeout = null;
+            let isNavigating = false;
+
+            if (!searchInput || !resultsContainer || !resultsList) {
+                return;
+            }
+
+            // Fonction pour formater les résultats
+            function renderResults(data) {
+                if (data.length === 0) {
+                    resultsList.innerHTML = `
+                        <div class="px-4 py-4 text-sm text-ink-400 text-center">
+                            Aucun résultat trouvé pour "<span class="font-medium text-ink-600">${searchInput.value.trim()}</span>"
+                        </div>
+                    `;
+                    resultsContainer.classList.remove('hidden');
+                    return;
+                }
+
+                let html = '';
+                data.forEach(item => {
+                    const badgeColor = item.type === 'ouvrage' 
+                        ? 'bg-amber-100 text-amber-700' 
+                        : 'bg-blue-100 text-blue-700';
+                    
+                    const icon = item.type === 'ouvrage' 
+                        ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>' 
+                        : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>';
+                    
+                    html += `
+                        <a href="${item.url}" class="flex items-center gap-3 px-4 py-3 hover:bg-ink-50 transition group">
+                            <div class="w-8 h-8 flex-shrink-0 rounded-lg bg-ink-100 flex items-center justify-center text-ink-400 group-hover:bg-amber-100 group-hover:text-amber-700 transition">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    ${icon}
+                                </svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-sm font-medium text-ink-900 group-hover:text-amber-700 transition truncate">
+                                        ${item.label}
+                                    </span>
+                                    <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium ${badgeColor} flex-shrink-0">
+                                        ${item.badge}
+                                    </span>
+                                </div>
+                                <span class="text-xs text-ink-400">Réf. ${item.reference}</span>
+                            </div>
+                            <svg class="w-4 h-4 text-ink-300 group-hover:text-amber-600 transition flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    `;
+                });
+
+                resultsList.innerHTML = html;
+                resultsContainer.classList.remove('hidden');
+            }
+
+            // Gestion de l'input
+            searchInput.addEventListener('input', function() {
+                const query = this.value.trim();
+
+                clearTimeout(searchTimeout);
+
+                if (query.length < 2) {
+                    resultsContainer.classList.add('hidden');
+                    return;
+                }
+
+                searchTimeout = setTimeout(function() {
+                    fetch(`/search/autocomplete?q=${encodeURIComponent(query)}`)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Erreur réseau');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            renderResults(data);
+                        })
+                        .catch(() => {
+                            resultsList.innerHTML = `
+                                <div class="px-4 py-4 text-sm text-red-400 text-center">
+                                    Une erreur est survenue lors de la recherche.
+                                </div>
+                            `;
+                            resultsContainer.classList.remove('hidden');
+                        });
+                }, 300);
+            });
+
+            // Navigation clavier (flèches + Entrée)
+            let selectedIndex = -1;
+
+            searchInput.addEventListener('keydown', function(e) {
+                const items = resultsList.querySelectorAll('a');
+                
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
+                    highlightItem(items, selectedIndex);
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    selectedIndex = Math.max(selectedIndex - 1, -1);
+                    highlightItem(items, selectedIndex);
+                } else if (e.key === 'Enter') {
+                    if (selectedIndex >= 0 && items[selectedIndex]) {
+                        e.preventDefault();
+                        window.location.href = items[selectedIndex].href;
+                    }
+                    // Sinon, le formulaire est soumis normalement
+                }
+            });
+
+            function highlightItem(items, index) {
+                items.forEach((item, i) => {
+                    if (i === index) {
+                        item.classList.add('bg-ink-50');
+                        item.scrollIntoView({ block: 'nearest' });
+                    } else {
+                        item.classList.remove('bg-ink-50');
+                    }
+                });
+            }
+
+            // Cacher les résultats en cas de clic à l'extérieur
+            document.addEventListener('click', function(e) {
+                const searchContainer = document.getElementById('search-form');
+                if (searchContainer && !searchContainer.contains(e.target)) {
+                    resultsContainer.classList.add('hidden');
+                    selectedIndex = -1;
+                }
+            });
+
+            // Fermer avec la touche Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    resultsContainer.classList.add('hidden');
+                    selectedIndex = -1;
+                }
+            });
+
+            // Réinitialiser l'index quand on ouvre/ferme les résultats
+            const observer = new MutationObserver(() => {
+                if (resultsContainer.classList.contains('hidden')) {
+                    selectedIndex = -1;
+                }
+            });
+            observer.observe(resultsContainer, { attributes: true, attributeFilter: ['class'] });
         });
     </script>
+
     @stack('scripts')
 </body>
 </html>

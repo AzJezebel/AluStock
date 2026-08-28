@@ -51,6 +51,11 @@ Route::prefix('composants')->name('composants.')->group(function () {
 });
 
 
+use App\Http\Controllers\Public\SearchController;
 
-// PLACEHOLDER FOR SEARCH ROUTE
-Route::get('/search', [OuvrageController::class, 'search'])->name('search.index');
+// Recherche
+Route::prefix('search')->name('search.')->group(function () {
+    Route::get('/', [SearchController::class, 'index'])->name('index');
+    Route::get('/autocomplete', [SearchController::class, 'autocomplete'])->name('autocomplete');
+    Route::post('/quick', [SearchController::class, 'quickSearch'])->name('quick');
+});
