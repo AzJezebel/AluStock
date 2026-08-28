@@ -25,6 +25,12 @@ class Gamme extends Model
     {
         return $this->hasMany(Composant::class);
     }
+    
+    // Comptage des composants via les ouvrages de la gamme
+    public function getComposantsCountAttribute()
+    {
+        return $this->ouvrages()->withCount('composants')->get()->sum('composants_count');
+    }
 
     public function medias()
     {

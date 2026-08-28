@@ -20,6 +20,11 @@ class Categorie extends Model
         return $this->hasMany(Ouvrage::class);
     }
 
+    // Comptage des composants via les ouvrages de la catégorie
+    public function getComposantsCountAttribute()
+    {
+        return $this->ouvrages()->withCount('composants')->get()->sum('composants_count');
+    }
     public function medias()
     {
         return $this->morphToMany(

@@ -4,9 +4,7 @@
 @section('title', 'AluStock — Catalogue de référence aluminium industriel')
 
 {{-- ============================================================
-     HERO (uniquement sur cette page — déclenche le header sombre
-     dans le layout via @hasSection('hero'))
-     Les chiffres sont en dur pour l'instant, comme convenu.
+     HERO
      ============================================================ --}}
 @section('hero')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
@@ -24,7 +22,7 @@
                 connecteurs et extrusions sur mesure. Fiches techniques EN disponibles pour chaque produit.
             </p>
 
-            <form action="#" method="GET" class="mt-6 flex max-w-xl">
+            <form action="{{ route('search.index') }}" method="GET" class="mt-6 flex max-w-xl">
                 <input type="text"
                        name="q"
                        placeholder="Référence, alliage, dimension..."
@@ -35,14 +33,14 @@
             </form>
         </div>
 
-        {{-- Stats en dur (placeholders) — à brancher sur le controller plus tard --}}
+        {{-- Stats --}}
         <div class="grid grid-cols-2 gap-4">
             <div class="bg-white/5 border border-white/10 rounded-lg p-4 text-center">
-                <span class="block text-2xl sm:text-3xl font-bold text-white">18 910</span>
+                <span class="block text-2xl sm:text-3xl font-bold text-white">{{ $totalReferences ?? '18 910' }}</span>
                 <span class="text-ink-400 text-xs uppercase tracking-wider">Références</span>
             </div>
             <div class="bg-white/5 border border-white/10 rounded-lg p-4 text-center">
-                <span class="block text-2xl sm:text-3xl font-bold text-white">6</span>
+                <span class="block text-2xl sm:text-3xl font-bold text-white">{{ $categories->count() }}</span>
                 <span class="text-ink-400 text-xs uppercase tracking-wider">Catégories</span>
             </div>
             <div class="bg-white/5 border border-white/10 rounded-lg p-4 text-center">
@@ -60,7 +58,7 @@
 @endsection
 
 {{-- ============================================================
-     CONTENU — grille des catégories (dynamique, via $categories)
+     CONTENU — grille des catégories
      ============================================================ --}}
 @section('content')
 <div>
@@ -70,12 +68,12 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         @forelse($categories as $category)
-            <a href="{{ route('categories.show', $category->slug) }}"
+            <a href="{{ route('ouvrages.index', ['categorie' => $category->slug]) }}"
                class="group bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-ink-200 hover:border-amber-300 flex flex-col">
 
                 <div class="h-36 bg-ink-100 overflow-hidden">
-                    @if($category->image)
-                        <img src="{{ asset($category->image) }}"
+                    @if($category->image_cover ?? false)
+                        <img src="{{ asset('storage/' . $category->image_cover) }}"
                              alt="{{ $category->nom }}"
                              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                     @else
@@ -93,7 +91,7 @@
                             {{ $category->nom }}
                         </h3>
                         <span class="shrink-0 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-800">
-                            {{ number_format($category->composants_count ?? 0, 0, ',', ' ') }} réf.
+                            {{ number_format($category->ouvrages_count ?? 0, 0, ',', ' ') }} réf.
                         </span>
                     </div>
 
@@ -101,21 +99,6 @@
                         <p class="text-sm text-ink-500 mt-1">
                             {{ Str::limit($category->description, 100) }}
                         </p>
-                    @endif
-
-                    @if(($category->subcategories ?? collect())->isNotEmpty())
-                        <div class="flex flex-wrap gap-1.5 mt-4 pt-3 border-t border-ink-100">
-                            @foreach($category->subcategories->take(4) as $sub)
-                                <span class="px-2 py-1 bg-ink-50 text-ink-600 text-xs rounded">
-                                    {{ $sub->nom }}
-                                </span>
-                            @endforeach
-                            @if($category->subcategories->count() > 4)
-                                <span class="px-2 py-1 bg-ink-50 text-ink-400 text-xs rounded">
-                                    +{{ $category->subcategories->count() - 4 }}
-                                </span>
-                            @endif
-                        </div>
                     @endif
                 </div>
             </a>

@@ -42,14 +42,73 @@
         }
     </script>
 
+    {{-- Style global pour le sticky footer --}}
+    <style>
+        /* Structure principale : body en flex column avec min-height 100vh */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Le contenu principal prend tout l'espace disponible */
+        .main-content {
+            flex: 1 0 auto;
+        }
+
+        /* Le footer reste en bas */
+        .main-footer {
+            flex-shrink: 0;
+        }
+
+        /* Pour la navigation sticky */
+        .nav-sticky {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+        }
+
+        /* Sidebar sticky */
+        .sidebar-sticky {
+            position: sticky;
+            top: 80px;
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+        }
+
+        /* Scrollbar hide pour la navigation */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Sur mobile, le sidebar n'est pas sticky */
+        @media (max-width: 768px) {
+            .sidebar-sticky {
+                position: relative;
+                top: 0;
+                max-height: none;
+            }
+        }
+    </style>
+
     @stack('styles')
 </head>
-<body class="font-sans antialiased bg-ink-50 text-ink-800">
+<body>
 
     {{-- ============================================================
          BANDEAU UTILITAIRE
          ============================================================ --}}
-    <div class="bg-ink-950 text-ink-300 text-xs">
+    <div class="bg-ink-950 text-ink-300 text-xs flex-shrink-0">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between">
             <span class="hidden sm:inline truncate">Catalogue de référence — aluminium industriel et profilés structuraux</span>
             <div class="flex items-center gap-4 ml-auto">
@@ -63,7 +122,7 @@
          EN-TÊTE
          ============================================================ --}}
     @hasSection('hero')
-        <header class="bg-ink-900">
+        <header class="bg-ink-900 flex-shrink-0">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between">
                 @include('partials.logo', ['dark' => true])
 
@@ -78,11 +137,11 @@
             @yield('hero')
         </header>
     @else
-        <header class="bg-white border-b border-ink-200">
+        <header class="bg-white border-b border-ink-200 flex-shrink-0">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row md:items-center gap-4">
                 @include('partials.logo')
 
-                <form action="#" method="GET" class="relative flex-1 max-w-2xl mx-auto w-full">
+                <form action="{{ route('search.index') }}" method="GET" class="relative flex-1 max-w-2xl mx-auto w-full">
                     <input type="text"
                            name="q"
                            placeholder="Rechercher par référence, alliage, dimension..."
@@ -107,11 +166,11 @@
     {{-- ============================================================
          CONTENU PRINCIPAL AVEC SIDEBAR
          ============================================================ --}}
-    <div class="flex flex-col md:flex-row max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 gap-6">
+    <div class="main-content flex flex-col md:flex-row max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 gap-6 w-full">
         
         {{-- SIDEBAR GAUCHE --}}
         <aside class="md:w-64 lg:w-72 flex-shrink-0">
-            <div class="sticky top-20 max-h-[calc(100vh-8rem)] overflow-y-auto bg-white rounded-xl shadow-sm border border-ink-200 p-3">
+            <div class="sidebar-sticky bg-white rounded-xl shadow-sm border border-ink-200 p-3">
                 
                 {{-- Bouton de bascule mobile --}}
                 <button class="md:hidden w-full flex items-center justify-between text-left text-sm font-medium text-ink-700 p-2 hover:bg-ink-50 rounded-lg" 
@@ -163,9 +222,9 @@
     </div>
 
     {{-- ============================================================
-         PIED DE PAGE
+         PIED DE PAGE (toujours en bas)
          ============================================================ --}}
-    <footer class="bg-ink-950 text-ink-300 mt-auto">
+    <footer class="main-footer bg-ink-950 text-ink-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
                 <div>
@@ -206,21 +265,13 @@
          ============================================================ --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Navigation scrollbar hide
             const nav = document.querySelector('nav .overflow-x-auto');
             if (nav) {
                 nav.classList.add('scrollbar-hide');
             }
         });
     </script>
-    <style>
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-    </style>
     @stack('scripts')
 </body>
 </html>

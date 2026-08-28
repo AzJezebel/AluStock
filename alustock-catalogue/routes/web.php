@@ -3,13 +3,13 @@
 use App\Http\Controllers\Public\CategorieController;
 use App\Http\Controllers\Public\ComposantController;
 use App\Http\Controllers\Public\GammeController;
+use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\OuvrageController;
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('catergories.index');
-})->name('home');
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/gammes', [GammeController::class, 'index'])->name('gammes.index');
 Route::get('/gammes/{gamme}', [GammeController::class, 'show'])->name('gammes.show');
@@ -49,3 +49,8 @@ Route::prefix('composants')->name('composants.')->group(function () {
     Route::get('/', [ComposantController::class, 'index'])->name('index');
     Route::get('/{composant:slug}', [ComposantController::class, 'show'])->name('show');
 });
+
+
+
+// PLACEHOLDER FOR SEARCH ROUTE
+Route::get('/search', [OuvrageController::class, 'search'])->name('search.index');
