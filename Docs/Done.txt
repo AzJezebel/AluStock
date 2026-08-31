@@ -147,3 +147,14 @@ feat: Implement search functionality with autocomplete and advanced filters
 
 --------------------------------------------------------------------------------------------------------------------------------
 31/08
+
+Add initial routes, testing setup, and configuration files
+
+- Created console command for inspiring quotes in routes/console.php
+- Added main web routes for the site in routes/web.php, including routes for catalogue, ouvrages, gammes, and categories
+- Implemented .gitignore files for various storage directories to manage ignored files
+- Set up basic feature and unit tests in tests/Feature and tests/Unit
+- Configured Vite for asset management with Laravel integration and Tailwind CSS support
+
+Entame projet laravel, migration , database setup, models (Categorie, Gamme, Ouvrage), Controllers associes, view Vitrine/index (main HERO) 
+et partials/nav, added placeholded data with seeders, tweak du rendu visuel et effet au scroll
