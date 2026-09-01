@@ -158,3 +158,20 @@ Add initial routes, testing setup, and configuration files
 
 Entame projet laravel, migration , database setup, models (Categorie, Gamme, Ouvrage), Controllers associes, view Vitrine/index (main HERO) 
 et partials/nav, added placeholded data with seeders, tweak du rendu visuel et effet au scroll
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+01/09 
+
+feat: Add Media, Ouvrage, and Settings management with CRUD operations
+
+- Implement MediaController for media uploads, listing, and deletion.
+- Create OuvrageController for managing ouvrages with image handling.
+- Add SettingsController for managing application settings.
+- Introduce AdminMiddleware for admin access control.
+- Create request validation classes for Categorie, Gamme, and Ouvrage.
+- Define Media and Settings models with necessary attributes and methods.
+- Create migrations for media and settings tables.
+- Add seeders for Media and User to populate initial data.
+- Develop admin dashboard layout with statistics and navigation.
+- Implement login view for admin authentication.
