@@ -1,5 +1,4 @@
 <?php
-// app/Models/Gamme.php
 
 namespace App\Models;
 
