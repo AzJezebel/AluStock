@@ -175,3 +175,21 @@ feat: Add Media, Ouvrage, and Settings management with CRUD operations
 - Add seeders for Media and User to populate initial data.
 - Develop admin dashboard layout with statistics and navigation.
 - Implement login view for admin authentication.
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+02/09 
+
+feat: Add admin management pages for gammes, medias, and ouvrages
+
+- Created index, create, edit, and show views for gammes with search and pagination functionality.
+- Developed index view for medias with search, filter by type, and display of media items.
+- Implemented create and edit views for ouvrages, including form fields for various attributes and file uploads.
+- Added index view for ouvrages with search, filters, and actions for managing each ouvrage.
+- Included detailed view for ouvrages displaying all relevant information and associated media.
+
+TODO: Check for delete and edit of Categories (prolly auto type category vs categorie)
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+03/09 
