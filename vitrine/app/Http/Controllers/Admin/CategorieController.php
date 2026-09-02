@@ -1,9 +1,9 @@
 <?php
+// app/Http/Controllers/Admin/CategorieController.php
 
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\CategorieRequest;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -27,10 +27,19 @@ class CategorieController extends Controller
         return view('admin.categories.create');
     }
 
-    public function store(CategorieRequest $request)
+    public function store(Request $request)
     {
-        $data = $request->validated();
-        $data['slug'] = Str::slug($data['nom']);
+        $request->validate([
+            'nom' => 'required|string|max:255|unique:categories,nom',
+            'description' => 'nullable|string',
+            'icone' => 'nullable|string|max:100',
+            'is_active' => 'boolean',
+            'ordre' => 'integer'
+        ]);
+
+        $data = $request->all();
+        $data['slug'] = Str::slug($request->nom);
+        $data['is_active'] = $request->has('is_active');
 
         Categorie::create($data);
 
@@ -38,18 +47,24 @@ class CategorieController extends Controller
             ->with('success', 'Catégorie créée avec succès.');
     }
 
-    public function edit(Categorie $categorie)
+    public function edit(Categorie $categorie) // Utiliser le model binding
     {
         return view('admin.categories.edit', compact('categorie'));
     }
 
-    public function update(CategorieRequest $request, Categorie $categorie)
+    public function update(Request $request, Categorie $categorie) // Utiliser le model binding
     {
-        $data = $request->validated();
+        $request->validate([
+            'nom' => 'required|string|max:255|unique:categories,nom,' . $categorie->id,
+            'description' => 'nullable|string',
+            'icone' => 'nullable|string|max:100',
+            'is_active' => 'boolean',
+            'ordre' => 'integer'
+        ]);
 
-        if ($request->filled('nom') && $categorie->nom != $data['nom']) {
-            $data['slug'] = Str::slug($data['nom']);
-        }
+        $data = $request->all();
+        $data['slug'] = Str::slug($request->nom);
+        $data['is_active'] = $request->has('is_active');
 
         $categorie->update($data);
 
@@ -57,7 +72,7 @@ class CategorieController extends Controller
             ->with('success', 'Catégorie mise à jour avec succès.');
     }
 
-    public function destroy(Categorie $categorie)
+    public function destroy(Categorie $categorie) // Utiliser le model binding
     {
         // Vérifier si des ouvrages sont associés
         if ($categorie->ouvrages()->count() > 0) {
@@ -71,6 +86,12 @@ class CategorieController extends Controller
             ->with('success', 'Catégorie supprimée avec succès.');
     }
 
+    public function toggleStatus(Categorie $categorie)
+    {
+        $categorie->update(['is_active' => !$categorie->is_active]);
+        return response()->json(['success' => true, 'status' => $categorie->is_active]);
+    }
+
     public function reorder(Request $request)
     {
         $order = $request->input('order', []);
@@ -79,11 +100,5 @@ class CategorieController extends Controller
         }
 
         return response()->json(['success' => true]);
-    }
-
-    public function toggleStatus(Categorie $categorie)
-    {
-        $categorie->update(['is_active' => !$categorie->is_active]);
-        return response()->json(['success' => true, 'status' => $categorie->is_active]);
     }
 }

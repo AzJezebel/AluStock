@@ -72,7 +72,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     // Gestion des ouvrages
-    Route::resource('ouvrages', AdminOuvrageController::class);
+    Route::resource('ouvrages', AdminOuvrageController::class)->parameters(['categories' => 'categorie']);
     Route::post('ouvrages/{ouvrage}/toggle-status', [AdminOuvrageController::class, 'toggleStatus'])->name('ouvrages.toggle-status');
     Route::post('ouvrages/{ouvrage}/toggle-featured', [AdminOuvrageController::class, 'toggleFeatured'])->name('ouvrages.toggle-featured');
     Route::delete('ouvrages/{ouvrage}/media/{media}', [AdminOuvrageController::class, 'deleteImage'])->name('ouvrages.delete-image');

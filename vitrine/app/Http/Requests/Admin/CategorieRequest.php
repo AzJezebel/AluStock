@@ -7,12 +7,12 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class CategorieRequest extends FormRequest
 {
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         $id = $this->route('categorie') ? $this->route('categorie')->id : null;
 
@@ -21,7 +21,7 @@ class CategorieRequest extends FormRequest
             'description' => 'nullable|string',
             'icone' => 'nullable|string|max:100',
             'is_active' => 'boolean',
-            'ordre' => 'integer'
+            'ordre' => 'integer',
         ];
     }
 }

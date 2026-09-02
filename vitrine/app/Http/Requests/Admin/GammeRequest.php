@@ -7,12 +7,12 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class GammeRequest extends FormRequest
 {
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         $id = $this->route('gamme') ? $this->route('gamme')->id : null;
 
@@ -22,7 +22,7 @@ class GammeRequest extends FormRequest
             'icone' => 'nullable|string|max:100',
             'couleur' => 'nullable|string|max:50',
             'is_active' => 'boolean',
-            'ordre' => 'integer'
+            'ordre' => 'integer',
         ];
     }
 }

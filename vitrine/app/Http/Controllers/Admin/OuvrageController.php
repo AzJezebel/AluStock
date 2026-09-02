@@ -61,6 +61,8 @@ class OuvrageController extends Controller
     {
         $data = $request->validated();
         $data['slug'] = Str::slug($data['titre']);
+        $data['is_active'] = $request->has('is_active');
+        $data['is_featured'] = $request->has('is_featured');
 
         $ouvrage = Ouvrage::create($data);
 
@@ -97,6 +99,8 @@ class OuvrageController extends Controller
 
         if ($request->filled('titre') && $ouvrage->titre != $data['titre']) {
             $data['slug'] = Str::slug($data['titre']);
+            $data['is_active'] = $request->has('is_active');
+            $data['is_featured'] = $request->has('is_featured');
         }
 
         $ouvrage->update($data);
