@@ -193,3 +193,13 @@ TODO: Check for delete and edit of Categories (prolly auto type category vs cate
 
 --------------------------------------------------------------------------------------------------------------------------------
 03/09 
+
+Review Catalogue
+Recherche sur comment implementer la data du catalogue sur le site de maniere efficiente 
+
+refactor: remove unused 'produits' relationship from Categorie and Gamme models; enhance vitrine navigation with smooth scrolling and back-to-top button;
+ update section IDs for better navigation; adjust route parameters for categories, hihglights on navbar
+Fix: edit and deletion for Categorie in admin's dashboard
+
+--------------------------------------------------------------------------------------------------------------------------------
+04/09
