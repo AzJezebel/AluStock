@@ -155,7 +155,7 @@
     @include('partials.vitrine-nav')
 
     <!-- 1. Hero Principal -->
-    <section class="hero min-h-screen flex items-center relative">
+    <section id="accueil" class="hero min-h-screen flex items-center relative">
         <div class="hero-content container mx-auto px-4 py-20">
             <div class="max-w-4xl mx-auto text-center">
 
@@ -218,7 +218,7 @@
     </section>
 
     <!-- 2. Section À propos / Chiffres clés -->
-    <section class="py-20 px-4 bg-white" data-aos="fade-up">
+    <section id="a-propos" class="py-20 px-4 bg-white" data-aos="fade-up">
         <div class="container mx-auto max-w-6xl">
             <div class="text-center mb-16">
                 <span class="inline-flex items-center gap-2 text-amber-700 text-xs font-semibold tracking-widest uppercase mb-4">
@@ -266,7 +266,7 @@
          — section agrandie : premier ouvrage en grand format (mise
            en avant éditoriale), le reste en grille secondaire
          ============================================================ --}}
-    <section class="py-28 px-4 bg-ink-50" data-aos="fade-up">
+    <section id="realisations" class="py-28 px-4 bg-ink-50" data-aos="fade-up">
         <div class="container mx-auto max-w-7xl">
             <div class="text-center mb-20">
                 <span class="inline-flex items-center gap-2 text-amber-700 text-xs font-semibold tracking-widest uppercase mb-4">
@@ -357,7 +357,7 @@
          — section très compacte : simple bandeau de tuiles,
            sans description, pour ne pas concurrencer le portfolio
          ============================================================ --}}
-    <section class="py-12 px-4 bg-white border-t border-ink-100" data-aos="fade-up">
+    <section id="gammes" class="py-12 px-4 bg-white border-t border-ink-100" data-aos="fade-up">
         <div class="container mx-auto max-w-7xl">
             <div class="flex items-center justify-between mb-6">
                 <h2 class="text-sm font-semibold uppercase tracking-widest text-ink-500">
@@ -395,7 +395,7 @@
     </section>
 
     <!-- 5. Section CTA final -->
-    <section class="relative py-24 px-4 bg-ink-950" data-aos="fade-up">
+    <section id="contact" class="relative py-24 px-4 bg-ink-950" data-aos="fade-up">
         <div class="container mx-auto max-w-4xl text-center relative z-10">
             <span class="inline-flex items-center gap-2 text-amber-400 text-xs font-semibold tracking-widest uppercase mb-6">
                 <span class="w-6 h-px bg-amber-400"></span>
@@ -424,6 +424,33 @@
             </p>
         </div>
     </section>
+
+    <!-- Bouton remonter -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 z-40 p-3 bg-amber-500 hover:bg-amber-600 text-ink-950 transition-colors shadow-lg opacity-0 invisible" style="transition: all 0.3s ease;">
+        <i class="fas fa-arrow-up text-lg"></i>
+    </button>
+
+    <script>
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.add('opacity-0', 'invisible');
+                backToTopButton.classList.remove('opacity-100', 'visible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
 
     <!-- 6. Footer -->
     <footer class="bg-ink-950 text-ink-300 border-t border-ink-800">

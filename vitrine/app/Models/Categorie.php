@@ -27,9 +27,4 @@ class Categorie extends Model
     {
         return $this->hasMany(Ouvrage::class);
     }
-
-    public function produits()
-    {
-        return $this->hasMany(Produit::class);
-    }
 }
