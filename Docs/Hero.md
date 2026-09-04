@@ -32,7 +32,6 @@ Commentaires dans le code
 Vidéo de démonstration (optionnel)
 
 
-
 # Structure de dossiers
 
 app/
