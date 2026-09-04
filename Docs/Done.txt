@@ -204,3 +204,23 @@ Fix: edit and deletion for Categorie in admin's dashboard
 --------------------------------------------------------------------------------------------------------------------------------
 04/09
 
+
+Review Catalogue + Call Benjamin
+Recherche sur comment recuperer la data des image/PDFs
+
+feat: Implement PDF data extraction tool with structured output
+
+- Added PDFProcessor for converting PDFs to images using PyMuPDF.
+- Introduced TableDetector for detecting tables and lines in images.
+- Created OCREngine for extracting text from images using EasyOCR.
+- Developed DataExtractor to extract structured data from text.
+- Implemented DataCleaner for cleaning and validating extracted data.
+- Added DataExporter for exporting data to CSV and Laravel Seeder format.
+- Configured extraction patterns and page types in config.py.
+- Established main execution flow in main.py for processing PDFs.
+- Included requirements.txt for necessary dependencies.
+- Created run.py for easy execution of the extraction tool.
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+07/09
