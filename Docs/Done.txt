@@ -219,3 +219,14 @@ Still testing, the written data is wrongly extracted
 
 --------------------------------------------------------------------------------------------------------------------------------
 07/09
+
+feat: enhance PDF data extraction with structured output and logging
+- Added new extraction patterns for weights and dimensions in config.py
+- Implemented methods for extracting inertia and perimeter in data_extractor.py
+- Improved main.py with logging, raw text saving, and error handling
+- Configured logging for better traceability during extraction
+- Updated .gitignore to exclude sensitive files and directories
+- Added new markdown file for project specifications
+
+--------------------------------------------------------------------------------------------------------------------------------
+08/09
