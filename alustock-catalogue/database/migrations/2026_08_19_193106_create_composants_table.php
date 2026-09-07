@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('matiere', 100)->nullable();
             $table->integer('longueur_barre_mm')->nullable();
             $table->decimal('poids_lineaire_kg_m', 10, 3)->nullable();
+            // $table->decimal('poids_lineaire_lbs_ft', 10, 3)->nullable(); // → WT/FT
             $table->decimal('section_largeur_mm', 10, 2)->nullable();
             $table->decimal('section_hauteur_mm', 10, 2)->nullable();
             $table->decimal('epaisseur_paroi_mm', 10, 2)->nullable();
@@ -31,6 +32,10 @@ return new class extends Migration
             $table->decimal('moment_inertie_y_cm4', 10, 2)->nullable();
             $table->decimal('module_elasticite_x_cm3', 10, 2)->nullable();
             $table->decimal('module_elasticite_y_cm3', 10, 2)->nullable();
+            // $table->decimal('moment_inertie_in4', 10, 2)->nullable();    // → IN (impérial)
+            // $table->decimal('moment_inertie_cm4', 10, 2)->nullable();    // → IN (métrique)
+            // $table->decimal('perimetre_mm', 10, 2)->nullable();          // → PERIM. (métrique)
+            // $table->decimal('perimetre_in', 10, 2)->nullable();          // → PERIM. (impérial)
             $table->string('image_coupe', 255)->nullable();
             $table->boolean('est_disponible')->default(true);
             $table->timestamps();

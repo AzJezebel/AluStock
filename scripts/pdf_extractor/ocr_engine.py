@@ -8,7 +8,7 @@ from PIL import Image
 from .config import ZONES
 
 class OCREngine:
-    def __init__(self, languages=['fr', 'es', 'en'], gpu=False):
+    def __init__(self, languages=['fr', 'es', 'en'], gpu=True):
         self.reader = easyocr.Reader(languages, gpu=gpu)
         self.zones = ZONES
 
@@ -60,3 +60,12 @@ class OCREngine:
             'dimensions': self.extract_from_zone(image_path, 'dimensions'),
             'full_text': self.extract_full_text(image_path),
         }
+
+    def extract_text(self, image_path):
+        """Extrait le texte d'une image"""
+        try:
+            result = self.reader.readtext(image_path, detail=0)
+            return ' '.join(result)
+        except Exception as e:
+            print(f"   ❌ Erreur OCR : {e}")
+            return ""

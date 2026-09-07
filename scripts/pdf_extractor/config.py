@@ -37,6 +37,11 @@ PATTERNS = {
     'designation': re.compile(
         r'^([A-Z\s\-ÀÂÇÉÈÊËÎÏÔÛÙÜŸÑ]{3,})$'
     ),
+    
+    'poids_lbs_ft': re.compile(r'(\d+[,.]\d{3})\s*(?:WT/FT)'),
+    'poids_kg_m': re.compile(r'(\d+[,.]\d{3})\s*(?:KG/M)'),
+    'inertie_in4': re.compile(r'(\d+[,.]\d{3})\s*(?:IN)'),
+    'perimetre_in': re.compile(r'(\d+[,.]\d{2})\s*(?:PERIM\.)'),
 }
 
 # Types de page

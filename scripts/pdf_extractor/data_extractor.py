@@ -34,6 +34,16 @@ class DataExtractor:
         matches = re.findall(self.patterns['perimetre'], text)
         return [m.replace(',', '.') for m in matches]
 
+    def extract_inertie(self, text):
+        """Extrait le moment d'inertie (IN)"""
+        matches = re.findall(self.patterns['inertie_in4'], text)
+        return [m.replace(',', '.') for m in matches]
+    
+    def extract_perimetre_in(self, text):
+        """Extrait le périmètre (PERIM.)"""
+        matches = re.findall(self.patterns['perimetre_in'], text)
+        return [m.replace(',', '.') for m in matches]
+    
     def extract_dimensions(self, text):
         """Extrait les dimensions"""
         if not text:
@@ -81,3 +91,4 @@ class DataExtractor:
             return 'plan_technique'
         else:
             return 'unknown'
+
