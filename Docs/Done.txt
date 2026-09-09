@@ -230,3 +230,9 @@ feat: enhance PDF data extraction with structured output and logging
 
 --------------------------------------------------------------------------------------------------------------------------------
 08/09
+
+Refactor PDF extraction process: Implemented modular structure with dedicated classes for page analysis, schema extraction, 
+and table extraction. Enhanced OCR functionality and improved logging. Added new requirements for PyMuPDF and opencv-python-headless.
+Introduced test script for OCR validation.
+
+    fix/feat: hard struggle with the scritps, trying to refactor the logic at reading and extraction

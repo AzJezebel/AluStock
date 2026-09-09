@@ -74,3 +74,6 @@ Ignorer le logo ALUMINA les mentions 'Fecha', 'Hoja no'
 │     │   └── ...                                                             │
 │     └── ImportAluData.php (Seeder Laravel)                                  │
 └─────────────────────────────────────────────────────────────────────────────┘
+
+I want a portion of the script to detect that this(first screenshot) is a table and should store approprietly REFERENCE and its value, KG_M, WT_FT, IN, PERIM and their values as text and the associated schema above or near it as shown in screenshot 2
+The associated schema should be cut and saved as an image and have a trace that links it to the text data extracted from the table 
