@@ -77,3 +77,38 @@ Ignorer le logo ALUMINA les mentions 'Fecha', 'Hoja no'
 
 I want a portion of the script to detect that this(first screenshot) is a table and should store approprietly REFERENCE and its value, KG_M, WT_FT, IN, PERIM and their values as text and the associated schema above or near it as shown in screenshot 2
 The associated schema should be cut and saved as an image and have a trace that links it to the text data extracted from the table 
+
+┌────────────────────────────────────────────────────────────────────────────┐
+│                    DÉTECTION STRUCTURÉE                                    │
+├────────────────────────────────────────────────────────────────────────────┤
+│                                                                            │
+│  📄 Page scannée                                                           │
+│       │                                                                    │
+│       ▼                                                                    │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │  TABLE_DETECTOR                                                     │   │
+│  │  → Détecte les lignes de tableau (horizontales + verticales)        │   │
+│  │  → Identifie la position du tableau                                 │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│       │                                                                    │
+│       ▼                                                                    │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │  SCHEMA_DETECTOR                                                    │   │
+│  │  → Détecte le schéma (au-dessus ou à côté du tableau)               │   │
+│  │  → Extrait et sauvegarde l'image du schéma                          │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│       │                                                                    │
+│       ▼                                                                    │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │  TABLE_PARSER                                                       │   │
+│  │  → Parse les colonnes : REF, WT/FT, IN, KG/M, PERIM.                │   │
+│  │  → Associe les données par ligne                                    │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│       │                                                                    │
+│       ▼                                                                    │
+│  📁 output/data/                                                          │
+│     ├── schemas/                                                           │
+│     │   └── page_001_schema.png                                            │
+│     ├── pieces.csv                                                         │
+│     └── ouvrages.csv                                                       │
+└────────────────────────────────────────────────────────────────────────────┘

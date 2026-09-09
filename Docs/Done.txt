@@ -236,3 +236,19 @@ and table extraction. Enhanced OCR functionality and improved logging. Added new
 Introduced test script for OCR validation.
 
     fix/feat: hard struggle with the scritps, trying to refactor the logic at reading and extraction
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+09/09
+
+feat: Implement PDF extraction tool with OCR and table parsing capabilities
+
+- Added main script for PDF extraction (`main.py`) that converts PDF pages to images, performs OCR, and extracts structured data.
+- Created `TableParser` class for detecting and parsing table structures from OCR text.
+- Developed `TableProcessor` class for detecting table and schema regions in images.
+- Introduced a requirements file (`requirements.txt`) for managing dependencies.
+- Added a run script (`run.py`) to execute the main extraction process.
+- Implemented a test script (`test_single.py`) for validating the extraction and parsing functionality on a specific PDF file.
+
+--------------------------------------------------------------------------------------------------------------------------------
+10/09
