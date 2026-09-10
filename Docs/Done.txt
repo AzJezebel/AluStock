@@ -252,3 +252,19 @@ feat: Implement PDF extraction tool with OCR and table parsing capabilities
 
 --------------------------------------------------------------------------------------------------------------------------------
 10/09
+
+Add admin layout and components for ouvrage management
+
+- Created a new layout for the admin section with a responsive header and footer.
+- Implemented the composition partial view for managing components of ouvrages, including a modal for adding new components.
+- Added the infos partial view for editing general information about ouvrages.
+- Introduced a placeholder for the medias partial view.
+- Ensured proper form handling and validation for ouvrage attributes.
+
+Dropped script, dashboard for admin with CRUD to start adding data in DB.
+TODO : Deal with images for each Composants and ouvrages
+TODO : When done export DB as seeder 
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+11/09
