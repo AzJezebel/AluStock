@@ -45,8 +45,9 @@ class Ouvrage extends Model
     public function composants(): BelongsToMany
     {
         return $this->belongsToMany(Composant::class, 'composition_ouvrage')
-            ->withPivot('quantite', 'unite', 'ordre', 'longueur_coupe_mm', 'commentaire')
-            ->orderBy('pivot_ordre');
+                ->withPivot('quantite', 'unite', 'ordre', 'commentaire')
+                ->withTimestamps()
+                ->orderBy('composition_ouvrage.ordre');
     }
 
     public function medias()

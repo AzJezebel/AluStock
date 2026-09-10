@@ -23,4 +23,18 @@ class TypeComposant extends Model
     {
         return 'slug';
     }
+    public function isProfile(): bool
+    {
+        return $this->slug === 'profile' || $this->slug === 'profil';
+    }
+
+    public function isJoint(): bool
+    {
+        return $this->slug === 'joint';
+    }
+
+    public function isQuincaillerie(): bool
+    {
+        return $this->slug === 'quincaillerie';
+    }
 }

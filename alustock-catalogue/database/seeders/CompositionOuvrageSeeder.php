@@ -18,7 +18,6 @@ class CompositionOuvrageSeeder extends Seeder
                 'quantite' => 2,
                 'unite' => 'u',
                 'ordre' => 1,
-                'longueur_coupe_mm' => 1200,
             ],
             [
                 'ouvrage_id' => 1,
@@ -26,7 +25,6 @@ class CompositionOuvrageSeeder extends Seeder
                 'quantite' => 2,
                 'unite' => 'u',
                 'ordre' => 2,
-                'longueur_coupe_mm' => 1200,
             ],
             [
                 'ouvrage_id' => 1,
@@ -34,7 +32,6 @@ class CompositionOuvrageSeeder extends Seeder
                 'quantite' => 4,
                 'unite' => 'u',
                 'ordre' => 3,
-                'longueur_coupe_mm' => 600,
             ],
             [
                 'ouvrage_id' => 1,
@@ -42,7 +39,6 @@ class CompositionOuvrageSeeder extends Seeder
                 'quantite' => 4,
                 'unite' => 'u',
                 'ordre' => 4,
-                'longueur_coupe_mm' => null,
             ],
 
             // Fenêtre oscillo-battante (ouvrage_id = 2)
@@ -52,7 +48,6 @@ class CompositionOuvrageSeeder extends Seeder
                 'quantite' => 1,
                 'unite' => 'u',
                 'ordre' => 1,
-                'longueur_coupe_mm' => 800,
             ],
             [
                 'ouvrage_id' => 2,
@@ -60,7 +55,6 @@ class CompositionOuvrageSeeder extends Seeder
                 'quantite' => 1,
                 'unite' => 'u',
                 'ordre' => 2,
-                'longueur_coupe_mm' => 800,
             ],
             [
                 'ouvrage_id' => 2,
@@ -68,7 +62,6 @@ class CompositionOuvrageSeeder extends Seeder
                 'quantite' => 4,
                 'unite' => 'm',
                 'ordre' => 3,
-                'longueur_coupe_mm' => null,
             ],
 
             // Porte d'entrée (ouvrage_id = 3)
@@ -78,7 +71,6 @@ class CompositionOuvrageSeeder extends Seeder
                 'quantite' => 1,
                 'unite' => 'u',
                 'ordre' => 1,
-                'longueur_coupe_mm' => 900,
             ],
             [
                 'ouvrage_id' => 3,
@@ -86,7 +78,6 @@ class CompositionOuvrageSeeder extends Seeder
                 'quantite' => 1,
                 'unite' => 'u',
                 'ordre' => 2,
-                'longueur_coupe_mm' => 900,
             ],
             [
                 'ouvrage_id' => 3,
@@ -94,7 +85,6 @@ class CompositionOuvrageSeeder extends Seeder
                 'quantite' => 2,
                 'unite' => 'u',
                 'ordre' => 3,
-                'longueur_coupe_mm' => 2000,
             ],
             [
                 'ouvrage_id' => 3,
@@ -102,7 +92,6 @@ class CompositionOuvrageSeeder extends Seeder
                 'quantite' => 6,
                 'unite' => 'm',
                 'ordre' => 4,
-                'longueur_coupe_mm' => null,
             ],
             [
                 'ouvrage_id' => 3,
@@ -110,7 +99,6 @@ class CompositionOuvrageSeeder extends Seeder
                 'quantite' => 1,
                 'unite' => 'u',
                 'ordre' => 5,
-                'longueur_coupe_mm' => null,
             ],
         ]);
     }

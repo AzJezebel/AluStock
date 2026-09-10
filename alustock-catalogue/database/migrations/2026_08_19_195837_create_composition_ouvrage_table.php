@@ -15,11 +15,13 @@ return new class extends Migration
             $table->foreignId('composant_id')
                 ->constrained('composants')
                 ->cascadeOnDelete();
+            
+            // Attributs de la composition
             $table->decimal('quantite', 10, 2)->default(1);
             $table->string('unite', 20)->default('u');
             $table->integer('ordre')->default(0);
-            $table->integer('longueur_coupe_mm')->nullable();
             $table->text('commentaire')->nullable();
+            
             $table->timestamps();
 
             $table->primary(['ouvrage_id', 'composant_id']);

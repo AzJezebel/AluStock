@@ -14,6 +14,25 @@ resources/views/
 └── search/
     └── index.blade.php         # Résultats transverses
 
+resources/views/admin/
+├── layouts/
+│   └── admin.blade.php
+├── dashboard.blade.php
+├── ouvrages/
+│   ├── index.blade.php
+│   ├── create.blade.php
+│   ├── edit.blade.php
+│   └── partials/
+│       ├── infos.blade.php
+│       ├── composition.blade.php
+│       ├── caracteristiques.blade.php
+│       └── medias.blade.php
+├── composants/
+│   ├── index.blade.php
+│   ├── create.blade.php
+│   └── edit.blade.php
+└── auth/
+    └── login.blade.php
 
 // 1. Navigation haute
 Route::get('/gammes/{gamme:slug}', [GammeController::class, 'show']);

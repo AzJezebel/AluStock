@@ -13,6 +13,8 @@ return new class extends Migration
             $table->string('reference', 50)->unique();
             $table->string('designation', 200);
             $table->string('slug', 220)->unique();
+            
+            // Relations
             $table->foreignId('type_composant_id')
                 ->nullable()
                 ->constrained('types_composant')
@@ -21,23 +23,32 @@ return new class extends Migration
                 ->nullable()
                 ->constrained('gammes')
                 ->nullOnDelete();
+            
+            // Informations générales
             $table->string('matiere', 100)->nullable();
+            
+            // Dimensions (métrique)
             $table->integer('longueur_barre_mm')->nullable();
-            $table->decimal('poids_lineaire_kg_m', 10, 3)->nullable();
-            // $table->decimal('poids_lineaire_lbs_ft', 10, 3)->nullable(); // → WT/FT
             $table->decimal('section_largeur_mm', 10, 2)->nullable();
             $table->decimal('section_hauteur_mm', 10, 2)->nullable();
             $table->decimal('epaisseur_paroi_mm', 10, 2)->nullable();
-            $table->decimal('moment_inertie_x_cm4', 10, 2)->nullable();
-            $table->decimal('moment_inertie_y_cm4', 10, 2)->nullable();
-            $table->decimal('module_elasticite_x_cm3', 10, 2)->nullable();
-            $table->decimal('module_elasticite_y_cm3', 10, 2)->nullable();
-            // $table->decimal('moment_inertie_in4', 10, 2)->nullable();    // → IN (impérial)
-            // $table->decimal('moment_inertie_cm4', 10, 2)->nullable();    // → IN (métrique)
-            // $table->decimal('perimetre_mm', 10, 2)->nullable();          // → PERIM. (métrique)
-            // $table->decimal('perimetre_in', 10, 2)->nullable();          // → PERIM. (impérial)
+            
+            // Poids linéaire (métrique + impérial)
+            $table->decimal('poids_lineaire_kg_m', 10, 3)->nullable();
+            $table->decimal('poids_lineaire_lbs_ft', 10, 3)->nullable();
+            
+            // Moment d'inertie
+            $table->decimal('moment_inertie_cm4', 10, 2)->nullable();
+            
+            // Périmètre
+            $table->decimal('perimetre_mm', 10, 2)->nullable();
+            
+            // Média
             $table->string('image_coupe', 255)->nullable();
+            
+            // Statut
             $table->boolean('est_disponible')->default(true);
+            
             $table->timestamps();
 
             // Index composites pour optimiser les filtres

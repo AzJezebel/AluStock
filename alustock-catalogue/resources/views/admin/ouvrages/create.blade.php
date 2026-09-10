@@ -1,0 +1,316 @@
+{{-- resources/views/admin/composants/create.blade.php --}}
+@extends('layouts.admin')
+
+@section('title', 'Nouveau composant - Administration')
+
+@section('content')
+<div>
+    <div class="flex items-center justify-between mb-4">
+        <div>
+            <h1 class="text-lg font-semibold text-admin-900">Nouveau composant</h1>
+            <p class="text-xs text-admin-500 mt-0.5">Créer un nouveau composant</p>
+        </div>
+        <a href="{{ route('admin.composants.index') }}" 
+           class="text-xs text-admin-500 hover:text-admin-700">← Retour</a>
+    </div>
+
+    <form action="{{ route('admin.composants.store') }}" method="POST" 
+          class="bg-white rounded border border-admin-200 p-6 space-y-5 max-w-4xl">
+        @csrf
+
+        {{-- Section : Identification --}}
+        <div>
+            <h2 class="text-xs font-semibold text-admin-400 uppercase tracking-wider mb-3 pb-2 border-b border-admin-100">
+                Identification
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="reference" class="block text-xs font-medium text-admin-600 mb-1">
+                        Référence <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" name="reference" id="reference" required
+                           value="{{ old('reference') }}"
+                           placeholder="PRO-001-45"
+                           class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    @error('reference')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div>
+                    <label for="designation" class="block text-xs font-medium text-admin-600 mb-1">
+                        Désignation <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" name="designation" id="designation" required
+                           value="{{ old('designation') }}"
+                           placeholder="Rail haut 45mm"
+                           class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    @error('designation')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+            </div>
+        </div>
+
+        {{-- Section : Classification --}}
+        <div>
+            <h2 class="text-xs font-semibold text-admin-400 uppercase tracking-wider mb-3 pb-2 border-b border-admin-100">
+                Classification
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="type_composant_id" class="block text-xs font-medium text-admin-600 mb-1">
+                        Type de composant
+                    </label>
+                    <select name="type_composant_id" id="type_composant_id"
+                            class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        <option value="">— Sélectionner —</option>
+                        @foreach($typesComposant as $type)
+                            <option value="{{ $type->id }}" 
+                                    data-slug="{{ $type->slug }}"
+                                    {{ old('type_composant_id') == $type->id ? 'selected' : '' }}>
+                                {{ $type->nom }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div>
+                    <label for="gamme_id" class="block text-xs font-medium text-admin-600 mb-1">Gamme</label>
+                    <select name="gamme_id" id="gamme_id"
+                            class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        <option value="">— Aucune —</option>
+                        @foreach($gammes as $gamme)
+                            <option value="{{ $gamme->id }}" {{ old('gamme_id') == $gamme->id ? 'selected' : '' }}>
+                                {{ $gamme->nom }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <label for="matiere" class="block text-xs font-medium text-admin-600 mb-1">Matière</label>
+                <input type="text" name="matiere" id="matiere"
+                       value="{{ old('matiere') }}"
+                       placeholder="Alu 6060-T6"
+                       class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
+            </div>
+        </div>
+
+        {{-- ============================================================ --}}
+        {{-- SECTION CONDITIONNELLE : Champs profilés --}}
+        {{-- Affichée uniquement si le type est "profilé" --}}
+        {{-- ============================================================ --}}
+        <div id="section-profile" class="hidden">
+            <h2 class="text-xs font-semibold text-admin-400 uppercase tracking-wider mb-3 pb-2 border-b border-admin-100">
+                Caractéristiques techniques (profilé)
+            </h2>
+
+            {{-- Dimensions --}}
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                <div>
+                    <label for="longueur_barre_mm" class="block text-xs font-medium text-admin-600 mb-1">
+                        Longueur barre (mm)
+                    </label>
+                    <input type="number" name="longueur_barre_mm" id="longueur_barre_mm" min="0"
+                           value="{{ old('longueur_barre_mm') }}"
+                           placeholder="6000"
+                           class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
+                </div>
+                <div>
+                    <label for="section_largeur_mm" class="block text-xs font-medium text-admin-600 mb-1">
+                        Largeur section (mm)
+                    </label>
+                    <input type="number" name="section_largeur_mm" id="section_largeur_mm" step="0.01" min="0"
+                           value="{{ old('section_largeur_mm') }}"
+                           placeholder="45.00"
+                           class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
+                </div>
+                <div>
+                    <label for="section_hauteur_mm" class="block text-xs font-medium text-admin-600 mb-1">
+                        Hauteur section (mm)
+                    </label>
+                    <input type="number" name="section_hauteur_mm" id="section_hauteur_mm" step="0.01" min="0"
+                           value="{{ old('section_hauteur_mm') }}"
+                           placeholder="35.00"
+                           class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
+                </div>
+                <div>
+                    <label for="epaisseur_paroi_mm" class="block text-xs font-medium text-admin-600 mb-1">
+                        Épaisseur paroi (mm)
+                    </label>
+                    <input type="number" name="epaisseur_paroi_mm" id="epaisseur_paroi_mm" step="0.01" min="0"
+                           value="{{ old('epaisseur_paroi_mm') }}"
+                           placeholder="1.50"
+                           class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
+                </div>
+            </div>
+
+            {{-- Poids (métrique + impérial) --}}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="p-3 bg-admin-50 rounded border border-admin-100">
+                    <h3 class="text-xs font-semibold text-admin-500 uppercase tracking-wider mb-2">
+                        Poids linéaire
+                    </h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label for="poids_lineaire_kg_m" class="block text-xs text-admin-500 mb-1">
+                                KG/M <span class="text-admin-400">(métrique)</span>
+                            </label>
+                            <input type="number" name="poids_lineaire_kg_m" id="poids_lineaire_kg_m" step="0.001" min="0"
+                                   value="{{ old('poids_lineaire_kg_m') }}"
+                                   placeholder="2.450"
+                                   class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        </div>
+                        <div>
+                            <label for="poids_lineaire_lbs_ft" class="block text-xs text-admin-500 mb-1">
+                                WT/FT <span class="text-admin-400">(impérial)</span>
+                            </label>
+                            <input type="number" name="poids_lineaire_lbs_ft" id="poids_lineaire_lbs_ft" step="0.001" min="0"
+                                   value="{{ old('poids_lineaire_lbs_ft') }}"
+                                   placeholder="1.647"
+                                   class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-3 bg-admin-50 rounded border border-admin-100">
+                    <h3 class="text-xs font-semibold text-admin-500 uppercase tracking-wider mb-2">
+                        Périmètre
+                    </h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label for="perimetre_mm" class="block text-xs text-admin-500 mb-1">
+                                PERIM. (mm) <span class="text-admin-400">(métrique)</span>
+                            </label>
+                            <input type="number" name="perimetre_mm" id="perimetre_mm" step="0.01" min="0"
+                                   value="{{ old('perimetre_mm') }}"
+                                   placeholder="205.39"
+                                   class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        </div>
+                        <div>
+                            <label for="perimetre_in" class="block text-xs text-admin-500 mb-1">
+                                PERIM. (in) <span class="text-admin-400">(impérial)</span>
+                            </label>
+                            <input type="number" name="perimetre_in" id="perimetre_in" step="0.001" min="0"
+                                   value="{{ old('perimetre_in') }}"
+                                   placeholder="8.086"
+                                   class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Moment d'inertie --}}
+            <div class="p-3 bg-admin-50 rounded border border-admin-100">
+                <h3 class="text-xs font-semibold text-admin-500 uppercase tracking-wider mb-2">
+                    Moment d'inertie
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div>
+                        <label for="moment_inertie_x_cm4" class="block text-xs text-admin-500 mb-1">
+                            Ix (cm⁴)
+                        </label>
+                        <input type="number" name="moment_inertie_x_cm4" id="moment_inertie_x_cm4" step="0.01" min="0"
+                               value="{{ old('moment_inertie_x_cm4') }}"
+                               placeholder="85.30"
+                               class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    </div>
+                    <div>
+                        <label for="moment_inertie_y_cm4" class="block text-xs text-admin-500 mb-1">
+                            Iy (cm⁴)
+                        </label>
+                        <input type="number" name="moment_inertie_y_cm4" id="moment_inertie_y_cm4" step="0.01" min="0"
+                               value="{{ old('moment_inertie_y_cm4') }}"
+                               placeholder="42.10"
+                               class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    </div>
+                    <div class="col-span-2">
+                        <label for="moment_inertie_in4" class="block text-xs text-admin-500 mb-1">
+                            IN (in⁴) <span class="text-admin-400">(impérial)</span>
+                        </label>
+                        <input type="number" name="moment_inertie_in4" id="moment_inertie_in4" step="0.001" min="0"
+                               value="{{ old('moment_inertie_in4') }}"
+                               placeholder="11.567"
+                               class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    </div>
+                </div>
+            </div>
+
+            {{-- Modules d'élasticité --}}
+            <div class="mt-4 p-3 bg-admin-50 rounded border border-admin-100">
+                <h3 class="text-xs font-semibold text-admin-500 uppercase tracking-wider mb-2">
+                    Module d'élasticité
+                </h3>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label for="module_elasticite_x_cm3" class="block text-xs text-admin-500 mb-1">
+                            Wx (cm³)
+                        </label>
+                        <input type="number" name="module_elasticite_x_cm3" id="module_elasticite_x_cm3" step="0.01" min="0"
+                               value="{{ old('module_elasticite_x_cm3') }}"
+                               placeholder="12.40"
+                               class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    </div>
+                    <div>
+                        <label for="module_elasticite_y_cm3" class="block text-xs text-admin-500 mb-1">
+                            Wy (cm³)
+                        </label>
+                        <input type="number" name="module_elasticite_y_cm3" id="module_elasticite_y_cm3" step="0.01" min="0"
+                               value="{{ old('module_elasticite_y_cm3') }}"
+                               placeholder="8.20"
+                               class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Section : Statut --}}
+        <div>
+            <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" name="est_disponible" value="1" 
+                       {{ old('est_disponible', true) ? 'checked' : '' }}
+                       class="w-4 h-4 text-amber-500 border-admin-300 rounded focus:ring-amber-500">
+                <span class="text-sm text-admin-700">Composant disponible</span>
+            </label>
+        </div>
+
+        {{-- Actions --}}
+        <div class="flex items-center justify-end gap-2 pt-4 border-t border-admin-100">
+            <a href="{{ route('admin.composants.index') }}" 
+               class="px-4 py-2 text-sm text-admin-500 hover:text-admin-700 transition">
+                Annuler
+            </a>
+            <button type="submit" 
+                    class="px-4 py-2 bg-admin-900 hover:bg-admin-800 text-white text-sm rounded transition">
+                Créer le composant
+            </button>
+        </div>
+    </form>
+</div>
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const typeSelect = document.getElementById('type_composant_id');
+        const sectionProfile = document.getElementById('section-profile');
+
+        function updateSections() {
+            const selectedOption = typeSelect.options[typeSelect.selectedIndex];
+            const slug = selectedOption.dataset.slug;
+
+            // Afficher la section profilé si type = "profile" ou "profil"
+            if (slug === 'profile' || slug === 'profil') {
+                sectionProfile.classList.remove('hidden');
+            } else {
+                sectionProfile.classList.add('hidden');
+            }
+        }
+
+        typeSelect.addEventListener('change', updateSections);
+        updateSections(); // Au chargement
+    });
+</script>
+@endpush
+@endsection
