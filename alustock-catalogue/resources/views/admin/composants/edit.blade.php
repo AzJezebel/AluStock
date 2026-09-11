@@ -26,13 +26,14 @@
         </div>
     </div>
 
-    {{-- Formulaire --}}
+    {{-- Formulaire principal --}}
     <form action="{{ route('admin.composants.update', $composant) }}" method="POST" 
-          class="bg-white rounded border border-admin-200 p-6 space-y-5 max-w-4xl">
+          enctype="multipart/form-data"
+          class="bg-white rounded border border-admin-200 p-6 space-y-5 max-w-4xl mb-6">
         @csrf
         @method('PUT')
 
-        {{-- Section : Identification --}}
+        {{-- Identification --}}
         <div>
             <h2 class="text-xs font-semibold text-admin-400 uppercase tracking-wider mb-3 pb-2 border-b border-admin-100">
                 Identification
@@ -64,7 +65,7 @@
             </div>
         </div>
 
-        {{-- Section : Classification --}}
+        {{-- Classification --}}
         <div>
             <h2 class="text-xs font-semibold text-admin-400 uppercase tracking-wider mb-3 pb-2 border-b border-admin-100">
                 Classification
@@ -109,15 +110,12 @@
             </div>
         </div>
 
-        {{-- ============================================================ --}}
-        {{-- SECTION CONDITIONNELLE : Champs profilés --}}
-        {{-- ============================================================ --}}
+        {{-- Section conditionnelle : Champs profilés --}}
         <div id="section-profile" class="hidden">
             <h2 class="text-xs font-semibold text-admin-400 uppercase tracking-wider mb-3 pb-2 border-b border-admin-100">
                 Caractéristiques techniques (profilé)
             </h2>
 
-            {{-- Dimensions --}}
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                 <div>
                     <label for="longueur_barre_mm" class="block text-xs font-medium text-admin-600 mb-1">
@@ -155,22 +153,16 @@
 
             {{-- Poids linéaire --}}
             <div class="p-3 bg-admin-50 rounded border border-admin-100 mb-4">
-                <h3 class="text-xs font-semibold text-admin-500 uppercase tracking-wider mb-2">
-                    Poids linéaire
-                </h3>
+                <h3 class="text-xs font-semibold text-admin-500 uppercase tracking-wider mb-2">Poids linéaire</h3>
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label for="poids_lineaire_kg_m" class="block text-xs text-admin-500 mb-1">
-                            KG/M <span class="text-admin-400">(métrique)</span>
-                        </label>
+                        <label for="poids_lineaire_kg_m" class="block text-xs text-admin-500 mb-1">KG/M</label>
                         <input type="number" name="poids_lineaire_kg_m" id="poids_lineaire_kg_m" step="0.001" min="0"
                                value="{{ old('poids_lineaire_kg_m', $composant->poids_lineaire_kg_m) }}"
                                class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
                     </div>
                     <div>
-                        <label for="poids_lineaire_lbs_ft" class="block text-xs text-admin-500 mb-1">
-                            WT/FT <span class="text-admin-400">(impérial)</span>
-                        </label>
+                        <label for="poids_lineaire_lbs_ft" class="block text-xs text-admin-500 mb-1">WT/FT</label>
                         <input type="number" name="poids_lineaire_lbs_ft" id="poids_lineaire_lbs_ft" step="0.001" min="0"
                                value="{{ old('poids_lineaire_lbs_ft', $composant->poids_lineaire_lbs_ft) }}"
                                class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
@@ -181,13 +173,9 @@
             {{-- Inertie + Périmètre --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="p-3 bg-admin-50 rounded border border-admin-100">
-                    <h3 class="text-xs font-semibold text-admin-500 uppercase tracking-wider mb-2">
-                        Moment d'inertie
-                    </h3>
+                    <h3 class="text-xs font-semibold text-admin-500 uppercase tracking-wider mb-2">Inertie</h3>
                     <div>
-                        <label for="moment_inertie_cm4" class="block text-xs text-admin-500 mb-1">
-                            IN (cm⁴)
-                        </label>
+                        <label for="moment_inertie_cm4" class="block text-xs text-admin-500 mb-1">IN (cm⁴)</label>
                         <input type="number" name="moment_inertie_cm4" id="moment_inertie_cm4" step="0.01" min="0"
                                value="{{ old('moment_inertie_cm4', $composant->moment_inertie_cm4) }}"
                                class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
@@ -195,13 +183,9 @@
                 </div>
 
                 <div class="p-3 bg-admin-50 rounded border border-admin-100">
-                    <h3 class="text-xs font-semibold text-admin-500 uppercase tracking-wider mb-2">
-                        Périmètre
-                    </h3>
+                    <h3 class="text-xs font-semibold text-admin-500 uppercase tracking-wider mb-2">Périmètre</h3>
                     <div>
-                        <label for="perimetre_mm" class="block text-xs text-admin-500 mb-1">
-                            PERIM. (mm)
-                        </label>
+                        <label for="perimetre_mm" class="block text-xs text-admin-500 mb-1">PERIM. (mm)</label>
                         <input type="number" name="perimetre_mm" id="perimetre_mm" step="0.01" min="0"
                                value="{{ old('perimetre_mm', $composant->perimetre_mm) }}"
                                class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
@@ -210,7 +194,7 @@
             </div>
         </div>
 
-        {{-- Section : Statut --}}
+        {{-- Statut --}}
         <div>
             <label class="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" name="est_disponible" value="1" 
@@ -240,14 +224,11 @@
 
         {{-- Actions --}}
         <div class="flex items-center justify-between pt-4 border-t border-admin-100">
-            <form action="{{ route('admin.composants.destroy', $composant) }}" method="POST" 
-                  onsubmit="return confirm('Supprimer ce composant ? Cette action est irréversible.')">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="text-xs text-red-400 hover:text-red-600 transition">
-                    Supprimer ce composant
-                </button>
-            </form>
+            <button type="button" 
+                    onclick="if(confirm('Supprimer ce composant ? Cette action est irréversible.')) document.getElementById('delete-form').submit();"
+                    class="text-xs text-red-400 hover:text-red-600 transition">
+                Supprimer ce composant
+            </button>
 
             <div class="flex items-center gap-2">
                 <a href="{{ route('admin.composants.index') }}" 
@@ -261,6 +242,22 @@
             </div>
         </div>
     </form>
+
+    {{-- Formulaire de suppression (hors du formulaire principal) --}}
+    <form id="delete-form" action="{{ route('admin.composants.destroy', $composant) }}" method="POST" class="hidden">
+        @csrf
+        @method('DELETE')
+    </form>
+
+    {{-- ============================================================ --}}
+    {{-- SECTION MÉDIAS (EN DEHORS DU FORMULAIRE PRINCIPAL) --}}
+    {{-- ============================================================ --}}
+    <div class="max-w-4xl">
+        @include('admin.partials.medias', [
+            'entity' => $composant,
+            'entityType' => 'composant',
+        ])
+    </div>
 </div>
 
 @push('scripts')

@@ -1,4 +1,4 @@
-{{-- resources/views/partials/logo.blade.php
+{{-- resources/views/public/partials/logo.blade.php
      $dark = true  -> variante utilisée sur le header sombre de la home (hero)
      $dark = false -> variante utilisée sur le header clair des pages internes --}}
 @php $dark = $dark ?? false; @endphp

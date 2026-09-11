@@ -12,11 +12,15 @@ return new class extends Migration
             $table->foreignId('media_id')
                 ->constrained('medias')
                 ->cascadeOnDelete();
-            $table->morphs('mediable');
+            
+            $table->morphs('mediable'); // mediable_id + mediable_type
+            
             $table->integer('ordre')->default(0);
+            
             $table->timestamps();
 
             $table->primary(['media_id', 'mediable_id', 'mediable_type']);
+            $table->index(['mediable_id', 'mediable_type']);
         });
     }
 

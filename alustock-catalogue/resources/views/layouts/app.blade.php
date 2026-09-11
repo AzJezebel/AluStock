@@ -145,7 +145,7 @@
     @hasSection('hero')
         <header class="bg-ink-900 flex-shrink-0">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between">
-                @include('partials.logo', ['dark' => true])
+                @include('public.partials.logo', ['dark' => true])
 
                 <a href="#" class="hidden sm:inline-flex items-center px-4 py-2 border border-white/20 text-white text-sm font-medium rounded-lg hover:bg-white/10 transition">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -160,7 +160,7 @@
     @else
         <header class="bg-white border-b border-ink-200 flex-shrink-0">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row md:items-center gap-4">
-                @include('partials.logo')
+                @include('public.partials.logo')
 
                 {{-- Barre de recherche avec autocomplétion --}}
                 <form action="{{ route('search.index') }}" method="GET" class="relative flex-1 max-w-2xl mx-auto w-full" id="search-form">
@@ -216,7 +216,7 @@
 
                 {{-- Menu --}}
                 <nav id="sidebar-menu" class="hidden md:block mt-2 space-y-1 text-sm">
-                    @include('partials.sidebar-menu')
+                    @include('public.partials.sidebar-menu')
                 </nav>
             </div>
         </aside>

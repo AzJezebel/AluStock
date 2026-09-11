@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Ouvrage;
 use App\Models\Media;
+use App\Models\Ouvrage;
+use App\Models\Composant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -12,100 +13,140 @@ use Illuminate\Support\Str;
 class MediaController extends Controller
 {
     /**
-     * Upload d'un média pour un ouvrage
+     * Upload pour un ouvrage
      */
-    public function store(Request $request, Ouvrage $ouvrage)
+    public function storeForOuvrage(Request $request, Ouvrage $ouvrage)
     {
-        $validated = $request->validate([
-            'fichier' => 'required|file|mimes:png,jpg,jpeg,webp,svg|max:5120', // 5 Mo max
-            'titre' => 'nullable|string|max:200',
-            'description' => 'nullable|string',
-            'type_media' => 'required|in:image,rendu_3d,plan',
-            'est_principal' => 'boolean',
+        $request->validate([
+            'fichiers' => 'required|array',
+            'fichiers.*' => 'file|mimes:png,jpg,jpeg|max:5120',
+            'type_media' => 'nullable|in:schema,photo,rendu_3d',
         ]);
 
-        // Upload du fichier
-        $file = $request->file('fichier');
-        $filename = Str::slug($ouvrage->slug) . '_' . time() . '.' . $file->getClientOriginalExtension();
-        $path = $file->storeAs('medias/ouvrages', $filename, 'public');
+        $files = $request->file('fichiers', []);
+        $typeMedia = $request->input('type_media', 'schema');
 
-        // Créer le média
-        $media = Media::create([
-            'chemin_fichier' => $path,
-            'titre' => $validated['titre'] ?? $file->getClientOriginalName(),
-            'description' => $validated['description'] ?? null,
-            'type_media' => $validated['type_media'],
-            'est_principal' => $request->has('est_principal'),
-        ]);
-
-        // Attacher le média à l'ouvrage
         $maxOrdre = $ouvrage->medias()->max('media_morph.ordre') ?? 0;
-        $ouvrage->medias()->attach($media->id, [
-            'ordre' => $maxOrdre + 1,
-        ]);
+        $count = 0;
 
-        // Si c'est le média principal, retirer le flag des autres
-        if ($request->has('est_principal')) {
-            $this->setPrincipal($ouvrage, $media);
+        foreach ($files as $file) {
+            // 1. Upload du fichier
+            $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('images/ouvrages', $filename, 'public');
+
+            // 2. Créer le média
+            $media = Media::create([
+                'chemin_fichier' => $path,
+                'titre' => $file->getClientOriginalName(),
+                'type_media' => $typeMedia,
+                'taille_octets' => $file->getSize(),
+                'mime_type' => $file->getMimeType(),
+                'est_principal' => $ouvrage->medias()->count() === 0 && $count === 0,
+            ]);
+
+            // 3. Attacher à l'ouvrage
+            $ouvrage->medias()->attach($media->id, [
+                'ordre' => $maxOrdre + $count + 1,
+            ]);
+
+            $count++;
         }
 
-        return redirect()
-            ->route('admin.ouvrages.edit', $ouvrage)
-            ->with('success', 'Média ajouté avec succès.');
+        return back()->with('success', $count . ' image(s) ajoutée(s).');
     }
 
     /**
-     * Supprimer un média
+     * Upload pour un composant
      */
-    public function destroy(Ouvrage $ouvrage, Media $media)
+    public function storeForComposant(Request $request, Composant $composant)
     {
-        // Détacher de l'ouvrage
-        $ouvrage->medias()->detach($media->id);
+        $request->validate([
+            'fichiers' => 'required|array',
+            'fichiers.*' => 'file|mimes:png,jpg,jpeg|max:5120',
+            'type_media' => 'nullable|in:schema,photo,rendu_3d',
+        ]);
 
-        // Supprimer le fichier
-        if (Storage::disk('public')->exists($media->chemin_fichier)) {
-            Storage::disk('public')->delete($media->chemin_fichier);
+        $files = $request->file('fichiers', []);
+        $typeMedia = $request->input('type_media', 'schema');
+
+        $maxOrdre = $composant->medias()->max('media_morph.ordre') ?? 0;
+        $count = 0;
+
+        foreach ($files as $file) {
+            $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('images/composants', $filename, 'public');
+
+            $media = Media::create([
+                'chemin_fichier' => $path,
+                'titre' => $file->getClientOriginalName(),
+                'type_media' => $typeMedia,
+                'taille_octets' => $file->getSize(),
+                'mime_type' => $file->getMimeType(),
+                'est_principal' => $composant->medias()->count() === 0 && $count === 0,
+            ]);
+
+            $composant->medias()->attach($media->id, [
+                'ordre' => $maxOrdre + $count + 1,
+            ]);
+
+            $count++;
         }
 
-        // Supprimer le média (s'il n'est plus utilisé)
-        $media->delete();
-
-        return redirect()
-            ->route('admin.ouvrages.edit', $ouvrage)
-            ->with('success', 'Média supprimé.');
+        return back()->with('success', $count . ' image(s) ajoutée(s).');
     }
 
     /**
      * Définir un média comme principal
      */
-    public function setPrincipal(Ouvrage $ouvrage, Media $media)
+    public function setPrincipal(Request $request, Media $media)
     {
-        // Retirer le flag de tous les médias de l'ouvrage
-        $ouvrage->medias()->update(['est_principal' => false]);
+        $entityType = $request->input('entity_type');
+        $entityId = $request->input('entity_id');
 
-        // Mettre le flag sur le média choisi
+        // Retirer le flag de tous les médias de l'entité
+        $entity = $entityType === 'ouvrage' 
+            ? Ouvrage::findOrFail($entityId) 
+            : Composant::findOrFail($entityId);
+
+        foreach ($entity->medias as $m) {
+            $m->update(['est_principal' => false]);
+        }
+
         $media->update(['est_principal' => true]);
 
-        return redirect()
-            ->route('admin.ouvrages.edit', $ouvrage)
-            ->with('success', 'Média principal défini.');
+        return back()->with('success', 'Image principale définie.');
     }
 
     /**
-     * Réordonner les médias
+     * Supprimer un média
      */
-    public function reorder(Request $request, Ouvrage $ouvrage)
+    public function destroy(Request $request, Media $media)
     {
-        $request->validate([
-            'ordre' => 'required|array',
-            'ordre.*' => 'integer|exists:medias,id',
-        ]);
-
-        foreach ($request->ordre as $position => $mediaId) {
-            $ouvrage->medias()->updateExistingPivot($mediaId, [
-                'ordre' => $position + 1,
-            ]);
+        // Supprimer le fichier physique
+        if ($media->chemin_fichier && Storage::disk('public')->exists($media->chemin_fichier)) {
+            Storage::disk('public')->delete($media->chemin_fichier);
         }
+
+        // Détacher de toutes les entités
+        $media->ouvrages()->detach();
+        $media->composants()->detach();
+        $media->gammes()->detach();
+        $media->categories()->detach();
+
+        // Supprimer le média
+        $media->forceDelete();
+
+        return back()->with('success', 'Image supprimée.');
+    }
+
+    /**
+     * Mettre à jour le titre
+     */
+    public function update(Request $request, Media $media)
+    {
+        $media->update([
+            'titre' => $request->input('titre'),
+        ]);
 
         return response()->json(['success' => true]);
     }

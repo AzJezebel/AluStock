@@ -1,4 +1,4 @@
-{{-- resources/views/partials/sidebar-menu.blade.php --}}
+{{-- resources/views/public/partials/sidebar-menu.blade.php --}}
 
 @php
     $sidebarCategories = \App\Models\Categorie::withCount('ouvrages')->orderBy('nom')->get();

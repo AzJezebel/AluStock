@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreComposantRequest;
+use App\Http\Requests\Admin\UpdateComposantRequest;
 use App\Models\Composant;
 use App\Models\Gamme;
 use App\Models\TypeComposant;
@@ -55,11 +56,46 @@ class ComposantController extends Controller
         $validated['slug'] = Str::slug($request->designation);
         $validated['est_disponible'] = $request->has('est_disponible');
 
-        Composant::create($validated);
+        $composant = Composant::create($validated);
+
+        // Traiter les médias
+        if ($request->hasFile('medias_fichiers')) {
+            $this->handleMedias($composant, $request);
+        }
 
         return redirect()
-            ->route('admin.composants.index')
+            ->route('admin.composants.edit', $composant)
             ->with('success', 'Composant créé avec succès.');
+    }
+
+    protected function handleMedias(Composant $composant, Request $request): void
+    {
+        $files = $request->file('medias_fichiers', []);
+        $typeMedia = $request->input('medias_type_media', 'schema');
+
+        if (empty($files)) return;
+
+        $count = 0;
+
+        foreach ($files as $file) {
+            $filename = \Str::uuid() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('images/composants', $filename, 'public');
+
+            $media = \App\Models\Media::create([
+                'chemin_fichier' => $path,
+                'titre' => $file->getClientOriginalName(),
+                'type_media' => $typeMedia,
+                'taille_octets' => $file->getSize(),
+                'mime_type' => $file->getMimeType(),
+                'est_principal' => $count === 0,
+            ]);
+
+            $composant->medias()->attach($media->id, [
+                'ordre' => $count + 1,
+            ]);
+
+            $count++;
+        }
     }
 
     public function edit(Composant $composant)
@@ -70,7 +106,7 @@ class ComposantController extends Controller
         return view('admin.composants.edit', compact('composant', 'typesComposant', 'gammes'));
     }
 
-    public function update(StoreComposantRequest $request, Composant $composant)
+    public function update(UpdateComposantRequest $request, Composant $composant)
     {
         $validated = $request->validated();
         $validated['slug'] = Str::slug($request->designation);

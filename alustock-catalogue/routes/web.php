@@ -109,16 +109,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
                 Route::delete('/{caracteristique}', [AdminCaracteristiqueController::class, 'destroy'])->name('destroy');
                 Route::post('/reorder', [AdminCaracteristiqueController::class, 'reorder'])->name('reorder');
             });
-
-            // Médias
-            Route::prefix('/{ouvrage:slug}/medias')->name('medias.')->group(function () {
-                Route::post('/upload', [AdminMediaController::class, 'store'])->name('store');
-                Route::delete('/{media}', [AdminMediaController::class, 'destroy'])->name('destroy');
-                Route::post('/{media}/principal', [AdminMediaController::class, 'setPrincipal'])->name('principal');
-                Route::post('/reorder', [AdminMediaController::class, 'reorder'])->name('reorder');
-            });
         });
 
+        // Médias
+        Route::prefix('medias')->name('medias.')->group(function () {
+            Route::post('/ouvrages/{ouvrage:slug}/upload', [AdminMediaController::class, 'storeForOuvrage'])->name('ouvrages.upload');
+            Route::post('/composants/{composant:slug}/upload', [AdminMediaController::class, 'storeForComposant'])->name('composants.upload');
+            Route::put('/{media}', [AdminMediaController::class, 'update'])->name('update');
+            Route::delete('/{media}', [AdminMediaController::class, 'destroy'])->name('destroy');
+            Route::post('/{media}/principal', [AdminMediaController::class, 'setPrincipal'])->name('principal');
+            // Route::post('/reorder', [AdminMediaController::class, 'reorder'])->name('reorder');
+        });
         Route::resource('composants', AdminComposantController::class);
         
         Route::get('/gammes', [DashboardController::class, 'gammes'])->name('gammes.index');
