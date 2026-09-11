@@ -268,3 +268,20 @@ TODO : When done export DB as seeder
 
 --------------------------------------------------------------------------------------------------------------------------------
 11/09
+
+Add partial views for logo, media carousel, and sidebar menu
+
+- Created a logo partial for consistent branding across pages.
+- Implemented a media carousel partial for displaying images with navigation and lightbox functionality.
+- Added a sidebar menu partial to display categories and ranges with links to relevant pages.
+
+Recreer migration pour table media/mediamorph
+Table composant mis a jour
+
+Views admin pour partial/medias
+Fix create and edit of ouvrage and composants
+Carroussel + Integration image dans show public
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+14/09
