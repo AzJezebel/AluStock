@@ -285,3 +285,12 @@ Carroussel + Integration image dans show public
 
 --------------------------------------------------------------------------------------------------------------------------------
 14/09
+
+Add orangehill/iseed
+Test export database into seeders
+Integration catalogue with admin dashboard
+New attempt on script pdf_extractor
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+15/09
