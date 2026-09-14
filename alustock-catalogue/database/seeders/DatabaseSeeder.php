@@ -29,5 +29,7 @@ class DatabaseSeeder extends Seeder
             // 4. Caractéristiques (EAV)
             CaracteristiqueSeeder::class,
         ]);
+
+        //php artisan iseed gamme,categories,type_composant,ouvrages,composants,composition_ouvrages,finition,composant_finitions,caracteristiques,medias,media_morph --force
     }
 }
