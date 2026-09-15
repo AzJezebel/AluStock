@@ -13,7 +13,7 @@ class ComposantController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Composant::with(['typeComposant', 'gamme', 'finitions'])
+        $query = Composant::with(['typeComposant', 'gamme', 'medias'])
                          ->disponible();
 
         // Filtre par recherche

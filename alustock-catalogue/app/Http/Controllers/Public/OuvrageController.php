@@ -15,7 +15,7 @@ class OuvrageController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Ouvrage::with(['gamme', 'categorie'])->actif();
+        $query = Ouvrage::with(['gamme', 'categorie', 'medias'])->actif();
 
         // Filtre par catégorie
         $categorieCourante = null;
