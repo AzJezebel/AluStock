@@ -390,16 +390,21 @@
                 <button type="button" onclick="closeModal('modal-add-composant')" class="text-admin-400 hover:text-admin-600">✕</button>
             </div>
             <div class="p-4 space-y-3">
-                <div>
+                <div class="relative">
                     <label class="block text-xs font-medium text-admin-600 mb-1">Composant</label>
-                    <select name="composant_id" required class="w-full px-3 py-2 text-sm border border-admin-200 rounded">
-                        <option value="">Sélectionner un composant</option>
-                        @foreach($composantsDisponibles as $c)
-                            <option value="{{ $c->id }}">
-                                {{ $c->reference }} — {{ $c->designation }}
-                            </option>
-                        @endforeach
-                    </select>
+                                
+                    <input type="text" 
+                           name="composant_search" 
+                           id="modal-composant-search" 
+                           placeholder="Tapez pour rechercher (référence ou désignation)..."
+                           autocomplete="off"
+                           class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
+                                
+                    <input type="hidden" name="composant_id" id="modal-composant-select" value="">
+                                
+                    <div id="modal-composant-results" 
+                         class="hidden absolute left-0 right-0 top-full mt-1 bg-white border border-admin-200 rounded shadow-lg max-h-60 overflow-y-auto z-50">
+                    </div>
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <div>
@@ -550,6 +555,96 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// ============================================================
+// RECHERCHE DE COMPOSANT (autocomplete)
+// ============================================================
+const composantsData = [
+    @foreach($composantsDisponibles as $c)
+    {
+        id: {{ $c->id }},
+        reference: @json($c->reference),
+        designation: @json($c->designation),
+        type: @json($c->typeComposant?->nom ?? ''),
+    },
+    @endforeach
+];
+
+function initComposantSearch() {
+    const searchInput = document.getElementById('modal-composant-search');
+    const hiddenInput = document.getElementById('modal-composant-select');
+    const resultsBox = document.getElementById('modal-composant-results');
+    const selectedBox = document.getElementById('modal-composant-selected');
+    const selectedLabel = document.getElementById('modal-composant-selected-label');
+
+    if (!searchInput) return;
+
+    function filterComposants(query) {
+        const q = query.toLowerCase().trim();
+        if (q === '') return composantsData.slice(0, 20);
+        return composantsData.filter(c => 
+            c.reference.toLowerCase().includes(q) || 
+            c.designation.toLowerCase().includes(q) ||
+            (c.type && c.type.toLowerCase().includes(q))
+        ).slice(0, 30);
+    }
+
+    function renderResults(items) {
+        if (items.length === 0) {
+            resultsBox.innerHTML = '<div class="px-3 py-2 text-xs text-admin-400">Aucun composant trouvé</div>';
+            resultsBox.classList.remove('hidden');
+            return;
+        }
+
+        resultsBox.innerHTML = items.map(c => `
+            <div class="px-3 py-2 hover:bg-amber-50 cursor-pointer border-b border-admin-100 last:border-0"
+                 onclick="selectComposant(${c.id}, '${c.reference.replace(/'/g, "\\'")}', '${c.designation.replace(/'/g, "\\'")}')">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-mono text-admin-400">${c.reference}</span>
+                    <span class="text-sm text-admin-900">${c.designation}</span>
+                </div>
+                ${c.type ? '<div class="text-xs text-admin-400 mt-0.5">' + c.type + '</div>' : ''}
+            </div>
+        `).join('');
+
+        resultsBox.classList.remove('hidden');
+    }
+
+    window.selectComposant = function(id, reference, designation) {
+        hiddenInput.value = id;
+        searchInput.value = reference + ' — ' + designation;
+        resultsBox.classList.add('hidden');
+        selectedLabel.textContent = reference + ' — ' + designation;
+        selectedBox.classList.remove('hidden');
+    };
+
+    window.clearComposantSelection = function() {
+        hiddenInput.value = '';
+        searchInput.value = '';
+        selectedBox.classList.add('hidden');
+    };
+
+    searchInput.addEventListener('input', function() {
+        if (hiddenInput.value) clearComposantSelection();
+        renderResults(filterComposants(this.value));
+    });
+
+    searchInput.addEventListener('focus', function() {
+        renderResults(filterComposants(this.value));
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!searchInput.contains(e.target) && !resultsBox.contains(e.target)) {
+            resultsBox.classList.add('hidden');
+        }
+    });
+
+    searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') resultsBox.classList.add('hidden');
+    });
+}
+
+document.addEventListener('DOMContentLoaded', initComposantSearch);
 </script>
 @endpush
 @endsection

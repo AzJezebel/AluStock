@@ -14,7 +14,7 @@ class StoreComposantRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'reference' => 'required|string|max:50|unique:composants,reference',
+            'reference' => 'required|string|max:50',
             'designation' => 'required|string|max:200',
             'type_composant_id' => 'nullable|exists:types_composant,id',
             'gamme_id' => 'nullable|exists:gammes,id',

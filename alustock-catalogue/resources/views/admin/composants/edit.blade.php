@@ -176,7 +176,7 @@
                     <h3 class="text-xs font-semibold text-admin-500 uppercase tracking-wider mb-2">Inertie</h3>
                     <div>
                         <label for="moment_inertie_cm4" class="block text-xs text-admin-500 mb-1">IN (cm⁴)</label>
-                        <input type="number" name="moment_inertie_cm4" id="moment_inertie_cm4" step="0.01" min="0"
+                        <input type="number" name="moment_inertie_cm4" id="moment_inertie_cm4" step="0.001" min="0"
                                value="{{ old('moment_inertie_cm4', $composant->moment_inertie_cm4) }}"
                                class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
                     </div>

@@ -103,7 +103,6 @@ class OuvrageController extends Controller
                     $composant = Composant::create([
                         'reference' => $item['reference'],
                         'designation' => $item['designation'],
-                        'slug' => Str::slug($item['designation']),
                         'type_composant_id' => $item['type_composant_id'] ?? null,
                         'matiere' => $item['matiere'] ?? null,
                         'est_disponible' => true,

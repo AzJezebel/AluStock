@@ -294,3 +294,16 @@ New attempt on script pdf_extractor
 
 --------------------------------------------------------------------------------------------------------------------------------
 15/09
+
+feat: Add new media entries and ouvrage details, enhance component search functionality, and update UI elements
+
+- Added multiple media entries in MediasTableSeeder for images related to components and ouvrages.
+- Introduced a new ouvrage entry in OuvragesTableSeeder.
+- Updated input fields for moment of inertia in component creation and editing views to allow finer precision.
+- Enhanced the component selection UI in create and edit views to use a searchable input field instead of a dropdown.
+- Implemented autocomplete functionality for component search, improving user experience.
+- Refactored JavaScript functions for better readability and maintainability.
+
+Tweak Create and Edit view for Ouvrage
+Fix : Reference not unique -> slug for composant is reference + designation
+Edit : Controllers and Resquest for Composant and Ouvrage

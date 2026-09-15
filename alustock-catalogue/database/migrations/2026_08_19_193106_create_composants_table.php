@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('composants', function (Blueprint $table) {
             $table->id();
-            $table->string('reference', 50)->unique();
+            $table->string('reference', 50);
             $table->string('designation', 200);
             $table->string('slug', 220)->unique();
             
@@ -38,7 +38,7 @@ return new class extends Migration
             $table->decimal('poids_lineaire_lbs_ft', 10, 3)->nullable();
             
             // Moment d'inertie
-            $table->decimal('moment_inertie_cm4', 10, 2)->nullable();
+            $table->decimal('moment_inertie_cm4', 10, 3)->nullable();
             
             // Périmètre
             $table->decimal('perimetre_mm', 10, 2)->nullable();

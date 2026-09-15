@@ -61,6 +61,27 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-11 21:59:20',
                 'updated_at' => '2026-09-11 21:59:20',
             ),
+            2 => 
+            array (
+                'id' => 7,
+                'reference' => 'BAR 009',
+                'nom' => 'MODULO SAN ANDRES',
+                'slug' => 'modulo-san-andres',
+                'gamme_id' => NULL,
+                'categorie_id' => 2,
+                'description_courte' => NULL,
+                'description_technique' => NULL,
+                'largeur_min_mm' => NULL,
+                'largeur_max_mm' => NULL,
+                'hauteur_min_mm' => NULL,
+                'hauteur_max_mm' => NULL,
+                'performance_thermique' => NULL,
+                'performance_acoustique' => NULL,
+                'image_principale' => NULL,
+                'est_actif' => 1,
+                'created_at' => '2026-09-15 19:06:18',
+                'updated_at' => '2026-09-15 19:06:18',
+            ),
         ));
         
         

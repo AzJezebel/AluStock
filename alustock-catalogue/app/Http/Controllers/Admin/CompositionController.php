@@ -86,7 +86,6 @@ class CompositionController extends Controller
         $composant = Composant::create([
             'reference' => $validated['reference'],
             'designation' => $validated['designation'],
-            'slug' => \Str::slug($validated['designation']),
             'type_composant_id' => $validated['type_composant_id'] ?? null,
             'matiere' => $validated['matiere'] ?? null,
             'longueur_barre_mm' => $validated['longueur_barre_mm'] ?? null,

@@ -198,7 +198,7 @@
                 </div>
             </div>
 
-            <div id="temp-composition-list" class="space-y-2"></div>
+            <div id="temp-composition-list" class="divide-y divide-admin-100"></div>
 
             <div id="temp-composition-empty" class="text-center py-6 text-xs text-admin-400 border border-dashed border-admin-200 rounded">
                 Aucun composant pour l'instant.
@@ -206,7 +206,7 @@
         </div>
 
         {{-- ============================================================ --}}
-        {{-- CARACTÉRISTIQUES (même logique que le edit) --}}
+        {{-- CARACTÉRISTIQUES --}}
         {{-- ============================================================ --}}
         <div class="border-t border-admin-100 pt-5">
             <div class="flex items-center justify-between mb-3">
@@ -221,7 +221,6 @@
                 </button>
             </div>
 
-            {{-- Formulaire d'ajout inline (comme le edit) --}}
             <div id="form-add-carac" class="hidden p-4 border-b border-admin-100 bg-admin-50">
                 <div class="flex items-center gap-2">
                     <input type="text" id="carac-cle" placeholder="Clé (ex: Épaisseur)"
@@ -346,19 +345,22 @@
             <button type="button" onclick="closeModal('modal-add-composant')" class="text-admin-400 hover:text-admin-600">✕</button>
         </div>
         <div class="p-4 space-y-3">
-            <div>
+            <div class="relative">
                 <label class="block text-xs font-medium text-admin-600 mb-1">Composant</label>
-                <select id="modal-composant-select" class="w-full px-3 py-2 text-sm border border-admin-200 rounded">
-                    <option value="">Sélectionner un composant</option>
-                    @foreach($composantsDisponibles as $c)
-                        <option value="{{ $c->id }}" 
-                                data-reference="{{ $c->reference }}"
-                                data-designation="{{ $c->designation }}">
-                            {{ $c->reference }} — {{ $c->designation }}
-                        </option>
-                    @endforeach
-                </select>
+                
+                <input type="text" 
+                       id="modal-composant-search" 
+                       placeholder="Sélectionner ou rechercher un composant..."
+                       autocomplete="off"
+                       class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500 cursor-pointer">
+                
+                <input type="hidden" id="modal-composant-select" value="">
+                
+                <div id="modal-composant-results" 
+                     class="hidden absolute left-0 right-0 top-full mt-1 bg-white border border-admin-200 rounded shadow-lg max-h-60 overflow-y-auto z-50">
+                </div>
             </div>
+
             <div class="grid grid-cols-2 gap-3">
                 <div>
                     <label class="block text-xs font-medium text-admin-600 mb-1">Quantité</label>
@@ -423,7 +425,6 @@
                 </div>
             </div>
 
-            {{-- Champs profilés (conditionnel) --}}
             <div id="new-section-profile" class="hidden pt-3 border-t border-admin-100 space-y-3">
                 <h4 class="text-xs font-semibold text-admin-500 uppercase">Caractéristiques (profilé)</h4>
                 <div class="grid grid-cols-4 gap-2">
@@ -441,7 +442,7 @@
                            class="px-2 py-1.5 text-xs border border-admin-200 rounded">
                     <input type="number" id="new-poids_lineaire_lbs_ft" step="0.001" placeholder="WT/FT"
                            class="px-2 py-1.5 text-xs border border-admin-200 rounded">
-                    <input type="number" id="new-moment_inertie_cm4" step="0.01" placeholder="IN"
+                    <input type="number" id="new-moment_inertie_cm4" step="0.001" placeholder="IN"
                            class="px-2 py-1.5 text-xs border border-admin-200 rounded">
                     <input type="number" id="new-perimetre_mm" step="0.01" placeholder="PERIM."
                            class="px-2 py-1.5 text-xs border border-admin-200 rounded">
@@ -479,49 +480,164 @@
 
 @push('scripts')
 <script>
-let tempComposition = [];
-let tempCaracteristiques = [];
+// ============================================================
+// ÉTAT GLOBAL
+// ============================================================
+window.tempComposition = [];
+window.tempCaracteristiques = [];
 
-function openAddComposantModal() {
+// ============================================================
+// DONNÉES COMPOSANTS
+// ============================================================
+window.composantsData = [
+    @foreach($composantsDisponibles as $c)
+    {
+        id: {{ $c->id }},
+        reference: @json($c->reference),
+        designation: @json($c->designation),
+        type: @json($c->typeComposant?->nom ?? ''),
+    },
+    @endforeach
+];
+
+// ============================================================
+// MODALS
+// ============================================================
+window.openAddComposantModal = function() {
     document.getElementById('modal-add-composant').classList.remove('hidden');
-}
+    const searchInput = document.getElementById('modal-composant-search');
+    const hiddenInput = document.getElementById('modal-composant-select');
+    const resultsBox = document.getElementById('modal-composant-results');
+    if (searchInput) searchInput.value = '';
+    if (hiddenInput) hiddenInput.value = '';
+    if (resultsBox) resultsBox.classList.add('hidden');
+};
 
-function openCreateComposantModal() {
+window.openCreateComposantModal = function() {
     document.getElementById('modal-create-composant').classList.remove('hidden');
-}
+};
 
-function closeModal(id) {
+window.closeModal = function(id) {
     document.getElementById(id).classList.add('hidden');
-}
+};
+
+// ============================================================
+// RECHERCHE DE COMPOSANT
+// ============================================================
+window.initComposantSearch = function() {
+    const searchInput = document.getElementById('modal-composant-search');
+    const hiddenInput = document.getElementById('modal-composant-select');
+    const resultsBox = document.getElementById('modal-composant-results');
+
+    if (!searchInput) return;
+
+    function filterComposants(query) {
+        const q = query.toLowerCase().trim();
+        if (q === '') return composantsData.slice(0, 30);
+        return composantsData.filter(c => 
+            c.reference.toLowerCase().includes(q) || 
+            c.designation.toLowerCase().includes(q) ||
+            (c.type && c.type.toLowerCase().includes(q))
+        ).slice(0, 30);
+    }
+
+    function renderResults(items) {
+        if (items.length === 0) {
+            resultsBox.innerHTML = '<div class="px-3 py-2 text-xs text-admin-400">Aucun composant trouvé</div>';
+            resultsBox.classList.remove('hidden');
+            return;
+        }
+
+        resultsBox.innerHTML = items.map(c => 
+            '<div class="px-3 py-2 hover:bg-amber-50 cursor-pointer border-b border-admin-100 last:border-0" ' +
+            'data-composant-id="' + c.id + '" ' +
+            'data-composant-reference="' + c.reference.replace(/"/g, '&quot;') + '" ' +
+            'data-composant-designation="' + c.designation.replace(/"/g, '&quot;') + '">' +
+                '<div class="flex items-center gap-2">' +
+                    '<span class="text-xs font-mono text-admin-400">' + c.reference + '</span>' +
+                    '<span class="text-sm text-admin-900">' + c.designation + '</span>' +
+                '</div>' +
+                (c.type ? '<div class="text-xs text-admin-400 mt-0.5">' + c.type + '</div>' : '') +
+            '</div>'
+        ).join('');
+
+        resultsBox.querySelectorAll('[data-composant-id]').forEach(el => {
+            el.addEventListener('click', function() {
+                selectComposant(
+                    this.dataset.composantId,
+                    this.dataset.composantReference,
+                    this.dataset.composantDesignation
+                );
+            });
+        });
+
+        resultsBox.classList.remove('hidden');
+    }
+
+    window.selectComposant = function(id, reference, designation) {
+        hiddenInput.value = id;
+        searchInput.value = reference + ' — ' + designation;
+        resultsBox.classList.add('hidden');
+    };
+
+    searchInput.addEventListener('input', function() {
+        if (hiddenInput.value) {
+            hiddenInput.value = '';
+        }
+        renderResults(filterComposants(this.value));
+    });
+
+    searchInput.addEventListener('focus', function() {
+        renderResults(filterComposants(this.value));
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!searchInput.contains(e.target) && !resultsBox.contains(e.target)) {
+            resultsBox.classList.add('hidden');
+        }
+    });
+
+    searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') resultsBox.classList.add('hidden');
+    });
+};
 
 // ============================================================
 // COMPOSITION
 // ============================================================
-function addTempComposant() {
-    const select = document.getElementById('modal-composant-select');
-    const option = select.options[select.selectedIndex];
+window.addTempComposant = function() {
+    const id = document.getElementById('modal-composant-select').value;
     
-    if (!option.value) {
+    if (!id) {
         alert('Sélectionnez un composant.');
         return;
     }
 
+    const composant = composantsData.find(c => c.id == id);
+    if (!composant) {
+        alert('Composant introuvable.');
+        return;
+    }
+
     tempComposition.push({
-        composant_id: parseInt(option.value),
-        reference: option.dataset.reference,
-        designation: option.dataset.designation,
+        composant_id: composant.id,
+        reference: composant.reference,
+        designation: composant.designation,
         quantite: parseFloat(document.getElementById('modal-quantite').value) || 1,
         unite: document.getElementById('modal-unite').value,
         is_new: false,
     });
 
     closeModal('modal-add-composant');
+    
+    document.getElementById('modal-composant-search').value = '';
     document.getElementById('modal-composant-select').value = '';
     document.getElementById('modal-quantite').value = '1';
+    
     renderTempComposition();
-}
+};
 
-function createTempComposant() {
+window.createTempComposant = function() {
     const reference = document.getElementById('new-composant-reference').value.trim();
     const designation = document.getElementById('new-composant-designation').value.trim();
 
@@ -556,13 +672,15 @@ function createTempComposant() {
     document.getElementById('new-composant-matiere').value = '';
     document.getElementById('new-composant-quantite').value = '1';
     renderTempComposition();
-}
+};
 
-function renderTempComposition() {
+window.renderTempComposition = function() {
     const list = document.getElementById('temp-composition-list');
     const empty = document.getElementById('temp-composition-empty');
     const input = document.getElementById('temp-composition-input');
     const count = document.getElementById('temp-composition-count');
+
+    if (!list) return;
 
     count.textContent = '(' + tempComposition.length + ')';
 
@@ -576,42 +694,44 @@ function renderTempComposition() {
     empty.classList.add('hidden');
     list.innerHTML = '';
 
-    tempComposition.forEach((item, index) => {
+    tempComposition.forEach(function(item, index) {
         const div = document.createElement('div');
-        div.className = 'flex items-center gap-3 p-3 bg-admin-50 rounded border border-admin-100';
-        div.innerHTML = `
-            <div class="flex-1">
-                <div class="flex items-center gap-2">
-                    <span class="text-sm font-medium text-admin-900">${item.designation}</span>
-                    <span class="text-xs text-admin-400 font-mono">${item.reference}</span>
-                    ${item.is_new ? '<span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 text-amber-700">NOUVEAU</span>' : ''}
-                </div>
-                <div class="text-xs text-admin-500 mt-0.5">
-                    Quantité : <strong>${item.quantite}</strong> ${item.unite}
-                </div>
-            </div>
-            <button type="button" onclick="removeTempComposant(${index})"
-                    class="p-1 text-red-400 hover:text-red-600">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                </svg>
-            </button>
-        `;
+        div.className = 'p-3 hover:bg-admin-50 transition group';
+        div.innerHTML = 
+            '<div class="flex items-center gap-3">' +
+                '<div class="flex-1 min-w-0">' +
+                    '<div class="flex items-center gap-2 flex-wrap">' +
+                        '<span class="text-sm font-medium text-admin-900">' + item.designation + '</span>' +
+                        '<span class="text-xs text-admin-400 font-mono">' + item.reference + '</span>' +
+                        (item.is_new ? '<span class="text-xs px-1.5 py-0.5 rounded bg-amber-100 text-amber-700">NOUVEAU</span>' : '') +
+                    '</div>' +
+                    '<div class="text-xs text-admin-500 mt-0.5">' +
+                        'Quantité : <strong>' + item.quantite + '</strong> ' + item.unite +
+                    '</div>' +
+                '</div>' +
+                '<div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition">' +
+                    '<button type="button" onclick="removeTempComposant(' + index + ')" class="p-1 text-red-400 hover:text-red-600 transition">' +
+                        '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">' +
+                            '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>' +
+                        '</svg>' +
+                    '</button>' +
+                '</div>' +
+            '</div>';
         list.appendChild(div);
     });
 
     input.value = JSON.stringify(tempComposition);
-}
+};
 
-function removeTempComposant(index) {
+window.removeTempComposant = function(index) {
     tempComposition.splice(index, 1);
     renderTempComposition();
-}
+};
 
 // ============================================================
-// CARACTÉRISTIQUES (mêmes IDs que le formulaire inline)
+// CARACTÉRISTIQUES
 // ============================================================
-function addTempCaracteristique() {
+window.addTempCaracteristique = function() {
     const cle = document.getElementById('carac-cle').value.trim();
     const valeur = document.getElementById('carac-valeur').value.trim();
     const unite = document.getElementById('carac-unite').value.trim();
@@ -621,7 +741,7 @@ function addTempCaracteristique() {
         return;
     }
 
-    tempCaracteristiques.push({ cle, valeur, unite });
+    tempCaracteristiques.push({ cle: cle, valeur: valeur, unite: unite });
     
     document.getElementById('carac-cle').value = '';
     document.getElementById('carac-valeur').value = '';
@@ -629,9 +749,9 @@ function addTempCaracteristique() {
     document.getElementById('carac-cle').focus();
     
     renderTempCaracteristiques();
-}
+};
 
-function renderTempCaracteristiques() {
+window.renderTempCaracteristiques = function() {
     const list = document.getElementById('temp-caracteristiques-list');
     const empty = document.getElementById('temp-caracteristiques-empty');
     const input = document.getElementById('temp-caracteristiques-input');
@@ -649,46 +769,47 @@ function renderTempCaracteristiques() {
     empty.classList.add('hidden');
     list.innerHTML = '';
 
-    tempCaracteristiques.forEach((carac, index) => {
+    tempCaracteristiques.forEach(function(carac, index) {
         const div = document.createElement('div');
         div.className = 'flex items-center gap-2 p-3 bg-admin-50 rounded border border-admin-100';
-        div.innerHTML = `
-            <input type="text" value="${carac.cle}" placeholder="Clé"
-                   onchange="updateTempCarac(${index}, 'cle', this.value)"
-                   class="flex-1 px-2 py-1 text-sm border border-transparent hover:border-admin-200 focus:border-amber-500 rounded bg-transparent">
-            <input type="text" value="${carac.valeur}" placeholder="Valeur"
-                   onchange="updateTempCarac(${index}, 'valeur', this.value)"
-                   class="flex-1 px-2 py-1 text-sm border border-transparent hover:border-admin-200 focus:border-amber-500 rounded bg-transparent">
-            <input type="text" value="${carac.unite}" placeholder="Unité"
-                   onchange="updateTempCarac(${index}, 'unite', this.value)"
-                   class="w-24 px-2 py-1 text-sm border border-transparent hover:border-admin-200 focus:border-amber-500 rounded bg-transparent">
-            <button type="button" onclick="removeTempCaracteristique(${index})"
-                    class="p-1 text-red-400 hover:text-red-600">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                </svg>
-            </button>
-        `;
+        div.innerHTML = 
+            '<input type="text" value="' + carac.cle + '" placeholder="Clé" ' +
+                'onchange="updateTempCarac(' + index + ', \'cle\', this.value)" ' +
+                'class="flex-1 px-2 py-1 text-sm border border-transparent hover:border-admin-200 focus:border-amber-500 rounded bg-transparent">' +
+            '<input type="text" value="' + carac.valeur + '" placeholder="Valeur" ' +
+                'onchange="updateTempCarac(' + index + ', \'valeur\', this.value)" ' +
+                'class="flex-1 px-2 py-1 text-sm border border-transparent hover:border-admin-200 focus:border-amber-500 rounded bg-transparent">' +
+            '<input type="text" value="' + carac.unite + '" placeholder="Unité" ' +
+                'onchange="updateTempCarac(' + index + ', \'unite\', this.value)" ' +
+                'class="w-24 px-2 py-1 text-sm border border-transparent hover:border-admin-200 focus:border-amber-500 rounded bg-transparent">' +
+            '<button type="button" onclick="removeTempCaracteristique(' + index + ')" class="p-1 text-red-400 hover:text-red-600">' +
+                '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">' +
+                    '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>' +
+                '</svg>' +
+            '</button>';
         list.appendChild(div);
     });
 
     input.value = JSON.stringify(tempCaracteristiques);
-}
+};
 
-function updateTempCarac(index, field, value) {
+window.updateTempCarac = function(index, field, value) {
     tempCaracteristiques[index][field] = value;
     document.getElementById('temp-caracteristiques-input').value = JSON.stringify(tempCaracteristiques);
-}
+};
 
-function removeTempCaracteristique(index) {
+window.removeTempCaracteristique = function(index) {
     tempCaracteristiques.splice(index, 1);
     renderTempCaracteristiques();
-}
+};
 
 // ============================================================
-// CONDITIONNEL PROFILÉ + UPLOAD
+// INIT AU CHARGEMENT
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
+    initComposantSearch();
+
+    // Conditionnel profilé
     const typeSelect = document.getElementById('new-composant-type');
     const sectionProfile = document.getElementById('new-section-profile');
 
@@ -703,6 +824,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Upload images
     const dropzone = document.getElementById('create-dropzone');
     const fileInput = document.getElementById('create-file-input');
     const preview = document.getElementById('create-preview');

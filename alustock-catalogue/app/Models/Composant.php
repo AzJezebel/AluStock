@@ -40,6 +40,61 @@ class Composant extends Model
         'perimetre_mm' => 'decimal:2',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($composant) {
+            if (empty($composant->slug)) {
+                $composant->slug = self::generateUniqueSlug(
+                    $composant->reference,
+                    $composant->designation
+                );
+            }
+        });
+
+        static::updating(function ($composant) {
+            if ($composant->isDirty(['reference', 'designation'])) {
+                $composant->slug = self::generateUniqueSlug(
+                    $composant->reference,
+                    $composant->designation,
+                    $composant->id
+                );
+            }
+        });
+    }
+
+    /**
+     * Génère un slug unique à partir de la référence + désignation
+     */
+    protected static function generateUniqueSlug(string $reference, string $designation, ?int $ignoreId = null): string
+    {
+        $baseSlug = \Str::slug($reference . '-' . $designation);
+        $slug = $baseSlug;
+        $counter = 1;
+
+        while (self::slugExists($slug, $ignoreId)) {
+            $slug = $baseSlug . '-' . $counter;
+            $counter++;
+        }
+
+        return $slug;
+    }
+
+    /**
+     * Vérifie si un slug existe déjà (en ignorant l'ID en cours)
+     */
+    protected static function slugExists(string $slug, ?int $ignoreId = null): bool
+    {
+        $query = self::where('slug', $slug);
+
+        if ($ignoreId) {
+            $query->where('id', '!=', $ignoreId);
+        }
+
+        return $query->exists();
+    }
+
     // ============================================================
     // RELATIONS
     // ============================================================

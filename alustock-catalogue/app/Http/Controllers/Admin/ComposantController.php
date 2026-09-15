@@ -53,7 +53,6 @@ class ComposantController extends Controller
     public function store(StoreComposantRequest $request)
     {
         $validated = $request->validated();
-        $validated['slug'] = Str::slug($request->designation);
         $validated['est_disponible'] = $request->has('est_disponible');
 
         $composant = Composant::create($validated);
@@ -109,7 +108,6 @@ class ComposantController extends Controller
     public function update(UpdateComposantRequest $request, Composant $composant)
     {
         $validated = $request->validated();
-        $validated['slug'] = Str::slug($request->designation);
         $validated['est_disponible'] = $request->has('est_disponible');
 
         $composant->update($validated);
