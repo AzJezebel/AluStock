@@ -4,47 +4,57 @@
 @section('title', $composant->designation . ' - AluStock')
 
 @section('breadcrumb')
-    <a href="{{ route('home') }}" class="hover:text-ink-700">Accueil</a>
-    <span class="mx-2">›</span>
-    <a href="{{ route('composants.index') }}" class="hover:text-ink-700">Composants</a>
-    <span class="mx-2">›</span>
-    <span class="text-ink-700 font-medium">{{ $composant->designation }}</span>
+    <a href="{{ route('home') }}" class="hover:text-slate-700">Accueil</a>
+    <span class="mx-1.5 text-slate-400">›</span>
+    <a href="{{ route('composants.index') }}" class="hover:text-slate-700">Composants</a>
+    <span class="mx-1.5 text-slate-400">›</span>
+    <span class="text-slate-700 font-medium">{{ $composant->designation }}</span>
 @endsection
 
 @section('content')
 <div>
-    {{-- En-tête --}}
-    <div class="bg-white rounded-xl shadow-sm border border-ink-200 p-6 mb-6">
-        <div class="flex flex-col md:flex-row md:items-start md:justify-between">
+    {{-- En-tête compact --}}
+    <div class="bg-white border border-slate-200 p-4 mb-4">
+        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
             <div>
-                <h1 class="text-2xl font-bold text-ink-900">{{ $composant->designation }}</h1>
-                <p class="text-sm text-ink-500 mt-1">Référence : {{ $composant->reference }}</p>
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="font-mono text-xs font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 tracking-wider">
+                        {{ $composant->reference }}
+                    </span>
+                    @if($composant->est_disponible)
+                        <span class="text-[10px] font-semibold text-green-700 bg-green-50 px-2 py-0.5 border border-green-200 uppercase tracking-wider">
+                            Disponible
+                        </span>
+                    @else
+                        <span class="text-[10px] font-semibold text-red-700 bg-red-50 px-2 py-0.5 border border-red-200 uppercase tracking-wider">
+                            Indisponible
+                        </span>
+                    @endif
+                </div>
+                <h1 class="text-xl font-bold text-slate-900">{{ $composant->designation }}</h1>
                 @if($composant->matiere)
-                    <p class="text-sm text-ink-600 mt-1">Matière : {{ $composant->matiere }}</p>
+                    <p class="text-xs text-slate-500 mt-1">Matière : <span class="text-slate-700 font-medium">{{ $composant->matiere }}</span></p>
                 @endif
             </div>
-            <div class="mt-4 md:mt-0 flex flex-wrap gap-2">
+            <div class="flex flex-wrap gap-1.5">
                 @if($composant->typeComposant)
-                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-50 text-amber-700">{{ $composant->typeComposant->nom }}</span>
+                    <span class="inline-flex items-center px-2 py-1 text-[10px] font-medium bg-blue-50 text-blue-700 border border-blue-200 uppercase tracking-wider">
+                        {{ $composant->typeComposant->nom }}
+                    </span>
                 @endif
                 @if($composant->gamme)
-                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-ink-100 text-ink-600">{{ $composant->gamme->nom }}</span>
-                @endif
-                @if($composant->est_disponible)
-                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-50 text-green-700">Disponible</span>
-                @else
-                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-50 text-red-700">Indisponible</span>
+                    <span class="inline-flex items-center px-2 py-1 text-[10px] font-medium bg-slate-100 text-slate-600 border border-slate-200 uppercase tracking-wider">
+                        {{ $composant->gamme->nom }}
+                    </span>
                 @endif
             </div>
         </div>
     </div>
 
-    {{-- ============================================================ --}}
-    {{-- LAYOUT : CARROUSEL + SPECS CÔTE À CÔTE --}}
-    {{-- ============================================================ --}}
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+    {{-- Layout 2 colonnes : carrousel + specs --}}
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
         
-        {{-- Carrousel d'images --}}
+        {{-- Carrousel --}}
         @if($composant->medias->count() > 0)
             <div>
                 @include('public.partials.media-carousel', [
@@ -54,75 +64,106 @@
                 ])
             </div>
         @else
-            <div class="bg-white rounded-xl shadow-sm border border-ink-200 p-12 flex items-center justify-center">
-                <div class="text-center text-ink-300">
-                    <svg class="w-16 h-16 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="bg-white border border-slate-200 p-12 flex items-center justify-center">
+                <div class="text-center text-slate-300">
+                    <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                     </svg>
-                    <p class="text-sm">Aucune image disponible</p>
+                    <p class="text-xs uppercase tracking-wider">Aucune image</p>
                 </div>
             </div>
         @endif
 
-        {{-- Caractéristiques techniques --}}
-        <div class="space-y-6">
+        {{-- Specs --}}
+        <div class="space-y-3">
+
             {{-- Dimensions --}}
-            @if($composant->longueur_barre_mm || $composant->section_largeur_mm || $composant->section_hauteur_mm || $composant->epaisseur_paroi_mm || $composant->poids_lineaire_kg_m)
-                <div class="bg-white rounded-xl shadow-sm border border-ink-200 p-6">
-                    <h3 class="text-sm font-semibold text-ink-700 uppercase tracking-wider mb-3">Dimensions</h3>
-                    <div class="space-y-2 text-sm">
+            @if($composant->longueur_barre_mm || $composant->section_largeur_mm || $composant->section_hauteur_mm || $composant->epaisseur_paroi_mm)
+                <div class="bg-white border border-slate-200">
+                    <div class="px-3 py-2 bg-slate-50 border-b border-slate-200">
+                        <h3 class="text-[10px] font-bold text-slate-600 uppercase tracking-wider">Dimensions</h3>
+                    </div>
+                    <table class="w-full text-xs">
                         @if($composant->longueur_barre_mm)
-                            <div class="flex justify-between"><span class="text-ink-500">Longueur</span><span class="text-ink-700 font-medium">{{ $composant->longueur_barre_mm }} mm</span></div>
+                            <tr class="border-b border-slate-100 last:border-0">
+                                <td class="px-3 py-1.5 text-slate-500">Longueur</td>
+                                <td class="px-3 py-1.5 text-right font-mono font-medium text-slate-900">{{ $composant->longueur_barre_mm }} mm</td>
+                            </tr>
                         @endif
                         @if($composant->section_largeur_mm)
-                            <div class="flex justify-between"><span class="text-ink-500">Largeur section</span><span class="text-ink-700 font-medium">{{ $composant->section_largeur_mm }} mm</span></div>
+                            <tr class="border-b border-slate-100 last:border-0">
+                                <td class="px-3 py-1.5 text-slate-500">Largeur section</td>
+                                <td class="px-3 py-1.5 text-right font-mono font-medium text-slate-900">{{ $composant->section_largeur_mm }} mm</td>
+                            </tr>
                         @endif
                         @if($composant->section_hauteur_mm)
-                            <div class="flex justify-between"><span class="text-ink-500">Hauteur section</span><span class="text-ink-700 font-medium">{{ $composant->section_hauteur_mm }} mm</span></div>
+                            <tr class="border-b border-slate-100 last:border-0">
+                                <td class="px-3 py-1.5 text-slate-500">Hauteur section</td>
+                                <td class="px-3 py-1.5 text-right font-mono font-medium text-slate-900">{{ $composant->section_hauteur_mm }} mm</td>
+                            </tr>
                         @endif
                         @if($composant->epaisseur_paroi_mm)
-                            <div class="flex justify-between"><span class="text-ink-500">Épaisseur paroi</span><span class="text-ink-700 font-medium">{{ $composant->epaisseur_paroi_mm }} mm</span></div>
+                            <tr class="border-b border-slate-100 last:border-0">
+                                <td class="px-3 py-1.5 text-slate-500">Épaisseur paroi</td>
+                                <td class="px-3 py-1.5 text-right font-mono font-medium text-slate-900">{{ $composant->epaisseur_paroi_mm }} mm</td>
+                            </tr>
                         @endif
-                    </div>
+                    </table>
                 </div>
             @endif
 
-            {{-- Poids + inertie + périmètre --}}
+            {{-- Propriétés --}}
             @if($composant->poids_lineaire_kg_m || $composant->poids_lineaire_lbs_ft || $composant->moment_inertie_cm4 || $composant->perimetre_mm)
-                <div class="bg-white rounded-xl shadow-sm border border-ink-200 p-6">
-                    <h3 class="text-sm font-semibold text-ink-700 uppercase tracking-wider mb-3">Propriétés</h3>
-                    <div class="space-y-2 text-sm">
+                <div class="bg-white border border-slate-200">
+                    <div class="px-3 py-2 bg-slate-50 border-b border-slate-200">
+                        <h3 class="text-[10px] font-bold text-slate-600 uppercase tracking-wider">Propriétés mécaniques</h3>
+                    </div>
+                    <table class="w-full text-xs">
                         @if($composant->poids_lineaire_kg_m)
-                            <div class="flex justify-between"><span class="text-ink-500">KG/M</span><span class="text-ink-700 font-medium">{{ $composant->poids_lineaire_kg_m }} kg/m</span></div>
+                            <tr class="border-b border-slate-100 last:border-0">
+                                <td class="px-3 py-1.5 text-slate-500">Poids (KG/M)</td>
+                                <td class="px-3 py-1.5 text-right font-mono font-medium text-slate-900">{{ $composant->poids_lineaire_kg_m }} kg/m</td>
+                            </tr>
                         @endif
                         @if($composant->poids_lineaire_lbs_ft)
-                            <div class="flex justify-between"><span class="text-ink-500">WT/FT</span><span class="text-ink-700 font-medium">{{ $composant->poids_lineaire_lbs_ft }} lbs/ft</span></div>
+                            <tr class="border-b border-slate-100 last:border-0">
+                                <td class="px-3 py-1.5 text-slate-500">Poids (WT/FT)</td>
+                                <td class="px-3 py-1.5 text-right font-mono font-medium text-slate-900">{{ $composant->poids_lineaire_lbs_ft }} lbs/ft</td>
+                            </tr>
                         @endif
                         @if($composant->moment_inertie_cm4)
-                            <div class="flex justify-between"><span class="text-ink-500">IN</span><span class="text-ink-700 font-medium">{{ $composant->moment_inertie_cm4 }} cm⁴</span></div>
+                            <tr class="border-b border-slate-100 last:border-0">
+                                <td class="px-3 py-1.5 text-slate-500">Moment d'inertie</td>
+                                <td class="px-3 py-1.5 text-right font-mono font-medium text-slate-900">{{ $composant->moment_inertie_cm4 }} cm⁴</td>
+                            </tr>
                         @endif
                         @if($composant->perimetre_mm)
-                            <div class="flex justify-between"><span class="text-ink-500">PERIM.</span><span class="text-ink-700 font-medium">{{ $composant->perimetre_mm }} mm</span></div>
+                            <tr class="border-b border-slate-100 last:border-0">
+                                <td class="px-3 py-1.5 text-slate-500">Périmètre</td>
+                                <td class="px-3 py-1.5 text-right font-mono font-medium text-slate-900">{{ $composant->perimetre_mm }} mm</td>
+                            </tr>
                         @endif
-                    </div>
+                    </table>
                 </div>
             @endif
 
             {{-- Caractéristiques EAV --}}
             @if($composant->caracteristiques->count())
-                <div class="bg-white rounded-xl shadow-sm border border-ink-200 p-6">
-                    <h3 class="text-sm font-semibold text-ink-700 uppercase tracking-wider mb-3">Caractéristiques</h3>
-                    <div class="space-y-2 text-sm">
-                        @foreach($composant->caracteristiques as $carac)
-                            <div class="flex justify-between">
-                                <span class="text-ink-500">{{ $carac->cle }}</span>
-                                <span class="text-ink-700 font-medium">
-                                    {{ $carac->valeur }}
-                                    @if($carac->unite)<span class="text-xs text-ink-400">{{ $carac->unite }}</span>@endif
-                                </span>
-                            </div>
-                        @endforeach
+                <div class="bg-white border border-slate-200">
+                    <div class="px-3 py-2 bg-slate-50 border-b border-slate-200">
+                        <h3 class="text-[10px] font-bold text-slate-600 uppercase tracking-wider">Caractéristiques</h3>
                     </div>
+                    <table class="w-full text-xs">
+                        @foreach($composant->caracteristiques as $carac)
+                            <tr class="border-b border-slate-100 last:border-0">
+                                <td class="px-3 py-1.5 text-slate-500">{{ $carac->cle }}</td>
+                                <td class="px-3 py-1.5 text-right font-mono font-medium text-slate-900">
+                                    {{ $carac->valeur }}
+                                    @if($carac->unite)<span class="text-slate-400">{{ $carac->unite }}</span>@endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    </table>
                 </div>
             @endif
         </div>
@@ -130,17 +171,19 @@
 
     {{-- Finitions --}}
     @if($composant->finitions->count())
-        <div class="bg-white rounded-xl shadow-sm border border-ink-200 p-6 mb-6">
-            <h2 class="text-lg font-semibold text-ink-900 mb-4">Finitions disponibles</h2>
-            <div class="flex flex-wrap gap-2">
+        <div class="bg-white border border-slate-200 mb-4">
+            <div class="px-3 py-2 bg-slate-50 border-b border-slate-200">
+                <h2 class="text-[10px] font-bold text-slate-600 uppercase tracking-wider">Finitions disponibles</h2>
+            </div>
+            <div class="p-3 flex flex-wrap gap-2">
                 @foreach($composant->finitions as $finition)
-                    <span class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium 
-                        {{ $finition->pivot->est_par_defaut ? 'bg-amber-100 text-amber-700 border-2 border-amber-300' : 'bg-ink-100 text-ink-600' }}">
-                        {{ $finition->nom }}
+                    <span class="inline-flex items-center px-2.5 py-1 text-xs font-medium border
+                        {{ $finition->pivot->est_par_defaut ? 'bg-blue-50 text-blue-700 border-blue-200' : 'bg-slate-50 text-slate-600 border-slate-200' }}">
                         @if($finition->code_ral)
-                            <span class="ml-2 w-4 h-4 rounded-full inline-block border border-ink-300" 
+                            <span class="w-3 h-3 inline-block border border-slate-300 mr-1.5" 
                                   style="background-color: #{{ $finition->code_ral }}"></span>
                         @endif
+                        {{ $finition->nom }}
                     </span>
                 @endforeach
             </div>
@@ -149,17 +192,19 @@
 
     {{-- Utilisé dans --}}
     @if(isset($ouvrages) && $ouvrages->count())
-        <div class="bg-white rounded-xl shadow-sm border border-ink-200 p-6">
-            <h2 class="text-lg font-semibold text-ink-900 mb-4">Utilisé dans</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div class="bg-white border border-slate-200">
+            <div class="px-3 py-2 bg-slate-50 border-b border-slate-200">
+                <h2 class="text-[10px] font-bold text-slate-600 uppercase tracking-wider">Utilisé dans</h2>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 divide-x divide-y divide-slate-100">
                 @foreach($ouvrages as $ouvrage)
                     <a href="{{ route('ouvrages.show', $ouvrage->slug) }}" 
-                       class="flex items-center justify-between p-3 bg-ink-50 rounded-lg hover:bg-amber-50 transition group">
+                       class="flex items-center justify-between p-3 hover:bg-slate-50 transition group">
                         <div>
-                            <p class="text-sm font-medium text-ink-900 group-hover:text-amber-700">{{ $ouvrage->nom }}</p>
-                            <p class="text-xs text-ink-400">{{ $ouvrage->gamme?->nom ?? 'Sans gamme' }}</p>
+                            <p class="text-xs font-semibold text-slate-900 group-hover:text-blue-700">{{ $ouvrage->nom }}</p>
+                            <p class="text-[10px] text-slate-400 font-mono">{{ $ouvrage->reference }}</p>
                         </div>
-                        <svg class="w-4 h-4 text-ink-300 group-hover:text-amber-600 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-3 h-3 text-slate-300 group-hover:text-blue-600 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                         </svg>
                     </a>

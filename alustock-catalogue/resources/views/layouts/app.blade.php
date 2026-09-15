@@ -17,29 +17,30 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        ink: {
-                            50:  '#f7f5f3',
-                            100: '#eeebe7',
-                            200: '#ddd6cf',
-                            300: '#c2b8ac',
-                            400: '#9c8f80',
-                            500: '#786c5e',
-                            600: '#5c5245',
-                            700: '#453d33',
-                            800: '#2e2822',
-                            900: '#1c1713',
-                            950: '#0f0c0a',
-                        },
-                    }
-                }
+    theme: {
+        extend: {
+            fontFamily: {
+                sans: ['Inter', 'sans-serif'],
+            },
+            colors: {
+                // Palette industrielle : slate + blue + orange sécurité
+                ink: {
+                    50:  '#f8fafc',
+                    100: '#f1f5f9',
+                    200: '#e2e8f0',
+                    300: '#cbd5e1',
+                    400: '#94a3b8',
+                    500: '#64748b',
+                    600: '#475569',
+                    700: '#334155',
+                    800: '#1e293b',
+                    900: '#0f172a',
+                    950: '#020617',
+                },
             }
         }
+    }
+}
     </script>
 
     {{-- Style global pour le sticky footer --}}
