@@ -307,3 +307,10 @@ feat: Add new media entries and ouvrage details, enhance component search functi
 Tweak Create and Edit view for Ouvrage
 Fix : Reference not unique -> slug for composant is reference + designation
 Edit : Controllers and Resquest for Composant and Ouvrage
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+16/09
+
+Integration 
+Organisation tasks
