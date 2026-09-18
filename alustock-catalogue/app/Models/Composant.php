@@ -36,7 +36,7 @@ class Composant extends Model
         'section_largeur_mm' => 'decimal:2',
         'section_hauteur_mm' => 'decimal:2',
         'epaisseur_paroi_mm' => 'decimal:2',
-        'moment_inertie_cm4' => 'decimal:2',
+        'moment_inertie_cm4' => 'decimal:3',
         'perimetre_mm' => 'decimal:2',
     ];
 

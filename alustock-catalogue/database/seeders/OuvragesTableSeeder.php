@@ -166,6 +166,27 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-15 21:37:10',
                 'updated_at' => '2026-09-15 21:37:10',
             ),
+            7 => 
+            array (
+                'id' => 13,
+                'reference' => 'REJA RANCH',
+                'nom' => 'REJA RANCH',
+                'slug' => 'reja-ranch',
+                'gamme_id' => NULL,
+                'categorie_id' => 5,
+                'description_courte' => NULL,
+                'description_technique' => NULL,
+                'largeur_min_mm' => NULL,
+                'largeur_max_mm' => NULL,
+                'hauteur_min_mm' => NULL,
+                'hauteur_max_mm' => NULL,
+                'performance_thermique' => NULL,
+                'performance_acoustique' => NULL,
+                'image_principale' => NULL,
+                'est_actif' => 1,
+                'created_at' => '2026-09-18 18:29:21',
+                'updated_at' => '2026-09-18 18:29:21',
+            ),
         ));
         
         

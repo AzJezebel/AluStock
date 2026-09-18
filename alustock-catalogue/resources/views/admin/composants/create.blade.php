@@ -175,7 +175,7 @@
                         <label for="moment_inertie_cm4" class="block text-xs text-admin-500 mb-1">IN (cm⁴)</label>
                         <input type="number" name="moment_inertie_cm4" id="moment_inertie_cm4" step="0.001" min="0"
                                value="{{ old('moment_inertie_cm4') }}"
-                               placeholder="85.30"
+                               placeholder="85.302"
                                class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
                     </div>
                 </div>
