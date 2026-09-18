@@ -314,3 +314,23 @@ Edit : Controllers and Resquest for Composant and Ouvrage
 
 Integration 
 Organisation tasks
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+17/09
+
+Integration
+Meet up Benjamin
+
+--------------------------------------------------------------------------------------------------------------------------------
+18/09
+
+Add new media and components to seeders, update OuvragesTableSeeder
+
+- Added new entries for components and media in CompositionOuvrageTableSeeder, MediaMorphTableSeeder, and MediasTableSeeder.
+- Integation of Ouvrages and Composants
+- Updated the create.blade.php view to reflect a more precise placeholder value.
+- Fix decimals managing at create and update for Composant
+
+--------------------------------------------------------------------------------------------------------------------------------
+18/09
