@@ -187,6 +187,27 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:29:21',
                 'updated_at' => '2026-09-18 18:29:21',
             ),
+            8 => 
+            array (
+                'id' => 14,
+                'reference' => 'SYSTEME ENROULABLE',
+                'nom' => 'SYSTEME ENROULABLE',
+                'slug' => 'systeme-enroulable',
+                'gamme_id' => NULL,
+                'categorie_id' => NULL,
+                'description_courte' => NULL,
+                'description_technique' => NULL,
+                'largeur_min_mm' => NULL,
+                'largeur_max_mm' => NULL,
+                'hauteur_min_mm' => NULL,
+                'hauteur_max_mm' => NULL,
+                'performance_thermique' => NULL,
+                'performance_acoustique' => NULL,
+                'image_principale' => NULL,
+                'est_actif' => 1,
+                'created_at' => '2026-09-21 17:15:14',
+                'updated_at' => '2026-09-21 17:15:14',
+            ),
         ));
         
         

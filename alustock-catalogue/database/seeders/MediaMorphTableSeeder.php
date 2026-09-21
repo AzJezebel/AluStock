@@ -649,6 +649,240 @@ class MediaMorphTableSeeder extends Seeder
                 'created_at' => '2026-09-18 19:27:29',
                 'updated_at' => '2026-09-18 19:27:29',
             ),
+            70 => 
+            array (
+                'media_id' => 71,
+                'mediable_type' => 'App\\Models\\Composant',
+                'mediable_id' => 73,
+                'ordre' => 1,
+                'created_at' => '2026-09-21 16:40:25',
+                'updated_at' => '2026-09-21 16:40:25',
+            ),
+            71 => 
+            array (
+                'media_id' => 72,
+                'mediable_type' => 'App\\Models\\Composant',
+                'mediable_id' => 74,
+                'ordre' => 1,
+                'created_at' => '2026-09-21 16:41:47',
+                'updated_at' => '2026-09-21 16:41:47',
+            ),
+            72 => 
+            array (
+                'media_id' => 73,
+                'mediable_type' => 'App\\Models\\Composant',
+                'mediable_id' => 75,
+                'ordre' => 1,
+                'created_at' => '2026-09-21 16:42:45',
+                'updated_at' => '2026-09-21 16:42:45',
+            ),
+            73 => 
+            array (
+                'media_id' => 74,
+                'mediable_type' => 'App\\Models\\Composant',
+                'mediable_id' => 76,
+                'ordre' => 1,
+                'created_at' => '2026-09-21 16:43:39',
+                'updated_at' => '2026-09-21 16:43:39',
+            ),
+            74 => 
+            array (
+                'media_id' => 75,
+                'mediable_type' => 'App\\Models\\Composant',
+                'mediable_id' => 77,
+                'ordre' => 1,
+                'created_at' => '2026-09-21 16:44:21',
+                'updated_at' => '2026-09-21 16:44:21',
+            ),
+            75 => 
+            array (
+                'media_id' => 76,
+                'mediable_type' => 'App\\Models\\Composant',
+                'mediable_id' => 78,
+                'ordre' => 1,
+                'created_at' => '2026-09-21 16:47:30',
+                'updated_at' => '2026-09-21 16:47:30',
+            ),
+            76 => 
+            array (
+                'media_id' => 77,
+                'mediable_type' => 'App\\Models\\Composant',
+                'mediable_id' => 46,
+                'ordre' => 2,
+                'created_at' => '2026-09-21 16:49:05',
+                'updated_at' => '2026-09-21 16:49:05',
+            ),
+            77 => 
+            array (
+                'media_id' => 78,
+                'mediable_type' => 'App\\Models\\Composant',
+                'mediable_id' => 79,
+                'ordre' => 1,
+                'created_at' => '2026-09-21 16:52:46',
+                'updated_at' => '2026-09-21 16:52:46',
+            ),
+            78 => 
+            array (
+                'media_id' => 79,
+                'mediable_type' => 'App\\Models\\Composant',
+                'mediable_id' => 80,
+                'ordre' => 1,
+                'created_at' => '2026-09-21 16:55:44',
+                'updated_at' => '2026-09-21 16:55:44',
+            ),
+            79 => 
+            array (
+                'media_id' => 80,
+                'mediable_type' => 'App\\Models\\Composant',
+                'mediable_id' => 81,
+                'ordre' => 1,
+                'created_at' => '2026-09-21 16:58:11',
+                'updated_at' => '2026-09-21 16:58:11',
+            ),
+            80 => 
+            array (
+                'media_id' => 81,
+                'mediable_type' => 'App\\Models\\Composant',
+                'mediable_id' => 82,
+                'ordre' => 1,
+                'created_at' => '2026-09-21 17:03:14',
+                'updated_at' => '2026-09-21 17:03:14',
+            ),
+            81 => 
+            array (
+                'media_id' => 83,
+                'mediable_type' => 'App\\Models\\Composant',
+                'mediable_id' => 83,
+                'ordre' => 1,
+                'created_at' => '2026-09-21 17:06:10',
+                'updated_at' => '2026-09-21 17:06:10',
+            ),
+            82 => 
+            array (
+                'media_id' => 84,
+                'mediable_type' => 'App\\Models\\Composant',
+                'mediable_id' => 84,
+                'ordre' => 1,
+                'created_at' => '2026-09-21 17:08:52',
+                'updated_at' => '2026-09-21 17:08:52',
+            ),
+            83 => 
+            array (
+                'media_id' => 85,
+                'mediable_type' => 'App\\Models\\Ouvrage',
+                'mediable_id' => 14,
+                'ordre' => 1,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            84 => 
+            array (
+                'media_id' => 86,
+                'mediable_type' => 'App\\Models\\Composant',
+                'mediable_id' => 85,
+                'ordre' => 1,
+                'created_at' => '2026-09-21 19:40:04',
+                'updated_at' => '2026-09-21 19:40:04',
+            ),
+            85 => 
+            array (
+                'media_id' => 87,
+                'mediable_type' => 'App\\Models\\Composant',
+                'mediable_id' => 86,
+                'ordre' => 1,
+                'created_at' => '2026-09-21 19:41:25',
+                'updated_at' => '2026-09-21 19:41:25',
+            ),
+            86 => 
+            array (
+                'media_id' => 88,
+                'mediable_type' => 'App\\Models\\Composant',
+                'mediable_id' => 87,
+                'ordre' => 1,
+                'created_at' => '2026-09-21 19:41:58',
+                'updated_at' => '2026-09-21 19:41:58',
+            ),
+            87 => 
+            array (
+                'media_id' => 89,
+                'mediable_type' => 'App\\Models\\Composant',
+                'mediable_id' => 88,
+                'ordre' => 1,
+                'created_at' => '2026-09-21 19:42:48',
+                'updated_at' => '2026-09-21 19:42:48',
+            ),
+            88 => 
+            array (
+                'media_id' => 90,
+                'mediable_type' => 'App\\Models\\Composant',
+                'mediable_id' => 89,
+                'ordre' => 1,
+                'created_at' => '2026-09-21 19:45:20',
+                'updated_at' => '2026-09-21 19:45:20',
+            ),
+            89 => 
+            array (
+                'media_id' => 91,
+                'mediable_type' => 'App\\Models\\Composant',
+                'mediable_id' => 90,
+                'ordre' => 1,
+                'created_at' => '2026-09-21 19:46:00',
+                'updated_at' => '2026-09-21 19:46:00',
+            ),
+            90 => 
+            array (
+                'media_id' => 92,
+                'mediable_type' => 'App\\Models\\Composant',
+                'mediable_id' => 91,
+                'ordre' => 1,
+                'created_at' => '2026-09-21 19:48:59',
+                'updated_at' => '2026-09-21 19:48:59',
+            ),
+            91 => 
+            array (
+                'media_id' => 93,
+                'mediable_type' => 'App\\Models\\Composant',
+                'mediable_id' => 92,
+                'ordre' => 1,
+                'created_at' => '2026-09-21 19:49:50',
+                'updated_at' => '2026-09-21 19:49:50',
+            ),
+            92 => 
+            array (
+                'media_id' => 94,
+                'mediable_type' => 'App\\Models\\Composant',
+                'mediable_id' => 93,
+                'ordre' => 1,
+                'created_at' => '2026-09-21 19:49:51',
+                'updated_at' => '2026-09-21 19:49:51',
+            ),
+            93 => 
+            array (
+                'media_id' => 95,
+                'mediable_type' => 'App\\Models\\Composant',
+                'mediable_id' => 94,
+                'ordre' => 1,
+                'created_at' => '2026-09-21 19:51:58',
+                'updated_at' => '2026-09-21 19:51:58',
+            ),
+            94 => 
+            array (
+                'media_id' => 96,
+                'mediable_type' => 'App\\Models\\Composant',
+                'mediable_id' => 95,
+                'ordre' => 1,
+                'created_at' => '2026-09-21 19:53:17',
+                'updated_at' => '2026-09-21 19:53:17',
+            ),
+            95 => 
+            array (
+                'media_id' => 97,
+                'mediable_type' => 'App\\Models\\Composant',
+                'mediable_id' => 96,
+                'ordre' => 1,
+                'created_at' => '2026-09-21 19:54:24',
+                'updated_at' => '2026-09-21 19:54:24',
+            ),
         ));
         
         

@@ -426,6 +426,39 @@ class CompositionOuvrageTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:47:19',
                 'updated_at' => '2026-09-18 18:47:19',
             ),
+            37 => 
+            array (
+                'ouvrage_id' => 14,
+                'composant_id' => 63,
+                'quantite' => '1.00',
+                'unite' => 'u',
+                'ordre' => 1,
+                'commentaire' => NULL,
+                'created_at' => '2026-09-21 17:15:14',
+                'updated_at' => '2026-09-21 17:15:14',
+            ),
+            38 => 
+            array (
+                'ouvrage_id' => 14,
+                'composant_id' => 71,
+                'quantite' => '1.00',
+                'unite' => 'u',
+                'ordre' => 2,
+                'commentaire' => NULL,
+                'created_at' => '2026-09-21 17:15:14',
+                'updated_at' => '2026-09-21 17:15:14',
+            ),
+            39 => 
+            array (
+                'ouvrage_id' => 14,
+                'composant_id' => 72,
+                'quantite' => '1.00',
+                'unite' => 'u',
+                'ordre' => 3,
+                'commentaire' => NULL,
+                'created_at' => '2026-09-21 17:15:14',
+                'updated_at' => '2026-09-21 17:15:14',
+            ),
         ));
         
         
