@@ -363,24 +363,6 @@ class MediasTableSeeder extends Seeder
             ),
             19 => 
             array (
-                'id' => 20,
-                'chemin_fichier' => 'images/composants/d15d88ae-f588-4edc-84dc-6ad93731be20.png',
-                'thumbnail' => NULL,
-                'titre' => 'image_2026-09-15_155854402.png',
-                'alt_text' => NULL,
-                'description' => NULL,
-                'type_media' => 'schema',
-                'taille_octets' => 56916,
-                'mime_type' => 'image/png',
-                'largeur_px' => NULL,
-                'hauteur_px' => NULL,
-                'est_principal' => 1,
-                'created_at' => '2026-09-15 18:59:22',
-                'updated_at' => '2026-09-15 18:59:22',
-                'deleted_at' => NULL,
-            ),
-            20 => 
-            array (
                 'id' => 21,
                 'chemin_fichier' => 'images/composants/6ca43975-849a-4b58-9cb1-4418f492d020.png',
                 'thumbnail' => NULL,
@@ -397,7 +379,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-15 19:00:10',
                 'deleted_at' => NULL,
             ),
-            21 => 
+            20 => 
             array (
                 'id' => 22,
                 'chemin_fichier' => 'images/composants/01ae0fc7-f231-42b9-b4cb-14355ef26dae.png',
@@ -415,7 +397,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-15 19:01:05',
                 'deleted_at' => NULL,
             ),
-            22 => 
+            21 => 
             array (
                 'id' => 23,
                 'chemin_fichier' => 'images/composants/e564f349-7ffa-4aeb-8597-4eb2e196d16a.png',
@@ -433,7 +415,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-15 19:01:58',
                 'deleted_at' => NULL,
             ),
-            23 => 
+            22 => 
             array (
                 'id' => 24,
                 'chemin_fichier' => 'images/composants/37e336f5-3ebe-4ff7-b8aa-3383b5289457.png',
@@ -451,7 +433,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-15 19:02:53',
                 'deleted_at' => NULL,
             ),
-            24 => 
+            23 => 
             array (
                 'id' => 25,
                 'chemin_fichier' => 'images/ouvrages/06dfb9c0-beec-4019-bf9a-561259a86f35.png',
@@ -469,7 +451,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-15 19:06:18',
                 'deleted_at' => NULL,
             ),
-            25 => 
+            24 => 
             array (
                 'id' => 26,
                 'chemin_fichier' => 'images/composants/2c22a493-2917-4b60-958c-a08820483fb2.png',
@@ -487,7 +469,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-15 19:29:15',
                 'deleted_at' => NULL,
             ),
-            26 => 
+            25 => 
             array (
                 'id' => 27,
                 'chemin_fichier' => 'images/composants/e6283ced-f287-4af6-bc63-5d7050b30623.png',
@@ -505,7 +487,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-15 19:35:11',
                 'deleted_at' => NULL,
             ),
-            27 => 
+            26 => 
             array (
                 'id' => 28,
                 'chemin_fichier' => 'images/composants/95d14d74-0717-4650-9878-d5d94ddcca58.png',
@@ -523,7 +505,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-15 19:36:01',
                 'deleted_at' => NULL,
             ),
-            28 => 
+            27 => 
             array (
                 'id' => 29,
                 'chemin_fichier' => 'images/composants/5591217c-2cd4-431d-b410-8ca06a700ce0.png',
@@ -541,7 +523,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-15 19:36:47',
                 'deleted_at' => NULL,
             ),
-            29 => 
+            28 => 
             array (
                 'id' => 30,
                 'chemin_fichier' => 'images/ouvrages/6f05f1b7-347f-4f1c-b9fd-1f751d575351.png',
@@ -559,7 +541,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-15 19:41:39',
                 'deleted_at' => NULL,
             ),
-            30 => 
+            29 => 
             array (
                 'id' => 31,
                 'chemin_fichier' => 'images/ouvrages/4e86484d-474e-415e-8e58-2175f21d9f77.png',
@@ -577,7 +559,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-15 20:33:44',
                 'deleted_at' => NULL,
             ),
-            31 => 
+            30 => 
             array (
                 'id' => 32,
                 'chemin_fichier' => 'images/composants/be85ea39-ae85-438b-a46d-abdd96779d08.png',
@@ -595,7 +577,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-15 20:35:15',
                 'deleted_at' => NULL,
             ),
-            32 => 
+            31 => 
             array (
                 'id' => 33,
                 'chemin_fichier' => 'images/composants/f1189817-5350-4cb1-a1eb-51c70ee03f58.png',
@@ -613,7 +595,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-15 20:36:00',
                 'deleted_at' => NULL,
             ),
-            33 => 
+            32 => 
             array (
                 'id' => 34,
                 'chemin_fichier' => 'images/composants/2b7a3e32-086a-488d-a98e-5b6c586d0ea3.png',
@@ -631,7 +613,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-15 20:36:40',
                 'deleted_at' => NULL,
             ),
-            34 => 
+            33 => 
             array (
                 'id' => 35,
                 'chemin_fichier' => 'images/composants/b837abc3-16d6-4a57-9fde-f384b05405d4.png',
@@ -649,7 +631,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-15 20:37:19',
                 'deleted_at' => NULL,
             ),
-            35 => 
+            34 => 
             array (
                 'id' => 36,
                 'chemin_fichier' => 'images/composants/f7b9a513-03e8-4711-b2d4-ff3da0348f67.png',
@@ -667,7 +649,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-15 20:38:59',
                 'deleted_at' => NULL,
             ),
-            36 => 
+            35 => 
             array (
                 'id' => 37,
                 'chemin_fichier' => 'images/composants/1c4029b8-2d90-43e2-bbe8-8a83ba9ba738.png',
@@ -685,7 +667,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-15 20:39:40',
                 'deleted_at' => NULL,
             ),
-            37 => 
+            36 => 
             array (
                 'id' => 38,
                 'chemin_fichier' => 'images/ouvrages/86e9c8cb-a83b-4815-954c-73f16ad773e6.png',
@@ -703,7 +685,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-15 20:42:48',
                 'deleted_at' => NULL,
             ),
-            38 => 
+            37 => 
             array (
                 'id' => 39,
                 'chemin_fichier' => 'images/composants/1fa4ab11-297d-40ee-bed9-d47afcee5787.png',
@@ -721,7 +703,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-15 20:44:13',
                 'deleted_at' => NULL,
             ),
-            39 => 
+            38 => 
             array (
                 'id' => 40,
                 'chemin_fichier' => 'images/composants/49755a08-b1e8-4019-ac61-b2f5c6c54a19.png',
@@ -739,7 +721,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-15 20:44:49',
                 'deleted_at' => NULL,
             ),
-            40 => 
+            39 => 
             array (
                 'id' => 41,
                 'chemin_fichier' => 'images/composants/3aedd606-2f6e-4740-8cc9-f60228b96fd6.png',
@@ -757,7 +739,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-15 20:45:29',
                 'deleted_at' => NULL,
             ),
-            41 => 
+            40 => 
             array (
                 'id' => 42,
                 'chemin_fichier' => 'images/composants/8ba87a54-2db3-4bab-8eb1-41d75731b914.png',
@@ -775,7 +757,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-15 20:48:14',
                 'deleted_at' => NULL,
             ),
-            42 => 
+            41 => 
             array (
                 'id' => 43,
                 'chemin_fichier' => 'images/ouvrages/7152cc7e-111c-498b-b043-bd2b04703293.png',
@@ -793,7 +775,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-15 21:37:10',
                 'deleted_at' => NULL,
             ),
-            43 => 
+            42 => 
             array (
                 'id' => 44,
                 'chemin_fichier' => 'images/composants/2f1efc82-1e17-493e-9468-73fad1dc34d4.png',
@@ -811,7 +793,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-15 21:37:53',
                 'deleted_at' => NULL,
             ),
-            44 => 
+            43 => 
             array (
                 'id' => 45,
                 'chemin_fichier' => 'images/composants/05004cfd-1133-4e38-bbf5-81b5ba6d29ab.png',
@@ -829,7 +811,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 18:22:24',
                 'deleted_at' => NULL,
             ),
-            45 => 
+            44 => 
             array (
                 'id' => 46,
                 'chemin_fichier' => 'images/composants/d484cf18-9f42-46a4-8b17-5c0fc155efec.png',
@@ -847,7 +829,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 18:23:16',
                 'deleted_at' => NULL,
             ),
-            46 => 
+            45 => 
             array (
                 'id' => 47,
                 'chemin_fichier' => 'images/composants/1ce7d88f-770e-4f17-91b1-fc98bb01d13d.png',
@@ -865,7 +847,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 18:24:24',
                 'deleted_at' => NULL,
             ),
-            47 => 
+            46 => 
             array (
                 'id' => 48,
                 'chemin_fichier' => 'images/composants/c4223702-aac7-4350-abb1-52f1b2f11ba7.png',
@@ -883,7 +865,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 18:25:35',
                 'deleted_at' => NULL,
             ),
-            48 => 
+            47 => 
             array (
                 'id' => 49,
                 'chemin_fichier' => 'images/composants/74d24f33-de86-4f14-b168-b24e18795c3a.png',
@@ -901,7 +883,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 18:26:47',
                 'deleted_at' => NULL,
             ),
-            49 => 
+            48 => 
             array (
                 'id' => 50,
                 'chemin_fichier' => 'images/ouvrages/3c8820f7-75fd-4aaf-95e3-41e3fa58ba51.png',
@@ -919,7 +901,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 18:29:21',
                 'deleted_at' => NULL,
             ),
-            50 => 
+            49 => 
             array (
                 'id' => 51,
                 'chemin_fichier' => 'images/composants/e6ceb740-6b19-40e4-b887-a729d3aecb3d.png',
@@ -937,7 +919,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 18:30:36',
                 'deleted_at' => NULL,
             ),
-            51 => 
+            50 => 
             array (
                 'id' => 52,
                 'chemin_fichier' => 'images/composants/f46776ed-ca0d-4c59-b0e4-dd4d08eb271c.png',
@@ -955,7 +937,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 18:32:19',
                 'deleted_at' => NULL,
             ),
-            52 => 
+            51 => 
             array (
                 'id' => 53,
                 'chemin_fichier' => 'images/composants/071b5767-c898-441f-b2d0-24550971aa75.png',
@@ -973,7 +955,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 18:33:31',
                 'deleted_at' => NULL,
             ),
-            53 => 
+            52 => 
             array (
                 'id' => 54,
                 'chemin_fichier' => 'images/composants/90dd0e2b-0bd3-4e51-91b8-d1fb40ef1577.png',
@@ -991,7 +973,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 18:34:20',
                 'deleted_at' => NULL,
             ),
-            54 => 
+            53 => 
             array (
                 'id' => 55,
                 'chemin_fichier' => 'images/composants/182da541-47bf-42a1-9efe-528a567692d5.png',
@@ -1009,7 +991,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 18:48:27',
                 'deleted_at' => NULL,
             ),
-            55 => 
+            54 => 
             array (
                 'id' => 56,
                 'chemin_fichier' => 'images/composants/0a7ede55-8834-4e9b-a48b-50275f12add4.png',
@@ -1027,7 +1009,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 18:49:46',
                 'deleted_at' => NULL,
             ),
-            56 => 
+            55 => 
             array (
                 'id' => 57,
                 'chemin_fichier' => 'images/composants/aece7737-d780-4900-b391-06daaef125a5.png',
@@ -1045,7 +1027,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 18:52:22',
                 'deleted_at' => NULL,
             ),
-            57 => 
+            56 => 
             array (
                 'id' => 58,
                 'chemin_fichier' => 'images/composants/cc39c680-109d-4965-9c4f-a4a915ba07cb.png',
@@ -1063,7 +1045,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 18:53:40',
                 'deleted_at' => NULL,
             ),
-            58 => 
+            57 => 
             array (
                 'id' => 59,
                 'chemin_fichier' => 'images/composants/f0befb99-b23b-43d8-a5e9-1d14991d810a.png',
@@ -1081,7 +1063,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 18:54:23',
                 'deleted_at' => NULL,
             ),
-            59 => 
+            58 => 
             array (
                 'id' => 60,
                 'chemin_fichier' => 'images/composants/f3606598-c5e1-477a-83e1-64ea1fd1686a.png',
@@ -1099,7 +1081,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 18:55:12',
                 'deleted_at' => NULL,
             ),
-            60 => 
+            59 => 
             array (
                 'id' => 61,
                 'chemin_fichier' => 'images/composants/6592625a-9f48-4b6f-80fb-f3534df6c4b3.png',
@@ -1117,7 +1099,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 18:57:56',
                 'deleted_at' => NULL,
             ),
-            61 => 
+            60 => 
             array (
                 'id' => 62,
                 'chemin_fichier' => 'images/composants/f153c473-cc0e-4962-9f73-7bcfe503b1c7.png',
@@ -1135,7 +1117,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 18:58:52',
                 'deleted_at' => NULL,
             ),
-            62 => 
+            61 => 
             array (
                 'id' => 63,
                 'chemin_fichier' => 'images/composants/c484fbf9-0bd2-45ab-a9c8-08238b43b2fc.png',
@@ -1153,7 +1135,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 19:01:27',
                 'deleted_at' => NULL,
             ),
-            63 => 
+            62 => 
             array (
                 'id' => 64,
                 'chemin_fichier' => 'images/composants/0ffb41cd-94c5-49ae-82f3-1bfa7ad0006c.png',
@@ -1171,7 +1153,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 19:20:15',
                 'deleted_at' => NULL,
             ),
-            64 => 
+            63 => 
             array (
                 'id' => 65,
                 'chemin_fichier' => 'images/composants/907ad318-0630-43c8-b947-6c4cad440723.png',
@@ -1189,7 +1171,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 19:22:13',
                 'deleted_at' => NULL,
             ),
-            65 => 
+            64 => 
             array (
                 'id' => 66,
                 'chemin_fichier' => 'images/composants/2f5acff7-1d8f-418f-9b4f-fbe90bcaed5f.png',
@@ -1207,7 +1189,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 19:23:13',
                 'deleted_at' => NULL,
             ),
-            66 => 
+            65 => 
             array (
                 'id' => 67,
                 'chemin_fichier' => 'images/composants/da772dfb-eb29-424e-8488-81068e2701dc.png',
@@ -1225,7 +1207,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 19:24:01',
                 'deleted_at' => NULL,
             ),
-            67 => 
+            66 => 
             array (
                 'id' => 68,
                 'chemin_fichier' => 'images/composants/fd48ff99-a187-4432-9417-fa05c1dd92b1.png',
@@ -1243,7 +1225,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 19:25:24',
                 'deleted_at' => NULL,
             ),
-            68 => 
+            67 => 
             array (
                 'id' => 69,
                 'chemin_fichier' => 'images/composants/4b37a3c1-3f26-4bf8-b74f-b779509fb293.png',
@@ -1261,7 +1243,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 19:26:31',
                 'deleted_at' => NULL,
             ),
-            69 => 
+            68 => 
             array (
                 'id' => 70,
                 'chemin_fichier' => 'images/composants/c2cd77b1-8ea2-48f2-8328-ba5f17c2d30a.png',
@@ -1279,7 +1261,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-18 19:27:29',
                 'deleted_at' => NULL,
             ),
-            70 => 
+            69 => 
             array (
                 'id' => 71,
                 'chemin_fichier' => 'images/composants/9754e4c0-4725-4bad-a1df-f7e06027b08b.png',
@@ -1297,7 +1279,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-21 16:40:25',
                 'deleted_at' => NULL,
             ),
-            71 => 
+            70 => 
             array (
                 'id' => 72,
                 'chemin_fichier' => 'images/composants/e8fdc10c-5946-41d1-a9ce-3df1c303485a.png',
@@ -1315,7 +1297,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-21 16:41:47',
                 'deleted_at' => NULL,
             ),
-            72 => 
+            71 => 
             array (
                 'id' => 73,
                 'chemin_fichier' => 'images/composants/7d8f62c1-a863-4fcb-9417-b8e680f2cbda.png',
@@ -1333,7 +1315,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-21 16:42:45',
                 'deleted_at' => NULL,
             ),
-            73 => 
+            72 => 
             array (
                 'id' => 74,
                 'chemin_fichier' => 'images/composants/47329335-5b2a-4262-bb5c-deb035afe581.png',
@@ -1351,7 +1333,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-21 16:43:39',
                 'deleted_at' => NULL,
             ),
-            74 => 
+            73 => 
             array (
                 'id' => 75,
                 'chemin_fichier' => 'images/composants/5444f5c7-1933-404c-8d6a-fa33b1d863a2.png',
@@ -1369,7 +1351,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-21 16:44:21',
                 'deleted_at' => NULL,
             ),
-            75 => 
+            74 => 
             array (
                 'id' => 76,
                 'chemin_fichier' => 'images/composants/65891a40-94a3-4ff4-b12a-3e7ee0e19fd5.png',
@@ -1387,7 +1369,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-21 16:47:30',
                 'deleted_at' => NULL,
             ),
-            76 => 
+            75 => 
             array (
                 'id' => 77,
                 'chemin_fichier' => 'images/composants/e91e5c55-529e-483c-80fc-0b9e9422e8d3.png',
@@ -1405,7 +1387,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-21 16:49:05',
                 'deleted_at' => NULL,
             ),
-            77 => 
+            76 => 
             array (
                 'id' => 78,
                 'chemin_fichier' => 'images/composants/6d529572-3c80-4a6c-bf12-c4712287069d.png',
@@ -1423,7 +1405,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-21 16:52:46',
                 'deleted_at' => NULL,
             ),
-            78 => 
+            77 => 
             array (
                 'id' => 79,
                 'chemin_fichier' => 'images/composants/d30afc85-f2b0-459a-8e82-e8f165f5b4a5.png',
@@ -1441,7 +1423,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-21 16:55:44',
                 'deleted_at' => NULL,
             ),
-            79 => 
+            78 => 
             array (
                 'id' => 80,
                 'chemin_fichier' => 'images/composants/9d17cdc0-c19d-48f6-a144-1d6019e83923.png',
@@ -1459,7 +1441,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-21 16:58:11',
                 'deleted_at' => NULL,
             ),
-            80 => 
+            79 => 
             array (
                 'id' => 81,
                 'chemin_fichier' => 'images/composants/b613b664-7149-4090-947d-6b9dc71a2dab.png',
@@ -1477,7 +1459,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-21 17:03:14',
                 'deleted_at' => NULL,
             ),
-            81 => 
+            80 => 
             array (
                 'id' => 83,
                 'chemin_fichier' => 'images/composants/71108dd3-6da8-4116-abaf-447898a6649d.png',
@@ -1495,7 +1477,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-21 17:06:10',
                 'deleted_at' => NULL,
             ),
-            82 => 
+            81 => 
             array (
                 'id' => 84,
                 'chemin_fichier' => 'images/composants/9711bb4c-a71b-43a8-936f-69a038686155.png',
@@ -1513,7 +1495,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-21 17:08:52',
                 'deleted_at' => NULL,
             ),
-            83 => 
+            82 => 
             array (
                 'id' => 85,
                 'chemin_fichier' => 'images/ouvrages/72ade640-4ba5-4ef0-8c07-2612bf2e0dd4.png',
@@ -1531,7 +1513,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-21 17:15:14',
                 'deleted_at' => NULL,
             ),
-            84 => 
+            83 => 
             array (
                 'id' => 86,
                 'chemin_fichier' => 'images/composants/149146bf-9d39-4aea-a947-858346b60276.png',
@@ -1549,7 +1531,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-21 19:40:04',
                 'deleted_at' => NULL,
             ),
-            85 => 
+            84 => 
             array (
                 'id' => 87,
                 'chemin_fichier' => 'images/composants/86af295e-de38-4550-a981-97520cf2e0c4.png',
@@ -1567,7 +1549,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-21 19:41:25',
                 'deleted_at' => NULL,
             ),
-            86 => 
+            85 => 
             array (
                 'id' => 88,
                 'chemin_fichier' => 'images/composants/32cdfaa9-1535-4de1-8aef-395c54893637.png',
@@ -1585,7 +1567,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-21 19:41:58',
                 'deleted_at' => NULL,
             ),
-            87 => 
+            86 => 
             array (
                 'id' => 89,
                 'chemin_fichier' => 'images/composants/236757d6-bbb0-47cc-bd50-4542ec26f9b3.png',
@@ -1603,7 +1585,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-21 19:42:48',
                 'deleted_at' => NULL,
             ),
-            88 => 
+            87 => 
             array (
                 'id' => 90,
                 'chemin_fichier' => 'images/composants/603736f9-d181-44be-8c90-a6323a76524c.png',
@@ -1621,7 +1603,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-21 19:45:20',
                 'deleted_at' => NULL,
             ),
-            89 => 
+            88 => 
             array (
                 'id' => 91,
                 'chemin_fichier' => 'images/composants/cb2b09b5-cab5-48b1-bbd3-411df261a4c7.png',
@@ -1639,7 +1621,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-21 19:46:00',
                 'deleted_at' => NULL,
             ),
-            90 => 
+            89 => 
             array (
                 'id' => 92,
                 'chemin_fichier' => 'images/composants/f9f8c117-07e1-4f63-87ae-81f8c2c1c5e1.png',
@@ -1657,7 +1639,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-21 19:48:59',
                 'deleted_at' => NULL,
             ),
-            91 => 
+            90 => 
             array (
                 'id' => 93,
                 'chemin_fichier' => 'images/composants/460da3da-498a-4650-b79c-f8d323f015a3.png',
@@ -1675,7 +1657,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-21 19:49:50',
                 'deleted_at' => NULL,
             ),
-            92 => 
+            91 => 
             array (
                 'id' => 94,
                 'chemin_fichier' => 'images/composants/b5167766-566c-4408-9ca6-449429ee8a21.png',
@@ -1693,7 +1675,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-21 19:49:51',
                 'deleted_at' => NULL,
             ),
-            93 => 
+            92 => 
             array (
                 'id' => 95,
                 'chemin_fichier' => 'images/composants/fe2a9e3b-05c7-4025-b685-cdf3117bea90.png',
@@ -1711,7 +1693,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-21 19:51:58',
                 'deleted_at' => NULL,
             ),
-            94 => 
+            93 => 
             array (
                 'id' => 96,
                 'chemin_fichier' => 'images/composants/50a71d86-c983-45d3-a944-ef39113e777a.png',
@@ -1729,7 +1711,7 @@ class MediasTableSeeder extends Seeder
                 'updated_at' => '2026-09-21 19:53:17',
                 'deleted_at' => NULL,
             ),
-            95 => 
+            94 => 
             array (
                 'id' => 97,
                 'chemin_fichier' => 'images/composants/6f7f8d1e-632d-4f9f-86e4-94b8a906db20.png',
@@ -1745,6 +1727,816 @@ class MediasTableSeeder extends Seeder
                 'est_principal' => 1,
                 'created_at' => '2026-09-21 19:54:24',
                 'updated_at' => '2026-09-21 19:54:24',
+                'deleted_at' => NULL,
+            ),
+            95 => 
+            array (
+                'id' => 98,
+                'chemin_fichier' => 'images/composants/ffc68c67-3afe-40fd-9665-a7764d90f16c.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_142747945.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 27481,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 17:28:15',
+                'updated_at' => '2026-09-22 17:28:15',
+                'deleted_at' => NULL,
+            ),
+            96 => 
+            array (
+                'id' => 99,
+                'chemin_fichier' => 'images/composants/70a61aa1-56a5-4922-a14d-57923cf86599.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_142852658.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 20692,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 17:29:14',
+                'updated_at' => '2026-09-22 17:29:14',
+                'deleted_at' => NULL,
+            ),
+            97 => 
+            array (
+                'id' => 100,
+                'chemin_fichier' => 'images/composants/0eb375f1-cf9f-4f3b-905d-33e8faee2aac.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_142924827.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 14175,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 17:29:43',
+                'updated_at' => '2026-09-22 17:29:43',
+                'deleted_at' => NULL,
+            ),
+            98 => 
+            array (
+                'id' => 101,
+                'chemin_fichier' => 'images/composants/46433a9f-84fe-484a-9e38-5fa922983276.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_143002557.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 11783,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 17:30:18',
+                'updated_at' => '2026-09-22 17:30:18',
+                'deleted_at' => NULL,
+            ),
+            99 => 
+            array (
+                'id' => 102,
+                'chemin_fichier' => 'images/composants/8d7cb947-6aa8-4e3d-8996-1e0952f059d8.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_143026876.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 13394,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 17:30:51',
+                'updated_at' => '2026-09-22 17:30:51',
+                'deleted_at' => NULL,
+            ),
+            100 => 
+            array (
+                'id' => 103,
+                'chemin_fichier' => 'images/composants/3c8be368-47b5-4ea1-863a-dd375a6703e2.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_143143666.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 24926,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 17:32:12',
+                'updated_at' => '2026-09-22 17:32:12',
+                'deleted_at' => NULL,
+            ),
+            101 => 
+            array (
+                'id' => 104,
+                'chemin_fichier' => 'images/composants/af5c0f14-6cbb-44a1-86ac-d72b01359eac.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_143302820.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 11853,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 17:33:33',
+                'updated_at' => '2026-09-22 17:33:33',
+                'deleted_at' => NULL,
+            ),
+            102 => 
+            array (
+                'id' => 105,
+                'chemin_fichier' => 'images/composants/265c509c-61f8-4057-8a37-baca467f9e3a.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_143427846.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 11962,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 17:34:28',
+                'updated_at' => '2026-09-22 17:34:28',
+                'deleted_at' => NULL,
+            ),
+            103 => 
+            array (
+                'id' => 106,
+                'chemin_fichier' => 'images/composants/ee49d364-7921-4d6e-9185-7e193ea1ed82.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_143447750.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 17558,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 17:35:06',
+                'updated_at' => '2026-09-22 17:35:06',
+                'deleted_at' => NULL,
+            ),
+            104 => 
+            array (
+                'id' => 107,
+                'chemin_fichier' => 'images/composants/bbe47764-ea0a-4d10-962e-90a04b3ed3ac.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_143520420.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 16334,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 17:35:47',
+                'updated_at' => '2026-09-22 17:35:47',
+                'deleted_at' => NULL,
+            ),
+            105 => 
+            array (
+                'id' => 108,
+                'chemin_fichier' => 'images/composants/4eabba06-6e37-41f3-9030-ea00c262e275.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_143606479.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 15331,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 17:36:24',
+                'updated_at' => '2026-09-22 17:36:24',
+                'deleted_at' => NULL,
+            ),
+            106 => 
+            array (
+                'id' => 109,
+                'chemin_fichier' => 'images/composants/b67fa239-4619-4996-b3fb-022ec586f456.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_143735802.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 19135,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 17:38:02',
+                'updated_at' => '2026-09-22 17:38:02',
+                'deleted_at' => NULL,
+            ),
+            107 => 
+            array (
+                'id' => 110,
+                'chemin_fichier' => 'images/composants/fb78e798-1fce-4a22-9df2-716ad413ca40.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_164439918.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 12765,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 19:45:55',
+                'updated_at' => '2026-09-22 19:45:55',
+                'deleted_at' => NULL,
+            ),
+            108 => 
+            array (
+                'id' => 111,
+                'chemin_fichier' => 'images/composants/11e02bfc-e427-46c0-b003-17a184538d38.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_164750868.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 14776,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 19:49:28',
+                'updated_at' => '2026-09-22 19:49:28',
+                'deleted_at' => NULL,
+            ),
+            109 => 
+            array (
+                'id' => 112,
+                'chemin_fichier' => 'images/composants/7b1f5734-a645-481a-b6be-a77af6e25460.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_165007913.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 14273,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 19:50:16',
+                'updated_at' => '2026-09-22 19:50:16',
+                'deleted_at' => NULL,
+            ),
+            110 => 
+            array (
+                'id' => 113,
+                'chemin_fichier' => 'images/composants/0670f3b4-ed6a-419f-b9d5-3790ed0344a7.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_165038885.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 17400,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 19:51:33',
+                'updated_at' => '2026-09-22 19:51:33',
+                'deleted_at' => NULL,
+            ),
+            111 => 
+            array (
+                'id' => 114,
+                'chemin_fichier' => 'images/composants/02838b4b-5a35-41ad-bdda-427fee2dbfa7.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_165211316.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 20319,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 19:52:15',
+                'updated_at' => '2026-09-22 19:52:15',
+                'deleted_at' => NULL,
+            ),
+            112 => 
+            array (
+                'id' => 115,
+                'chemin_fichier' => 'images/composants/8d835718-fdc2-4584-82d3-fc767f20ae10.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_165248787.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 13354,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 19:52:50',
+                'updated_at' => '2026-09-22 19:52:50',
+                'deleted_at' => NULL,
+            ),
+            113 => 
+            array (
+                'id' => 116,
+                'chemin_fichier' => 'images/composants/92d8123f-6b63-4043-a106-170b680b6e8e.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_165356698.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 20381,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 19:53:58',
+                'updated_at' => '2026-09-22 19:53:58',
+                'deleted_at' => NULL,
+            ),
+            114 => 
+            array (
+                'id' => 117,
+                'chemin_fichier' => 'images/composants/d926dea3-5ae1-4639-af8f-0029bfa34a71.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_165426628.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 12973,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 19:54:49',
+                'updated_at' => '2026-09-22 19:54:49',
+                'deleted_at' => NULL,
+            ),
+            115 => 
+            array (
+                'id' => 118,
+                'chemin_fichier' => 'images/composants/68f97a6a-b35f-4703-811c-b62659ad83b0.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_165522023.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 32181,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 19:55:42',
+                'updated_at' => '2026-09-22 19:55:42',
+                'deleted_at' => NULL,
+            ),
+            116 => 
+            array (
+                'id' => 119,
+                'chemin_fichier' => 'images/composants/13b0cc18-31c5-47ea-ac40-55b90d732684.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_165631263.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 8529,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 19:56:48',
+                'updated_at' => '2026-09-22 19:56:48',
+                'deleted_at' => NULL,
+            ),
+            117 => 
+            array (
+                'id' => 120,
+                'chemin_fichier' => 'images/composants/6a83c071-58d6-419c-adc9-457ddc35144e.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_165657575.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 8312,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 19:57:21',
+                'updated_at' => '2026-09-22 19:57:21',
+                'deleted_at' => NULL,
+            ),
+            118 => 
+            array (
+                'id' => 121,
+                'chemin_fichier' => 'images/composants/116d73e5-3470-48c2-8f90-4a446de90927.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_165734002.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 9654,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 19:57:55',
+                'updated_at' => '2026-09-22 19:57:55',
+                'deleted_at' => NULL,
+            ),
+            119 => 
+            array (
+                'id' => 122,
+                'chemin_fichier' => 'images/composants/3d8902af-4276-488d-9c4d-3abeb5b5e64e.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_165812520.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 13166,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 19:58:30',
+                'updated_at' => '2026-09-22 19:58:30',
+                'deleted_at' => NULL,
+            ),
+            120 => 
+            array (
+                'id' => 123,
+                'chemin_fichier' => 'images/composants/f01f2041-b575-40ff-bffc-575414e94152.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_165857170.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 11142,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 19:59:24',
+                'updated_at' => '2026-09-22 19:59:24',
+                'deleted_at' => NULL,
+            ),
+            121 => 
+            array (
+                'id' => 124,
+                'chemin_fichier' => 'images/composants/86bd408b-e70c-4ef4-bb14-1d3eb90c9de4.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_165955502.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 9752,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 20:00:16',
+                'updated_at' => '2026-09-22 20:00:16',
+                'deleted_at' => NULL,
+            ),
+            122 => 
+            array (
+                'id' => 125,
+                'chemin_fichier' => 'images/composants/0291de49-4ee5-4b25-98a5-f72a1f337e7e.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_170120891.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 23082,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 20:01:51',
+                'updated_at' => '2026-09-22 20:01:51',
+                'deleted_at' => NULL,
+            ),
+            123 => 
+            array (
+                'id' => 126,
+                'chemin_fichier' => 'images/composants/a734cf6c-a62c-48af-b524-02bc6599a9d5.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_170457589.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 76213,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 20:04:59',
+                'updated_at' => '2026-09-22 20:04:59',
+                'deleted_at' => NULL,
+            ),
+            124 => 
+            array (
+                'id' => 127,
+                'chemin_fichier' => 'images/composants/dd85837b-2e48-46cb-8764-c52581c521ff.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_170612419.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 13816,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 20:06:53',
+                'updated_at' => '2026-09-22 20:06:53',
+                'deleted_at' => NULL,
+            ),
+            125 => 
+            array (
+                'id' => 128,
+                'chemin_fichier' => 'images/composants/638405dd-6449-49e5-8575-754839b96e77.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_170755277.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 13050,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 20:08:15',
+                'updated_at' => '2026-09-22 20:08:15',
+                'deleted_at' => NULL,
+            ),
+            126 => 
+            array (
+                'id' => 129,
+                'chemin_fichier' => 'images/composants/dbbcfb9a-2211-4dea-a19a-69217b64ac65.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_170913619.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 13720,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 20:09:15',
+                'updated_at' => '2026-09-22 20:09:15',
+                'deleted_at' => NULL,
+            ),
+            127 => 
+            array (
+                'id' => 130,
+                'chemin_fichier' => 'images/composants/e910ca7e-0616-4885-a525-1d5b1465d135.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_170932262.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 14441,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 20:10:06',
+                'updated_at' => '2026-09-22 20:10:06',
+                'deleted_at' => NULL,
+            ),
+            128 => 
+            array (
+                'id' => 131,
+                'chemin_fichier' => 'images/composants/9a3249bb-259a-443c-9bbb-daafb88de11a.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_172205101.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 26125,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 20:23:16',
+                'updated_at' => '2026-09-22 20:23:16',
+                'deleted_at' => NULL,
+            ),
+            129 => 
+            array (
+                'id' => 132,
+                'chemin_fichier' => 'images/composants/1fc01831-227e-4a2f-8881-5cc2d2b86a13.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_172440837.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 8097,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 20:24:59',
+                'updated_at' => '2026-09-22 20:24:59',
+                'deleted_at' => NULL,
+            ),
+            130 => 
+            array (
+                'id' => 133,
+                'chemin_fichier' => 'images/composants/e708f08b-79bb-426f-94ac-9385d3b8a79c.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_172517167.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 9599,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 20:25:47',
+                'updated_at' => '2026-09-22 20:25:47',
+                'deleted_at' => NULL,
+            ),
+            131 => 
+            array (
+                'id' => 134,
+                'chemin_fichier' => 'images/composants/db08363b-4dab-45b7-854a-949ed2501798.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_172659464.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 16508,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 20:27:23',
+                'updated_at' => '2026-09-22 20:27:23',
+                'deleted_at' => NULL,
+            ),
+            132 => 
+            array (
+                'id' => 135,
+                'chemin_fichier' => 'images/composants/6c493a85-508f-45c0-b030-2410b1b05f8c.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_172744105.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 12322,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 20:28:05',
+                'updated_at' => '2026-09-22 20:28:05',
+                'deleted_at' => NULL,
+            ),
+            133 => 
+            array (
+                'id' => 136,
+                'chemin_fichier' => 'images/composants/31070981-645d-4028-a647-df3e0be9e197.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_172941891.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 15006,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 20:29:43',
+                'updated_at' => '2026-09-22 20:29:43',
+                'deleted_at' => NULL,
+            ),
+            134 => 
+            array (
+                'id' => 137,
+                'chemin_fichier' => 'images/composants/dcc416de-e57f-49d3-a717-5eede489c9a2.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_173108298.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 17624,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 20:31:09',
+                'updated_at' => '2026-09-22 20:31:09',
+                'deleted_at' => NULL,
+            ),
+            135 => 
+            array (
+                'id' => 138,
+                'chemin_fichier' => 'images/composants/897fae78-e89a-4ac3-8645-352ab6c41295.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_173127240.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 12275,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 20:31:49',
+                'updated_at' => '2026-09-22 20:31:49',
+                'deleted_at' => NULL,
+            ),
+            136 => 
+            array (
+                'id' => 139,
+                'chemin_fichier' => 'images/ouvrages/50d9993f-e7d6-44fe-9e1d-7b109905b119.png',
+                'thumbnail' => NULL,
+                'titre' => 'image_2026-09-22_173319818.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 121455,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 1,
+                'created_at' => '2026-09-22 20:35:58',
+                'updated_at' => '2026-09-22 20:35:58',
+                'deleted_at' => NULL,
+            ),
+            137 => 
+            array (
+                'id' => 140,
+                'chemin_fichier' => 'images/composants/584458f3-debe-40c6-afd0-4e29c221a4f6.png',
+                'thumbnail' => NULL,
+                'titre' => '5591217c-2cd4-431d-b410-8ca06a700ce0.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 5067,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 0,
+                'created_at' => '2026-09-22 20:43:32',
+                'updated_at' => '2026-09-22 20:43:32',
+                'deleted_at' => NULL,
+            ),
+            138 => 
+            array (
+                'id' => 141,
+                'chemin_fichier' => 'images/composants/485f88a4-dbe0-4924-96c6-40f19043cbf2.png',
+                'thumbnail' => NULL,
+                'titre' => '2c22a493-2917-4b60-958c-a08820483fb2.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 5565,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 0,
+                'created_at' => '2026-09-22 20:48:39',
+                'updated_at' => '2026-09-22 20:48:39',
+                'deleted_at' => NULL,
+            ),
+            139 => 
+            array (
+                'id' => 142,
+                'chemin_fichier' => 'images/composants/e00f19a6-c1dc-45b6-a0a3-8d394d53fa7e.png',
+                'thumbnail' => NULL,
+                'titre' => 'cb2b09b5-cab5-48b1-bbd3-411df261a4c7.png',
+                'alt_text' => NULL,
+                'description' => NULL,
+                'type_media' => 'schema',
+                'taille_octets' => 22567,
+                'mime_type' => 'image/png',
+                'largeur_px' => NULL,
+                'hauteur_px' => NULL,
+                'est_principal' => 0,
+                'created_at' => '2026-09-22 20:49:07',
+                'updated_at' => '2026-09-22 20:49:07',
                 'deleted_at' => NULL,
             ),
         ));

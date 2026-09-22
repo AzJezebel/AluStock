@@ -483,28 +483,6 @@ class ComposantsTableSeeder extends Seeder
             ),
             21 => 
             array (
-                'id' => 33,
-                'reference' => 'ALN-876',
-                'designation' => 'ELEMENTO DIAGONAL',
-                'slug' => 'aln-876-elemento-diagonal',
-                'type_composant_id' => 1,
-                'gamme_id' => NULL,
-                'matiere' => NULL,
-                'longueur_barre_mm' => NULL,
-                'section_largeur_mm' => NULL,
-                'section_hauteur_mm' => NULL,
-                'epaisseur_paroi_mm' => NULL,
-                'poids_lineaire_kg_m' => '0.548',
-                'poids_lineaire_lbs_ft' => '0.368',
-                'moment_inertie_cm4' => NULL,
-                'perimetre_mm' => '205.39',
-                'image_coupe' => NULL,
-                'est_disponible' => 1,
-                'created_at' => '2026-09-15 19:29:15',
-                'updated_at' => '2026-09-15 19:34:05',
-            ),
-            22 => 
-            array (
                 'id' => 34,
                 'reference' => 'ALN-877',
                 'designation' => 'ELEMENTO VERTICAL',
@@ -525,7 +503,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-15 19:35:11',
                 'updated_at' => '2026-09-15 19:35:11',
             ),
-            23 => 
+            22 => 
             array (
                 'id' => 35,
                 'reference' => 'ALN-937',
@@ -547,29 +525,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-15 19:36:01',
                 'updated_at' => '2026-09-15 19:36:01',
             ),
-            24 => 
-            array (
-                'id' => 36,
-                'reference' => 'ALN-879',
-                'designation' => 'TAPA',
-                'slug' => 'aln-879-tapa',
-                'type_composant_id' => 1,
-                'gamme_id' => NULL,
-                'matiere' => NULL,
-                'longueur_barre_mm' => NULL,
-                'section_largeur_mm' => NULL,
-                'section_hauteur_mm' => NULL,
-                'epaisseur_paroi_mm' => NULL,
-                'poids_lineaire_kg_m' => '0.385',
-                'poids_lineaire_lbs_ft' => '0.259',
-                'moment_inertie_cm4' => NULL,
-                'perimetre_mm' => '150.01',
-                'image_coupe' => NULL,
-                'est_disponible' => 1,
-                'created_at' => '2026-09-15 19:36:47',
-                'updated_at' => '2026-09-15 19:36:47',
-            ),
-            25 => 
+            23 => 
             array (
                 'id' => 37,
                 'reference' => 'F-014',
@@ -591,7 +547,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-15 20:35:15',
                 'updated_at' => '2026-09-15 20:35:15',
             ),
-            26 => 
+            24 => 
             array (
                 'id' => 38,
                 'reference' => 'ALN-1097',
@@ -613,7 +569,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-15 20:36:00',
                 'updated_at' => '2026-09-15 20:36:00',
             ),
-            27 => 
+            25 => 
             array (
                 'id' => 39,
                 'reference' => 'ALN-1057',
@@ -635,7 +591,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-15 20:36:40',
                 'updated_at' => '2026-09-15 20:36:40',
             ),
-            28 => 
+            26 => 
             array (
                 'id' => 40,
                 'reference' => 'ALN-1244',
@@ -657,7 +613,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-15 20:37:19',
                 'updated_at' => '2026-09-15 20:37:19',
             ),
-            29 => 
+            27 => 
             array (
                 'id' => 41,
                 'reference' => 'ALN-1099',
@@ -679,7 +635,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-15 20:38:59',
                 'updated_at' => '2026-09-15 20:38:59',
             ),
-            30 => 
+            28 => 
             array (
                 'id' => 42,
                 'reference' => 'ALN-1098',
@@ -701,7 +657,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-15 20:39:40',
                 'updated_at' => '2026-09-15 20:39:40',
             ),
-            31 => 
+            29 => 
             array (
                 'id' => 43,
                 'reference' => 'ALN-988',
@@ -723,7 +679,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-15 20:44:13',
                 'updated_at' => '2026-09-15 20:44:13',
             ),
-            32 => 
+            30 => 
             array (
                 'id' => 44,
                 'reference' => 'ALN-1097',
@@ -745,7 +701,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-15 20:44:49',
                 'updated_at' => '2026-09-15 20:44:49',
             ),
-            33 => 
+            31 => 
             array (
                 'id' => 45,
                 'reference' => 'U-107',
@@ -767,7 +723,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-15 20:45:29',
                 'updated_at' => '2026-09-15 20:45:29',
             ),
-            34 => 
+            32 => 
             array (
                 'id' => 46,
                 'reference' => 'ALN-1247',
@@ -789,7 +745,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-15 20:48:14',
                 'updated_at' => '2026-09-15 20:48:14',
             ),
-            35 => 
+            33 => 
             array (
                 'id' => 47,
                 'reference' => 'U-118',
@@ -811,7 +767,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-15 21:37:53',
                 'updated_at' => '2026-09-15 21:37:53',
             ),
-            36 => 
+            34 => 
             array (
                 'id' => 48,
                 'reference' => 'ALN-1568',
@@ -833,7 +789,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:22:24',
                 'updated_at' => '2026-09-18 18:22:24',
             ),
-            37 => 
+            35 => 
             array (
                 'id' => 49,
                 'reference' => 'ALN-1569',
@@ -855,7 +811,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:23:16',
                 'updated_at' => '2026-09-18 18:23:16',
             ),
-            38 => 
+            36 => 
             array (
                 'id' => 50,
                 'reference' => 'ALN-1570',
@@ -877,7 +833,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:24:24',
                 'updated_at' => '2026-09-18 18:24:24',
             ),
-            39 => 
+            37 => 
             array (
                 'id' => 51,
                 'reference' => 'ALN-1571',
@@ -899,7 +855,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:25:35',
                 'updated_at' => '2026-09-18 18:25:35',
             ),
-            40 => 
+            38 => 
             array (
                 'id' => 52,
                 'reference' => 'ALN-1572',
@@ -921,7 +877,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:26:47',
                 'updated_at' => '2026-09-18 18:26:47',
             ),
-            41 => 
+            39 => 
             array (
                 'id' => 53,
                 'reference' => 'ALN-988',
@@ -943,7 +899,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:30:36',
                 'updated_at' => '2026-09-18 18:30:36',
             ),
-            42 => 
+            40 => 
             array (
                 'id' => 54,
                 'reference' => 'ALN-183',
@@ -965,7 +921,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:32:19',
                 'updated_at' => '2026-09-18 18:32:19',
             ),
-            43 => 
+            41 => 
             array (
                 'id' => 55,
                 'reference' => 'T-086',
@@ -987,7 +943,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:33:31',
                 'updated_at' => '2026-09-18 18:33:31',
             ),
-            44 => 
+            42 => 
             array (
                 'id' => 56,
                 'reference' => 'ALN-170',
@@ -1009,7 +965,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:34:20',
                 'updated_at' => '2026-09-18 18:34:20',
             ),
-            45 => 
+            43 => 
             array (
                 'id' => 57,
                 'reference' => 'T-264',
@@ -1031,7 +987,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:48:27',
                 'updated_at' => '2026-09-18 18:48:27',
             ),
-            46 => 
+            44 => 
             array (
                 'id' => 58,
                 'reference' => 'ALN-1496',
@@ -1053,7 +1009,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:49:46',
                 'updated_at' => '2026-09-18 18:49:46',
             ),
-            47 => 
+            45 => 
             array (
                 'id' => 59,
                 'reference' => 'ALN-1583',
@@ -1075,7 +1031,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:52:22',
                 'updated_at' => '2026-09-18 18:52:22',
             ),
-            48 => 
+            46 => 
             array (
                 'id' => 60,
                 'reference' => 'ALN-1534',
@@ -1097,7 +1053,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:53:40',
                 'updated_at' => '2026-09-18 18:53:40',
             ),
-            49 => 
+            47 => 
             array (
                 'id' => 61,
                 'reference' => 'ALN-1535',
@@ -1119,7 +1075,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:54:23',
                 'updated_at' => '2026-09-18 18:54:23',
             ),
-            50 => 
+            48 => 
             array (
                 'id' => 62,
                 'reference' => 'ALN-1536',
@@ -1141,7 +1097,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:55:12',
                 'updated_at' => '2026-09-18 18:55:19',
             ),
-            51 => 
+            49 => 
             array (
                 'id' => 63,
                 'reference' => 'ALN-1240',
@@ -1163,7 +1119,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:57:56',
                 'updated_at' => '2026-09-18 19:15:55',
             ),
-            52 => 
+            50 => 
             array (
                 'id' => 64,
                 'reference' => 'ALN-1241',
@@ -1185,7 +1141,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:58:52',
                 'updated_at' => '2026-09-18 19:19:28',
             ),
-            53 => 
+            51 => 
             array (
                 'id' => 65,
                 'reference' => 'ALN-1267',
@@ -1207,7 +1163,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 19:01:27',
                 'updated_at' => '2026-09-18 19:06:58',
             ),
-            54 => 
+            52 => 
             array (
                 'id' => 66,
                 'reference' => 'ALN-1246',
@@ -1229,7 +1185,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 19:20:15',
                 'updated_at' => '2026-09-18 19:20:15',
             ),
-            55 => 
+            53 => 
             array (
                 'id' => 67,
                 'reference' => 'ALN-1242',
@@ -1251,7 +1207,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 19:22:13',
                 'updated_at' => '2026-09-18 19:22:13',
             ),
-            56 => 
+            54 => 
             array (
                 'id' => 68,
                 'reference' => 'ALN-1248',
@@ -1273,7 +1229,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 19:23:13',
                 'updated_at' => '2026-09-18 19:23:13',
             ),
-            57 => 
+            55 => 
             array (
                 'id' => 69,
                 'reference' => 'ALN-1247',
@@ -1295,7 +1251,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 19:24:01',
                 'updated_at' => '2026-09-18 19:24:01',
             ),
-            58 => 
+            56 => 
             array (
                 'id' => 70,
                 'reference' => 'ALN-1249',
@@ -1317,7 +1273,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 19:25:24',
                 'updated_at' => '2026-09-18 19:25:24',
             ),
-            59 => 
+            57 => 
             array (
                 'id' => 71,
                 'reference' => 'ALN-1253',
@@ -1339,7 +1295,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 19:26:31',
                 'updated_at' => '2026-09-18 19:26:31',
             ),
-            60 => 
+            58 => 
             array (
                 'id' => 72,
                 'reference' => 'ALN-1254',
@@ -1361,7 +1317,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 19:27:29',
                 'updated_at' => '2026-09-18 19:27:29',
             ),
-            61 => 
+            59 => 
             array (
                 'id' => 73,
                 'reference' => 'SVR-002',
@@ -1383,7 +1339,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 16:40:25',
                 'updated_at' => '2026-09-21 16:40:25',
             ),
-            62 => 
+            60 => 
             array (
                 'id' => 74,
                 'reference' => 'SVR-003',
@@ -1405,7 +1361,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 16:41:47',
                 'updated_at' => '2026-09-21 16:41:47',
             ),
-            63 => 
+            61 => 
             array (
                 'id' => 75,
                 'reference' => 'OJL-3005',
@@ -1427,7 +1383,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 16:42:45',
                 'updated_at' => '2026-09-21 16:42:45',
             ),
-            64 => 
+            62 => 
             array (
                 'id' => 76,
                 'reference' => 'OD-9012',
@@ -1449,7 +1405,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 16:43:39',
                 'updated_at' => '2026-09-21 16:43:39',
             ),
-            65 => 
+            63 => 
             array (
                 'id' => 77,
                 'reference' => 'STC-001',
@@ -1471,7 +1427,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 16:44:21',
                 'updated_at' => '2026-09-21 16:44:21',
             ),
-            66 => 
+            64 => 
             array (
                 'id' => 78,
                 'reference' => 'SVR-001',
@@ -1493,7 +1449,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 16:47:30',
                 'updated_at' => '2026-09-21 16:47:30',
             ),
-            67 => 
+            65 => 
             array (
                 'id' => 79,
                 'reference' => 'ALN-1453',
@@ -1515,7 +1471,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 16:52:46',
                 'updated_at' => '2026-09-21 16:52:46',
             ),
-            68 => 
+            66 => 
             array (
                 'id' => 80,
                 'reference' => 'ALN-1454',
@@ -1537,7 +1493,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 16:55:44',
                 'updated_at' => '2026-09-21 16:56:15',
             ),
-            69 => 
+            67 => 
             array (
                 'id' => 81,
                 'reference' => 'ALN-1455',
@@ -1559,7 +1515,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 16:58:11',
                 'updated_at' => '2026-09-21 16:58:11',
             ),
-            70 => 
+            68 => 
             array (
                 'id' => 82,
                 'reference' => 'ALN-1495',
@@ -1581,7 +1537,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 17:03:14',
                 'updated_at' => '2026-09-21 17:03:35',
             ),
-            71 => 
+            69 => 
             array (
                 'id' => 83,
                 'reference' => 'ALN-1576',
@@ -1603,7 +1559,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 17:05:19',
                 'updated_at' => '2026-09-21 17:05:19',
             ),
-            72 => 
+            70 => 
             array (
                 'id' => 84,
                 'reference' => 'ALN-1577',
@@ -1625,7 +1581,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 17:08:52',
                 'updated_at' => '2026-09-21 17:08:52',
             ),
-            73 => 
+            71 => 
             array (
                 'id' => 85,
                 'reference' => 'ALN-1570',
@@ -1647,7 +1603,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 19:40:03',
                 'updated_at' => '2026-09-21 19:40:03',
             ),
-            74 => 
+            72 => 
             array (
                 'id' => 86,
                 'reference' => 'ALN-1580',
@@ -1669,7 +1625,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 19:41:25',
                 'updated_at' => '2026-09-21 19:41:25',
             ),
-            75 => 
+            73 => 
             array (
                 'id' => 87,
                 'reference' => 'P-136',
@@ -1691,7 +1647,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 19:41:58',
                 'updated_at' => '2026-09-21 19:41:58',
             ),
-            76 => 
+            74 => 
             array (
                 'id' => 88,
                 'reference' => 'ALN-1581',
@@ -1713,7 +1669,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 19:42:48',
                 'updated_at' => '2026-09-21 19:42:48',
             ),
-            77 => 
+            75 => 
             array (
                 'id' => 89,
                 'reference' => 'STOA071',
@@ -1735,29 +1691,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 19:45:20',
                 'updated_at' => '2026-09-21 19:45:20',
             ),
-            78 => 
-            array (
-                'id' => 90,
-                'reference' => 'ALN-876',
-                'designation' => 'HORIZONTAL',
-                'slug' => 'aln-876-horizontal-1',
-                'type_composant_id' => 1,
-                'gamme_id' => NULL,
-                'matiere' => NULL,
-                'longueur_barre_mm' => NULL,
-                'section_largeur_mm' => NULL,
-                'section_hauteur_mm' => NULL,
-                'epaisseur_paroi_mm' => NULL,
-                'poids_lineaire_kg_m' => '0.548',
-                'poids_lineaire_lbs_ft' => '0.368',
-                'moment_inertie_cm4' => NULL,
-                'perimetre_mm' => '205.39',
-                'image_coupe' => NULL,
-                'est_disponible' => 1,
-                'created_at' => '2026-09-21 19:46:00',
-                'updated_at' => '2026-09-21 19:46:00',
-            ),
-            79 => 
+            76 => 
             array (
                 'id' => 91,
                 'reference' => 'ALN-1463',
@@ -1779,7 +1713,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 19:48:59',
                 'updated_at' => '2026-09-21 19:48:59',
             ),
-            80 => 
+            77 => 
             array (
                 'id' => 92,
                 'reference' => 'ALN-1563',
@@ -1801,7 +1735,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 19:49:50',
                 'updated_at' => '2026-09-21 19:49:50',
             ),
-            81 => 
+            78 => 
             array (
                 'id' => 94,
                 'reference' => 'ALN-1573',
@@ -1823,7 +1757,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 19:51:57',
                 'updated_at' => '2026-09-21 19:51:57',
             ),
-            82 => 
+            79 => 
             array (
                 'id' => 95,
                 'reference' => 'ALN-1574',
@@ -1845,7 +1779,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 19:53:17',
                 'updated_at' => '2026-09-21 19:53:17',
             ),
-            83 => 
+            80 => 
             array (
                 'id' => 96,
                 'reference' => 'ALN-1575',
@@ -1866,6 +1800,886 @@ class ComposantsTableSeeder extends Seeder
                 'est_disponible' => 1,
                 'created_at' => '2026-09-21 19:54:24',
                 'updated_at' => '2026-09-21 19:54:24',
+            ),
+            81 => 
+            array (
+                'id' => 97,
+                'reference' => 'ALN-363',
+                'designation' => 'PROFILES VARIES',
+                'slug' => 'aln-363-profiles-varies',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.799',
+                'poids_lineaire_lbs_ft' => '0.537',
+                'moment_inertie_cm4' => '14.378',
+                'perimetre_mm' => '365.20',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 17:28:15',
+                'updated_at' => '2026-09-22 17:28:15',
+            ),
+            82 => 
+            array (
+                'id' => 98,
+                'reference' => 'ALN-1012',
+                'designation' => 'PROFILES VARIES',
+                'slug' => 'aln-1012-profiles-varies',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.530',
+                'poids_lineaire_lbs_ft' => '0.356',
+                'moment_inertie_cm4' => '4.724',
+                'perimetre_mm' => '120.00',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 17:29:14',
+                'updated_at' => '2026-09-22 17:29:14',
+            ),
+            83 => 
+            array (
+                'id' => 99,
+                'reference' => 'S-343',
+                'designation' => 'PROFILES VARIES',
+                'slug' => 's-343-profiles-varies',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.207',
+                'poids_lineaire_lbs_ft' => '0.139',
+                'moment_inertie_cm4' => '5.036',
+                'perimetre_mm' => '127.92',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 17:29:43',
+                'updated_at' => '2026-09-22 17:29:43',
+            ),
+            84 => 
+            array (
+                'id' => 100,
+                'reference' => 'S-344',
+                'designation' => 'PROFILES VARIES',
+                'slug' => 's-344-profiles-varies',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.113',
+                'poids_lineaire_lbs_ft' => '0.076',
+                'moment_inertie_cm4' => '2.807',
+                'perimetre_mm' => '71.30',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 17:30:18',
+                'updated_at' => '2026-09-22 17:30:18',
+            ),
+            85 => 
+            array (
+                'id' => 101,
+                'reference' => 'ALN-511',
+                'designation' => 'PROFILES VARIES',
+                'slug' => 'aln-511-profiles-varies',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.113',
+                'poids_lineaire_lbs_ft' => '0.076',
+                'moment_inertie_cm4' => '2.807',
+                'perimetre_mm' => '71.30',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 17:30:51',
+                'updated_at' => '2026-09-22 17:30:51',
+            ),
+            86 => 
+            array (
+                'id' => 102,
+                'reference' => 'ALN-1600',
+                'designation' => 'PROFILES VARIES',
+                'slug' => 'aln-1600-profiles-varies',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '1.039',
+                'poids_lineaire_lbs_ft' => '0.698',
+                'moment_inertie_cm4' => '15.170',
+                'perimetre_mm' => '385.33',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 17:32:12',
+                'updated_at' => '2026-09-22 17:32:12',
+            ),
+            87 => 
+            array (
+                'id' => 103,
+                'reference' => 'T-116',
+                'designation' => 'TUBULAIRES VARIES',
+                'slug' => 't-116-tubulaires-varies',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.274',
+                'poids_lineaire_lbs_ft' => '0.184',
+                'moment_inertie_cm4' => '3.937',
+                'perimetre_mm' => '100.00',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 17:33:33',
+                'updated_at' => '2026-09-22 17:33:33',
+            ),
+            88 => 
+            array (
+                'id' => 104,
+                'reference' => 'T-050',
+                'designation' => 'TUBULAIRES VARIES',
+                'slug' => 't-050-tubulaires-varies',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.521',
+                'poids_lineaire_lbs_ft' => '0.350',
+                'moment_inertie_cm4' => '4.992',
+                'perimetre_mm' => '126.80',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 17:34:28',
+                'updated_at' => '2026-09-22 17:34:28',
+            ),
+            89 => 
+            array (
+                'id' => 105,
+                'reference' => 'T-021',
+                'designation' => 'TUBULAIRES VARIES',
+                'slug' => 't-021-tubulaires-varies',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.955',
+                'poids_lineaire_lbs_ft' => '0.642',
+                'moment_inertie_cm4' => '7.973',
+                'perimetre_mm' => '202.51',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 17:35:06',
+                'updated_at' => '2026-09-22 17:35:06',
+            ),
+            90 => 
+            array (
+                'id' => 106,
+                'reference' => 'T-A-007',
+                'designation' => 'TUBULAIRES VARIES',
+                'slug' => 't-a-007-tubulaires-varies',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.691',
+                'poids_lineaire_lbs_ft' => '0.464',
+                'moment_inertie_cm4' => '6.929',
+                'perimetre_mm' => '176.00',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 17:35:47',
+                'updated_at' => '2026-09-22 17:35:47',
+            ),
+            91 => 
+            array (
+                'id' => 107,
+                'reference' => 'T-252',
+                'designation' => 'TUBULAIRES VARIES',
+                'slug' => 't-252-tubulaires-varies',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.661',
+                'poids_lineaire_lbs_ft' => '0.444',
+                'moment_inertie_cm4' => '7.053',
+                'perimetre_mm' => '179.14',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 17:36:24',
+                'updated_at' => '2026-09-22 17:36:24',
+            ),
+            92 => 
+            array (
+                'id' => 108,
+                'reference' => 'T-222',
+                'designation' => 'TUBULAIRES VARIES',
+                'slug' => 't-222-tubulaires-varies',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '4.996',
+                'poids_lineaire_lbs_ft' => '3.357',
+                'moment_inertie_cm4' => '15.973',
+                'perimetre_mm' => '405.71',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 17:38:02',
+                'updated_at' => '2026-09-22 17:38:02',
+            ),
+            93 => 
+            array (
+                'id' => 109,
+                'reference' => 'T-198',
+                'designation' => 'TUBE CARRE',
+                'slug' => 't-198-tube-carre',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.750',
+                'poids_lineaire_lbs_ft' => '0.504',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '203.20',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 19:45:55',
+                'updated_at' => '2026-09-22 19:45:55',
+            ),
+            94 => 
+            array (
+                'id' => 110,
+                'reference' => 'T-231',
+                'designation' => 'TUBE CARRE',
+                'slug' => 't-231-tube-carre',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '1.640',
+                'poids_lineaire_lbs_ft' => '1.102',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '202.51',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 19:49:28',
+                'updated_at' => '2026-09-22 19:49:28',
+            ),
+            95 => 
+            array (
+                'id' => 111,
+                'reference' => 'T-240',
+                'designation' => 'TUBE CARRE',
+                'slug' => 't-240-tube-carre',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '1.190',
+                'poids_lineaire_lbs_ft' => '0.800',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '202.51',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 19:50:16',
+                'updated_at' => '2026-09-22 19:50:16',
+            ),
+            96 => 
+            array (
+                'id' => 112,
+                'reference' => 'T-272',
+                'designation' => 'TUBE RECTANGULAIRE',
+                'slug' => 't-272-tube-rectangulaire',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '2.513',
+                'poids_lineaire_lbs_ft' => '1.689',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '304.11',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 19:51:33',
+                'updated_at' => '2026-09-22 19:51:33',
+            ),
+            97 => 
+            array (
+                'id' => 113,
+                'reference' => 'T-264',
+                'designation' => 'TUBE RECTANGULAIRE',
+                'slug' => 't-264-tube-rectangulaire',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '1.946',
+                'poids_lineaire_lbs_ft' => '1.308',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '319.14',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 19:52:15',
+                'updated_at' => '2026-09-22 19:52:15',
+            ),
+            98 => 
+            array (
+                'id' => 114,
+                'reference' => 'T-257',
+                'designation' => 'TUBE RECTANGULAIRE',
+                'slug' => 't-257-tube-rectangulaire',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '1.258',
+                'poids_lineaire_lbs_ft' => '0.845',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '279.14',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 19:52:50',
+                'updated_at' => '2026-09-22 19:52:50',
+            ),
+            99 => 
+            array (
+                'id' => 115,
+                'reference' => 'T-224',
+                'designation' => 'TUBE VARIE',
+                'slug' => 't-224-tube-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '6.556',
+                'poids_lineaire_lbs_ft' => '4.406',
+                'moment_inertie_cm4' => '15.973',
+                'perimetre_mm' => '405.71',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 19:53:58',
+                'updated_at' => '2026-09-22 19:53:58',
+            ),
+            100 => 
+            array (
+                'id' => 116,
+                'reference' => 'T-256',
+                'designation' => 'TUBE VARIE',
+                'slug' => 't-256-tube-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.889',
+                'poids_lineaire_lbs_ft' => '0.597',
+                'moment_inertie_cm4' => '9.415',
+                'perimetre_mm' => '239.14',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 19:54:49',
+                'updated_at' => '2026-09-22 19:54:49',
+            ),
+            101 => 
+            array (
+                'id' => 117,
+                'reference' => 'TC-097',
+                'designation' => 'TUBE VARIE',
+                'slug' => 'tc-097-tube-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.817',
+                'poids_lineaire_lbs_ft' => '0.549',
+                'moment_inertie_cm4' => '6.184',
+                'perimetre_mm' => '157.08',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 19:55:42',
+                'updated_at' => '2026-09-22 19:55:42',
+            ),
+            102 => 
+            array (
+                'id' => 118,
+                'reference' => 'A-009',
+                'designation' => 'ANGLE VARIE',
+                'slug' => 'a-009-angle-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.312',
+                'poids_lineaire_lbs_ft' => '0.210',
+                'moment_inertie_cm4' => '4.024',
+                'perimetre_mm' => '102.20',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 19:56:48',
+                'updated_at' => '2026-09-22 19:56:48',
+            ),
+            103 => 
+            array (
+                'id' => 119,
+                'reference' => 'A-015',
+                'designation' => 'ANGLE VARIE',
+                'slug' => 'a-015-angle-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.519',
+                'poids_lineaire_lbs_ft' => '0.349',
+                'moment_inertie_cm4' => '1.962',
+                'perimetre_mm' => '127.00',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 19:57:21',
+                'updated_at' => '2026-09-22 19:57:21',
+            ),
+            104 => 
+            array (
+                'id' => 120,
+                'reference' => 'A-018',
+                'designation' => 'ANGLE VARIE',
+                'slug' => 'a-018-angle-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.321',
+                'poids_lineaire_lbs_ft' => '0.216',
+                'moment_inertie_cm4' => '6.000',
+                'perimetre_mm' => '152.40',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 19:57:55',
+                'updated_at' => '2026-09-22 19:57:55',
+            ),
+            105 => 
+            array (
+                'id' => 121,
+                'reference' => 'A-027',
+                'designation' => 'ANGLE VARIE',
+                'slug' => 'a-027-angle-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.848',
+                'poids_lineaire_lbs_ft' => '0.570',
+                'moment_inertie_cm4' => '8.000',
+                'perimetre_mm' => '203.20',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 19:58:30',
+                'updated_at' => '2026-09-22 19:58:30',
+            ),
+            106 => 
+            array (
+                'id' => 122,
+                'reference' => 'ALN-1245',
+                'designation' => 'ANGLE VARIE',
+                'slug' => 'aln-1245-angle-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.477',
+                'poids_lineaire_lbs_ft' => '0.321',
+                'moment_inertie_cm4' => '7.087',
+                'perimetre_mm' => '180.00',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 19:59:24',
+                'updated_at' => '2026-09-22 19:59:24',
+            ),
+            107 => 
+            array (
+                'id' => 123,
+                'reference' => 'ALN-1243',
+                'designation' => 'ANGLE VARIE',
+                'slug' => 'aln-1243-angle-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.504',
+                'poids_lineaire_lbs_ft' => '0.339',
+                'moment_inertie_cm4' => '5.118',
+                'perimetre_mm' => '130.00',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 20:00:16',
+                'updated_at' => '2026-09-22 20:00:16',
+            ),
+            108 => 
+            array (
+                'id' => 124,
+                'reference' => 'A-085',
+                'designation' => 'ANGLE VARIE',
+                'slug' => 'a-085-angle-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '5.272',
+                'poids_lineaire_lbs_ft' => '3.543',
+                'moment_inertie_cm4' => '15.644',
+                'perimetre_mm' => '397.37',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 20:01:51',
+                'updated_at' => '2026-09-22 20:01:51',
+            ),
+            109 => 
+            array (
+                'id' => 125,
+                'reference' => 'RECTO256',
+                'designation' => 'PROFILE DE DISPOSITION LIBRE',
+                'slug' => 'recto256-profile-de-disposition-libre',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.889',
+                'poids_lineaire_lbs_ft' => '0.597',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '239.14',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 20:06:53',
+                'updated_at' => '2026-09-22 20:06:53',
+            ),
+            110 => 
+            array (
+                'id' => 126,
+                'reference' => 'ALN1245',
+                'designation' => 'PROFILE DE DISPOSITION LIBRE',
+                'slug' => 'aln1245-profile-de-disposition-libre',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.477',
+                'poids_lineaire_lbs_ft' => '0.321',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '179.98',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 20:08:15',
+                'updated_at' => '2026-09-22 20:08:15',
+            ),
+            111 => 
+            array (
+                'id' => 127,
+                'reference' => 'ANGU0099',
+                'designation' => 'PROFILE DE DISPOSITION LIBRE',
+                'slug' => 'angu0099-profile-de-disposition-libre',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.616',
+                'poids_lineaire_lbs_ft' => '0.414',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '202.34',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 20:09:15',
+                'updated_at' => '2026-09-22 20:10:23',
+            ),
+            112 => 
+            array (
+                'id' => 128,
+                'reference' => 'ANGUO0096',
+                'designation' => 'PROFILE DE DISPOSITION LIBRE',
+                'slug' => 'anguo0096-profile-de-disposition-libre',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.846',
+                'poids_lineaire_lbs_ft' => '0.569',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '202.34',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 20:10:06',
+                'updated_at' => '2026-09-22 20:10:06',
+            ),
+            113 => 
+            array (
+                'id' => 129,
+                'reference' => 'U-117',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'u-117-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '4.957',
+                'poids_lineaire_lbs_ft' => '3.331',
+                'moment_inertie_cm4' => '18.461',
+                'perimetre_mm' => '468.90',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 20:23:16',
+                'updated_at' => '2026-09-22 20:23:16',
+            ),
+            114 => 
+            array (
+                'id' => 130,
+                'reference' => 'U-119',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'u-119-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.232',
+                'poids_lineaire_lbs_ft' => '0.156',
+                'moment_inertie_cm4' => '3.337',
+                'perimetre_mm' => '84.77',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 20:24:59',
+                'updated_at' => '2026-09-22 20:24:59',
+            ),
+            115 => 
+            array (
+                'id' => 131,
+                'reference' => 'U-085',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'u-085-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.335',
+                'poids_lineaire_lbs_ft' => '0.225',
+                'moment_inertie_cm4' => '7.071',
+                'perimetre_mm' => '179.60',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 20:25:47',
+                'updated_at' => '2026-09-22 20:25:47',
+            ),
+            116 => 
+            array (
+                'id' => 132,
+                'reference' => 'U-121',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'u-121-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '5.390',
+                'poids_lineaire_lbs_ft' => '3.622',
+                'moment_inertie_cm4' => '20.035',
+                'perimetre_mm' => '508.90',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 20:27:23',
+                'updated_at' => '2026-09-22 20:27:23',
+            ),
+            117 => 
+            array (
+                'id' => 133,
+                'reference' => 'T-269',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 't-269-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '3.244',
+                'poids_lineaire_lbs_ft' => '2.180',
+                'moment_inertie_cm4' => '17.188',
+                'perimetre_mm' => '436.57',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 20:28:05',
+                'updated_at' => '2026-09-22 20:28:05',
+            ),
+            118 => 
+            array (
+                'id' => 134,
+                'reference' => 'OF-511',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'of-511-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '1.727',
+                'poids_lineaire_lbs_ft' => '1.161',
+                'moment_inertie_cm4' => '20.051',
+                'perimetre_mm' => '509.29',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 20:29:43',
+                'updated_at' => '2026-09-22 20:29:43',
+            ),
+            119 => 
+            array (
+                'id' => 135,
+                'reference' => 'ALN-1658',
+                'designation' => 'RAIL PORTE FENETRE',
+                'slug' => 'aln-1658-rail-porte-fenetre',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.655',
+                'poids_lineaire_lbs_ft' => '0.440',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '164.75',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 20:31:09',
+                'updated_at' => '2026-09-22 20:31:09',
+            ),
+            120 => 
+            array (
+                'id' => 136,
+                'reference' => 'ALN-1659',
+                'designation' => 'RAIL PORTE FENETRE',
+                'slug' => 'aln-1659-rail-porte-fenetre',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.778',
+                'poids_lineaire_lbs_ft' => '0.523',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '233.80',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-22 20:31:49',
+                'updated_at' => '2026-09-22 20:31:49',
             ),
         ));
         

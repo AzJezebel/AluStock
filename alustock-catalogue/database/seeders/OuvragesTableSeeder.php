@@ -208,6 +208,27 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-21 17:15:14',
                 'updated_at' => '2026-09-21 17:15:14',
             ),
+            9 => 
+            array (
+                'id' => 15,
+                'reference' => 'EMPTY001',
+                'nom' => 'SCHEMA DE PERFORATION POUR BARREAU',
+                'slug' => 'schema-de-perforation-pour-barreau',
+                'gamme_id' => NULL,
+                'categorie_id' => 5,
+                'description_courte' => NULL,
+                'description_technique' => NULL,
+                'largeur_min_mm' => NULL,
+                'largeur_max_mm' => NULL,
+                'hauteur_min_mm' => NULL,
+                'hauteur_max_mm' => NULL,
+                'performance_thermique' => NULL,
+                'performance_acoustique' => NULL,
+                'image_principale' => NULL,
+                'est_actif' => 1,
+                'created_at' => '2026-09-22 20:35:58',
+                'updated_at' => '2026-09-22 20:35:58',
+            ),
         ));
         
         
