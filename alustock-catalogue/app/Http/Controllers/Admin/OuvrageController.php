@@ -11,7 +11,6 @@ use App\Models\Categorie;
 use App\Models\Composant;
 use App\Models\TypeComposant;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class OuvrageController extends Controller
 {
@@ -77,13 +76,13 @@ class OuvrageController extends Controller
             'typesComposant'
         ));
     }
+
     /**
      * Enregistrement
      */
     public function store(StoreOuvrageRequest $request)
     {
         $validated = $request->validated();
-        $validated['slug'] = Str::slug($request->nom);
         $validated['est_actif'] = $request->has('est_actif');
 
         $ouvrage = Ouvrage::create($validated);
@@ -181,7 +180,6 @@ class OuvrageController extends Controller
         }
     }
 
-
     /**
      * Formulaire d'édition (avec composition, caractéristiques, médias)
      */
@@ -220,11 +218,6 @@ class OuvrageController extends Controller
     public function update(UpdateOuvrageRequest $request, Ouvrage $ouvrage)
     {
         $validated = $request->validated();
-        
-        if ($request->nom !== $ouvrage->nom) {
-            $validated['slug'] = Str::slug($request->nom);
-        }
-        
         $validated['est_actif'] = $request->has('est_actif');
 
         $ouvrage->update($validated);

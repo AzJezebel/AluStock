@@ -44,6 +44,17 @@ class CompositionOuvrageTableSeeder extends Seeder
             2 => 
             array (
                 'ouvrage_id' => 7,
+                'composant_id' => 13,
+                'quantite' => '1.00',
+                'unite' => 'u',
+                'ordre' => 6,
+                'commentaire' => NULL,
+                'created_at' => '2026-09-23 17:48:13',
+                'updated_at' => '2026-09-23 17:48:13',
+            ),
+            3 => 
+            array (
+                'ouvrage_id' => 7,
                 'composant_id' => 17,
                 'quantite' => '1.00',
                 'unite' => 'u',
@@ -52,7 +63,7 @@ class CompositionOuvrageTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:49:56',
                 'updated_at' => '2026-09-22 20:49:56',
             ),
-            3 => 
+            4 => 
             array (
                 'ouvrage_id' => 7,
                 'composant_id' => 18,
@@ -63,7 +74,7 @@ class CompositionOuvrageTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:44:10',
                 'updated_at' => '2026-09-22 20:44:10',
             ),
-            4 => 
+            5 => 
             array (
                 'ouvrage_id' => 7,
                 'composant_id' => 34,
@@ -73,17 +84,6 @@ class CompositionOuvrageTableSeeder extends Seeder
                 'commentaire' => NULL,
                 'created_at' => '2026-09-15 19:37:41',
                 'updated_at' => '2026-09-15 19:37:41',
-            ),
-            5 => 
-            array (
-                'ouvrage_id' => 7,
-                'composant_id' => 35,
-                'quantite' => '1.00',
-                'unite' => 'u',
-                'ordre' => 3,
-                'commentaire' => NULL,
-                'created_at' => '2026-09-15 19:38:03',
-                'updated_at' => '2026-09-15 19:38:03',
             ),
             6 => 
             array (
@@ -388,10 +388,10 @@ class CompositionOuvrageTableSeeder extends Seeder
                 'composant_id' => 53,
                 'quantite' => '1.00',
                 'unite' => 'u',
-                'ordre' => 1,
+                'ordre' => 5,
                 'commentaire' => NULL,
-                'created_at' => '2026-09-18 18:45:51',
-                'updated_at' => '2026-09-18 18:45:51',
+                'created_at' => '2026-09-23 17:50:21',
+                'updated_at' => '2026-09-23 17:50:21',
             ),
             34 => 
             array (
@@ -491,6 +491,237 @@ class CompositionOuvrageTableSeeder extends Seeder
                 'commentaire' => NULL,
                 'created_at' => '2026-09-22 20:35:58',
                 'updated_at' => '2026-09-22 20:35:58',
+            ),
+            43 => 
+            array (
+                'ouvrage_id' => 16,
+                'composant_id' => 12,
+                'quantite' => '2.00',
+                'unite' => 'u',
+                'ordre' => 2,
+                'commentaire' => NULL,
+                'created_at' => '2026-09-23 17:26:50',
+                'updated_at' => '2026-09-23 17:26:50',
+            ),
+            44 => 
+            array (
+                'ouvrage_id' => 16,
+                'composant_id' => 17,
+                'quantite' => '1.00',
+                'unite' => 'u',
+                'ordre' => 3,
+                'commentaire' => NULL,
+                'created_at' => '2026-09-23 17:26:50',
+                'updated_at' => '2026-09-23 17:26:50',
+            ),
+            45 => 
+            array (
+                'ouvrage_id' => 16,
+                'composant_id' => 18,
+                'quantite' => '1.00',
+                'unite' => 'u',
+                'ordre' => 1,
+                'commentaire' => NULL,
+                'created_at' => '2026-09-23 17:26:50',
+                'updated_at' => '2026-09-23 17:26:50',
+            ),
+            46 => 
+            array (
+                'ouvrage_id' => 19,
+                'composant_id' => 13,
+                'quantite' => '2.00',
+                'unite' => 'u',
+                'ordre' => 2,
+                'commentaire' => NULL,
+                'created_at' => '2026-09-23 17:47:09',
+                'updated_at' => '2026-09-23 17:47:09',
+            ),
+            47 => 
+            array (
+                'ouvrage_id' => 19,
+                'composant_id' => 17,
+                'quantite' => '1.00',
+                'unite' => 'u',
+                'ordre' => 3,
+                'commentaire' => NULL,
+                'created_at' => '2026-09-23 17:47:15',
+                'updated_at' => '2026-09-23 17:47:15',
+            ),
+            48 => 
+            array (
+                'ouvrage_id' => 19,
+                'composant_id' => 18,
+                'quantite' => '1.00',
+                'unite' => 'u',
+                'ordre' => 1,
+                'commentaire' => NULL,
+                'created_at' => '2026-09-23 17:47:00',
+                'updated_at' => '2026-09-23 17:47:00',
+            ),
+            49 => 
+            array (
+                'ouvrage_id' => 20,
+                'composant_id' => 14,
+                'quantite' => '2.00',
+                'unite' => 'u',
+                'ordre' => 3,
+                'commentaire' => NULL,
+                'created_at' => '2026-09-23 17:51:43',
+                'updated_at' => '2026-09-23 17:51:43',
+            ),
+            50 => 
+            array (
+                'ouvrage_id' => 20,
+                'composant_id' => 17,
+                'quantite' => '1.00',
+                'unite' => 'u',
+                'ordre' => 2,
+                'commentaire' => NULL,
+                'created_at' => '2026-09-23 17:51:43',
+                'updated_at' => '2026-09-23 17:51:43',
+            ),
+            51 => 
+            array (
+                'ouvrage_id' => 20,
+                'composant_id' => 18,
+                'quantite' => '1.00',
+                'unite' => 'u',
+                'ordre' => 1,
+                'commentaire' => NULL,
+                'created_at' => '2026-09-23 17:51:43',
+                'updated_at' => '2026-09-23 17:51:43',
+            ),
+            52 => 
+            array (
+                'ouvrage_id' => 21,
+                'composant_id' => 15,
+                'quantite' => '2.00',
+                'unite' => 'u',
+                'ordre' => 2,
+                'commentaire' => NULL,
+                'created_at' => '2026-09-23 17:56:13',
+                'updated_at' => '2026-09-23 17:56:13',
+            ),
+            53 => 
+            array (
+                'ouvrage_id' => 21,
+                'composant_id' => 17,
+                'quantite' => '1.00',
+                'unite' => 'u',
+                'ordre' => 3,
+                'commentaire' => NULL,
+                'created_at' => '2026-09-23 17:56:13',
+                'updated_at' => '2026-09-23 17:56:13',
+            ),
+            54 => 
+            array (
+                'ouvrage_id' => 21,
+                'composant_id' => 18,
+                'quantite' => '1.00',
+                'unite' => 'u',
+                'ordre' => 1,
+                'commentaire' => NULL,
+                'created_at' => '2026-09-23 17:56:13',
+                'updated_at' => '2026-09-23 17:56:13',
+            ),
+            55 => 
+            array (
+                'ouvrage_id' => 22,
+                'composant_id' => 17,
+                'quantite' => '1.00',
+                'unite' => 'u',
+                'ordre' => 3,
+                'commentaire' => NULL,
+                'created_at' => '2026-09-23 17:57:35',
+                'updated_at' => '2026-09-23 17:57:35',
+            ),
+            56 => 
+            array (
+                'ouvrage_id' => 22,
+                'composant_id' => 18,
+                'quantite' => '1.00',
+                'unite' => 'u',
+                'ordre' => 1,
+                'commentaire' => NULL,
+                'created_at' => '2026-09-23 17:57:35',
+                'updated_at' => '2026-09-23 17:57:35',
+            ),
+            57 => 
+            array (
+                'ouvrage_id' => 22,
+                'composant_id' => 21,
+                'quantite' => '2.00',
+                'unite' => 'u',
+                'ordre' => 2,
+                'commentaire' => NULL,
+                'created_at' => '2026-09-23 17:57:35',
+                'updated_at' => '2026-09-23 17:57:35',
+            ),
+            58 => 
+            array (
+                'ouvrage_id' => 23,
+                'composant_id' => 17,
+                'quantite' => '1.00',
+                'unite' => 'u',
+                'ordre' => 3,
+                'commentaire' => NULL,
+                'created_at' => '2026-09-23 17:58:14',
+                'updated_at' => '2026-09-23 17:58:14',
+            ),
+            59 => 
+            array (
+                'ouvrage_id' => 23,
+                'composant_id' => 18,
+                'quantite' => '1.00',
+                'unite' => 'u',
+                'ordre' => 1,
+                'commentaire' => NULL,
+                'created_at' => '2026-09-23 17:58:14',
+                'updated_at' => '2026-09-23 17:58:14',
+            ),
+            60 => 
+            array (
+                'ouvrage_id' => 23,
+                'composant_id' => 22,
+                'quantite' => '2.00',
+                'unite' => 'u',
+                'ordre' => 2,
+                'commentaire' => NULL,
+                'created_at' => '2026-09-23 17:58:14',
+                'updated_at' => '2026-09-23 17:58:14',
+            ),
+            61 => 
+            array (
+                'ouvrage_id' => 24,
+                'composant_id' => 17,
+                'quantite' => '1.00',
+                'unite' => 'u',
+                'ordre' => 3,
+                'commentaire' => NULL,
+                'created_at' => '2026-09-23 17:59:21',
+                'updated_at' => '2026-09-23 17:59:21',
+            ),
+            62 => 
+            array (
+                'ouvrage_id' => 24,
+                'composant_id' => 18,
+                'quantite' => '1.00',
+                'unite' => 'u',
+                'ordre' => 1,
+                'commentaire' => NULL,
+                'created_at' => '2026-09-23 17:59:21',
+                'updated_at' => '2026-09-23 17:59:21',
+            ),
+            63 => 
+            array (
+                'ouvrage_id' => 24,
+                'composant_id' => 91,
+                'quantite' => '2.00',
+                'unite' => 'u',
+                'ordre' => 2,
+                'commentaire' => NULL,
+                'created_at' => '2026-09-23 17:59:21',
+                'updated_at' => '2026-09-23 17:59:21',
             ),
         ));
         

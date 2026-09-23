@@ -30,6 +30,20 @@ class Ouvrage extends Model
     protected $casts = [
         'est_actif' => 'boolean',
     ];
+    protected static function boot()
+    {
+        parent::boot();
+    
+        static::creating(function ($ouvrage) {
+            $ouvrage->slug = \Str::slug($ouvrage->reference . '-' . $ouvrage->nom);
+        });
+    
+        static::updating(function ($ouvrage) {
+            if ($ouvrage->isDirty(['reference', 'nom'])) {
+                $ouvrage->slug = \Str::slug($ouvrage->reference . '-' . $ouvrage->nom);
+            }
+        });
+    }
 
     // Relations
     public function gamme(): BelongsTo

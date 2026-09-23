@@ -42,12 +42,15 @@
                     <div class="p-3 flex flex-col flex-1">
 
                         {{-- Référence + type --}}
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="font-mono text-[10px] font-bold text-ink-600 bg-ink-100 px-1.5 py-0.5 tracking-wider">
+                        <div class="flex items-start justify-between gap-2 mb-2 min-w-0">
+                            {{-- Référence : peut être tronquée si trop longue --}}
+                            <span class="font-mono text-[10px] font-bold text-ink-600 bg-ink-100 px-1.5 py-0.5 tracking-wider truncate max-w-[60%]">
                                 {{ $composant->reference }}
                             </span>
+                        
+                            {{-- Catégorie : largeur limitée + tronquée + alignée à droite --}}
                             @if($composant->typeComposant)
-                                <span class="text-[10px] text-ink-400 uppercase tracking-wider font-semibold">
+                                <span class="text-[10px] text-ink-400 uppercase tracking-wider font-semibold truncate max-w-[40%] text-right shrink-0">
                                     {{ $composant->typeComposant->nom }}
                                 </span>
                             @endif

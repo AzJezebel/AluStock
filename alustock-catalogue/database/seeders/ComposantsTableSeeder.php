@@ -505,28 +505,6 @@ class ComposantsTableSeeder extends Seeder
             ),
             22 => 
             array (
-                'id' => 35,
-                'reference' => 'ALN-937',
-                'designation' => 'BARROTE',
-                'slug' => 'aln-937-barrote',
-                'type_composant_id' => 1,
-                'gamme_id' => NULL,
-                'matiere' => NULL,
-                'longueur_barre_mm' => NULL,
-                'section_largeur_mm' => NULL,
-                'section_hauteur_mm' => NULL,
-                'epaisseur_paroi_mm' => NULL,
-                'poids_lineaire_kg_m' => '0.427',
-                'poids_lineaire_lbs_ft' => '0.287',
-                'moment_inertie_cm4' => NULL,
-                'perimetre_mm' => '87.66',
-                'image_coupe' => NULL,
-                'est_disponible' => 1,
-                'created_at' => '2026-09-15 19:36:01',
-                'updated_at' => '2026-09-15 19:36:01',
-            ),
-            23 => 
-            array (
                 'id' => 37,
                 'reference' => 'F-014',
                 'designation' => 'LAME DE REMPLISSAGE BAS DE PORTAIL',
@@ -547,7 +525,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-15 20:35:15',
                 'updated_at' => '2026-09-15 20:35:15',
             ),
-            24 => 
+            23 => 
             array (
                 'id' => 38,
                 'reference' => 'ALN-1097',
@@ -569,7 +547,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-15 20:36:00',
                 'updated_at' => '2026-09-15 20:36:00',
             ),
-            25 => 
+            24 => 
             array (
                 'id' => 39,
                 'reference' => 'ALN-1057',
@@ -591,7 +569,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-15 20:36:40',
                 'updated_at' => '2026-09-15 20:36:40',
             ),
-            26 => 
+            25 => 
             array (
                 'id' => 40,
                 'reference' => 'ALN-1244',
@@ -613,7 +591,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-15 20:37:19',
                 'updated_at' => '2026-09-15 20:37:19',
             ),
-            27 => 
+            26 => 
             array (
                 'id' => 41,
                 'reference' => 'ALN-1099',
@@ -635,7 +613,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-15 20:38:59',
                 'updated_at' => '2026-09-15 20:38:59',
             ),
-            28 => 
+            27 => 
             array (
                 'id' => 42,
                 'reference' => 'ALN-1098',
@@ -657,7 +635,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-15 20:39:40',
                 'updated_at' => '2026-09-15 20:39:40',
             ),
-            29 => 
+            28 => 
             array (
                 'id' => 43,
                 'reference' => 'ALN-988',
@@ -679,7 +657,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-15 20:44:13',
                 'updated_at' => '2026-09-15 20:44:13',
             ),
-            30 => 
+            29 => 
             array (
                 'id' => 44,
                 'reference' => 'ALN-1097',
@@ -701,7 +679,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-15 20:44:49',
                 'updated_at' => '2026-09-15 20:44:49',
             ),
-            31 => 
+            30 => 
             array (
                 'id' => 45,
                 'reference' => 'U-107',
@@ -723,7 +701,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-15 20:45:29',
                 'updated_at' => '2026-09-15 20:45:29',
             ),
-            32 => 
+            31 => 
             array (
                 'id' => 46,
                 'reference' => 'ALN-1247',
@@ -745,7 +723,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-15 20:48:14',
                 'updated_at' => '2026-09-15 20:48:14',
             ),
-            33 => 
+            32 => 
             array (
                 'id' => 47,
                 'reference' => 'U-118',
@@ -767,7 +745,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-15 21:37:53',
                 'updated_at' => '2026-09-15 21:37:53',
             ),
-            34 => 
+            33 => 
             array (
                 'id' => 48,
                 'reference' => 'ALN-1568',
@@ -789,7 +767,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:22:24',
                 'updated_at' => '2026-09-18 18:22:24',
             ),
-            35 => 
+            34 => 
             array (
                 'id' => 49,
                 'reference' => 'ALN-1569',
@@ -811,7 +789,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:23:16',
                 'updated_at' => '2026-09-18 18:23:16',
             ),
-            36 => 
+            35 => 
             array (
                 'id' => 50,
                 'reference' => 'ALN-1570',
@@ -833,7 +811,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:24:24',
                 'updated_at' => '2026-09-18 18:24:24',
             ),
-            37 => 
+            36 => 
             array (
                 'id' => 51,
                 'reference' => 'ALN-1571',
@@ -855,7 +833,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:25:35',
                 'updated_at' => '2026-09-18 18:25:35',
             ),
-            38 => 
+            37 => 
             array (
                 'id' => 52,
                 'reference' => 'ALN-1572',
@@ -877,7 +855,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:26:47',
                 'updated_at' => '2026-09-18 18:26:47',
             ),
-            39 => 
+            38 => 
             array (
                 'id' => 53,
                 'reference' => 'ALN-988',
@@ -899,7 +877,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:30:36',
                 'updated_at' => '2026-09-18 18:30:36',
             ),
-            40 => 
+            39 => 
             array (
                 'id' => 54,
                 'reference' => 'ALN-183',
@@ -921,7 +899,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:32:19',
                 'updated_at' => '2026-09-18 18:32:19',
             ),
-            41 => 
+            40 => 
             array (
                 'id' => 55,
                 'reference' => 'T-086',
@@ -943,7 +921,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:33:31',
                 'updated_at' => '2026-09-18 18:33:31',
             ),
-            42 => 
+            41 => 
             array (
                 'id' => 56,
                 'reference' => 'ALN-170',
@@ -965,7 +943,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:34:20',
                 'updated_at' => '2026-09-18 18:34:20',
             ),
-            43 => 
+            42 => 
             array (
                 'id' => 57,
                 'reference' => 'T-264',
@@ -987,7 +965,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:48:27',
                 'updated_at' => '2026-09-18 18:48:27',
             ),
-            44 => 
+            43 => 
             array (
                 'id' => 58,
                 'reference' => 'ALN-1496',
@@ -1009,7 +987,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:49:46',
                 'updated_at' => '2026-09-18 18:49:46',
             ),
-            45 => 
+            44 => 
             array (
                 'id' => 59,
                 'reference' => 'ALN-1583',
@@ -1031,7 +1009,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:52:22',
                 'updated_at' => '2026-09-18 18:52:22',
             ),
-            46 => 
+            45 => 
             array (
                 'id' => 60,
                 'reference' => 'ALN-1534',
@@ -1053,7 +1031,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:53:40',
                 'updated_at' => '2026-09-18 18:53:40',
             ),
-            47 => 
+            46 => 
             array (
                 'id' => 61,
                 'reference' => 'ALN-1535',
@@ -1075,7 +1053,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:54:23',
                 'updated_at' => '2026-09-18 18:54:23',
             ),
-            48 => 
+            47 => 
             array (
                 'id' => 62,
                 'reference' => 'ALN-1536',
@@ -1097,7 +1075,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:55:12',
                 'updated_at' => '2026-09-18 18:55:19',
             ),
-            49 => 
+            48 => 
             array (
                 'id' => 63,
                 'reference' => 'ALN-1240',
@@ -1119,7 +1097,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:57:56',
                 'updated_at' => '2026-09-18 19:15:55',
             ),
-            50 => 
+            49 => 
             array (
                 'id' => 64,
                 'reference' => 'ALN-1241',
@@ -1141,7 +1119,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:58:52',
                 'updated_at' => '2026-09-18 19:19:28',
             ),
-            51 => 
+            50 => 
             array (
                 'id' => 65,
                 'reference' => 'ALN-1267',
@@ -1163,7 +1141,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 19:01:27',
                 'updated_at' => '2026-09-18 19:06:58',
             ),
-            52 => 
+            51 => 
             array (
                 'id' => 66,
                 'reference' => 'ALN-1246',
@@ -1185,7 +1163,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 19:20:15',
                 'updated_at' => '2026-09-18 19:20:15',
             ),
-            53 => 
+            52 => 
             array (
                 'id' => 67,
                 'reference' => 'ALN-1242',
@@ -1207,7 +1185,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 19:22:13',
                 'updated_at' => '2026-09-18 19:22:13',
             ),
-            54 => 
+            53 => 
             array (
                 'id' => 68,
                 'reference' => 'ALN-1248',
@@ -1229,7 +1207,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 19:23:13',
                 'updated_at' => '2026-09-18 19:23:13',
             ),
-            55 => 
+            54 => 
             array (
                 'id' => 69,
                 'reference' => 'ALN-1247',
@@ -1251,7 +1229,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 19:24:01',
                 'updated_at' => '2026-09-18 19:24:01',
             ),
-            56 => 
+            55 => 
             array (
                 'id' => 70,
                 'reference' => 'ALN-1249',
@@ -1273,7 +1251,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 19:25:24',
                 'updated_at' => '2026-09-18 19:25:24',
             ),
-            57 => 
+            56 => 
             array (
                 'id' => 71,
                 'reference' => 'ALN-1253',
@@ -1295,7 +1273,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 19:26:31',
                 'updated_at' => '2026-09-18 19:26:31',
             ),
-            58 => 
+            57 => 
             array (
                 'id' => 72,
                 'reference' => 'ALN-1254',
@@ -1317,7 +1295,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-18 19:27:29',
                 'updated_at' => '2026-09-18 19:27:29',
             ),
-            59 => 
+            58 => 
             array (
                 'id' => 73,
                 'reference' => 'SVR-002',
@@ -1339,7 +1317,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 16:40:25',
                 'updated_at' => '2026-09-21 16:40:25',
             ),
-            60 => 
+            59 => 
             array (
                 'id' => 74,
                 'reference' => 'SVR-003',
@@ -1361,7 +1339,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 16:41:47',
                 'updated_at' => '2026-09-21 16:41:47',
             ),
-            61 => 
+            60 => 
             array (
                 'id' => 75,
                 'reference' => 'OJL-3005',
@@ -1383,7 +1361,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 16:42:45',
                 'updated_at' => '2026-09-21 16:42:45',
             ),
-            62 => 
+            61 => 
             array (
                 'id' => 76,
                 'reference' => 'OD-9012',
@@ -1405,7 +1383,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 16:43:39',
                 'updated_at' => '2026-09-21 16:43:39',
             ),
-            63 => 
+            62 => 
             array (
                 'id' => 77,
                 'reference' => 'STC-001',
@@ -1427,7 +1405,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 16:44:21',
                 'updated_at' => '2026-09-21 16:44:21',
             ),
-            64 => 
+            63 => 
             array (
                 'id' => 78,
                 'reference' => 'SVR-001',
@@ -1449,7 +1427,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 16:47:30',
                 'updated_at' => '2026-09-21 16:47:30',
             ),
-            65 => 
+            64 => 
             array (
                 'id' => 79,
                 'reference' => 'ALN-1453',
@@ -1471,7 +1449,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 16:52:46',
                 'updated_at' => '2026-09-21 16:52:46',
             ),
-            66 => 
+            65 => 
             array (
                 'id' => 80,
                 'reference' => 'ALN-1454',
@@ -1493,7 +1471,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 16:55:44',
                 'updated_at' => '2026-09-21 16:56:15',
             ),
-            67 => 
+            66 => 
             array (
                 'id' => 81,
                 'reference' => 'ALN-1455',
@@ -1515,7 +1493,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 16:58:11',
                 'updated_at' => '2026-09-21 16:58:11',
             ),
-            68 => 
+            67 => 
             array (
                 'id' => 82,
                 'reference' => 'ALN-1495',
@@ -1537,7 +1515,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 17:03:14',
                 'updated_at' => '2026-09-21 17:03:35',
             ),
-            69 => 
+            68 => 
             array (
                 'id' => 83,
                 'reference' => 'ALN-1576',
@@ -1559,7 +1537,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 17:05:19',
                 'updated_at' => '2026-09-21 17:05:19',
             ),
-            70 => 
+            69 => 
             array (
                 'id' => 84,
                 'reference' => 'ALN-1577',
@@ -1581,7 +1559,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 17:08:52',
                 'updated_at' => '2026-09-21 17:08:52',
             ),
-            71 => 
+            70 => 
             array (
                 'id' => 85,
                 'reference' => 'ALN-1570',
@@ -1603,7 +1581,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 19:40:03',
                 'updated_at' => '2026-09-21 19:40:03',
             ),
-            72 => 
+            71 => 
             array (
                 'id' => 86,
                 'reference' => 'ALN-1580',
@@ -1625,7 +1603,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 19:41:25',
                 'updated_at' => '2026-09-21 19:41:25',
             ),
-            73 => 
+            72 => 
             array (
                 'id' => 87,
                 'reference' => 'P-136',
@@ -1647,7 +1625,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 19:41:58',
                 'updated_at' => '2026-09-21 19:41:58',
             ),
-            74 => 
+            73 => 
             array (
                 'id' => 88,
                 'reference' => 'ALN-1581',
@@ -1669,7 +1647,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 19:42:48',
                 'updated_at' => '2026-09-21 19:42:48',
             ),
-            75 => 
+            74 => 
             array (
                 'id' => 89,
                 'reference' => 'STOA071',
@@ -1691,7 +1669,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 19:45:20',
                 'updated_at' => '2026-09-21 19:45:20',
             ),
-            76 => 
+            75 => 
             array (
                 'id' => 91,
                 'reference' => 'ALN-1463',
@@ -1713,7 +1691,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 19:48:59',
                 'updated_at' => '2026-09-21 19:48:59',
             ),
-            77 => 
+            76 => 
             array (
                 'id' => 92,
                 'reference' => 'ALN-1563',
@@ -1735,7 +1713,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 19:49:50',
                 'updated_at' => '2026-09-21 19:49:50',
             ),
-            78 => 
+            77 => 
             array (
                 'id' => 94,
                 'reference' => 'ALN-1573',
@@ -1757,7 +1735,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 19:51:57',
                 'updated_at' => '2026-09-21 19:51:57',
             ),
-            79 => 
+            78 => 
             array (
                 'id' => 95,
                 'reference' => 'ALN-1574',
@@ -1779,7 +1757,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 19:53:17',
                 'updated_at' => '2026-09-21 19:53:17',
             ),
-            80 => 
+            79 => 
             array (
                 'id' => 96,
                 'reference' => 'ALN-1575',
@@ -1801,7 +1779,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 19:54:24',
                 'updated_at' => '2026-09-21 19:54:24',
             ),
-            81 => 
+            80 => 
             array (
                 'id' => 97,
                 'reference' => 'ALN-363',
@@ -1823,7 +1801,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 17:28:15',
                 'updated_at' => '2026-09-22 17:28:15',
             ),
-            82 => 
+            81 => 
             array (
                 'id' => 98,
                 'reference' => 'ALN-1012',
@@ -1845,7 +1823,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 17:29:14',
                 'updated_at' => '2026-09-22 17:29:14',
             ),
-            83 => 
+            82 => 
             array (
                 'id' => 99,
                 'reference' => 'S-343',
@@ -1867,7 +1845,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 17:29:43',
                 'updated_at' => '2026-09-22 17:29:43',
             ),
-            84 => 
+            83 => 
             array (
                 'id' => 100,
                 'reference' => 'S-344',
@@ -1889,7 +1867,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 17:30:18',
                 'updated_at' => '2026-09-22 17:30:18',
             ),
-            85 => 
+            84 => 
             array (
                 'id' => 101,
                 'reference' => 'ALN-511',
@@ -1911,7 +1889,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 17:30:51',
                 'updated_at' => '2026-09-22 17:30:51',
             ),
-            86 => 
+            85 => 
             array (
                 'id' => 102,
                 'reference' => 'ALN-1600',
@@ -1933,7 +1911,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 17:32:12',
                 'updated_at' => '2026-09-22 17:32:12',
             ),
-            87 => 
+            86 => 
             array (
                 'id' => 103,
                 'reference' => 'T-116',
@@ -1955,7 +1933,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 17:33:33',
                 'updated_at' => '2026-09-22 17:33:33',
             ),
-            88 => 
+            87 => 
             array (
                 'id' => 104,
                 'reference' => 'T-050',
@@ -1977,7 +1955,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 17:34:28',
                 'updated_at' => '2026-09-22 17:34:28',
             ),
-            89 => 
+            88 => 
             array (
                 'id' => 105,
                 'reference' => 'T-021',
@@ -1999,7 +1977,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 17:35:06',
                 'updated_at' => '2026-09-22 17:35:06',
             ),
-            90 => 
+            89 => 
             array (
                 'id' => 106,
                 'reference' => 'T-A-007',
@@ -2021,7 +1999,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 17:35:47',
                 'updated_at' => '2026-09-22 17:35:47',
             ),
-            91 => 
+            90 => 
             array (
                 'id' => 107,
                 'reference' => 'T-252',
@@ -2043,7 +2021,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 17:36:24',
                 'updated_at' => '2026-09-22 17:36:24',
             ),
-            92 => 
+            91 => 
             array (
                 'id' => 108,
                 'reference' => 'T-222',
@@ -2065,7 +2043,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 17:38:02',
                 'updated_at' => '2026-09-22 17:38:02',
             ),
-            93 => 
+            92 => 
             array (
                 'id' => 109,
                 'reference' => 'T-198',
@@ -2087,7 +2065,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:45:55',
                 'updated_at' => '2026-09-22 19:45:55',
             ),
-            94 => 
+            93 => 
             array (
                 'id' => 110,
                 'reference' => 'T-231',
@@ -2109,7 +2087,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:49:28',
                 'updated_at' => '2026-09-22 19:49:28',
             ),
-            95 => 
+            94 => 
             array (
                 'id' => 111,
                 'reference' => 'T-240',
@@ -2131,7 +2109,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:50:16',
                 'updated_at' => '2026-09-22 19:50:16',
             ),
-            96 => 
+            95 => 
             array (
                 'id' => 112,
                 'reference' => 'T-272',
@@ -2153,7 +2131,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:51:33',
                 'updated_at' => '2026-09-22 19:51:33',
             ),
-            97 => 
+            96 => 
             array (
                 'id' => 113,
                 'reference' => 'T-264',
@@ -2175,7 +2153,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:52:15',
                 'updated_at' => '2026-09-22 19:52:15',
             ),
-            98 => 
+            97 => 
             array (
                 'id' => 114,
                 'reference' => 'T-257',
@@ -2197,7 +2175,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:52:50',
                 'updated_at' => '2026-09-22 19:52:50',
             ),
-            99 => 
+            98 => 
             array (
                 'id' => 115,
                 'reference' => 'T-224',
@@ -2219,7 +2197,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:53:58',
                 'updated_at' => '2026-09-22 19:53:58',
             ),
-            100 => 
+            99 => 
             array (
                 'id' => 116,
                 'reference' => 'T-256',
@@ -2241,7 +2219,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:54:49',
                 'updated_at' => '2026-09-22 19:54:49',
             ),
-            101 => 
+            100 => 
             array (
                 'id' => 117,
                 'reference' => 'TC-097',
@@ -2263,7 +2241,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:55:42',
                 'updated_at' => '2026-09-22 19:55:42',
             ),
-            102 => 
+            101 => 
             array (
                 'id' => 118,
                 'reference' => 'A-009',
@@ -2285,7 +2263,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:56:48',
                 'updated_at' => '2026-09-22 19:56:48',
             ),
-            103 => 
+            102 => 
             array (
                 'id' => 119,
                 'reference' => 'A-015',
@@ -2307,7 +2285,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:57:21',
                 'updated_at' => '2026-09-22 19:57:21',
             ),
-            104 => 
+            103 => 
             array (
                 'id' => 120,
                 'reference' => 'A-018',
@@ -2329,7 +2307,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:57:55',
                 'updated_at' => '2026-09-22 19:57:55',
             ),
-            105 => 
+            104 => 
             array (
                 'id' => 121,
                 'reference' => 'A-027',
@@ -2351,7 +2329,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:58:30',
                 'updated_at' => '2026-09-22 19:58:30',
             ),
-            106 => 
+            105 => 
             array (
                 'id' => 122,
                 'reference' => 'ALN-1245',
@@ -2373,7 +2351,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:59:24',
                 'updated_at' => '2026-09-22 19:59:24',
             ),
-            107 => 
+            106 => 
             array (
                 'id' => 123,
                 'reference' => 'ALN-1243',
@@ -2395,7 +2373,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:00:16',
                 'updated_at' => '2026-09-22 20:00:16',
             ),
-            108 => 
+            107 => 
             array (
                 'id' => 124,
                 'reference' => 'A-085',
@@ -2417,7 +2395,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:01:51',
                 'updated_at' => '2026-09-22 20:01:51',
             ),
-            109 => 
+            108 => 
             array (
                 'id' => 125,
                 'reference' => 'RECTO256',
@@ -2439,7 +2417,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:06:53',
                 'updated_at' => '2026-09-22 20:06:53',
             ),
-            110 => 
+            109 => 
             array (
                 'id' => 126,
                 'reference' => 'ALN1245',
@@ -2461,7 +2439,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:08:15',
                 'updated_at' => '2026-09-22 20:08:15',
             ),
-            111 => 
+            110 => 
             array (
                 'id' => 127,
                 'reference' => 'ANGU0099',
@@ -2483,7 +2461,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:09:15',
                 'updated_at' => '2026-09-22 20:10:23',
             ),
-            112 => 
+            111 => 
             array (
                 'id' => 128,
                 'reference' => 'ANGUO0096',
@@ -2505,7 +2483,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:10:06',
                 'updated_at' => '2026-09-22 20:10:06',
             ),
-            113 => 
+            112 => 
             array (
                 'id' => 129,
                 'reference' => 'U-117',
@@ -2527,7 +2505,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:23:16',
                 'updated_at' => '2026-09-22 20:23:16',
             ),
-            114 => 
+            113 => 
             array (
                 'id' => 130,
                 'reference' => 'U-119',
@@ -2549,7 +2527,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:24:59',
                 'updated_at' => '2026-09-22 20:24:59',
             ),
-            115 => 
+            114 => 
             array (
                 'id' => 131,
                 'reference' => 'U-085',
@@ -2571,7 +2549,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:25:47',
                 'updated_at' => '2026-09-22 20:25:47',
             ),
-            116 => 
+            115 => 
             array (
                 'id' => 132,
                 'reference' => 'U-121',
@@ -2593,7 +2571,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:27:23',
                 'updated_at' => '2026-09-22 20:27:23',
             ),
-            117 => 
+            116 => 
             array (
                 'id' => 133,
                 'reference' => 'T-269',
@@ -2615,7 +2593,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:28:05',
                 'updated_at' => '2026-09-22 20:28:05',
             ),
-            118 => 
+            117 => 
             array (
                 'id' => 134,
                 'reference' => 'OF-511',
@@ -2637,7 +2615,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:29:43',
                 'updated_at' => '2026-09-22 20:29:43',
             ),
-            119 => 
+            118 => 
             array (
                 'id' => 135,
                 'reference' => 'ALN-1658',
@@ -2659,7 +2637,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:31:09',
                 'updated_at' => '2026-09-22 20:31:09',
             ),
-            120 => 
+            119 => 
             array (
                 'id' => 136,
                 'reference' => 'ALN-1659',
@@ -2680,6 +2658,1568 @@ class ComposantsTableSeeder extends Seeder
                 'est_disponible' => 1,
                 'created_at' => '2026-09-22 20:31:49',
                 'updated_at' => '2026-09-22 20:31:49',
+            ),
+            120 => 
+            array (
+                'id' => 137,
+                'reference' => 'SBP-001',
+                'designation' => 'PORTE COULISSANTE',
+                'slug' => 'sbp-001-porte-coulissante',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '1.100',
+                'poids_lineaire_lbs_ft' => '0.739',
+                'moment_inertie_cm4' => '9.659',
+                'perimetre_mm' => '245.30',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 19:21:31',
+                'updated_at' => '2026-09-23 19:21:31',
+            ),
+            121 => 
+            array (
+                'id' => 138,
+                'reference' => 'SBP-004',
+                'designation' => 'PORTE COULISSANTE',
+                'slug' => 'sbp-004-porte-coulissante',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '1.089',
+                'poids_lineaire_lbs_ft' => '0.732',
+                'moment_inertie_cm4' => '9.679',
+                'perimetre_mm' => '245.84',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 19:22:21',
+                'updated_at' => '2026-09-23 19:22:21',
+            ),
+            122 => 
+            array (
+                'id' => 139,
+                'reference' => 'SBP-003',
+                'designation' => 'PORTE COULISSANTE',
+                'slug' => 'sbp-003-porte-coulissante',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.293',
+                'poids_lineaire_lbs_ft' => '0.197',
+                'moment_inertie_cm4' => '7.121',
+                'perimetre_mm' => '108.85',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 19:23:16',
+                'updated_at' => '2026-09-23 19:23:16',
+            ),
+            123 => 
+            array (
+                'id' => 140,
+                'reference' => 'STC-002',
+                'designation' => 'SUPPORT CREMAILLERE',
+                'slug' => 'stc-002-support-cremaillere',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.281',
+                'poids_lineaire_lbs_ft' => '0.189',
+                'moment_inertie_cm4' => '4.358',
+                'perimetre_mm' => '110.70',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 19:24:32',
+                'updated_at' => '2026-09-23 19:24:32',
+            ),
+            124 => 
+            array (
+                'id' => 141,
+                'reference' => 'SPB-005',
+                'designation' => 'SUPPORT CREMAILLERE',
+                'slug' => 'spb-005-support-cremaillere',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.273',
+                'poids_lineaire_lbs_ft' => '0.183',
+                'moment_inertie_cm4' => '6.159',
+                'perimetre_mm' => '156.45',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 19:32:09',
+                'updated_at' => '2026-09-23 19:32:09',
+            ),
+            125 => 
+            array (
+                'id' => 142,
+                'reference' => 'SBP-002',
+                'designation' => 'SUPPORT CREMAILLERE',
+                'slug' => 'sbp-002-support-cremaillere',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.958',
+                'poids_lineaire_lbs_ft' => '0.644',
+                'moment_inertie_cm4' => '18.110',
+                'perimetre_mm' => '459.97',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 19:33:27',
+                'updated_at' => '2026-09-23 19:33:27',
+            ),
+            126 => 
+            array (
+                'id' => 143,
+                'reference' => 'STC-3001',
+                'designation' => 'FENETRE A TREILLIS',
+                'slug' => 'stc-3001-fenetre-a-treillis',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.922',
+                'poids_lineaire_lbs_ft' => '0.620',
+                'moment_inertie_cm4' => '10.609',
+                'perimetre_mm' => '269.48',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 19:34:38',
+                'updated_at' => '2026-09-23 19:34:38',
+            ),
+            127 => 
+            array (
+                'id' => 144,
+                'reference' => 'STC-3002',
+                'designation' => 'FENETRE A TREILLIS',
+                'slug' => 'stc-3002-fenetre-a-treillis',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.903',
+                'poids_lineaire_lbs_ft' => '0.607',
+                'moment_inertie_cm4' => '10.078',
+                'perimetre_mm' => '255.99',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 19:36:19',
+                'updated_at' => '2026-09-23 19:36:19',
+            ),
+            128 => 
+            array (
+                'id' => 145,
+                'reference' => 'STC-3015',
+                'designation' => 'FENETRE A TREILLIS',
+                'slug' => 'stc-3015-fenetre-a-treillis',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.158',
+                'poids_lineaire_lbs_ft' => '0.106',
+                'moment_inertie_cm4' => '3.049',
+                'perimetre_mm' => '77.45',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 19:36:53',
+                'updated_at' => '2026-09-23 19:36:53',
+            ),
+            129 => 
+            array (
+                'id' => 146,
+                'reference' => 'STC-3003',
+                'designation' => 'FENETRE A TREILLIS',
+                'slug' => 'stc-3003-fenetre-a-treillis',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.798',
+                'poids_lineaire_lbs_ft' => '0.536',
+                'moment_inertie_cm4' => '15.465',
+                'perimetre_mm' => '392.82',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 19:37:49',
+                'updated_at' => '2026-09-23 19:37:49',
+            ),
+            130 => 
+            array (
+                'id' => 147,
+                'reference' => 'STC-3004',
+                'designation' => 'FENETRE A TREILLIS',
+                'slug' => 'stc-3004-fenetre-a-treillis',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.417',
+                'poids_lineaire_lbs_ft' => '0.280',
+                'moment_inertie_cm4' => '7.833',
+                'perimetre_mm' => '198.95',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 19:38:28',
+                'updated_at' => '2026-09-23 19:38:28',
+            ),
+            131 => 
+            array (
+                'id' => 148,
+                'reference' => 'STC-6011',
+                'designation' => 'FENETRE A TREILLIS',
+                'slug' => 'stc-6011-fenetre-a-treillis',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '1.458',
+                'poids_lineaire_lbs_ft' => '0.980',
+                'moment_inertie_cm4' => '5.507',
+                'perimetre_mm' => '139.89',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 19:40:33',
+                'updated_at' => '2026-09-23 19:40:33',
+            ),
+            132 => 
+            array (
+                'id' => 149,
+                'reference' => 'STC-3005',
+                'designation' => 'FENETRE A TREILLIS',
+                'slug' => 'stc-3005-fenetre-a-treillis',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '1.038',
+                'poids_lineaire_lbs_ft' => '0.698',
+                'moment_inertie_cm4' => '7.512',
+                'perimetre_mm' => '191.04',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:13:59',
+                'updated_at' => '2026-09-23 20:14:03',
+            ),
+            133 => 
+            array (
+                'id' => 150,
+                'reference' => 'STC-3009',
+                'designation' => 'FENETRE A TREILLIS',
+                'slug' => 'stc-3009-fenetre-a-treillis',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '1.129',
+                'poids_lineaire_lbs_ft' => '0.759',
+                'moment_inertie_cm4' => '9.944',
+                'perimetre_mm' => '252.57',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:15:46',
+                'updated_at' => '2026-09-23 20:15:46',
+            ),
+            134 => 
+            array (
+                'id' => 151,
+                'reference' => 'STC-304',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'stc-304-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.494',
+                'poids_lineaire_lbs_ft' => '0.332',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '236.87',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:18:46',
+                'updated_at' => '2026-09-23 20:20:04',
+            ),
+            135 => 
+            array (
+                'id' => 152,
+                'reference' => 'STC-303',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'stc-303-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.868',
+                'poids_lineaire_lbs_ft' => '0.583',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '426.12',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:19:18',
+                'updated_at' => '2026-09-23 20:20:08',
+            ),
+            136 => 
+            array (
+                'id' => 153,
+                'reference' => 'OD-9014',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'od-9014-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.180',
+                'poids_lineaire_lbs_ft' => '0.121',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '91.46',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:19:48',
+                'updated_at' => '2026-09-23 20:20:12',
+            ),
+            137 => 
+            array (
+                'id' => 154,
+                'reference' => 'STOJR-001',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'stojr-001-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '1.082',
+                'poids_lineaire_lbs_ft' => '0.727',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '278.01',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:20:57',
+                'updated_at' => '2026-09-23 20:20:57',
+            ),
+            138 => 
+            array (
+                'id' => 155,
+                'reference' => 'STOJR-002',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'stojr-002-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.984',
+                'poids_lineaire_lbs_ft' => '0.661',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '292.15',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:21:24',
+                'updated_at' => '2026-09-23 20:21:24',
+            ),
+            139 => 
+            array (
+                'id' => 156,
+                'reference' => 'STOJR-004',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'stojr-004-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.501',
+                'poids_lineaire_lbs_ft' => '0.337',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '254.72',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:26:31',
+                'updated_at' => '2026-09-23 20:26:38',
+            ),
+            140 => 
+            array (
+                'id' => 157,
+                'reference' => 'STOJR-005',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'stojr-005-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.531',
+                'poids_lineaire_lbs_ft' => '0.357',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '154.80',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:27:16',
+                'updated_at' => '2026-09-23 20:27:16',
+            ),
+            141 => 
+            array (
+                'id' => 158,
+                'reference' => 'STOJR-003',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'stojr-003-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.766',
+                'poids_lineaire_lbs_ft' => '0.515',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '390.69',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:28:08',
+                'updated_at' => '2026-09-23 20:28:08',
+            ),
+            142 => 
+            array (
+                'id' => 159,
+                'reference' => 'OD-9015',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'od-9015-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.096',
+                'poids_lineaire_lbs_ft' => '0.065',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '73.05',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:28:58',
+                'updated_at' => '2026-09-23 20:28:58',
+            ),
+            143 => 
+            array (
+                'id' => 160,
+                'reference' => 'STOJS-009',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'stojs-009-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.245',
+                'poids_lineaire_lbs_ft' => '0.165',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '106.17',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:29:27',
+                'updated_at' => '2026-09-23 20:29:27',
+            ),
+            144 => 
+            array (
+                'id' => 161,
+                'reference' => 'STOJS-406',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'stojs-406-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.862',
+                'poids_lineaire_lbs_ft' => '0.579',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '203.13',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:30:28',
+                'updated_at' => '2026-09-23 20:30:28',
+            ),
+            145 => 
+            array (
+                'id' => 162,
+                'reference' => 'STOJS-408',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'stojs-408-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.230',
+                'poids_lineaire_lbs_ft' => '0.155',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '136.93',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:30:54',
+                'updated_at' => '2026-09-23 20:30:54',
+            ),
+            146 => 
+            array (
+                'id' => 163,
+                'reference' => 'STOJS-401',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'stojs-401-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.774',
+                'poids_lineaire_lbs_ft' => '0.520',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '340.97',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:31:38',
+                'updated_at' => '2026-09-23 20:31:38',
+            ),
+            147 => 
+            array (
+                'id' => 164,
+                'reference' => 'STOJS-407',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'stojs-407-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.260',
+                'poids_lineaire_lbs_ft' => '0.175',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '74.22',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:32:08',
+                'updated_at' => '2026-09-23 20:32:08',
+            ),
+            148 => 
+            array (
+                'id' => 165,
+                'reference' => 'STOJS-402',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'stojs-402-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.921',
+                'poids_lineaire_lbs_ft' => '0.619',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '255.96',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:32:52',
+                'updated_at' => '2026-09-23 20:32:52',
+            ),
+            149 => 
+            array (
+                'id' => 166,
+                'reference' => 'STOJS-411',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'stojs-411-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.466',
+                'poids_lineaire_lbs_ft' => '0.313',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '168.33',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:33:16',
+                'updated_at' => '2026-09-23 20:33:16',
+            ),
+            150 => 
+            array (
+                'id' => 167,
+                'reference' => 'STOJS-403',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'stojs-403-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.880',
+                'poids_lineaire_lbs_ft' => '0.591',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '250.25',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:34:30',
+                'updated_at' => '2026-09-23 20:34:30',
+            ),
+            151 => 
+            array (
+                'id' => 168,
+                'reference' => 'STOJS-404',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'stojs-404-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.377',
+                'poids_lineaire_lbs_ft' => '0.253',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '212.73',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:34:59',
+                'updated_at' => '2026-09-23 20:34:59',
+            ),
+            152 => 
+            array (
+                'id' => 169,
+                'reference' => 'STOA-071',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'stoa-071-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.418',
+                'poids_lineaire_lbs_ft' => '0.281',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '93.29',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:35:34',
+                'updated_at' => '2026-09-23 20:35:34',
+            ),
+            153 => 
+            array (
+                'id' => 170,
+                'reference' => 'STOJS-415',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'stojs-415-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.381',
+                'poids_lineaire_lbs_ft' => '0.256',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '188.13',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:35:53',
+                'updated_at' => '2026-09-23 20:35:53',
+            ),
+            154 => 
+            array (
+                'id' => 171,
+                'reference' => 'OC-6002',
+                'designation' => 'PORTE COULISSANTE',
+                'slug' => 'oc-6002-porte-coulissante',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '1.403',
+                'poids_lineaire_lbs_ft' => '0.943',
+                'moment_inertie_cm4' => '20.041',
+                'perimetre_mm' => '509.04',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:36:33',
+                'updated_at' => '2026-09-23 20:36:51',
+            ),
+            155 => 
+            array (
+                'id' => 172,
+                'reference' => 'OC-6007',
+                'designation' => 'PORTE COULISSANTE',
+                'slug' => 'oc-6007-porte-coulissante',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.863',
+                'poids_lineaire_lbs_ft' => '0.580',
+                'moment_inertie_cm4' => '12.214',
+                'perimetre_mm' => '310.24',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:37:50',
+                'updated_at' => '2026-09-23 20:37:50',
+            ),
+            156 => 
+            array (
+                'id' => 173,
+                'reference' => 'OC-6003',
+                'designation' => 'PORTE COULISSANTE',
+                'slug' => 'oc-6003-porte-coulissante',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '2.002',
+                'poids_lineaire_lbs_ft' => '1.345',
+                'moment_inertie_cm4' => '28.687',
+                'perimetre_mm' => '728.64',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:38:42',
+                'updated_at' => '2026-09-23 20:38:42',
+            ),
+            157 => 
+            array (
+                'id' => 174,
+                'reference' => 'OC-6008',
+                'designation' => 'PORTE COULISSANTE',
+                'slug' => 'oc-6008-porte-coulissante',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '1.282',
+                'poids_lineaire_lbs_ft' => '0.862',
+                'moment_inertie_cm4' => '16.381',
+                'perimetre_mm' => '416.08',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:39:31',
+                'updated_at' => '2026-09-23 20:39:31',
+            ),
+            158 => 
+            array (
+                'id' => 175,
+                'reference' => 'OC-6006',
+                'designation' => 'PORTE COULISSANTE',
+                'slug' => 'oc-6006-porte-coulissante',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.166',
+                'poids_lineaire_lbs_ft' => '0.112',
+                'moment_inertie_cm4' => '2.428',
+                'perimetre_mm' => '61.67',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:40:07',
+                'updated_at' => '2026-09-23 20:40:14',
+            ),
+            159 => 
+            array (
+                'id' => 176,
+                'reference' => 'OC-6009',
+                'designation' => 'PORTE COULISSANTE',
+                'slug' => 'oc-6009-porte-coulissante',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.996',
+                'poids_lineaire_lbs_ft' => '0.669',
+                'moment_inertie_cm4' => '14.783',
+                'perimetre_mm' => '375.45',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:41:09',
+                'updated_at' => '2026-09-23 20:41:09',
+            ),
+            160 => 
+            array (
+                'id' => 177,
+                'reference' => 'OC-6011',
+                'designation' => 'PORTE COULISSANTE',
+                'slug' => 'oc-6011-porte-coulissante',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.947',
+                'poids_lineaire_lbs_ft' => '0.636',
+                'moment_inertie_cm4' => '11.256',
+                'perimetre_mm' => '285.91',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:41:42',
+                'updated_at' => '2026-09-23 20:41:42',
+            ),
+            161 => 
+            array (
+                'id' => 178,
+                'reference' => 'OC-6012',
+                'designation' => 'PORTE COULISSANTE',
+                'slug' => 'oc-6012-porte-coulissante',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.646',
+                'poids_lineaire_lbs_ft' => '0.434',
+                'moment_inertie_cm4' => '8.652',
+                'perimetre_mm' => '219.77',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:42:54',
+                'updated_at' => '2026-09-23 20:42:54',
+            ),
+            162 => 
+            array (
+                'id' => 179,
+                'reference' => 'STC-5021',
+                'designation' => 'PORTES ET FENETRES',
+                'slug' => 'stc-5021-portes-et-fenetres',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.275',
+                'poids_lineaire_lbs_ft' => '0.185',
+                'moment_inertie_cm4' => '7.481',
+                'perimetre_mm' => '190.01',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:43:52',
+                'updated_at' => '2026-09-23 20:43:52',
+            ),
+            163 => 
+            array (
+                'id' => 180,
+                'reference' => 'STC-5023',
+                'designation' => 'PORTES ET FENETRES',
+                'slug' => 'stc-5023-portes-et-fenetres',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.375',
+                'poids_lineaire_lbs_ft' => '0.252',
+                'moment_inertie_cm4' => '7.335',
+                'perimetre_mm' => '186.30',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:44:44',
+                'updated_at' => '2026-09-23 20:44:44',
+            ),
+            164 => 
+            array (
+                'id' => 181,
+                'reference' => 'STC-6013',
+                'designation' => 'PORTES ET FENETRES',
+                'slug' => 'stc-6013-portes-et-fenetres',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '1.390',
+                'poids_lineaire_lbs_ft' => '0.934',
+                'moment_inertie_cm4' => '10.903',
+                'perimetre_mm' => '276.93',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:45:27',
+                'updated_at' => '2026-09-23 20:45:27',
+            ),
+            165 => 
+            array (
+                'id' => 182,
+                'reference' => 'OC-6001',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'oc-6001-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.830',
+                'poids_lineaire_lbs_ft' => '0.558',
+                'moment_inertie_cm4' => '11.538',
+                'perimetre_mm' => '293.07',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:46:16',
+                'updated_at' => '2026-09-23 20:46:16',
+            ),
+            166 => 
+            array (
+                'id' => 183,
+                'reference' => 'OC-6017',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'oc-6017-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.785',
+                'poids_lineaire_lbs_ft' => '0.528',
+                'moment_inertie_cm4' => '8.409',
+                'perimetre_mm' => '213.60',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:46:50',
+                'updated_at' => '2026-09-23 20:46:50',
+            ),
+            167 => 
+            array (
+                'id' => 184,
+                'reference' => 'OF-5001',
+                'designation' => 'FENETRE OSCILLO-BATTANTE',
+                'slug' => 'of-5001-fenetre-oscillo-battante',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.962',
+                'poids_lineaire_lbs_ft' => '0.646',
+                'moment_inertie_cm4' => '12.481',
+                'perimetre_mm' => '317.03',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:49:34',
+                'updated_at' => '2026-09-23 20:49:34',
+            ),
+            168 => 
+            array (
+                'id' => 185,
+                'reference' => 'OF-5002',
+                'designation' => 'FENETRE OSCILLO-BATTANTE',
+                'slug' => 'of-5002-fenetre-oscillo-battante',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.932',
+                'poids_lineaire_lbs_ft' => '0.626',
+                'moment_inertie_cm4' => '13.744',
+                'perimetre_mm' => '349.09',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:50:33',
+                'updated_at' => '2026-09-23 20:50:33',
+            ),
+            169 => 
+            array (
+                'id' => 186,
+                'reference' => 'OF-5004',
+                'designation' => 'FENETRE OSCILLO-BATTANTE',
+                'slug' => 'of-5004-fenetre-oscillo-battante',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '1.117',
+                'poids_lineaire_lbs_ft' => '0.751',
+                'moment_inertie_cm4' => '14.492',
+                'perimetre_mm' => '368.09',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:51:13',
+                'updated_at' => '2026-09-23 20:51:13',
+            ),
+            170 => 
+            array (
+                'id' => 187,
+                'reference' => 'OF-5006',
+                'designation' => 'FENETRE OSCILLO-BATTANTE',
+                'slug' => 'of-5006-fenetre-oscillo-battante',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '1.354',
+                'poids_lineaire_lbs_ft' => '0.910',
+                'moment_inertie_cm4' => '16.449',
+                'perimetre_mm' => '417.81',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:52:25',
+                'updated_at' => '2026-09-23 20:52:25',
+            ),
+            171 => 
+            array (
+                'id' => 188,
+                'reference' => 'OF-5005',
+                'designation' => 'FENETRE OSCILLO-BATTANTE',
+                'slug' => 'of-5005-fenetre-oscillo-battante',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '1.393',
+                'poids_lineaire_lbs_ft' => '0.936',
+                'moment_inertie_cm4' => '16.518',
+                'perimetre_mm' => '419.56',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:53:17',
+                'updated_at' => '2026-09-23 20:53:17',
+            ),
+            172 => 
+            array (
+                'id' => 189,
+                'reference' => 'OF-5008',
+                'designation' => 'FENETRE OSCILLO-BATTANTE',
+                'slug' => 'of-5008-fenetre-oscillo-battante',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '1.434',
+                'poids_lineaire_lbs_ft' => '0.964',
+                'moment_inertie_cm4' => '15.808',
+                'perimetre_mm' => '401.52',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:54:10',
+                'updated_at' => '2026-09-23 20:54:10',
+            ),
+            173 => 
+            array (
+                'id' => 190,
+                'reference' => 'OF-5010',
+                'designation' => 'FENETRE OSCILLO-BATTANTE',
+                'slug' => 'of-5010-fenetre-oscillo-battante',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '1.086',
+                'poids_lineaire_lbs_ft' => '0.730',
+                'moment_inertie_cm4' => '13.009',
+                'perimetre_mm' => '330.42',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:54:52',
+                'updated_at' => '2026-09-23 20:54:52',
+            ),
+            174 => 
+            array (
+                'id' => 191,
+                'reference' => 'OF-5009',
+                'designation' => 'FENETRE OSCILLO-BATTANTE',
+                'slug' => 'of-5009-fenetre-oscillo-battante',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '1.390',
+                'poids_lineaire_lbs_ft' => '0.934',
+                'moment_inertie_cm4' => '15.365',
+                'perimetre_mm' => '390.27',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:55:41',
+                'updated_at' => '2026-09-23 20:55:41',
+            ),
+            175 => 
+            array (
+                'id' => 192,
+                'reference' => 'OF-5013',
+                'designation' => 'FENETRE OSCILLO-BATTANTE',
+                'slug' => 'of-5013-fenetre-oscillo-battante',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '1.136',
+                'poids_lineaire_lbs_ft' => '0.763',
+                'moment_inertie_cm4' => '12.723',
+                'perimetre_mm' => '323.17',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:56:54',
+                'updated_at' => '2026-09-23 20:56:54',
+            ),
+            176 => 
+            array (
+                'id' => 193,
+                'reference' => 'OF-5015',
+                'designation' => 'FENETRE OSCILLO-BATTANTE',
+                'slug' => 'of-5015-fenetre-oscillo-battante',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.359',
+                'poids_lineaire_lbs_ft' => '0.241',
+                'moment_inertie_cm4' => '7.033',
+                'perimetre_mm' => '178.64',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:57:30',
+                'updated_at' => '2026-09-23 20:57:30',
+            ),
+            177 => 
+            array (
+                'id' => 194,
+                'reference' => 'OF-5016',
+                'designation' => 'FENETRE OSCILLO-BATTANTE',
+                'slug' => 'of-5016-fenetre-oscillo-battante',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.283',
+                'poids_lineaire_lbs_ft' => '0.190',
+                'moment_inertie_cm4' => '5.857',
+                'perimetre_mm' => '148.77',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:57:59',
+                'updated_at' => '2026-09-23 20:57:59',
+            ),
+            178 => 
+            array (
+                'id' => 195,
+                'reference' => 'OF-5016',
+                'designation' => 'FENETRE OSCILLO-BATTANTE',
+                'slug' => 'of-5016-fenetre-oscillo-battante-1',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.283',
+                'poids_lineaire_lbs_ft' => '0.190',
+                'moment_inertie_cm4' => '5.857',
+                'perimetre_mm' => '148.77',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:58:00',
+                'updated_at' => '2026-09-23 20:58:00',
+            ),
+            179 => 
+            array (
+                'id' => 196,
+                'reference' => 'OF-5020',
+                'designation' => 'FENETRE OSCILLO-BATTANTE',
+                'slug' => 'of-5020-fenetre-oscillo-battante',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.455',
+                'poids_lineaire_lbs_ft' => '0.306',
+                'moment_inertie_cm4' => '9.317',
+                'perimetre_mm' => '236.66',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:58:40',
+                'updated_at' => '2026-09-23 20:58:40',
+            ),
+            180 => 
+            array (
+                'id' => 197,
+                'reference' => 'OF-5017',
+                'designation' => 'FENETRE OSCILLO-BATTANTE',
+                'slug' => 'of-5017-fenetre-oscillo-battante',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.346',
+                'poids_lineaire_lbs_ft' => '0.233',
+                'moment_inertie_cm4' => '6.795',
+                'perimetre_mm' => '172.59',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 20:59:13',
+                'updated_at' => '2026-09-23 20:59:13',
+            ),
+            181 => 
+            array (
+                'id' => 198,
+                'reference' => 'OF-5018',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'of-5018-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.298',
+                'poids_lineaire_lbs_ft' => '0.200',
+                'moment_inertie_cm4' => '6.329',
+                'perimetre_mm' => '160.76',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 21:01:13',
+                'updated_at' => '2026-09-23 21:01:13',
+            ),
+            182 => 
+            array (
+                'id' => 199,
+                'reference' => 'OF-5019',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'of-5019-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.176',
+                'poids_lineaire_lbs_ft' => '0.118',
+                'moment_inertie_cm4' => '2.770',
+                'perimetre_mm' => '70.37',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 21:01:48',
+                'updated_at' => '2026-09-23 21:01:48',
+            ),
+            183 => 
+            array (
+                'id' => 200,
+                'reference' => 'OJL-3015',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'ojl-3015-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.268',
+                'poids_lineaire_lbs_ft' => '0.180',
+                'moment_inertie_cm4' => '4.833',
+                'perimetre_mm' => '122.75',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 21:02:47',
+                'updated_at' => '2026-09-23 21:02:47',
+            ),
+            184 => 
+            array (
+                'id' => 201,
+                'reference' => 'OFR-503',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'ofr-503-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.532',
+                'poids_lineaire_lbs_ft' => '0.358',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '257.85',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 21:03:57',
+                'updated_at' => '2026-09-23 21:03:57',
+            ),
+            185 => 
+            array (
+                'id' => 202,
+                'reference' => 'OFR-504',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'ofr-504-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.900',
+                'poids_lineaire_lbs_ft' => '0.605',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '284.90',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 21:04:33',
+                'updated_at' => '2026-09-23 21:04:33',
+            ),
+            186 => 
+            array (
+                'id' => 203,
+                'reference' => 'OFR-511',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'ofr-511-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.905',
+                'poids_lineaire_lbs_ft' => '0.608',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '206.23',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 21:04:55',
+                'updated_at' => '2026-09-23 21:04:55',
+            ),
+            187 => 
+            array (
+                'id' => 204,
+                'reference' => 'OFR-505',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'ofr-505-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '1.222',
+                'poids_lineaire_lbs_ft' => '0.821',
+                'moment_inertie_cm4' => NULL,
+                'perimetre_mm' => '340.58',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 21:05:55',
+                'updated_at' => '2026-09-23 21:05:55',
+            ),
+            188 => 
+            array (
+                'id' => 205,
+                'reference' => 'STC-009',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'stc-009-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.353',
+                'poids_lineaire_lbs_ft' => '0.237',
+                'moment_inertie_cm4' => '6.384',
+                'perimetre_mm' => '162.15',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 21:07:11',
+                'updated_at' => '2026-09-23 21:07:11',
+            ),
+            189 => 
+            array (
+                'id' => 206,
+                'reference' => 'STC-010',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'stc-010-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.413',
+                'poids_lineaire_lbs_ft' => '0.278',
+                'moment_inertie_cm4' => '6.585',
+                'perimetre_mm' => '167.25',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 21:07:59',
+                'updated_at' => '2026-09-23 21:07:59',
+            ),
+            190 => 
+            array (
+                'id' => 207,
+                'reference' => 'STC-011',
+                'designation' => 'PROFILE VARIE',
+                'slug' => 'stc-011-profile-varie',
+                'type_composant_id' => 1,
+                'gamme_id' => NULL,
+                'matiere' => NULL,
+                'longueur_barre_mm' => NULL,
+                'section_largeur_mm' => NULL,
+                'section_hauteur_mm' => NULL,
+                'epaisseur_paroi_mm' => NULL,
+                'poids_lineaire_kg_m' => '0.570',
+                'poids_lineaire_lbs_ft' => '0.383',
+                'moment_inertie_cm4' => '7.356',
+                'perimetre_mm' => '186.85',
+                'image_coupe' => NULL,
+                'est_disponible' => 1,
+                'created_at' => '2026-09-23 21:08:46',
+                'updated_at' => '2026-09-23 21:08:46',
             ),
         ));
         
