@@ -333,4 +333,22 @@ Add new media and components to seeders, update OuvragesTableSeeder
 - Fix decimals managing at create and update for Composant
 
 --------------------------------------------------------------------------------------------------------------------------------
-18/09
+21/09
+
+Integration catalogue
+
+--------------------------------------------------------------------------------------------------------------------------------
+22/09
+
+Integration catalogue 
+Manually reassigning medias + removing doublons + backup catalogue in seeders
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+23/09
+
+Integration catalogue 
+Fix view index for composant/ouvrage public + re backup seeders
+
+--------------------------------------------------------------------------------------------------------------------------------
+24/09
