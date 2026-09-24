@@ -1649,28 +1649,6 @@ class ComposantsTableSeeder extends Seeder
             ),
             74 => 
             array (
-                'id' => 89,
-                'reference' => 'STOA071',
-                'designation' => 'BARREAU OVAL',
-                'slug' => 'stoa071-barreau-oval',
-                'type_composant_id' => 1,
-                'gamme_id' => NULL,
-                'matiere' => NULL,
-                'longueur_barre_mm' => NULL,
-                'section_largeur_mm' => NULL,
-                'section_hauteur_mm' => NULL,
-                'epaisseur_paroi_mm' => NULL,
-                'poids_lineaire_kg_m' => '0.418',
-                'poids_lineaire_lbs_ft' => '0.281',
-                'moment_inertie_cm4' => NULL,
-                'perimetre_mm' => '93.30',
-                'image_coupe' => NULL,
-                'est_disponible' => 1,
-                'created_at' => '2026-09-21 19:45:20',
-                'updated_at' => '2026-09-21 19:45:20',
-            ),
-            75 => 
-            array (
                 'id' => 91,
                 'reference' => 'ALN-1463',
                 'designation' => 'BARROTES PASAMANOS',
@@ -1691,7 +1669,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 19:48:59',
                 'updated_at' => '2026-09-21 19:48:59',
             ),
-            76 => 
+            75 => 
             array (
                 'id' => 92,
                 'reference' => 'ALN-1563',
@@ -1713,7 +1691,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 19:49:50',
                 'updated_at' => '2026-09-21 19:49:50',
             ),
-            77 => 
+            76 => 
             array (
                 'id' => 94,
                 'reference' => 'ALN-1573',
@@ -1735,7 +1713,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 19:51:57',
                 'updated_at' => '2026-09-21 19:51:57',
             ),
-            78 => 
+            77 => 
             array (
                 'id' => 95,
                 'reference' => 'ALN-1574',
@@ -1757,7 +1735,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 19:53:17',
                 'updated_at' => '2026-09-21 19:53:17',
             ),
-            79 => 
+            78 => 
             array (
                 'id' => 96,
                 'reference' => 'ALN-1575',
@@ -1779,7 +1757,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-21 19:54:24',
                 'updated_at' => '2026-09-21 19:54:24',
             ),
-            80 => 
+            79 => 
             array (
                 'id' => 97,
                 'reference' => 'ALN-363',
@@ -1801,7 +1779,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 17:28:15',
                 'updated_at' => '2026-09-22 17:28:15',
             ),
-            81 => 
+            80 => 
             array (
                 'id' => 98,
                 'reference' => 'ALN-1012',
@@ -1823,7 +1801,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 17:29:14',
                 'updated_at' => '2026-09-22 17:29:14',
             ),
-            82 => 
+            81 => 
             array (
                 'id' => 99,
                 'reference' => 'S-343',
@@ -1845,7 +1823,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 17:29:43',
                 'updated_at' => '2026-09-22 17:29:43',
             ),
-            83 => 
+            82 => 
             array (
                 'id' => 100,
                 'reference' => 'S-344',
@@ -1867,7 +1845,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 17:30:18',
                 'updated_at' => '2026-09-22 17:30:18',
             ),
-            84 => 
+            83 => 
             array (
                 'id' => 101,
                 'reference' => 'ALN-511',
@@ -1889,7 +1867,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 17:30:51',
                 'updated_at' => '2026-09-22 17:30:51',
             ),
-            85 => 
+            84 => 
             array (
                 'id' => 102,
                 'reference' => 'ALN-1600',
@@ -1911,7 +1889,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 17:32:12',
                 'updated_at' => '2026-09-22 17:32:12',
             ),
-            86 => 
+            85 => 
             array (
                 'id' => 103,
                 'reference' => 'T-116',
@@ -1933,7 +1911,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 17:33:33',
                 'updated_at' => '2026-09-22 17:33:33',
             ),
-            87 => 
+            86 => 
             array (
                 'id' => 104,
                 'reference' => 'T-050',
@@ -1955,7 +1933,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 17:34:28',
                 'updated_at' => '2026-09-22 17:34:28',
             ),
-            88 => 
+            87 => 
             array (
                 'id' => 105,
                 'reference' => 'T-021',
@@ -1977,7 +1955,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 17:35:06',
                 'updated_at' => '2026-09-22 17:35:06',
             ),
-            89 => 
+            88 => 
             array (
                 'id' => 106,
                 'reference' => 'T-A-007',
@@ -1999,7 +1977,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 17:35:47',
                 'updated_at' => '2026-09-22 17:35:47',
             ),
-            90 => 
+            89 => 
             array (
                 'id' => 107,
                 'reference' => 'T-252',
@@ -2021,7 +1999,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 17:36:24',
                 'updated_at' => '2026-09-22 17:36:24',
             ),
-            91 => 
+            90 => 
             array (
                 'id' => 108,
                 'reference' => 'T-222',
@@ -2043,7 +2021,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 17:38:02',
                 'updated_at' => '2026-09-22 17:38:02',
             ),
-            92 => 
+            91 => 
             array (
                 'id' => 109,
                 'reference' => 'T-198',
@@ -2065,7 +2043,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:45:55',
                 'updated_at' => '2026-09-22 19:45:55',
             ),
-            93 => 
+            92 => 
             array (
                 'id' => 110,
                 'reference' => 'T-231',
@@ -2087,7 +2065,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:49:28',
                 'updated_at' => '2026-09-22 19:49:28',
             ),
-            94 => 
+            93 => 
             array (
                 'id' => 111,
                 'reference' => 'T-240',
@@ -2109,7 +2087,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:50:16',
                 'updated_at' => '2026-09-22 19:50:16',
             ),
-            95 => 
+            94 => 
             array (
                 'id' => 112,
                 'reference' => 'T-272',
@@ -2131,7 +2109,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:51:33',
                 'updated_at' => '2026-09-22 19:51:33',
             ),
-            96 => 
+            95 => 
             array (
                 'id' => 113,
                 'reference' => 'T-264',
@@ -2153,7 +2131,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:52:15',
                 'updated_at' => '2026-09-22 19:52:15',
             ),
-            97 => 
+            96 => 
             array (
                 'id' => 114,
                 'reference' => 'T-257',
@@ -2175,7 +2153,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:52:50',
                 'updated_at' => '2026-09-22 19:52:50',
             ),
-            98 => 
+            97 => 
             array (
                 'id' => 115,
                 'reference' => 'T-224',
@@ -2197,7 +2175,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:53:58',
                 'updated_at' => '2026-09-22 19:53:58',
             ),
-            99 => 
+            98 => 
             array (
                 'id' => 116,
                 'reference' => 'T-256',
@@ -2219,7 +2197,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:54:49',
                 'updated_at' => '2026-09-22 19:54:49',
             ),
-            100 => 
+            99 => 
             array (
                 'id' => 117,
                 'reference' => 'TC-097',
@@ -2241,7 +2219,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:55:42',
                 'updated_at' => '2026-09-22 19:55:42',
             ),
-            101 => 
+            100 => 
             array (
                 'id' => 118,
                 'reference' => 'A-009',
@@ -2263,7 +2241,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:56:48',
                 'updated_at' => '2026-09-22 19:56:48',
             ),
-            102 => 
+            101 => 
             array (
                 'id' => 119,
                 'reference' => 'A-015',
@@ -2285,7 +2263,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:57:21',
                 'updated_at' => '2026-09-22 19:57:21',
             ),
-            103 => 
+            102 => 
             array (
                 'id' => 120,
                 'reference' => 'A-018',
@@ -2307,7 +2285,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:57:55',
                 'updated_at' => '2026-09-22 19:57:55',
             ),
-            104 => 
+            103 => 
             array (
                 'id' => 121,
                 'reference' => 'A-027',
@@ -2329,7 +2307,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:58:30',
                 'updated_at' => '2026-09-22 19:58:30',
             ),
-            105 => 
+            104 => 
             array (
                 'id' => 122,
                 'reference' => 'ALN-1245',
@@ -2351,7 +2329,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 19:59:24',
                 'updated_at' => '2026-09-22 19:59:24',
             ),
-            106 => 
+            105 => 
             array (
                 'id' => 123,
                 'reference' => 'ALN-1243',
@@ -2373,7 +2351,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:00:16',
                 'updated_at' => '2026-09-22 20:00:16',
             ),
-            107 => 
+            106 => 
             array (
                 'id' => 124,
                 'reference' => 'A-085',
@@ -2395,7 +2373,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:01:51',
                 'updated_at' => '2026-09-22 20:01:51',
             ),
-            108 => 
+            107 => 
             array (
                 'id' => 125,
                 'reference' => 'RECTO256',
@@ -2417,7 +2395,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:06:53',
                 'updated_at' => '2026-09-22 20:06:53',
             ),
-            109 => 
+            108 => 
             array (
                 'id' => 126,
                 'reference' => 'ALN1245',
@@ -2439,7 +2417,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:08:15',
                 'updated_at' => '2026-09-22 20:08:15',
             ),
-            110 => 
+            109 => 
             array (
                 'id' => 127,
                 'reference' => 'ANGU0099',
@@ -2461,7 +2439,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:09:15',
                 'updated_at' => '2026-09-22 20:10:23',
             ),
-            111 => 
+            110 => 
             array (
                 'id' => 128,
                 'reference' => 'ANGUO0096',
@@ -2483,7 +2461,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:10:06',
                 'updated_at' => '2026-09-22 20:10:06',
             ),
-            112 => 
+            111 => 
             array (
                 'id' => 129,
                 'reference' => 'U-117',
@@ -2505,7 +2483,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:23:16',
                 'updated_at' => '2026-09-22 20:23:16',
             ),
-            113 => 
+            112 => 
             array (
                 'id' => 130,
                 'reference' => 'U-119',
@@ -2527,7 +2505,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:24:59',
                 'updated_at' => '2026-09-22 20:24:59',
             ),
-            114 => 
+            113 => 
             array (
                 'id' => 131,
                 'reference' => 'U-085',
@@ -2549,7 +2527,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:25:47',
                 'updated_at' => '2026-09-22 20:25:47',
             ),
-            115 => 
+            114 => 
             array (
                 'id' => 132,
                 'reference' => 'U-121',
@@ -2571,7 +2549,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:27:23',
                 'updated_at' => '2026-09-22 20:27:23',
             ),
-            116 => 
+            115 => 
             array (
                 'id' => 133,
                 'reference' => 'T-269',
@@ -2593,7 +2571,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:28:05',
                 'updated_at' => '2026-09-22 20:28:05',
             ),
-            117 => 
+            116 => 
             array (
                 'id' => 134,
                 'reference' => 'OF-511',
@@ -2615,7 +2593,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:29:43',
                 'updated_at' => '2026-09-22 20:29:43',
             ),
-            118 => 
+            117 => 
             array (
                 'id' => 135,
                 'reference' => 'ALN-1658',
@@ -2637,7 +2615,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:31:09',
                 'updated_at' => '2026-09-22 20:31:09',
             ),
-            119 => 
+            118 => 
             array (
                 'id' => 136,
                 'reference' => 'ALN-1659',
@@ -2659,7 +2637,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:31:49',
                 'updated_at' => '2026-09-22 20:31:49',
             ),
-            120 => 
+            119 => 
             array (
                 'id' => 137,
                 'reference' => 'SBP-001',
@@ -2681,7 +2659,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 19:21:31',
                 'updated_at' => '2026-09-23 19:21:31',
             ),
-            121 => 
+            120 => 
             array (
                 'id' => 138,
                 'reference' => 'SBP-004',
@@ -2703,7 +2681,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 19:22:21',
                 'updated_at' => '2026-09-23 19:22:21',
             ),
-            122 => 
+            121 => 
             array (
                 'id' => 139,
                 'reference' => 'SBP-003',
@@ -2725,7 +2703,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 19:23:16',
                 'updated_at' => '2026-09-23 19:23:16',
             ),
-            123 => 
+            122 => 
             array (
                 'id' => 140,
                 'reference' => 'STC-002',
@@ -2747,7 +2725,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 19:24:32',
                 'updated_at' => '2026-09-23 19:24:32',
             ),
-            124 => 
+            123 => 
             array (
                 'id' => 141,
                 'reference' => 'SPB-005',
@@ -2769,7 +2747,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 19:32:09',
                 'updated_at' => '2026-09-23 19:32:09',
             ),
-            125 => 
+            124 => 
             array (
                 'id' => 142,
                 'reference' => 'SBP-002',
@@ -2791,7 +2769,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 19:33:27',
                 'updated_at' => '2026-09-23 19:33:27',
             ),
-            126 => 
+            125 => 
             array (
                 'id' => 143,
                 'reference' => 'STC-3001',
@@ -2813,7 +2791,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 19:34:38',
                 'updated_at' => '2026-09-23 19:34:38',
             ),
-            127 => 
+            126 => 
             array (
                 'id' => 144,
                 'reference' => 'STC-3002',
@@ -2835,7 +2813,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 19:36:19',
                 'updated_at' => '2026-09-23 19:36:19',
             ),
-            128 => 
+            127 => 
             array (
                 'id' => 145,
                 'reference' => 'STC-3015',
@@ -2857,7 +2835,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 19:36:53',
                 'updated_at' => '2026-09-23 19:36:53',
             ),
-            129 => 
+            128 => 
             array (
                 'id' => 146,
                 'reference' => 'STC-3003',
@@ -2879,7 +2857,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 19:37:49',
                 'updated_at' => '2026-09-23 19:37:49',
             ),
-            130 => 
+            129 => 
             array (
                 'id' => 147,
                 'reference' => 'STC-3004',
@@ -2901,7 +2879,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 19:38:28',
                 'updated_at' => '2026-09-23 19:38:28',
             ),
-            131 => 
+            130 => 
             array (
                 'id' => 148,
                 'reference' => 'STC-6011',
@@ -2923,7 +2901,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 19:40:33',
                 'updated_at' => '2026-09-23 19:40:33',
             ),
-            132 => 
+            131 => 
             array (
                 'id' => 149,
                 'reference' => 'STC-3005',
@@ -2945,7 +2923,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:13:59',
                 'updated_at' => '2026-09-23 20:14:03',
             ),
-            133 => 
+            132 => 
             array (
                 'id' => 150,
                 'reference' => 'STC-3009',
@@ -2967,7 +2945,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:15:46',
                 'updated_at' => '2026-09-23 20:15:46',
             ),
-            134 => 
+            133 => 
             array (
                 'id' => 151,
                 'reference' => 'STC-304',
@@ -2989,7 +2967,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:18:46',
                 'updated_at' => '2026-09-23 20:20:04',
             ),
-            135 => 
+            134 => 
             array (
                 'id' => 152,
                 'reference' => 'STC-303',
@@ -3011,7 +2989,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:19:18',
                 'updated_at' => '2026-09-23 20:20:08',
             ),
-            136 => 
+            135 => 
             array (
                 'id' => 153,
                 'reference' => 'OD-9014',
@@ -3033,7 +3011,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:19:48',
                 'updated_at' => '2026-09-23 20:20:12',
             ),
-            137 => 
+            136 => 
             array (
                 'id' => 154,
                 'reference' => 'STOJR-001',
@@ -3055,7 +3033,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:20:57',
                 'updated_at' => '2026-09-23 20:20:57',
             ),
-            138 => 
+            137 => 
             array (
                 'id' => 155,
                 'reference' => 'STOJR-002',
@@ -3077,7 +3055,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:21:24',
                 'updated_at' => '2026-09-23 20:21:24',
             ),
-            139 => 
+            138 => 
             array (
                 'id' => 156,
                 'reference' => 'STOJR-004',
@@ -3099,7 +3077,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:26:31',
                 'updated_at' => '2026-09-23 20:26:38',
             ),
-            140 => 
+            139 => 
             array (
                 'id' => 157,
                 'reference' => 'STOJR-005',
@@ -3121,7 +3099,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:27:16',
                 'updated_at' => '2026-09-23 20:27:16',
             ),
-            141 => 
+            140 => 
             array (
                 'id' => 158,
                 'reference' => 'STOJR-003',
@@ -3143,7 +3121,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:28:08',
                 'updated_at' => '2026-09-23 20:28:08',
             ),
-            142 => 
+            141 => 
             array (
                 'id' => 159,
                 'reference' => 'OD-9015',
@@ -3165,7 +3143,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:28:58',
                 'updated_at' => '2026-09-23 20:28:58',
             ),
-            143 => 
+            142 => 
             array (
                 'id' => 160,
                 'reference' => 'STOJS-009',
@@ -3187,7 +3165,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:29:27',
                 'updated_at' => '2026-09-23 20:29:27',
             ),
-            144 => 
+            143 => 
             array (
                 'id' => 161,
                 'reference' => 'STOJS-406',
@@ -3209,7 +3187,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:30:28',
                 'updated_at' => '2026-09-23 20:30:28',
             ),
-            145 => 
+            144 => 
             array (
                 'id' => 162,
                 'reference' => 'STOJS-408',
@@ -3231,7 +3209,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:30:54',
                 'updated_at' => '2026-09-23 20:30:54',
             ),
-            146 => 
+            145 => 
             array (
                 'id' => 163,
                 'reference' => 'STOJS-401',
@@ -3253,7 +3231,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:31:38',
                 'updated_at' => '2026-09-23 20:31:38',
             ),
-            147 => 
+            146 => 
             array (
                 'id' => 164,
                 'reference' => 'STOJS-407',
@@ -3275,7 +3253,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:32:08',
                 'updated_at' => '2026-09-23 20:32:08',
             ),
-            148 => 
+            147 => 
             array (
                 'id' => 165,
                 'reference' => 'STOJS-402',
@@ -3297,7 +3275,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:32:52',
                 'updated_at' => '2026-09-23 20:32:52',
             ),
-            149 => 
+            148 => 
             array (
                 'id' => 166,
                 'reference' => 'STOJS-411',
@@ -3319,7 +3297,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:33:16',
                 'updated_at' => '2026-09-23 20:33:16',
             ),
-            150 => 
+            149 => 
             array (
                 'id' => 167,
                 'reference' => 'STOJS-403',
@@ -3341,7 +3319,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:34:30',
                 'updated_at' => '2026-09-23 20:34:30',
             ),
-            151 => 
+            150 => 
             array (
                 'id' => 168,
                 'reference' => 'STOJS-404',
@@ -3363,7 +3341,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:34:59',
                 'updated_at' => '2026-09-23 20:34:59',
             ),
-            152 => 
+            151 => 
             array (
                 'id' => 169,
                 'reference' => 'STOA-071',
@@ -3385,7 +3363,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:35:34',
                 'updated_at' => '2026-09-23 20:35:34',
             ),
-            153 => 
+            152 => 
             array (
                 'id' => 170,
                 'reference' => 'STOJS-415',
@@ -3407,7 +3385,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:35:53',
                 'updated_at' => '2026-09-23 20:35:53',
             ),
-            154 => 
+            153 => 
             array (
                 'id' => 171,
                 'reference' => 'OC-6002',
@@ -3429,7 +3407,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:36:33',
                 'updated_at' => '2026-09-23 20:36:51',
             ),
-            155 => 
+            154 => 
             array (
                 'id' => 172,
                 'reference' => 'OC-6007',
@@ -3451,7 +3429,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:37:50',
                 'updated_at' => '2026-09-23 20:37:50',
             ),
-            156 => 
+            155 => 
             array (
                 'id' => 173,
                 'reference' => 'OC-6003',
@@ -3473,7 +3451,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:38:42',
                 'updated_at' => '2026-09-23 20:38:42',
             ),
-            157 => 
+            156 => 
             array (
                 'id' => 174,
                 'reference' => 'OC-6008',
@@ -3495,7 +3473,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:39:31',
                 'updated_at' => '2026-09-23 20:39:31',
             ),
-            158 => 
+            157 => 
             array (
                 'id' => 175,
                 'reference' => 'OC-6006',
@@ -3517,7 +3495,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:40:07',
                 'updated_at' => '2026-09-23 20:40:14',
             ),
-            159 => 
+            158 => 
             array (
                 'id' => 176,
                 'reference' => 'OC-6009',
@@ -3539,7 +3517,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:41:09',
                 'updated_at' => '2026-09-23 20:41:09',
             ),
-            160 => 
+            159 => 
             array (
                 'id' => 177,
                 'reference' => 'OC-6011',
@@ -3561,7 +3539,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:41:42',
                 'updated_at' => '2026-09-23 20:41:42',
             ),
-            161 => 
+            160 => 
             array (
                 'id' => 178,
                 'reference' => 'OC-6012',
@@ -3583,7 +3561,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:42:54',
                 'updated_at' => '2026-09-23 20:42:54',
             ),
-            162 => 
+            161 => 
             array (
                 'id' => 179,
                 'reference' => 'STC-5021',
@@ -3605,7 +3583,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:43:52',
                 'updated_at' => '2026-09-23 20:43:52',
             ),
-            163 => 
+            162 => 
             array (
                 'id' => 180,
                 'reference' => 'STC-5023',
@@ -3627,7 +3605,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:44:44',
                 'updated_at' => '2026-09-23 20:44:44',
             ),
-            164 => 
+            163 => 
             array (
                 'id' => 181,
                 'reference' => 'STC-6013',
@@ -3649,7 +3627,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:45:27',
                 'updated_at' => '2026-09-23 20:45:27',
             ),
-            165 => 
+            164 => 
             array (
                 'id' => 182,
                 'reference' => 'OC-6001',
@@ -3671,7 +3649,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:46:16',
                 'updated_at' => '2026-09-23 20:46:16',
             ),
-            166 => 
+            165 => 
             array (
                 'id' => 183,
                 'reference' => 'OC-6017',
@@ -3693,7 +3671,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:46:50',
                 'updated_at' => '2026-09-23 20:46:50',
             ),
-            167 => 
+            166 => 
             array (
                 'id' => 184,
                 'reference' => 'OF-5001',
@@ -3715,7 +3693,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:49:34',
                 'updated_at' => '2026-09-23 20:49:34',
             ),
-            168 => 
+            167 => 
             array (
                 'id' => 185,
                 'reference' => 'OF-5002',
@@ -3737,7 +3715,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:50:33',
                 'updated_at' => '2026-09-23 20:50:33',
             ),
-            169 => 
+            168 => 
             array (
                 'id' => 186,
                 'reference' => 'OF-5004',
@@ -3759,7 +3737,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:51:13',
                 'updated_at' => '2026-09-23 20:51:13',
             ),
-            170 => 
+            169 => 
             array (
                 'id' => 187,
                 'reference' => 'OF-5006',
@@ -3781,7 +3759,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:52:25',
                 'updated_at' => '2026-09-23 20:52:25',
             ),
-            171 => 
+            170 => 
             array (
                 'id' => 188,
                 'reference' => 'OF-5005',
@@ -3803,7 +3781,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:53:17',
                 'updated_at' => '2026-09-23 20:53:17',
             ),
-            172 => 
+            171 => 
             array (
                 'id' => 189,
                 'reference' => 'OF-5008',
@@ -3825,7 +3803,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:54:10',
                 'updated_at' => '2026-09-23 20:54:10',
             ),
-            173 => 
+            172 => 
             array (
                 'id' => 190,
                 'reference' => 'OF-5010',
@@ -3847,7 +3825,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:54:52',
                 'updated_at' => '2026-09-23 20:54:52',
             ),
-            174 => 
+            173 => 
             array (
                 'id' => 191,
                 'reference' => 'OF-5009',
@@ -3869,7 +3847,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:55:41',
                 'updated_at' => '2026-09-23 20:55:41',
             ),
-            175 => 
+            174 => 
             array (
                 'id' => 192,
                 'reference' => 'OF-5013',
@@ -3891,7 +3869,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:56:54',
                 'updated_at' => '2026-09-23 20:56:54',
             ),
-            176 => 
+            175 => 
             array (
                 'id' => 193,
                 'reference' => 'OF-5015',
@@ -3913,7 +3891,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:57:30',
                 'updated_at' => '2026-09-23 20:57:30',
             ),
-            177 => 
+            176 => 
             array (
                 'id' => 194,
                 'reference' => 'OF-5016',
@@ -3935,7 +3913,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:57:59',
                 'updated_at' => '2026-09-23 20:57:59',
             ),
-            178 => 
+            177 => 
             array (
                 'id' => 195,
                 'reference' => 'OF-5016',
@@ -3957,7 +3935,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:58:00',
                 'updated_at' => '2026-09-23 20:58:00',
             ),
-            179 => 
+            178 => 
             array (
                 'id' => 196,
                 'reference' => 'OF-5020',
@@ -3979,7 +3957,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:58:40',
                 'updated_at' => '2026-09-23 20:58:40',
             ),
-            180 => 
+            179 => 
             array (
                 'id' => 197,
                 'reference' => 'OF-5017',
@@ -4001,7 +3979,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 20:59:13',
                 'updated_at' => '2026-09-23 20:59:13',
             ),
-            181 => 
+            180 => 
             array (
                 'id' => 198,
                 'reference' => 'OF-5018',
@@ -4023,7 +4001,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 21:01:13',
                 'updated_at' => '2026-09-23 21:01:13',
             ),
-            182 => 
+            181 => 
             array (
                 'id' => 199,
                 'reference' => 'OF-5019',
@@ -4045,7 +4023,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 21:01:48',
                 'updated_at' => '2026-09-23 21:01:48',
             ),
-            183 => 
+            182 => 
             array (
                 'id' => 200,
                 'reference' => 'OJL-3015',
@@ -4067,7 +4045,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 21:02:47',
                 'updated_at' => '2026-09-23 21:02:47',
             ),
-            184 => 
+            183 => 
             array (
                 'id' => 201,
                 'reference' => 'OFR-503',
@@ -4089,7 +4067,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 21:03:57',
                 'updated_at' => '2026-09-23 21:03:57',
             ),
-            185 => 
+            184 => 
             array (
                 'id' => 202,
                 'reference' => 'OFR-504',
@@ -4111,7 +4089,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 21:04:33',
                 'updated_at' => '2026-09-23 21:04:33',
             ),
-            186 => 
+            185 => 
             array (
                 'id' => 203,
                 'reference' => 'OFR-511',
@@ -4133,7 +4111,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 21:04:55',
                 'updated_at' => '2026-09-23 21:04:55',
             ),
-            187 => 
+            186 => 
             array (
                 'id' => 204,
                 'reference' => 'OFR-505',
@@ -4155,7 +4133,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 21:05:55',
                 'updated_at' => '2026-09-23 21:05:55',
             ),
-            188 => 
+            187 => 
             array (
                 'id' => 205,
                 'reference' => 'STC-009',
@@ -4177,7 +4155,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 21:07:11',
                 'updated_at' => '2026-09-23 21:07:11',
             ),
-            189 => 
+            188 => 
             array (
                 'id' => 206,
                 'reference' => 'STC-010',
@@ -4199,7 +4177,7 @@ class ComposantsTableSeeder extends Seeder
                 'created_at' => '2026-09-23 21:07:59',
                 'updated_at' => '2026-09-23 21:07:59',
             ),
-            190 => 
+            189 => 
             array (
                 'id' => 207,
                 'reference' => 'STC-011',
