@@ -17,7 +17,9 @@
 
 @section('content')
 <div>
-    {{-- En-tête compact --}}
+    {{-- ============================================================ --}}
+    {{-- EN-TÊTE --}}
+    {{-- ============================================================ --}}
     <div class="bg-white border border-ink-200 p-4 mb-4">
         <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
             <div>
@@ -51,7 +53,9 @@
         </div>
     </div>
 
-    {{-- Carrousel --}}
+    {{-- ============================================================ --}}
+    {{-- CARROUSEL D'IMAGES --}}
+    {{-- ============================================================ --}}
     @if($ouvrage->medias->count() > 0)
         <div class="mb-4">
             @include('public.partials.media-carousel', [
@@ -62,7 +66,9 @@
         </div>
     @endif
 
-    {{-- Description technique --}}
+    {{-- ============================================================ --}}
+    {{-- DESCRIPTION TECHNIQUE --}}
+    {{-- ============================================================ --}}
     @if($ouvrage->description_technique)
         <div class="bg-white border border-ink-200 mb-4">
             <div class="px-3 py-2 bg-ink-50 border-b border-ink-200">
@@ -74,7 +80,9 @@
         </div>
     @endif
 
-    {{-- Caractéristiques --}}
+    {{-- ============================================================ --}}
+    {{-- CARACTÉRISTIQUES TECHNIQUES --}}
+    {{-- ============================================================ --}}
     @if($ouvrage->caracteristiques->count())
         <div class="bg-white border border-ink-200 mb-4">
             <div class="px-3 py-2 bg-ink-50 border-b border-ink-200">
@@ -94,7 +102,9 @@
         </div>
     @endif
 
-    {{-- Composition --}}
+    {{-- ============================================================ --}}
+    {{-- COMPOSITION AVEC VIGNETTES --}}
+    {{-- ============================================================ --}}
     @if($ouvrage->composants->count())
         <div class="bg-white border border-ink-200 mb-4">
             <div class="px-3 py-2 bg-ink-50 border-b border-ink-200 flex items-center justify-between">
@@ -107,38 +117,64 @@
                     Détail complet →
                 </a>
             </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-xs">
-                    <thead class="bg-ink-50 border-b border-ink-200">
-                        <tr>
-                            <th class="px-3 py-2 text-left font-bold text-ink-500 uppercase tracking-wider">#</th>
-                            <th class="px-3 py-2 text-left font-bold text-ink-500 uppercase tracking-wider">Composant</th>
-                            <th class="px-3 py-2 text-left font-bold text-ink-500 uppercase tracking-wider">Référence</th>
-                            <th class="px-3 py-2 text-right font-bold text-ink-500 uppercase tracking-wider">Qté</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-ink-100">
-                        @foreach($ouvrage->composants as $composant)
-                            <tr class="hover:bg-ink-50 transition">
-                                <td class="px-3 py-2 text-ink-400 font-mono">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</td>
-                                <td class="px-3 py-2 text-ink-900 font-medium">
-                                    <a href="{{ route('composants.show', $composant->slug) }}" class="hover:text-amber-700 transition">
-                                        {{ $composant->designation }}
-                                    </a>
-                                </td>
-                                <td class="px-3 py-2 text-ink-500 font-mono">{{ $composant->reference }}</td>
-                                <td class="px-3 py-2 text-ink-700 text-right font-mono font-medium">
-                                    {{ $composant->pivot->quantite }} <span class="text-ink-400">{{ $composant->pivot->unite }}</span>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+
+            <div class="p-3 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+                @foreach($ouvrage->composants->sortBy('pivot.ordre') as $composant)
+                    @php
+                        $media = $composant->medias->firstWhere('est_principal', true) 
+                              ?? $composant->medias->sortBy('pivot.ordre')->first();
+                    @endphp
+
+                    <a href="{{ route('composants.show', $composant->slug) }}"
+                       class="group bg-white border border-ink-200 hover:border-amber-500 hover:shadow-md transition-all flex flex-col">
+
+                        {{-- Thumbnail --}}
+                        <div class="aspect-square bg-ink-50 border-b border-ink-100 overflow-hidden flex items-center justify-center relative">
+                            @if($media)
+                                <img src="{{ asset('storage/' . $media->chemin_fichier) }}" 
+                                     alt="{{ $media->titre ?? $composant->designation }}"
+                                     class="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-300">
+                            @else
+                                <svg class="w-10 h-10 text-ink-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                                </svg>
+                            @endif
+
+                            {{-- Badge quantité --}}
+                            <span class="absolute top-1.5 right-1.5 font-mono text-[10px] font-bold text-white bg-ink-900/80 backdrop-blur-sm px-1.5 py-0.5 tracking-wider">
+                                ×{{ $composant->pivot->quantite }}
+                            </span>
+                        </div>
+
+                        {{-- Contenu --}}
+                        <div class="p-2.5 flex flex-col flex-1">
+
+                            {{-- Référence + type --}}
+                            <div class="flex items-start justify-between gap-2 mb-1.5 min-w-0">
+                                <span class="font-mono text-[10px] font-bold text-ink-600 bg-ink-100 px-1.5 py-0.5 tracking-wider truncate max-w-[60%]">
+                                    {{ $composant->reference }}
+                                </span>
+                                @if($composant->typeComposant)
+                                    <span class="text-[10px] text-ink-400 uppercase tracking-wider font-semibold truncate max-w-[40%] text-right shrink-0">
+                                        {{ $composant->typeComposant->nom }}
+                                    </span>
+                                @endif
+                            </div>
+
+                            {{-- Désignation --}}
+                            <h3 class="text-xs font-semibold text-ink-900 leading-snug line-clamp-2 group-hover:text-amber-700 transition-colors">
+                                {{ $composant->designation }}
+                            </h3>
+                        </div>
+                    </a>
+                @endforeach
             </div>
         </div>
     @endif
 
-    {{-- Actions --}}
+    {{-- ============================================================ --}}
+    {{-- ACTIONS --}}
+    {{-- ============================================================ --}}
     <div class="bg-white border border-ink-200">
         <div class="px-3 py-2 bg-ink-50 border-b border-ink-200">
             <h3 class="text-[10px] font-bold text-ink-600 uppercase tracking-wider">Actions</h3>
@@ -157,13 +193,6 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
                 </svg>
                 Imprimer
-            </a>
-            <a href="#" 
-               class="flex items-center justify-center px-4 py-2.5 bg-amber-700 text-white hover:bg-amber-800 transition text-xs font-semibold uppercase tracking-wider">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                </svg>
-                Télécharger PDF
             </a>
         </div>
     </div>

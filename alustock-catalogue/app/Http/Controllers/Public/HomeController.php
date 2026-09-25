@@ -3,34 +3,41 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
-use App\Models\Categorie;
 use App\Models\Gamme;
+use App\Models\Categorie;
+use App\Models\Ouvrage;
+use App\Models\Composant;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        // Catégories en vedette (4 premières)
+        // Catégories en vedette
         $featuredCategories = Categorie::withCount('ouvrages')
                                        ->orderBy('ouvrages_count', 'desc')
                                        ->limit(4)
                                        ->get();
 
-        // Gammes en vedette (4 premières)
+        // Gammes en vedette
         $featuredGammes = Gamme::withCount('ouvrages')
                                ->orderBy('ordre_affichage')
                                ->limit(4)
                                ->get();
 
-        // Statistiques globales
-        $totalCategories = Categorie::count();
-        $totalGammes = Gamme::count();
+        // ============================================================
+        // STATISTIQUES RÉELLES
+        // ============================================================
+        $stats = [
+            'references' => Composant::count() + Ouvrage::count(),  
+            'ouvrages' => Ouvrage::count(),           
+            'categories' => Categorie::count(),      
+            'gammes' => Gamme::count(),               
+        ];
 
         return view('public.home', compact(
             'featuredCategories',
             'featuredGammes',
-            'totalCategories',
-            'totalGammes'
+            'stats'
         ));
     }
 }

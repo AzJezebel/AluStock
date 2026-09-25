@@ -77,6 +77,7 @@ class OuvrageController extends Controller
             },
             'composants.finitions',
             'composants.typeComposant',
+            'composants.medias',
             'caracteristiques' => function ($query) {
                 $query->orderBy('ordre_affichage');
             },

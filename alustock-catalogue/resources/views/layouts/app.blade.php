@@ -37,6 +37,97 @@
                             950: '#0f0c0a',
                         },
                     }
+                    //colors: {
+                    //     ink: {
+                    //         50:  '#faf8f5',
+                    //         100: '#f2ede6',
+                    //         200: '#e0d8cc',
+                    //         300: '#c4b8a6',
+                    //         400: '#a1927e',
+                    //         500: '#82725e',
+                    //         600: '#665847',
+                    //         700: '#4e4235',
+                    //         800: '#332b22',
+                    //         900: '#1f1a15',
+                    //         950: '#0f0d0a',
+                    //     },
+                    //     amber: {  // Surcharge : devient "rouille"
+                    //         50:  '#fdf5f0',
+                    //         100: '#fae5d8',
+                    //         200: '#f5c8ab',
+                    //         300: '#eea57a',
+                    //         400: '#d97f4a',
+                    //         500: '#c25d2e',
+                    //         600: '#a84a23',
+                    //         700: '#8a3a1c',
+                    //         800: '#6e2e17',
+                    //         900: '#5a2613',
+                    //         950: '#2e130a',
+                    //     },
+                    // },
+                    // colors: {
+                    //     ink: {
+                    //         50:  '#f6f8fa',
+                    //         100: '#eaeef2',
+                    //         200: '#d0d7de',
+                    //         300: '#afb8c1',
+                    //         400: '#8b949e',
+                    //         500: '#6e7681',
+                    //         600: '#57606a',
+                    //         700: '#424a53',
+                    //         800: '#2d333b',
+                    //         900: '#1c2128',
+                    //         950: '#0d1117',
+                    //     },
+                    //     amber: {  // Surcharge : devient "bleu acier"
+                    //         50:  '#eff6ff',
+                    //         100: '#dbeafe',
+                    //         200: '#bfdbfe',
+                    //         300: '#93c5fd',
+                    //         400: '#60a5fa',
+                    //         500: '#3b82f6',
+                    //         600: '#2563eb',
+                    //         700: '#1d4ed8',
+                    //         800: '#1e40af',
+                    //         900: '#1e3a8a',
+                    //         950: '#172554',
+                    //     },
+                    //     // Ajouter une 2e couleur pour les accents
+                    //     accent: {
+                    //         400: '#4ade80',
+                    //         500: '#22c55e',
+                    //         600: '#16a34a',
+                    //         700: '#15803d',
+                    //     },
+                    // },
+                    // colors: {
+                    //     ink: {
+                    //         50:  '#f7f7f5',
+                    //         100: '#eeece8',
+                    //         200: '#d9d5cc',
+                    //         300: '#b8b1a3',
+                    //         400: '#948b7a',
+                    //         500: '#736b5c',
+                    //         600: '#585143',
+                    //         700: '#413c31',
+                    //         800: '#2a271f',
+                    //         900: '#1a1813',
+                    //         950: '#0d0c09',
+                    //     },
+                    //     amber: {  // Surcharge : devient "cuivre"
+                    //         50:  '#fdf6f1',
+                    //         100: '#fbe9d9',
+                    //         200: '#f5d0b3',
+                    //         300: '#ecb183',
+                    //         400: '#df8d52',
+                    //         500: '#c96e2e',
+                    //         600: '#a85520',
+                    //         700: '#87421a',
+                    //         800: '#6b3417',
+                    //         900: '#562b16',
+                    //         950: '#2d1408',
+                    //     },
+                    // },
                 }
             }
         }
@@ -146,13 +237,6 @@
         <header class="bg-ink-900 flex-shrink-0">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between">
                 @include('public.partials.logo', ['dark' => true])
-
-                <a href="#" class="hidden sm:inline-flex items-center px-4 py-2 border border-white/20 text-white text-sm font-medium rounded-lg hover:bg-white/10 transition">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-                    </svg>
-                    Catalogue PDF
-                </a>
             </div>
 
             @yield('hero')
@@ -185,13 +269,6 @@
                         </svg>
                     </button>
                 </form>
-
-                <a href="#" class="inline-flex items-center justify-center px-4 py-2 bg-amber-700 text-white text-sm font-medium rounded-lg hover:bg-amber-800 transition whitespace-nowrap">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-                    </svg>
-                    Catalogue PDF
-                </a>
             </div>
         </header>
     @endif
