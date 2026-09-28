@@ -126,7 +126,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('categories', AdminCategorieController::class)
             ->parameters(['categories' => 'categorie'])
             ->except(['show']);
-        Route::resource('categories', AdminCategorieController::class)->except(['show']);
     }); 
 });
 
