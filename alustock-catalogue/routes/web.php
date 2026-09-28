@@ -123,7 +123,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('composants', AdminComposantController::class);
         
         Route::get('/gammes', [DashboardController::class, 'gammes'])->name('gammes.index');
-        Route::get('/categories', [DashboardController::class, 'categories'])->name('categories.index');
+        Route::resource('categories', AdminCategorieController::class)
+            ->parameters(['categories' => 'categorie'])
+            ->except(['show']);
+        Route::resource('categories', AdminCategorieController::class)->except(['show']);
     }); 
 });
 
