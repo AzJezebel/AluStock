@@ -373,3 +373,10 @@ Mini deploy on Railway debug .json .env variable to port care for duplciate rout
 
 --------------------------------------------------------------------------------------------------------------------------------
 29/09
+
+feat: Refactor admin dashboard navbar + view for type composant + placeholders + added joints from new catalogue data + backup seeder and update deployed version
+Done integration + starting cleanup 
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+30/09
