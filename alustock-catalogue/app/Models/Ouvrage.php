@@ -33,11 +33,11 @@ class Ouvrage extends Model
     protected static function boot()
     {
         parent::boot();
-    
+
         static::creating(function ($ouvrage) {
             $ouvrage->slug = \Str::slug($ouvrage->reference . '-' . $ouvrage->nom);
         });
-    
+
         static::updating(function ($ouvrage) {
             if ($ouvrage->isDirty(['reference', 'nom'])) {
                 $ouvrage->slug = \Str::slug($ouvrage->reference . '-' . $ouvrage->nom);
@@ -97,3 +97,4 @@ class Ouvrage extends Model
         return $query->where('est_actif', true);
     }
 }
+

@@ -5,22 +5,29 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Ouvrage;
 use App\Models\Composant;
-use App\Models\Gamme;
 use App\Models\Categorie;
+use App\Models\Gamme;
+use App\Models\TypeComposant;
+use App\Models\Media;
+use App\Models\Document;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        // Compteurs simples (pas de graphiques)
         $stats = [
+            // Contenu principal
             'ouvrages' => Ouvrage::count(),
             'composants' => Composant::count(),
-            'gammes' => Gamme::count(),
+            'medias' => Media::count(),
+            'documents' => Document::count(),
+
+            // Classification
             'categories' => Categorie::count(),
+            'gammes' => Gamme::count(),
+            'types_composant' => TypeComposant::count(),
         ];
 
-        // Derniers ouvrages modifiés
         $derniersOuvrages = Ouvrage::with('gamme')
             ->orderBy('updated_at', 'desc')
             ->limit(5)

@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\ComposantController as AdminComposantController;
 use App\Http\Controllers\Admin\CompositionController as AdminCompositionController;
 use App\Http\Controllers\Admin\OuvrageController as AdminOuvrageController;
 use App\Http\Controllers\Admin\MediaController as AdminMediaController;
+use App\Http\Controllers\Admin\TypeComposantController as AdminTypeComposantController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -125,6 +126,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/gammes', [DashboardController::class, 'gammes'])->name('gammes.index');
         Route::resource('categories', AdminCategorieController::class)
             ->parameters(['categories' => 'categorie'])
+            ->except(['show']);
+
+        Route::resource('types-composant', AdminTypeComposantController::class)
+            ->parameters(['types-composant' => 'typeComposant'])
             ->except(['show']);
     }); 
 });

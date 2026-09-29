@@ -92,13 +92,13 @@
                            class="px-3 py-1.5 text-sm rounded transition {{ request()->routeIs('admin.composants.*') ? 'bg-admin-800 text-white' : 'text-admin-300 hover:text-white hover:bg-admin-800' }}">
                             Composants
                         </a>
-                        <a href="{{ route('admin.gammes.index') }}" 
-                           class="px-3 py-1.5 text-sm rounded transition {{ request()->routeIs('admin.gammes.*') ? 'bg-admin-800 text-white' : 'text-admin-300 hover:text-white hover:bg-admin-800' }}">
-                            Gammes
-                        </a>
                         <a href="{{ route('admin.categories.index') }}" 
                            class="px-3 py-1.5 text-sm rounded transition {{ request()->routeIs('admin.categories.*') ? 'bg-admin-800 text-white' : 'text-admin-300 hover:text-white hover:bg-admin-800' }}">
                             Catégories
+                        </a>
+                        <a href="{{ route('admin.types-composant.index') }}" 
+                           class="px-3 py-1.5 text-sm rounded transition {{ request()->routeIs('admin.types-composant.*') ? 'bg-admin-800 text-white' : 'text-admin-300 hover:text-white hover:bg-admin-800' }}">
+                            Types de composant
                         </a>
                     </nav>
                 </div>
@@ -126,8 +126,8 @@
                 <a href="{{ route('admin.dashboard') }}" class="whitespace-nowrap px-3 py-1.5 text-xs rounded {{ request()->routeIs('admin.dashboard') ? 'bg-admin-800 text-white' : 'text-admin-300' }}">Dashboard</a>
                 <a href="{{ route('admin.ouvrages.index') }}" class="whitespace-nowrap px-3 py-1.5 text-xs rounded {{ request()->routeIs('admin.ouvrages.*') ? 'bg-admin-800 text-white' : 'text-admin-300' }}">Ouvrages</a>
                 <a href="{{ route('admin.composants.index') }}" class="whitespace-nowrap px-3 py-1.5 text-xs rounded {{ request()->routeIs('admin.composants.*') ? 'bg-admin-800 text-white' : 'text-admin-300' }}">Composants</a>
-                <a href="{{ route('admin.gammes.index') }}" class="whitespace-nowrap px-3 py-1.5 text-xs rounded {{ request()->routeIs('admin.gammes.*') ? 'bg-admin-800 text-white' : 'text-admin-300' }}">Gammes</a>
                 <a href="{{ route('admin.categories.index') }}" class="whitespace-nowrap px-3 py-1.5 text-xs rounded {{ request()->routeIs('admin.categories.*') ? 'bg-admin-800 text-white' : 'text-admin-300' }}">Catégories</a>
+                <a href="{{ route('admin.types-composant.index') }}" class="whitespace-nowrap px-3 py-1.5 text-xs rounded {{ request()->routeIs('admin.types-composant.*') ? 'bg-admin-800 text-white' : 'text-admin-300' }}">Types</a>
             </div>
         </div>
     </header>
