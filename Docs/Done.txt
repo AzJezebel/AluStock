@@ -359,3 +359,17 @@ Setup for meeting
 
 --------------------------------------------------------------------------------------------------------------------------------
 25/09
+
+Export seeders
+Test enviro on laptop
+Meeting Jessica Benjamin
+
+--------------------------------------------------------------------------------------------------------------------------------
+28/09
+
+Integration joint
+Admin Dashboard + categorie CRUD + views + controllers tweak
+Mini deploy on Railway debug .json .env variable to port care for duplciate routes
+
+--------------------------------------------------------------------------------------------------------------------------------
+29/09
