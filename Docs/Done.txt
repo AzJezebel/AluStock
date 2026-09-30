@@ -380,3 +380,11 @@ Done integration + starting cleanup
 
 --------------------------------------------------------------------------------------------------------------------------------
 30/09
+
+Refactor UI components for improved consistency and accessibility
+
+- Updated media carousel to enhance styling and accessibility features, including aria-labels for navigation buttons.
+- Refined sidebar menu layout with numbered categories and improved hover effects.
+- Enhanced search page design for better readability and user experience, including updated filter styles and result displays.
+- Introduced reusable component cards for both components and ouvrages, ensuring a consistent look and feel across various pages.
+- Added .gitignore file to exclude sensitive and environment-specific files from version control.
