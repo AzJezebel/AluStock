@@ -1,79 +1,35 @@
-{{-- resources/views/public/categories/index.blade.php --}}
+{{-- resources/views/public/categories/index.blade.php
+     Direction "Blueprint" — page de listing pure (le hero vit sur home.blade.php). --}}
 @extends('layouts.app')
 
-@section('title', 'AluStock — Catalogue de référence aluminium industriel')
+@section('title', 'Catégories — AluStock')
 
-{{-- ============================================================
-     HERO
-     ============================================================ --}}
-@section('hero')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
-
-        <div class="lg:col-span-2">
-            <span class="text-xs font-semibold uppercase tracking-widest text-amber-500">
-                Catalogue de référence industriel
-            </span>
-            <h1 class="mt-2 text-3xl sm:text-4xl font-bold text-white tracking-tight">
-                Aluminium industriel, profilés et fixations
-            </h1>
-            <p class="mt-4 text-ink-300 max-w-xl">
-                Plus de 18 910 références documentées — profilés T-slot, tôles, visserie,
-                connecteurs et extrusions sur mesure. Fiches techniques EN disponibles pour chaque produit.
-            </p>
-
-            <form action="{{ route('search.index') }}" method="GET" class="mt-6 flex max-w-xl">
-                <input type="text"
-                       name="q"
-                       placeholder="Référence, alliage, dimension..."
-                       class="flex-1 px-4 py-3 rounded-l-lg bg-white/5 border border-white/10 text-white placeholder-ink-400 text-sm focus:outline-none focus:ring-2 focus:ring-amber-600">
-                <button type="submit" class="px-5 py-3 bg-amber-700 hover:bg-amber-800 text-white text-sm font-semibold rounded-r-lg transition">
-                    Rechercher
-                </button>
-            </form>
-        </div>
-
-        {{-- Stats --}}
-        <div class="grid grid-cols-2 gap-4">
-            <div class="bg-white/5 border border-white/10 rounded-lg p-4 text-center">
-                <span class="block text-2xl sm:text-3xl font-bold text-white">{{ $totalReferences ?? '18 910' }}</span>
-                <span class="text-ink-400 text-xs uppercase tracking-wider">Références</span>
-            </div>
-            <div class="bg-white/5 border border-white/10 rounded-lg p-4 text-center">
-                <span class="block text-2xl sm:text-3xl font-bold text-white">{{ $categories->count() }}</span>
-                <span class="text-ink-400 text-xs uppercase tracking-wider">Catégories</span>
-            </div>
-            <div class="bg-white/5 border border-white/10 rounded-lg p-4 text-center">
-                <span class="block text-sm sm:text-base font-bold text-white">6063 · 6061 · 3003</span>
-                <span class="text-ink-400 text-xs uppercase tracking-wider">Alliages principaux</span>
-            </div>
-            <div class="bg-white/5 border border-white/10 rounded-lg p-4 text-center">
-                <span class="block text-sm sm:text-base font-bold text-white">EN 755 · EN 485</span>
-                <span class="text-ink-400 text-xs uppercase tracking-wider">Normes couvertes</span>
-            </div>
-        </div>
-
-    </div>
-</div>
+@section('breadcrumb')
+    <a href="{{ route('home') }}" class="hover:text-ink-200">Accueil</a>
+    <span class="mx-2 text-ink-600">›</span>
+    <span class="text-ink-200 font-medium">Catégories</span>
 @endsection
 
-{{-- ============================================================
-     CONTENU — grille des catégories
-     ============================================================ --}}
 @section('content')
 <div>
-    <h2 class="text-xs font-semibold uppercase tracking-widest text-ink-400 mb-4">
-        Parcourir par catégorie
-    </h2>
+    <div class="mb-6 pb-3 border-b border-ink-800">
+        <h1 class="font-display text-2xl font-bold text-fg">Toutes les catégories</h1>
+        <p class="font-mono text-[11px] text-ink-500 mt-1 uppercase tracking-wider">
+            Parcourir les ouvrages par catégorie
+        </p>
+    </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         @forelse($categories as $category)
-            <a href="{{ route('ouvrages.index', ['categorie' => $category->slug]) }}"
-               class="group bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-ink-200 hover:border-amber-300 flex flex-col">
+            <a href="{{ route('categories.show', $category->slug) }}"
+               class="card-blueprint group relative bg-ink-900 border border-ink-800 hover:border-amber-500/60 transition-colors flex flex-col">
 
-                <div class="h-36 bg-ink-100 overflow-hidden">
-                    @if($category->image_cover ?? false)
-                        <img src="{{ asset('storage/' . $category->image_cover) }}"
+                <span class="tick tick-tl" aria-hidden="true"></span>
+                <span class="tick tick-br" aria-hidden="true"></span>
+
+                <div class="h-36 bg-ink-50 border-b border-ink-800 overflow-hidden">
+                    @if($category->image)
+                        <img src="{{ asset($category->image) }}"
                              alt="{{ $category->nom }}"
                              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                     @else
@@ -85,26 +41,41 @@
                     @endif
                 </div>
 
-                <div class="p-5 flex flex-col flex-1">
+                <div class="p-4 flex flex-col flex-1">
                     <div class="flex items-start justify-between gap-2">
-                        <h3 class="text-base font-semibold text-ink-900 group-hover:text-amber-700 transition">
+                        <h3 class="text-base font-semibold text-ink-100 group-hover:text-amber-600 transition">
                             {{ $category->nom }}
                         </h3>
-                        <span class="shrink-0 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-800">
-                            {{ number_format($category->ouvrages_count ?? 0, 0, ',', ' ') }} réf.
+                        <span class="shrink-0 font-mono text-[10px] px-2 py-0.5 border border-amber-500/30 bg-amber-500/10 text-amber-400">
+                            {{ number_format($category->composants_count ?? 0, 0, ',', ' ') }} réf.
                         </span>
                     </div>
 
                     @if($category->description)
-                        <p class="text-sm text-ink-500 mt-1">
+                        <p class="text-sm text-ink-400 mt-1.5">
                             {{ Str::limit($category->description, 100) }}
                         </p>
+                    @endif
+
+                    @if(($category->subcategories ?? collect())->isNotEmpty())
+                        <div class="flex flex-wrap gap-1.5 mt-4 pt-3 border-t border-ink-800">
+                            @foreach($category->subcategories->take(4) as $sub)
+                                <span class="font-mono px-2 py-1 bg-ink-800 text-ink-400 text-[10.5px]">
+                                    {{ $sub->nom }}
+                                </span>
+                            @endforeach
+                            @if($category->subcategories->count() > 4)
+                                <span class="font-mono px-2 py-1 bg-ink-800 text-ink-500 text-[10.5px]">
+                                    +{{ $category->subcategories->count() - 4 }}
+                                </span>
+                            @endif
+                        </div>
                     @endif
                 </div>
             </a>
         @empty
-            <div class="col-span-full text-center py-12 bg-white rounded-xl border border-ink-200">
-                <div class="text-ink-400">
+            <div class="col-span-full text-center py-12 bg-ink-900 border border-ink-800">
+                <div class="text-ink-500">
                     <svg class="w-12 h-12 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                     </svg>

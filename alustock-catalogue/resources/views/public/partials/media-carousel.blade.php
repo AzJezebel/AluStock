@@ -14,24 +14,24 @@
         })->values()->toJson();
     @endphp
 
-    <div class="bg-white rounded-xl shadow-sm border border-ink-200 overflow-hidden">
+    <div class="bg-white border border-ink-200 overflow-hidden">
         <div class="relative">
             {{-- Slides --}}
-            <div id="{{ $uniqueId }}" 
+            <div id="{{ $uniqueId }}"
                  class="relative {{ $aspectClass }} bg-white select-none"
                  data-carousel-medias="{{ $mediasJson }}">
                 @foreach($medias as $index => $media)
                     <div class="carousel-slide absolute inset-0 transition-opacity duration-300 {{ $index === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none' }}"
                          data-index="{{ $index }}">
-                        
-                        <img src="{{ asset('storage/' . $media->chemin_fichier) }}" 
+
+                        <img src="{{ asset('storage/' . $media->chemin_fichier) }}"
                              alt="{{ $media->titre }}"
                              data-lightbox-trigger
                              data-lightbox-carousel="{{ $carouselId }}"
                              data-lightbox-index="{{ $index }}"
                              class="w-full h-full object-contain cursor-zoom-in hover:opacity-95 transition"
                              draggable="false">
-                        
+
                         @if($media->titre)
                             <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 pointer-events-none">
                                 <p class="text-white text-sm font-medium truncate">{{ $media->titre }}</p>
@@ -42,22 +42,24 @@
             </div>
 
             @if($medias->count() > 1)
-                <button type="button" 
+                <button type="button"
                         onclick="carouselPrev('{{ $carouselId }}')"
-                        class="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/90 backdrop-blur-sm rounded-full shadow-lg items-center justify-center hover:bg-white transition z-10">
+                        aria-label="Média précédent"
+                        class="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/90 backdrop-blur-sm shadow items-center justify-center hover:bg-white transition z-10">
                     <svg class="w-4 h-4 text-ink-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                     </svg>
                 </button>
-                <button type="button" 
+                <button type="button"
                         onclick="carouselNext('{{ $carouselId }}')"
-                        class="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/90 backdrop-blur-sm rounded-full shadow-lg items-center justify-center hover:bg-white transition z-10">
+                        aria-label="Média suivant"
+                        class="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/90 backdrop-blur-sm shadow items-center justify-center hover:bg-white transition z-10">
                     <svg class="w-4 h-4 text-ink-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                     </svg>
                 </button>
 
-                <div class="absolute top-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded backdrop-blur-sm z-10 pointer-events-none">
+                <div class="absolute top-3 right-3 bg-black/60 text-white font-mono text-[11px] px-2 py-1 backdrop-blur-sm z-10 pointer-events-none">
                     <span class="carousel-counter-{{ $carouselId }}">1</span> / {{ $medias->count() }}
                 </div>
             @endif
@@ -67,11 +69,12 @@
         @if($medias->count() > 1)
             <div class="flex gap-2 p-3 bg-ink-50 border-t border-ink-100 overflow-x-auto">
                 @foreach($medias as $index => $media)
-                    <button type="button" 
+                    <button type="button"
                             onclick="carouselGoTo('{{ $carouselId }}', {{ $index }})"
-                            class="carousel-thumb-{{ $carouselId }} flex-shrink-0 w-16 h-16 rounded border-2 {{ $index === 0 ? 'border-amber-500' : 'border-transparent' }} overflow-hidden hover:border-amber-300 transition bg-white"
+                            aria-label="Voir le média {{ $index + 1 }}"
+                            class="carousel-thumb-{{ $carouselId }} flex-shrink-0 w-16 h-16 border-2 {{ $index === 0 ? 'border-amber-600' : 'border-transparent' }} overflow-hidden hover:border-amber-400 transition bg-white"
                             data-index="{{ $index }}">
-                        <img src="{{ asset('storage/' . $media->chemin_fichier) }}" 
+                        <img src="{{ asset('storage/' . $media->chemin_fichier) }}"
                              alt="{{ $media->titre }}"
                              class="w-full h-full object-contain">
                     </button>
@@ -99,7 +102,7 @@
                 });
                 
                 thumbs.forEach((thumb, i) => {
-                    thumb.classList.toggle('border-amber-500', i === index);
+                    thumb.classList.toggle('border-amber-600', i === index);
                     thumb.classList.toggle('border-transparent', i !== index);
                 });
 
@@ -376,7 +379,7 @@
             lightboxMedias.forEach((media, index) => {
                 const btn = document.createElement('button');
                 btn.type = 'button';
-                btn.className = `lightbox-thumb flex-shrink-0 w-12 h-12 rounded border-2 ${index === lightboxCurrentIndex ? 'border-amber-500' : 'border-transparent opacity-60'} overflow-hidden hover:opacity-100 transition`;
+                btn.className = `lightbox-thumb flex-shrink-0 w-12 h-12 rounded border-2 ${index === lightboxCurrentIndex ? 'border-amber-600' : 'border-transparent opacity-60'} overflow-hidden hover:opacity-100 transition`;
                 btn.dataset.index = index;
                 btn.innerHTML = `<img src="${media.thumb}" class="w-full h-full object-cover" draggable="false">`;
                 btn.addEventListener('click', (e) => {
@@ -391,7 +394,7 @@
 
         function updateLightboxThumbs() {
             document.querySelectorAll('.lightbox-thumb').forEach((thumb, i) => {
-                thumb.classList.toggle('border-amber-500', i === lightboxCurrentIndex);
+                thumb.classList.toggle('border-amber-600', i === lightboxCurrentIndex);
                 thumb.classList.toggle('border-transparent', i !== lightboxCurrentIndex);
                 thumb.classList.toggle('opacity-60', i !== lightboxCurrentIndex);
             });

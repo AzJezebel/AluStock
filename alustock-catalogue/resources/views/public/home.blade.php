@@ -1,356 +1,248 @@
-{{-- resources/views/public/home.blade.php --}}
+{{-- resources/views/public/home.blade.php
+     Direction "Blueprint" — hero "cartouche", catégories en vedette,
+     puis deux grandes cartes d'entrée vers les index complets.
+     Section "Gammes" retirée. --}}
 @extends('layouts.app')
 
 @section('title', 'AluStock — Catalogue de référence aluminium industriel')
 
-{{-- ============================================================
-     HERO PRINCIPAL (plein écran avec pattern)
-     ============================================================ --}}
-@section('hero')
-<div class="relative min-h-[90vh] flex items-center overflow-hidden">
-    
-    <div class="absolute inset-0 bg-ink-900">
-        <div class="absolute inset-0 opacity-10"
-             style="background-image: url(&quot;data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E&quot;);">
-        </div>
-        <div class="absolute inset-0 bg-gradient-to-br from-ink-950/80 via-ink-900/50 to-ink-800/30"></div>
-    </div>
-
-    <div class="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            
-            <div class="text-white">
-                <span class="inline-block text-xs font-semibold uppercase tracking-widest text-amber-400 mb-3 border border-amber-400/30 px-3 py-1 rounded-full">
-                    Catalogue de référence industriel
-                </span>
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
-                    Aluminium industriel,<br>
-                    <span class="text-amber-400">profilés et fixations</span>
-                </h1>
-                <p class="mt-4 text-lg text-ink-300 max-w-lg leading-relaxed">
-                    #PLACEHOLDER# Plus de {{ number_format($stats['references'], 0, ',', ' ') }} références documentées — profilés T-slot, tôles, visserie,
-                    connecteurs et extrusions sur mesure. Fiches techniques EN disponibles pour chaque produit.
-                </p>
-
-                <form action="{{ route('search.index') }}" method="GET" class="mt-8 flex max-w-lg">
-                    <input type="text"
-                           name="q"
-                           placeholder="Référence, alliage, dimension..."
-                           class="flex-1 px-4 py-3.5 rounded-l-lg bg-white/10 border border-white/10 text-white placeholder-ink-400 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition">
-                    <button type="submit" class="px-6 py-3.5 bg-amber-600 hover:bg-amber-700 text-white text-sm font-semibold rounded-r-lg transition shadow-lg shadow-amber-600/25 hover:shadow-amber-600/40 glow">
-                        Rechercher
-                    </button>
-                </form>
-
-                <div class="flex flex-wrap gap-6 mt-6 text-sm text-ink-300">
-                    <span class="flex items-center gap-2">
-                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
-                        <span class="font-medium text-white" data-count="{{ $stats['references'] }}">{{ number_format($stats['references'], 0, ',', ' ') }}</span> références
-                    </span>
-                    <span class="flex items-center gap-2">
-                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
-                        <span class="font-medium text-white" data-count="{{ $stats['categories'] }}">{{ $stats['categories'] }}</span> catégories
-                    </span>
-                    <span class="flex items-center gap-2">
-                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
-                        <span class="font-medium text-white" data-count="{{ $stats['gammes'] }}">{{ $stats['gammes'] }}</span> gammes
-                    </span>
-                </div>
-            </div>
-
-            {{-- Illustration décorative --}}
-            <div class="hidden lg:flex items-center justify-center">
-                <div class="relative w-full max-w-md aspect-square">
-                    <div class="absolute inset-0 border-2 border-amber-400/20 rounded-full animate-pulse-slow"></div>
-                    <div class="absolute inset-8 border border-amber-400/10 rounded-full"></div>
-                    <div class="absolute inset-16 border border-amber-400/5 rounded-full"></div>
-                    
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <div class="w-32 h-32 bg-amber-500/10 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-amber-400/20">
-                            <svg class="w-16 h-16 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
-                            </svg>
-                        </div>
-                    </div>
-
-                    <div class="absolute top-0 right-0 w-3 h-3 bg-amber-400/30 rounded-full"></div>
-                    <div class="absolute bottom-0 left-0 w-4 h-4 bg-amber-400/20 rounded-full"></div>
-                    <div class="absolute top-1/2 -left-2 w-2 h-2 bg-amber-400/20 rounded-full"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-ink-400 animate-bounce">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
-        </svg>
-    </div>
-</div>
-@endsection
-
-{{-- ============================================================
-     CONTENU DE LA PAGE
-     ============================================================ --}}
 @section('content')
 <div>
 
     {{-- ============================================================
-         SECTION : CATÉGORIES EN VEDETTE
+         SWITCHER DE PALETTE — TEMPORAIRE, POUR TESTER LES 7 DIRECTIONS
+         À retirer une fois un choix figé (voir commentaire dans app.blade.php
+         pour comment rendre ce choix permanent).
          ============================================================ --}}
-    <section class="py-16" data-aos="fade-up">
-        <div class="flex items-center justify-between mb-8">
-            <div>
-                <h2 class="text-xs font-semibold uppercase tracking-widest text-amber-600">
-                    Parcourir par
-                </h2>
-                <h3 class="text-2xl font-bold text-ink-900 mt-1">Catégories d'ouvrages</h3>
+    <div class="mb-6 flex flex-wrap items-center gap-2 p-2.5 bg-ink-900 border border-dashed border-amber-500/40">
+        <span class="font-mono text-[10px] uppercase tracking-widest text-amber-400 mr-1">
+            Test palette (temporaire) :
+        </span>
+        <button type="button" onclick="setTestTheme(null)"
+                class="palette-btn px-2.5 py-1 font-mono text-[10.5px] border border-ink-700 text-ink-300 hover:border-amber-500 hover:text-fg transition">
+            Cyan blueprint
+        </button>
+        <button type="button" onclick="setTestTheme('ambre')"
+                class="palette-btn px-2.5 py-1 font-mono text-[10.5px] border border-ink-700 text-ink-300 hover:border-amber-500 hover:text-fg transition">
+            Ambre sécurité
+        </button>
+        <button type="button" onclick="setTestTheme('vert')"
+                class="palette-btn px-2.5 py-1 font-mono text-[10.5px] border border-ink-700 text-ink-300 hover:border-amber-500 hover:text-fg transition">
+            Vert phosphore
+        </button>
+        <button type="button" onclick="setTestTheme('mono')"
+                class="palette-btn px-2.5 py-1 font-mono text-[10.5px] border border-ink-700 text-ink-300 hover:border-amber-500 hover:text-fg transition">
+            Blanc sur noir
+        </button>
+        <button type="button" onclick="setTestTheme('cyanotype')"
+                class="palette-btn px-2.5 py-1 font-mono text-[10.5px] border border-ink-700 text-ink-300 hover:border-amber-500 hover:text-fg transition">
+            Cyanotype classique
+        </button>
+        <button type="button" onclick="setTestTheme('rouge')"
+                class="palette-btn px-2.5 py-1 font-mono text-[10.5px] border border-ink-700 text-ink-300 hover:border-amber-500 hover:text-fg transition">
+            Rouge alerte
+        </button>
+        <button type="button" onclick="setTestTheme('violet')"
+                class="palette-btn px-2.5 py-1 font-mono text-[10.5px] border border-ink-700 text-ink-300 hover:border-amber-500 hover:text-fg transition">
+            Violet UV
+        </button>
+        <button type="button" onclick="setTestTheme('graphite')"
+                class="palette-btn px-2.5 py-1 font-mono text-[10.5px] border border-ink-700 text-ink-300 hover:border-amber-500 hover:text-fg transition">
+            Graphite doux
+        </button>
+        <button type="button" onclick="setTestTheme('sable')"
+                class="palette-btn px-2.5 py-1 font-mono text-[10.5px] border border-ink-700 text-ink-300 hover:border-amber-500 hover:text-fg transition">
+            Sable industriel
+        </button>
+        <span class="w-px self-stretch bg-ink-700 mx-1"></span>
+        <button type="button" onclick="setTestTheme('papier')"
+                class="palette-btn px-2.5 py-1 font-mono text-[10.5px] border border-ink-700 text-ink-300 hover:border-amber-500 hover:text-fg transition">
+            ☀ Papier ingénieur
+        </button>
+        <button type="button" onclick="setTestTheme('aluminium')"
+                class="palette-btn px-2.5 py-1 font-mono text-[10.5px] border border-ink-700 text-ink-300 hover:border-amber-500 hover:text-fg transition">
+            ☀ Aluminium brossé
+        </button>
+        <button type="button" onclick="setTestTheme('atelier')"
+                class="palette-btn px-2.5 py-1 font-mono text-[10.5px] border border-ink-700 text-ink-300 hover:border-amber-500 hover:text-fg transition">
+            ☀ Blanc atelier
+        </button>
+    </div>
+    <script>
+        function setTestTheme(theme) {
+            if (theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem('alustock-theme-test', theme);
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.removeItem('alustock-theme-test');
+            }
+        }
+    </script>
+
+    {{-- ============================================================
+         HERO — plaque "cartouche" façon plan technique
+         ============================================================ --}}
+    <div class="relative bg-ink-900 border border-ink-700 mb-10 overflow-hidden">
+        <div class="absolute inset-0 blueprint-grid pointer-events-none"></div>
+
+        <span class="tick tick-tl" aria-hidden="true"></span>
+        <span class="tick tick-br" aria-hidden="true"></span>
+
+        <div class="relative grid grid-cols-1 lg:grid-cols-3 gap-8 p-6 sm:p-10">
+
+            <div class="lg:col-span-2">
+                <span class="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-400">
+                    Catalogue de référence industriel
+                </span>
+                <h1 class="mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-fg tracking-tight leading-tight">
+                    ALU<span class="text-amber-400">STOCK</span>
+                </h1>
+                <p class="mt-4 font-mono text-[13px] text-ink-300 max-w-xl leading-relaxed">
+                    Plus de {{ number_format($stats['references'], 0, ',', ' ') }} références documentées — profilés T-slot, tôles, visserie,
+                    connecteurs et extrusions sur mesure. Fiches techniques EN disponibles pour chaque produit.
+                </p>
+
+                <form action="{{ route('search.index') }}" method="GET" class="mt-6 flex max-w-xl">
+                    <label for="hero-search" class="sr-only">Rechercher</label>
+                    <div class="flex items-center gap-2 flex-1 border border-ink-600 bg-ink-950/60 h-11 px-3.5 focus-within:border-amber-500 transition">
+                        <span class="text-amber-500 text-sm">&gt;</span>
+                        <input type="text" id="hero-search" name="q"
+                               placeholder="Référence, alliage, dimension..."
+                               class="flex-1 bg-transparent border-none outline-none text-[12.5px] text-fg placeholder-ink-400"
+                               autocomplete="off">
+                    </div>
+                    <button type="submit"
+                            class="px-5 h-11 bg-amber-600 hover:bg-amber-500 text-ink-950 text-[12.5px] font-bold uppercase tracking-wider transition">
+                        Rechercher
+                    </button>
+                </form>
             </div>
-            <a href="{{ route('categories.index') }}" 
-               class="inline-flex items-center text-sm font-medium text-amber-700 hover:text-amber-800 transition group">
-                Voir toutes les catégories
-                <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                </svg>
-            </a>
-        </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            @forelse($featuredCategories as $category)
-                <a href="{{ route('ouvrages.index', ['categorie' => $category->slug]) }}"
-                   class="group bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-ink-200 hover:border-amber-300 flex flex-col hover:-translate-y-1">
-                    
-                    <div class="h-24 bg-gradient-to-br from-ink-50 to-ink-100 flex items-center justify-center group-hover:from-amber-50 group-hover:to-amber-100 transition-colors duration-300">
-                        <div class="w-14 h-14 rounded-full bg-ink-200/50 group-hover:bg-amber-200/50 flex items-center justify-center text-2xl transition-colors duration-300">
-                            {{ $category->icone ?? '📦' }}
-                        </div>
-                    </div>
-
-                    <div class="p-5 flex flex-col flex-1">
-                        <div class="flex items-start justify-between gap-2">
-                            <h4 class="text-base font-semibold text-ink-900 group-hover:text-amber-700 transition">
-                                {{ $category->nom }}
-                            </h4>
-                            <span class="shrink-0 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-800">
-                                {{ number_format($category->ouvrages_count ?? 0, 0, ',', ' ') }}
-                            </span>
-                        </div>
-                        @if($category->description)
-                            <p class="text-sm text-ink-500 mt-1 line-clamp-2">
-                                {{ Str::limit($category->description, 60) }}
-                            </p>
-                        @endif
-                    </div>
-                </a>
-            @empty
-                <div class="col-span-full text-center py-8 text-ink-400">
-                    <p class="text-sm">Aucune catégorie disponible.</p>
+            {{-- Stats --}}
+            <div class="grid grid-cols-1 gap-3 h-full">
+                <div class="border border-ink-700 bg-ink-950/50 p-5 flex-1 flex flex-col items-center justify-center text-center">
+                    <span class="block font-display text-4xl sm:text-5xl font-bold text-fg">{{ number_format($stats['references'], 0, ',', ' ') }}</span>
+                    <span class="font-mono text-ink-400 text-[10px] uppercase tracking-widest mt-1">Références</span>
                 </div>
-            @endforelse
-        </div>
-    </section>
+                <div class="border border-ink-700 bg-ink-950/50 p-5 flex-1 flex flex-col items-center justify-center text-center">
+                    <span class="block font-display text-4xl sm:text-5xl font-bold text-fg">{{ $stats['categories'] }}</span>
+                    <span class="font-mono text-ink-400 text-[10px] uppercase tracking-widest mt-1">Catégories</span>
+                </div>
+            </div>
 
-    {{-- Séparateur --}}
-    <div class="relative py-4">
-        <div class="absolute inset-0 flex items-center">
-            <div class="w-full border-t border-ink-200"></div>
-        </div>
-        <div class="relative flex justify-center">
-            <span class="bg-ink-50 px-4 text-ink-300 text-sm">✦</span>
         </div>
     </div>
 
     {{-- ============================================================
-         SECTION : GAMMES EN VEDETTE
+         CATÉGORIES EN VEDETTE
          ============================================================ --}}
-    <section class="py-16" data-aos="fade-up" data-aos-delay="100">
-        <div class="flex items-center justify-between mb-8">
-            <div>
-                <h2 class="text-xs font-semibold uppercase tracking-widest text-amber-600">
-                    Parcourir par
-                </h2>
-                <h3 class="text-2xl font-bold text-ink-900 mt-1">Gammes de profilés</h3>
-            </div>
-            <a href="{{ route('gammes.index') }}" 
-               class="inline-flex items-center text-sm font-medium text-amber-700 hover:text-amber-800 transition group">
-                Voir toutes les gammes
-                <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                </svg>
-            </a>
-        </div>
+    <div class="flex items-end justify-between mb-4">
+        <h2 class="font-mono text-[11px] font-semibold uppercase tracking-widest text-ink-500">
+            Parcourir par catégorie
+        </h2>
+        <a href="{{ route('categories.index') }}"
+           class="inline-flex items-center gap-1 font-mono text-[11px] text-amber-400 hover:text-amber-600 transition">
+            Voir toutes les catégories
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+        </a>
+    </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            @forelse($featuredGammes as $gamme)
-                <a href="{{ route('ouvrages.index', ['gamme' => $gamme->slug]) }}"
-                   class="group bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-ink-200 hover:border-amber-300 flex flex-col hover:-translate-y-1">
-                    
-                    <div class="h-32 bg-ink-100 overflow-hidden">
-                        @if($gamme->image_cover)
-                            <img src="{{ asset('storage/' . $gamme->image_cover) }}"
-                                 alt="{{ $gamme->nom }}"
-                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        @else
-                            <div class="w-full h-full flex items-center justify-center text-ink-300 bg-gradient-to-br from-ink-100 to-ink-200">
-                                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5"/>
-                                </svg>
-                            </div>
-                        @endif
-                    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+        @forelse($featuredCategories as $category)
+            <a href="{{ route('ouvrages.index', ['categorie' => $category->slug]) }}"
+               class="card-blueprint group relative bg-ink-900 border border-ink-800 hover:border-amber-500/60 transition-colors flex flex-col">
 
-                    <div class="p-5 flex flex-col flex-1">
-                        <div class="flex items-start justify-between gap-2">
-                            <h4 class="text-base font-semibold text-ink-900 group-hover:text-amber-700 transition">
-                                {{ $gamme->nom }}
-                            </h4>
-                            <span class="shrink-0 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-800">
-                                {{ number_format($gamme->ouvrages_count ?? 0, 0, ',', ' ') }}
-                            </span>
-                        </div>
-                        @if($gamme->description)
-                            <p class="text-sm text-ink-500 mt-1 line-clamp-2">
-                                {{ Str::limit($gamme->description, 60) }}
-                            </p>
-                        @endif
-                    </div>
-                </a>
-            @empty
-                <div class="col-span-full text-center py-8 text-ink-400">
-                    <p class="text-sm">Aucune gamme disponible.</p>
+                <span class="tick tick-tl" aria-hidden="true"></span>
+                <span class="tick tick-br" aria-hidden="true"></span>
+
+                <div class="h-20 bg-ink-950 border-b border-ink-800 flex items-center justify-center">
+                    <span class="text-2xl">{{ $category->icone ?? '▦' }}</span>
                 </div>
-            @endforelse
-        </div>
-    </section>
+
+                <div class="p-4 flex flex-col flex-1">
+                    <div class="flex items-start justify-between gap-2">
+                        <h4 class="text-sm font-semibold text-ink-100 group-hover:text-amber-600 transition">
+                            {{ $category->nom }}
+                        </h4>
+                        <span class="shrink-0 font-mono text-[10px] px-2 py-0.5 border border-amber-500/30 bg-amber-500/10 text-amber-400">
+                            {{ number_format($category->ouvrages_count ?? 0, 0, ',', ' ') }}
+                        </span>
+                    </div>
+                    @if($category->description)
+                        <p class="text-xs text-ink-400 mt-1.5 line-clamp-2">
+                            {{ Str::limit($category->description, 60) }}
+                        </p>
+                    @endif
+                </div>
+            </a>
+        @empty
+            <div class="col-span-full text-center py-8 bg-ink-900 border border-ink-800 text-ink-500">
+                <p class="text-sm">Aucune catégorie disponible.</p>
+            </div>
+        @endforelse
+    </div>
 
     {{-- ============================================================
-         SECTION : STATISTIQUES (animées)
+         ACCÈS DIRECTS — tout l'index d'un coup
          ============================================================ --}}
-    <section class="py-16" data-aos="fade-up" data-aos-delay="200">
-        <div class="bg-gradient-to-br from-ink-900 to-ink-800 rounded-2xl p-8 md:p-12 text-white relative overflow-hidden">
-            
-            <div class="absolute inset-0 opacity-5"
-                 style="background-image: url(&quot;data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E&quot;);">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+        <a href="{{ route('ouvrages.index') }}"
+           class="card-blueprint group relative bg-ink-900 border border-ink-700 hover:border-amber-500/60 transition-colors flex items-center gap-5 p-6">
+
+            <span class="tick tick-tl" aria-hidden="true"></span>
+            <span class="tick tick-br" aria-hidden="true"></span>
+
+            <div class="w-14 h-14 shrink-0 border border-ink-700 bg-ink-950 flex items-center justify-center text-amber-400 group-hover:border-amber-500/60 transition-colors">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+                </svg>
             </div>
 
-            <div class="relative grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
-                <div>
-                    <div class="text-4xl md:text-5xl font-bold text-amber-400" 
-                         data-count="{{ $stats['references'] }}">0</div>
-                    <p class="text-ink-300 text-sm mt-2 uppercase tracking-wider">Références</p>
-                </div>
-                <div>
-                    <div class="text-4xl md:text-5xl font-bold text-amber-400" 
-                         data-count="{{ $stats['categories'] }}">0</div>
-                    <p class="text-ink-300 text-sm mt-2 uppercase tracking-wider">Catégories</p>
-                </div>
-                <div>
-                    <div class="text-4xl md:text-5xl font-bold text-amber-400" 
-                         data-count="{{ $stats['gammes'] }}">0</div>
-                    <p class="text-ink-300 text-sm mt-2 uppercase tracking-wider">Gammes</p>
-                </div>
+            <div class="flex-1 min-w-0">
+                <h3 class="font-display text-lg font-bold text-fg group-hover:text-amber-600 transition">
+                    Tous les ouvrages
+                </h3>
+                <p class="font-mono text-[11px] text-ink-400 mt-0.5">
+                    Fenêtres, portes, garde-corps — produits finis assemblés
+                </p>
             </div>
-        </div>
-    </section>
+
+            <svg class="w-5 h-5 text-ink-600 group-hover:text-amber-500 group-hover:translate-x-1 transition-all shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+        </a>
+
+        <a href="{{ route('composants.index') }}"
+           class="card-blueprint group relative bg-ink-900 border border-ink-700 hover:border-amber-500/60 transition-colors flex items-center gap-5 p-6">
+
+            <span class="tick tick-tl" aria-hidden="true"></span>
+            <span class="tick tick-br" aria-hidden="true"></span>
+
+            <div class="w-14 h-14 shrink-0 border border-ink-700 bg-ink-950 flex items-center justify-center text-amber-400 group-hover:border-amber-500/60 transition-colors">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                </svg>
+            </div>
+
+            <div class="flex-1 min-w-0">
+                <h3 class="font-display text-lg font-bold text-fg group-hover:text-amber-600 transition">
+                    Tous les composants
+                </h3>
+                <p class="font-mono text-[11px] text-ink-400 mt-0.5">
+                    Profilés, visserie, connecteurs — références atomiques
+                </p>
+            </div>
+
+            <svg class="w-5 h-5 text-ink-600 group-hover:text-amber-500 group-hover:translate-x-1 transition-all shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+        </a>
+
+    </div>
 
 </div>
 @endsection
-
-{{-- ============================================================
-     SCRIPTS : Animations et compteurs
-     ============================================================ --}}
-@push('scripts')
-{{-- AOS (Animate On Scroll) --}}
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // 1. Initialiser AOS
-        AOS.init({
-            duration: 600,
-            once: true,
-            offset: 80,
-            easing: 'ease-out-cubic'
-        });
-
-        // 2. Compteur animé
-        const counters = document.querySelectorAll('[data-count]');
-        
-        const animateCounter = (el) => {
-            const target = parseInt(el.getAttribute('data-count'));
-            const duration = 2000;
-            const startTime = performance.now();
-            
-            const updateCounter = (currentTime) => {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                const eased = 1 - Math.pow(1 - progress, 4);
-                const current = Math.round(eased * target);
-                
-                el.textContent = current.toLocaleString('fr-FR');
-                
-                if (progress < 1) {
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    el.textContent = target.toLocaleString('fr-FR');
-                }
-            };
-            
-            requestAnimationFrame(updateCounter);
-        };
-
-        // Observer pour déclencher les compteurs au scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const el = entry.target;
-                    animateCounter(el);
-                    observer.unobserve(el);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        counters.forEach(counter => observer.observe(counter));
-    });
-</script>
-
-<style>
-    /* Animation de glow pour les boutons */
-    .glow {
-        position: relative;
-    }
-    .glow::after {
-        content: '';
-        position: absolute;
-        inset: -2px;
-        border-radius: inherit;
-        background: linear-gradient(135deg, rgba(245, 158, 11, 0.3), rgba(245, 158, 11, 0.1));
-        filter: blur(12px);
-        z-index: -1;
-        opacity: 0;
-        transition: opacity 0.4s ease;
-    }
-    .glow:hover::after {
-        opacity: 1;
-    }
-
-    /* Pulse lente pour les cercles décoratifs */
-    @keyframes pulse-slow {
-        0%, 100% { transform: scale(1); opacity: 1; }
-        50% { transform: scale(1.05); opacity: 0.8; }
-    }
-    .animate-pulse-slow {
-        animation: pulse-slow 4s ease-in-out infinite;
-    }
-
-    /* Animation de défilement */
-    .animate-bounce {
-        animation: bounce 2s infinite;
-    }
-    @keyframes bounce {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-8px); }
-    }
-</style>
-@endpush
