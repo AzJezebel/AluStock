@@ -380,7 +380,12 @@
                 </div>
             </form>
 
-            <div class="font-mono text-[11px] text-ink-400 tracking-wide whitespace-nowrap">{{ number_format($stats['references'], 0, ',', ' ') }} REFS</div>
+            <div class="font-mono text-[11px] text-ink-400 tracking-wide whitespace-nowrap">
+                N={{ number_format(
+                    \Illuminate\Support\Facades\Cache::remember('layout_references_count', 3600, fn () => \App\Models\Composant::count() + \App\Models\Ouvrage::count()),
+                    0, '', ' '
+                ) }} REFS
+            </div>
         </div>
     </header>
 

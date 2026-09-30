@@ -35,7 +35,7 @@ class ComposantController extends Controller
             $query->where('type_composant_id', $request->type);
         }
 
-        $composants = $query->paginate(20);
+        $composants = $query->paginate(24);
 
         return view('public.composants.index', compact('composants'));
     }
