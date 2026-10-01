@@ -388,3 +388,15 @@ Refactor UI components for improved consistency and accessibility
 - Enhanced search page design for better readability and user experience, including updated filter styles and result displays.
 - Introduced reusable component cards for both components and ouvrages, ensuring a consistent look and feel across various pages.
 - Added .gitignore file to exclude sensitive and environment-specific files from version control.
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+31/09
+
+feat: add palette management and switching functionality
+
+- Introduced palette-data.js to define color palettes and presets.
+- Implemented palette-switcher.js for dynamic palette switching in the UI.
+- Created media-image.blade.php component for image handling with placeholders.
+- Added partial view palette-switcher.blade.php for integrating palette switcher in the layout.
+- Enhanced vitrine.js with scroll reveal, navigation, and lightbox functionalities.
