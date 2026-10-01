@@ -1,348 +1,317 @@
 {{-- resources/views/public/vitrine/index.blade.php --}}
+@php
+    $brandName = trim(config('vitrine.brand.first') . config('vitrine.brand.second'));
+    $hero = config('vitrine.hero');
 
+    // --- Ouvrages normalisés (placeholders si pas d'image, démo si base vide)
+    $items = collect($featuredOuvrages ?? [])->values()
+        ->map(fn ($o, $i) => \App\Support\Media::ouvrage($o, $i));
+    $isDemo = false;
+    if ($items->isEmpty() && config('vitrine.demo_when_empty')) {
+        $items = collect(\App\Support\Media::demo());
+        $isDemo = true;
+    }
+    $cats = $items->pluck('categorie')->filter()->unique()->values();
+
+    // --- Hero
+    $heroImages = \App\Support\Media::urls($hero['images'] ?? []);
+    $heroCount = count($heroImages) ?: 3;
+    $titleWords1 = preg_split('/\s+/', trim($hero['title_1']));
+    $titleWords2 = preg_split('/\s+/', trim($hero['title_2']));
+
+    // --- Chiffres
+    $years = max(1, now()->year - (int) config('vitrine.since'));
+    $stats = collect([
+        ['value' => $stats['ouvrages'] ?? $items->count(), 'label' => 'Réalisations'],
+        ['value' => $stats['categories'] ?? $cats->count(), 'label' => 'Domaines'],
+        ['value' => $stats['gammes'] ?? collect($gammes ?? [])->count(), 'label' => 'Gammes'],
+        ['value' => $years, 'label' => "Années d'expérience"],
+    ])->filter(fn ($s) => (int) $s['value'] > 0)->values();
+
+    // --- Bandeau défilant
+    $marquee = collect($categories ?? [])->pluck('nom')
+        ->merge(collect($gammes ?? [])->pluck('nom'))
+        ->merge($cats)->filter()->unique()->values();
+    if ($marquee->count() < 5) {
+        $marquee = $marquee->merge(config('vitrine.marquee'))->unique()->values();
+    }
+
+    // --- Données JSON pour la lightbox
+    $lightboxData = $items->map(fn ($it) => \Illuminate\Support\Arr::only(
+        $it, ['titre', 'description', 'categorie', 'gamme', 'lieu', 'annee', 'images']
+    ))->values();
+@endphp
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="no-js">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AluStock - Distributeur industriel d'aluminium, de profilés et de fixations. Plus de 18 910 références documentées.">
-    <title>AluStock - Distributeur industriel d'aluminium</title>
+    <meta name="description" content="{{ $brandName }} — {{ config('vitrine.tagline') }}">
+    <title>{{ $brandName }} — Réalisations en aluminium</title>
 
-    <!-- Tailwind CSS CDN -->
+    {{-- Évite le flash : active .js avant le rendu + applique la palette mémorisée --}}
+    <script>
+        document.documentElement.classList.replace('no-js', 'js');
+        @if (config('vitrine.palette_switcher'))
+        try {
+            var s = JSON.parse(localStorage.getItem('vitrine.palette') || '{}'), d = document.documentElement;
+            if (s.ink) d.dataset.ink = s.ink;
+            if (s.accent) d.dataset.accent = s.accent;
+            if (s.fx === false) d.dataset.fx = 'off';
+        } catch (e) {}
+        @endif
+    </script>
+
+    {{-- Palettes (variables CSS) — avant Tailwind --}}
+    <link rel="stylesheet" href="{{ asset('css/palettes.css') }}">
+
+    {{-- Tailwind CDN : les couleurs lisent les variables CSS, donc changent avec la palette --}}
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+        const v = (name) => `rgb(var(--${name}) / <alpha-value>)`;
+        const scale = (p) => Object.fromEntries([50,100,200,300,400,500,600,700,800,900,950].map(s => [s, v(`${p}-${s}`)]));
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        ink: {
-                            50:  '#f6f7f8',
-                            100: '#e9ebee',
-                            200: '#d3d7dd',
-                            300: '#aab1bb',
-                            400: '#7c8492',
-                            500: '#5b6472',
-                            600: '#434b57',
-                            700: '#313842',
-                            800: '#20252d',
-                            900: '#14171c',
-                            950: '#0a0c0f',
-                        },
-                        amber: {
-                            50:  '#faf6ee',
-                            100: '#f1e3c8',
-                            200: '#e3c78e',
-                            300: '#d1a866',
-                            400: '#bb8d47',
-                            500: '#a97a3a',
-                            600: '#8f6530',
-                            700: '#735026',
-                            800: '#573d1e',
-                            900: '#3c2a15',
-                            950: '#241a0e',
-                        },
-                    }
+                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Fraunces', 'Georgia', 'serif'] },
+                    colors: { ink: scale('ink'), accent: scale('accent'), onaccent: v('on-accent') },
                 }
             }
-        }
+        };
     </script>
 
-    <!-- Google Fonts - Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-    <!-- AOS.js -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-
-    <!-- Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <style>
-        * {
-            font-family: 'Inter', sans-serif;
-        }
-
-        :root {
-            --ink-50: #f6f7f8;
-            --ink-100: #e9ebee;
-            --ink-200: #d3d7dd;
-            --ink-300: #aab1bb;
-            --ink-400: #7c8492;
-            --ink-500: #5b6472;
-            --ink-600: #434b57;
-            --ink-700: #313842;
-            --ink-800: #20252d;
-            --ink-900: #14171c;
-            --ink-950: #0a0c0f;
-        }
-
-        .hero {
-            background: var(--ink-950);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .btn-flat {
-            transition: background-color 0.2s ease, border-color 0.2s ease;
-        }
-
-        .card-hover {
-            transition: box-shadow 0.2s ease, border-color 0.2s ease;
-        }
-
-        .card-hover:hover {
-            box-shadow: 0 4px 20px rgba(10, 12, 15, 0.08);
-        }
-
-        .counter {
-            font-variant-numeric: tabular-nums;
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--ink-100);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--ink-400);
-            border-radius: 4px;
-        }
-
-        /* Entrée du hero — amplitude très réduite */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(8px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-animate {
-            animation: fadeInUp 0.5s ease-out forwards;
-        }
-
-        .hero-animate-delay-1 { animation-delay: 0.1s; opacity: 0; }
-        .hero-animate-delay-2 { animation-delay: 0.2s; opacity: 0; }
-        .hero-animate-delay-3 { animation-delay: 0.3s; opacity: 0; }
-
-        /* AOS — amplitude de déplacement très réduite (au lieu des ~100px par défaut) */
-        [data-aos="fade-up"] {
-            transform: translate3d(0, 10px, 0) !important;
-        }
-        [data-aos="fade-up"].aos-animate {
-            transform: translate3d(0, 0, 0) !important;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/vitrine.css') }}">
 </head>
-<body class="bg-white">
+<body class="bg-white text-ink-900">
 
-    <!-- Navigation -->
     @include('partials.vitrine-nav')
 
-    <!-- 1. Hero Principal -->
-    <section id="accueil" class="hero min-h-screen flex items-center relative">
-        <div class="hero-content container mx-auto px-4 py-20">
-            <div class="max-w-4xl mx-auto text-center">
+    {{-- =================================================================
+         1. HERO — diaporama Ken Burns + aurore + grille + projecteur + grain
+         ================================================================= --}}
+    <section id="accueil" class="hero relative min-h-screen flex items-center overflow-hidden"
+             data-interval="{{ $hero['interval'] ?? 6500 }}" style="--interval: {{ $hero['interval'] ?? 6500 }}ms;">
 
-                <div class="hero-animate hero-animate-delay-1 mb-6">
-                    <span class="inline-flex items-center gap-2 text-amber-400 text-xs font-semibold tracking-widest uppercase">
-                        <span class="w-6 h-px bg-amber-400"></span>
-                        Distributeur industriel depuis 1995
-                        <span class="w-6 h-px bg-amber-400"></span>
+        {{-- Diaporama (images de config('vitrine.hero.images'), sinon placeholders) --}}
+        <div class="absolute inset-0 -z-10" aria-hidden="true">
+            @for ($i = 0; $i < $heroCount; $i++)
+                <x-media-image :src="$heroImages[$i] ?? null" :seed="$i" label="" :icon="false" :eager="$i === 0"
+                               class="hero-slide absolute inset-0 {{ $i === 0 ? 'is-active' : '' }}"
+                               style="--kx: {{ $i % 2 ? '1.5%' : '-1.5%' }}; --ky: {{ $i % 3 ? '-1%' : '1%' }};" />
+            @endfor
+        </div>
+        <div class="hero-overlay absolute inset-0 -z-10"></div>
+
+        {{-- Effets décoratifs (désactivables depuis le panneau de palettes) --}}
+        <div class="hero-fx absolute inset-0 -z-10 pointer-events-none overflow-hidden" aria-hidden="true">
+            <div data-depth="-60" class="absolute -top-[10%] -left-[8%]"><div class="aurora-blob aurora-a"></div></div>
+            <div data-depth="80" class="absolute top-[30%] -right-[10%]"><div class="aurora-blob aurora-b"></div></div>
+            <div data-depth="-40" class="absolute -bottom-[20%] left-[25%]"><div class="aurora-blob aurora-c"></div></div>
+        </div>
+        <div class="hero-fx hero-grid absolute inset-0 -z-10 pointer-events-none" aria-hidden="true"></div>
+        <div class="hero-fx hero-spot absolute inset-0 -z-10 pointer-events-none" aria-hidden="true"></div>
+        <div class="hero-fx hero-grain absolute inset-0 -z-10 pointer-events-none" aria-hidden="true"></div>
+
+        {{-- Contenu --}}
+        <div class="container mx-auto px-4 pt-28 pb-32 relative">
+            <div class="max-w-5xl mx-auto text-center" data-depth="8">
+
+                <div class="hero-fade mb-8" style="--d: 100ms">
+                    <span class="inline-flex items-center gap-3 text-accent-400 text-xs font-semibold tracking-[.25em] uppercase">
+                        <span class="w-8 h-px bg-accent-400"></span>
+                        {{ $hero['eyebrow'] }} · depuis {{ config('vitrine.since') }}
+                        <span class="w-8 h-px bg-accent-400"></span>
                     </span>
                 </div>
 
-                <h1 class="hero-animate hero-animate-delay-1 text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6">
-                    L'aluminium
-                    <span class="text-amber-400">à portée de main</span>
+                <h1 class="text-5xl sm:text-6xl md:text-8xl font-extrabold text-white leading-[1.02] tracking-tight mb-8">
+                    <span class="block">
+                        @foreach ($titleWords1 as $w)
+                            <span class="word"><span style="--i: {{ $loop->index }}">{{ $w }}</span></span>
+                        @endforeach
+                    </span>
+                    <span class="block font-display italic font-medium text-accent-400">
+                        @foreach ($titleWords2 as $w)
+                            <span class="word"><span style="--i: {{ count($titleWords1) + $loop->index }}">{{ $w }}</span></span>
+                        @endforeach
+                    </span>
                 </h1>
 
-                <p class="hero-animate hero-animate-delay-2 text-xl md:text-2xl text-ink-300 mb-10 max-w-2xl mx-auto">
-                    Plus de 18 910 références documentées pour tous vos projets d'architecture et d'industrie
+                <p class="hero-fade text-lg md:text-xl text-ink-200 mb-12 max-w-2xl mx-auto" style="--d: 900ms">
+                    {{ $hero['subtitle'] }}
                 </p>
 
-                <div class="hero-animate hero-animate-delay-2 max-w-2xl mx-auto mb-12">
-                    <form action="{{ route('catalogue.index') }}" method="GET" class="relative">
-                        <input
-                            type="text"
-                            name="search"
-                            placeholder="Rechercher un profilé, une référence, une catégorie..."
-                            class="w-full px-6 py-4 pr-36 rounded-none bg-white/5 border border-white/10 text-white placeholder-ink-400 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/40 transition-colors"
-                        >
-                        <button type="submit" class="btn-flat absolute right-2 top-1/2 -translate-y-1/2 px-6 py-2.5 bg-amber-500 hover:bg-amber-600 text-ink-950 font-semibold rounded-none">
-                            <i class="fas fa-search mr-2"></i>
-                            Rechercher
-                        </button>
-                    </form>
+                <div class="hero-fade flex flex-col sm:flex-row gap-4 justify-center mb-16" style="--d: 1100ms">
+                    <a href="#realisations" class="btn btn-primary btn-shine px-8 py-4 text-lg">
+                        Découvrir nos réalisations <i class="fas fa-arrow-down"></i>
+                    </a>
+                    <a href="#contact" class="btn btn-ghost px-8 py-4 text-lg">
+                        <i class="fas fa-phone"></i> Nous contacter
+                    </a>
                 </div>
 
-                <div class="hero-animate hero-animate-delay-3 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
-                    <div class="bg-white/5 rounded-none p-4 border border-white/10">
-                        <div class="text-3xl font-bold text-amber-400 counter" data-target="{{ $stats['references'] }}">0</div>
-                        <div class="text-sm text-ink-400 mt-1">Références</div>
+                @if ($stats->isNotEmpty())
+                    <div class="hero-fade grid grid-cols-2 md:grid-cols-{{ min(4, $stats->count()) }} gap-4 max-w-3xl mx-auto" style="--d: 1300ms">
+                        @foreach ($stats as $s)
+                            <div class="stat-card p-4 text-center">
+                                <div class="text-3xl font-bold text-accent-400 tabular-nums counter" data-target="{{ (int) $s['value'] }}">0</div>
+                                <div class="text-xs uppercase tracking-widest text-ink-300 mt-1">{{ $s['label'] }}</div>
+                            </div>
+                        @endforeach
                     </div>
-                    <div class="bg-white/5 rounded-none p-4 border border-white/10">
-                        <div class="text-3xl font-bold text-amber-400 counter" data-target="{{ $stats['categories'] }}">0</div>
-                        <div class="text-sm text-ink-400 mt-1">Catégories</div>
-                    </div>
-                    <div class="bg-white/5 rounded-none p-4 border border-white/10">
-                        <div class="text-3xl font-bold text-amber-400 counter" data-target="{{ $stats['gammes'] }}">0</div>
-                        <div class="text-sm text-ink-400 mt-1">Gammes</div>
-                    </div>
-                    <div class="bg-white/5 rounded-none p-4 border border-white/10">
-                        <div class="text-3xl font-bold text-amber-400 counter" data-target="{{ $stats['ouvrages'] }}">0</div>
-                        <div class="text-sm text-ink-400 mt-1">Réalisations</div>
-                    </div>
-                </div>
+                @endif
             </div>
         </div>
 
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
-            <i class="fas fa-chevron-down text-white/30 text-xl"></i>
+        {{-- Indicateurs de diapositive --}}
+        @if ($heroCount > 1)
+            <div class="absolute bottom-8 right-6 md:right-10 z-10 hidden sm:flex items-center gap-4 text-xs text-ink-300 tracking-widest">
+                <span id="hero-count" class="tabular-nums">01 / {{ str_pad($heroCount, 2, '0', STR_PAD_LEFT) }}</span>
+                <div class="flex gap-2">
+                    @for ($i = 0; $i < $heroCount; $i++)
+                        <button type="button" class="hero-dot {{ $i === 0 ? 'is-active' : '' }}" aria-label="Image {{ $i + 1 }}"></button>
+                    @endfor
+                </div>
+            </div>
+        @endif
+
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 hidden md:block" aria-hidden="true">
+            <div class="scroll-cue"></div>
         </div>
     </section>
 
-    <!-- 2. Section À propos / Chiffres clés -->
-    <section id="a-propos" class="py-20 px-4 bg-white" data-aos="fade-up">
-        <div class="container mx-auto max-w-6xl">
-            <div class="text-center mb-16">
-                <span class="inline-flex items-center gap-2 text-amber-700 text-xs font-semibold tracking-widest uppercase mb-4">
-                    <span class="w-6 h-px bg-amber-700"></span>
-                    À propos
-                    <span class="w-6 h-px bg-amber-700"></span>
-                </span>
-                <h2 class="text-4xl md:text-5xl font-bold text-ink-950 mb-4">
-                    L'excellence <span class="text-amber-600">industrielle</span>
-                </h2>
-                <p class="text-xl text-ink-600 max-w-3xl mx-auto">
-                    AluStock est votre partenaire de confiance pour la distribution d'aluminium et de profilés techniques.
-                    Nous accompagnons les professionnels dans leurs projets les plus exigeants.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="text-center p-6 rounded-none bg-ink-50 hover:bg-ink-100 transition-colors" data-aos="fade-up" data-aos-delay="60">
-                    <div class="w-14 h-14 mx-auto mb-4 bg-amber-500/10 rounded-none flex items-center justify-center">
-                        <i class="fas fa-industry text-xl text-amber-600"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-ink-950 mb-2">Qualité certifiée</h3>
-                    <p class="text-ink-600">Des produits conformes aux normes EN avec des fiches techniques complètes</p>
+    {{-- Bandeau défilant --}}
+    <div class="marquee-wrap bg-accent-500 text-onaccent overflow-hidden border-y border-black/10" aria-hidden="true">
+        <div class="marquee py-4">
+            @for ($copy = 0; $copy < 2; $copy++)
+                <div class="flex shrink-0 items-center">
+                    @foreach ($marquee as $word)
+                        <span class="px-8 text-sm font-semibold uppercase tracking-[.25em] whitespace-nowrap">{{ $word }}</span>
+                        <i class="fas fa-diamond text-[.5rem] opacity-60"></i>
+                    @endforeach
                 </div>
-                <div class="text-center p-6 rounded-none bg-ink-50 hover:bg-ink-100 transition-colors" data-aos="fade-up" data-aos-delay="120">
-                    <div class="w-14 h-14 mx-auto mb-4 bg-amber-500/10 rounded-none flex items-center justify-center">
-                        <i class="fas fa-cubes text-xl text-amber-600"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-ink-950 mb-2">Stock permanent</h3>
-                    <p class="text-ink-600">Plus de 18 000 références disponibles pour une livraison rapide</p>
-                </div>
-                <div class="text-center p-6 rounded-none bg-ink-50 hover:bg-ink-100 transition-colors" data-aos="fade-up" data-aos-delay="180">
-                    <div class="w-14 h-14 mx-auto mb-4 bg-amber-500/10 rounded-none flex items-center justify-center">
-                        <i class="fas fa-tools text-xl text-amber-600"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-ink-950 mb-2">Expertise technique</h3>
-                    <p class="text-ink-600">Une équipe d'experts pour vous conseiller dans vos choix techniques</p>
-                </div>
-            </div>
+            @endfor
         </div>
-    </section>
+    </div>
 
-    {{-- ============================================================
-         3. Nos réalisations en vedette
-         — section agrandie : premier ouvrage en grand format (mise
-           en avant éditoriale), le reste en grille secondaire
-         ============================================================ --}}
-    <section id="realisations" class="py-28 px-4 bg-ink-50" data-aos="fade-up">
+    {{-- =================================================================
+         2. À PROPOS
+         ================================================================= --}}
+    <section id="a-propos" class="py-24 px-4 bg-white">
         <div class="container mx-auto max-w-7xl">
-            <div class="text-center mb-20">
-                <span class="inline-flex items-center gap-2 text-amber-700 text-xs font-semibold tracking-widest uppercase mb-4">
-                    <span class="w-6 h-px bg-amber-700"></span>
-                    Portfolio
-                    <span class="w-6 h-px bg-amber-700"></span>
+            <div class="grid lg:grid-cols-2 gap-14 items-center">
+
+                <div class="reveal">
+                    <span class="inline-flex items-center gap-3 text-accent-700 text-xs font-semibold tracking-[.25em] uppercase mb-5">
+                        <span class="w-8 h-px bg-accent-700"></span> À propos
+                    </span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-ink-950 leading-tight mb-6">
+                        L'excellence <span class="font-display italic font-medium text-accent-600">artisanale</span>,
+                        la rigueur de l'industrie
+                    </h2>
+                    <p class="text-lg text-ink-600 mb-10">
+                        {{ $brandName }} conçoit et réalise des ouvrages en aluminium pour les professionnels
+                        comme pour les particuliers. Chaque projet est étudié, fabriqué et posé avec le même
+                        souci du détail.
+                    </p>
+
+                    <div class="space-y-4">
+                        @foreach ([
+                            ['fa-compass-drafting', 'Sur mesure', "Chaque ouvrage est dessiné pour son lieu, ses contraintes et son usage."],
+                            ['fa-gem', 'Finitions soignées', "Thermolaquage, anodisation, brossage : une matière travaillée jusque dans le détail."],
+                            ['fa-helmet-safety', 'Pose maîtrisée', "Des équipes qualifiées, du relevé de cotes à la réception du chantier."],
+                        ] as [$icon, $title, $text])
+                            <div class="value-card flex gap-4 p-5 reveal" style="--d: {{ $loop->index * 90 }}ms">
+                                <div class="w-12 h-12 shrink-0 bg-accent-500/10 flex items-center justify-center">
+                                    <i class="fas {{ $icon }} text-accent-600"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-ink-950">{{ $title }}</h3>
+                                    <p class="text-sm text-ink-600">{{ $text }}</p>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="relative reveal" style="--d: 150ms">
+                    <x-media-image :seed="2" label="Photo atelier / équipe" class="aspect-[4/5] w-full" />
+                    <div class="absolute -bottom-6 -left-4 md:-left-8 bg-ink-950 text-white p-6 shadow-2xl">
+                        <div class="text-4xl font-bold text-accent-400 tabular-nums">{{ $years }}+</div>
+                        <div class="text-xs uppercase tracking-widest text-ink-300">ans de savoir-faire</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- =================================================================
+         3. RÉALISATIONS — galerie filtrable + lightbox
+         ================================================================= --}}
+    <section id="realisations" class="py-28 px-4 bg-ink-50">
+        <div class="container mx-auto max-w-7xl">
+            <div class="text-center mb-14 reveal">
+                <span class="inline-flex items-center gap-3 text-accent-700 text-xs font-semibold tracking-[.25em] uppercase mb-5">
+                    <span class="w-8 h-px bg-accent-700"></span> Portfolio <span class="w-8 h-px bg-accent-700"></span>
                 </span>
-                <h2 class="text-4xl md:text-6xl font-bold text-ink-950 mb-4">
-                    Nos <span class="text-amber-600">réalisations</span> en vedette
+                <h2 class="text-4xl md:text-6xl font-bold text-ink-950 mb-5">
+                    Nos <span class="font-display italic font-medium text-accent-600">réalisations</span>
                 </h2>
                 <p class="text-xl text-ink-600 max-w-3xl mx-auto">
-                    Découvrez une sélection de nos plus beaux ouvrages réalisés avec des profilés aluminium
+                    Une sélection d'ouvrages livrés, du plus discret au plus ambitieux.
                 </p>
+                @if ($isDemo)
+                    <p class="inline-block mt-5 px-3 py-1 text-xs font-semibold bg-accent-500/15 text-accent-800">
+                        Données de démonstration — elles disparaissent dès qu'un ouvrage est publié
+                    </p>
+                @endif
             </div>
 
-            @if($featuredOuvrages->isNotEmpty())
-                <div class="space-y-12">
-
-                    {{-- Ouvrage phare — grand format --}}
-                    @php $premier = $featuredOuvrages->first(); @endphp
-                    <div class="card-hover grid md:grid-cols-2 bg-white border border-ink-200" data-aos="fade-up">
-                        <div class="h-80 md:h-auto min-h-[24rem] bg-gradient-to-br from-ink-200 to-ink-300 relative">
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <i class="fas fa-building text-7xl text-ink-400"></i>
-                            </div>
-                            <div class="absolute top-6 left-6">
-                                <span class="px-3 py-1 bg-amber-600 text-white text-xs font-semibold">
-                                    {{ $premier->categorie->nom ?? 'Non catégorisé' }}
-                                </span>
-                            </div>
-                        </div>
-                        <div class="p-10 md:p-12 flex flex-col justify-center">
-                            <h3 class="text-2xl md:text-3xl font-bold text-ink-950 mb-4">{{ $premier->titre }}</h3>
-                            <p class="text-ink-600 mb-8">{{ $premier->description ?? 'Ouvrage réalisé avec des profilés aluminium de qualité supérieure' }}</p>
-                            <div class="flex items-center justify-between">
-                                <span class="text-sm text-ink-500">
-                                    <i class="fas fa-tag mr-1"></i> {{ $premier->gamme->nom ?? 'Gamme standard' }}
-                                </span>
-                                <a href="#" class="text-amber-700 hover:text-amber-800 font-semibold text-sm transition-colors">
-                                    Voir plus <i class="fas fa-arrow-right ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
+            @if ($items->isNotEmpty())
+                @if ($cats->count() > 1)
+                    <div class="flex flex-wrap justify-center gap-2 mb-10 reveal" role="group" aria-label="Filtrer par catégorie">
+                        <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">Tous</button>
+                        @foreach ($cats as $cat)
+                            <button type="button" class="chip" data-filter="{{ \Illuminate\Support\Str::slug($cat) }}" aria-pressed="false">{{ $cat }}</button>
+                        @endforeach
                     </div>
+                @endif
 
-                    {{-- Reste de la sélection — grille secondaire --}}
-                    @if($featuredOuvrages->count() > 1)
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                            @foreach($featuredOuvrages->skip(1) as $ouvrage)
-                                <div class="card-hover bg-white border border-ink-200" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 50 }}">
-                                    <div class="h-64 bg-gradient-to-br from-ink-200 to-ink-300 flex items-center justify-center relative">
-                                        <div class="absolute inset-0 flex items-center justify-center">
-                                            <i class="fas fa-building text-6xl text-ink-400"></i>
-                                        </div>
-                                        <div class="absolute top-4 right-4">
-                                            <span class="px-3 py-1 bg-amber-600 text-white text-xs font-semibold">
-                                                {{ $ouvrage->categorie->nom ?? 'Non catégorisé' }}
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="p-7">
-                                        <h3 class="text-xl font-bold text-ink-950 mb-2">{{ $ouvrage->titre }}</h3>
-                                        <p class="text-ink-600 text-sm mb-4 line-clamp-2">{{ $ouvrage->description ?? 'Ouvrage réalisé avec des profilés aluminium de qualité supérieure' }}</p>
-                                        <div class="flex items-center justify-between">
-                                            <span class="text-sm text-ink-500">
-                                                <i class="fas fa-tag mr-1"></i> {{ $ouvrage->gamme->nom ?? 'Gamme standard' }}
-                                            </span>
-                                            <a href="#" class="text-amber-700 hover:text-amber-800 font-semibold text-sm transition-colors">
-                                                Voir plus <i class="fas fa-arrow-right ml-1"></i>
-                                            </a>
-                                        </div>
-                                    </div>
+                <div class="gallery">
+                    @foreach ($items as $it)
+                        <article class="ouvrage reveal {{ $loop->first ? 'is-lead' : '' }}"
+                                 style="--d: {{ min($loop->index, 5) * 70 }}ms"
+                                 data-index="{{ $loop->index }}"
+                                 data-cat="{{ \Illuminate\Support\Str::slug($it['categorie']) }}"
+                                 tabindex="0" role="button" aria-label="Voir « {{ $it['titre'] }} »">
+
+                            <x-media-image :src="$it['images'][0] ?? null" :alt="$it['titre']" :seed="$loop->index"
+                                           class="absolute inset-0" />
+                            <div class="ouvrage-shade"></div>
+
+                            @if ($it['categorie'])
+                                <span class="badge">{{ $it['categorie'] }}</span>
+                            @endif
+
+                            <div class="ouvrage-body">
+                                <h3 class="font-bold leading-tight {{ $loop->first ? 'text-2xl md:text-4xl' : 'text-xl' }}">{{ $it['titre'] }}</h3>
+                                @if ($it['description'])
+                                    <p class="ouvrage-desc">{{ $it['description'] }}</p>
+                                @endif
+                                <div class="flex items-center justify-between mt-3">
+                                    <span class="text-xs text-ink-300">
+                                        @if ($it['gamme'])<i class="fas fa-tag mr-1"></i>{{ $it['gamme'] }}@endif
+                                    </span>
+                                    <span class="ouvrage-more">Voir <i class="fas fa-arrow-right"></i></span>
                                 </div>
-                            @endforeach
-                        </div>
-                    @endif
+                            </div>
+                        </article>
+                    @endforeach
                 </div>
             @else
                 <div class="text-center py-12">
@@ -352,209 +321,122 @@
         </div>
     </section>
 
-    {{-- ============================================================
-         4. Nos gammes / catégories
-         — section très compacte : simple bandeau de tuiles,
-           sans description, pour ne pas concurrencer le portfolio
-         ============================================================ --}}
-    <section id="gammes" class="py-12 px-4 bg-white border-t border-ink-100" data-aos="fade-up">
-        <div class="container mx-auto max-w-7xl">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-sm font-semibold uppercase tracking-widest text-ink-500">
-                    Gammes &amp; catégories
-                </h2>
-                <a href="{{ route('catalogue.index') }}" class="text-xs font-semibold text-amber-700 hover:text-amber-800 transition-colors">
-                    Tout voir <i class="fas fa-arrow-right ml-1"></i>
-                </a>
-            </div>
-
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-                @foreach($gammes as $gamme)
-                <a href="#" class="group flex items-center gap-2 p-3 border border-ink-200 hover:border-amber-400 transition-colors" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 30 }}">
-                    <div class="w-8 h-8 shrink-0 bg-ink-950 flex items-center justify-center">
-                        <i class="fas fa-cube text-amber-400 text-xs"></i>
-                    </div>
-                    <span class="text-sm font-medium text-ink-800 group-hover:text-amber-700 transition-colors truncate">
-                        {{ $gamme->nom }}
-                    </span>
-                </a>
-                @endforeach
-
-                @foreach($categories as $categorie)
-                <a href="#" class="group flex items-center gap-2 p-3 border border-ink-200 hover:border-amber-400 transition-colors" data-aos="fade-up" data-aos-delay="{{ ($loop->iteration + 4) * 30 }}">
-                    <div class="w-8 h-8 shrink-0 bg-amber-700 flex items-center justify-center">
-                        <i class="fas fa-door-open text-white text-xs"></i>
-                    </div>
-                    <span class="text-sm font-medium text-ink-800 group-hover:text-amber-700 transition-colors truncate">
-                        {{ $categorie->nom }}
-                    </span>
-                </a>
-                @endforeach
-            </div>
+    {{-- =================================================================
+         4. CONTACT
+         ================================================================= --}}
+    <section id="contact" class="relative py-28 px-4 bg-ink-950 overflow-hidden">
+        <div class="hero-fx absolute inset-0 pointer-events-none" aria-hidden="true">
+            <div class="aurora-blob aurora-a absolute -top-1/3 left-1/4"></div>
         </div>
-    </section>
-
-    <!-- 5. Section CTA final -->
-    <section id="contact" class="relative py-24 px-4 bg-ink-950" data-aos="fade-up">
         <div class="container mx-auto max-w-4xl text-center relative z-10">
-            <span class="inline-flex items-center gap-2 text-amber-400 text-xs font-semibold tracking-widest uppercase mb-6">
-                <span class="w-6 h-px bg-amber-400"></span>
-                Catalogue technique
-                <span class="w-6 h-px bg-amber-400"></span>
+            <span class="inline-flex items-center gap-3 text-accent-400 text-xs font-semibold tracking-[.25em] uppercase mb-6 reveal">
+                <span class="w-8 h-px bg-accent-400"></span> Votre projet <span class="w-8 h-px bg-accent-400"></span>
             </span>
-            <h2 class="text-4xl md:text-6xl font-bold text-white mb-6">
-                Accédez à notre <span class="text-amber-400">catalogue complet</span>
+            <h2 class="text-4xl md:text-6xl font-bold text-white mb-6 reveal">
+                Parlons de votre <span class="font-display italic font-medium text-accent-400">prochain ouvrage</span>
             </h2>
-            <p class="text-xl text-ink-300 mb-10 max-w-2xl mx-auto">
-                Plus de 18 910 références documentées avec fiches techniques EN disponibles en téléchargement
+            <p class="text-xl text-ink-300 mb-12 max-w-2xl mx-auto reveal">
+                Décrivez-nous votre projet : nous revenons vers vous avec une étude et un devis détaillé.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="{{ route('catalogue.index') }}" class="btn-flat px-8 py-4 bg-amber-500 hover:bg-amber-600 text-ink-950 font-semibold rounded-none text-lg inline-flex items-center justify-center">
-                    <i class="fas fa-file-pdf mr-2"></i>
-                    Accéder au catalogue
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-14 reveal">
+                <a href="mailto:{{ config('vitrine.contact.email') }}" class="btn btn-primary btn-shine px-8 py-4 text-lg">
+                    <i class="fas fa-envelope"></i> Écrire un message
                 </a>
-                <a href="#" class="btn-flat px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-none text-lg border border-white/15 inline-flex items-center justify-center">
-                    <i class="fas fa-phone mr-2"></i>
-                    Nous contacter
+                <a href="tel:{{ preg_replace('/[^+\d]/', '', config('vitrine.contact.phone')) }}" class="btn btn-ghost px-8 py-4 text-lg">
+                    <i class="fas fa-phone"></i> {{ config('vitrine.contact.phone') }}
                 </a>
             </div>
-            <p class="text-ink-400 text-sm mt-6">
-                <i class="fas fa-check-circle text-amber-400 mr-1"></i>
-                Fiches techniques EN disponibles pour chaque produit
-            </p>
+
+            <div class="grid sm:grid-cols-3 gap-4 text-left reveal">
+                <div class="stat-card p-5">
+                    <i class="fas fa-envelope text-accent-400 mb-3"></i>
+                    <div class="text-sm text-ink-300 break-words">{{ config('vitrine.contact.email') }}</div>
+                </div>
+                <div class="stat-card p-5">
+                    <i class="fas fa-phone text-accent-400 mb-3"></i>
+                    <div class="text-sm text-ink-300">{{ config('vitrine.contact.phone') }}</div>
+                </div>
+                <div class="stat-card p-5">
+                    <i class="fas fa-location-dot text-accent-400 mb-3"></i>
+                    <div class="text-sm text-ink-300">{{ config('vitrine.contact.address') }}<br>{{ config('vitrine.contact.city') }}</div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Bouton remonter -->
-    <button id="back-to-top" class="fixed bottom-8 right-8 z-40 p-3 bg-amber-500 hover:bg-amber-600 text-ink-950 transition-colors shadow-lg opacity-0 invisible" style="transition: all 0.3s ease;">
-        <i class="fas fa-arrow-up text-lg"></i>
-    </button>
-
-    <script>
-        // Back to top button
-        const backToTopButton = document.getElementById('back-to-top');
-
-        window.addEventListener('scroll', function() {
-            if (window.pageYOffset > 300) {
-                backToTopButton.classList.remove('opacity-0', 'invisible');
-                backToTopButton.classList.add('opacity-100', 'visible');
-            } else {
-                backToTopButton.classList.add('opacity-0', 'invisible');
-                backToTopButton.classList.remove('opacity-100', 'visible');
-            }
-        });
-
-        backToTopButton.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    </script>
-
-    <!-- 6. Footer -->
+    {{-- =================================================================
+         5. FOOTER
+         ================================================================= --}}
     <footer class="bg-ink-950 text-ink-300 border-t border-ink-800">
-        <div class="container mx-auto max-w-7xl px-4 py-16">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="container mx-auto max-w-7xl px-4 py-14">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                 <div>
                     <h3 class="text-2xl font-bold text-white mb-4">
-                        Alu<span class="text-amber-500">Stock</span>
+                        {{ config('vitrine.brand.first') }}<span class="text-accent-500">{{ config('vitrine.brand.second') }}</span>
                     </h3>
-                    <p class="text-sm mb-4">Distributeur industriel d'aluminium, de profilés et de fixations depuis 1995</p>
+                    <p class="text-sm mb-5 max-w-xs">{{ config('vitrine.tagline') }}</p>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-ink-400 hover:text-amber-400 transition-colors">
-                            <i class="fab fa-linkedin text-xl"></i>
-                        </a>
-                        <a href="#" class="text-ink-400 hover:text-amber-400 transition-colors">
-                            <i class="fab fa-facebook text-xl"></i>
-                        </a>
-                        <a href="#" class="text-ink-400 hover:text-amber-400 transition-colors">
-                            <i class="fab fa-instagram text-xl"></i>
-                        </a>
-                        <a href="#" class="text-ink-400 hover:text-amber-400 transition-colors">
-                            <i class="fab fa-youtube text-xl"></i>
-                        </a>
+                        @foreach (['linkedin', 'facebook', 'instagram', 'youtube'] as $social)
+                            <a href="#" class="text-ink-400 hover:text-accent-400 transition-colors" aria-label="{{ ucfirst($social) }}">
+                                <i class="fab fa-{{ $social }} text-xl"></i>
+                            </a>
+                        @endforeach
                     </div>
                 </div>
                 <div>
                     <h4 class="text-white font-semibold mb-4">Navigation</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="hover:text-amber-400 transition-colors">Accueil</a></li>
-                        <li><a href="#" class="hover:text-amber-400 transition-colors">Catalogue</a></li>
-                        <li><a href="#" class="hover:text-amber-400 transition-colors">Réalisations</a></li>
-                        <li><a href="#" class="hover:text-amber-400 transition-colors">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-white font-semibold mb-4">Gammes</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="hover:text-amber-400 transition-colors">Gamme 45</a></li>
-                        <li><a href="#" class="hover:text-amber-400 transition-colors">Gamme 55</a></li>
-                        <li><a href="#" class="hover:text-amber-400 transition-colors">Gamme Structure</a></li>
-                        <li><a href="#" class="hover:text-amber-400 transition-colors">Gamme Design</a></li>
+                        <li><a href="#accueil" class="hover:text-accent-400 transition-colors">Accueil</a></li>
+                        <li><a href="#a-propos" class="hover:text-accent-400 transition-colors">À propos</a></li>
+                        <li><a href="#realisations" class="hover:text-accent-400 transition-colors">Réalisations</a></li>
+                        <li><a href="#contact" class="hover:text-accent-400 transition-colors">Contact</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="text-white font-semibold mb-4">Contact</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><i class="fas fa-phone mr-2 text-amber-400"></i> +33 (0)1 23 45 67 89</li>
-                        <li><i class="fas fa-envelope mr-2 text-amber-400"></i> contact@alustock.fr</li>
-                        <li><i class="fas fa-map-marker-alt mr-2 text-amber-400"></i> 123 Avenue de l'Industrie</li>
-                        <li><i class="fas fa-map-pin mr-2 text-amber-400"></i> 75001 Paris, France</li>
+                        <li><i class="fas fa-phone mr-2 text-accent-400"></i> {{ config('vitrine.contact.phone') }}</li>
+                        <li><i class="fas fa-envelope mr-2 text-accent-400"></i> {{ config('vitrine.contact.email') }}</li>
+                        <li><i class="fas fa-location-dot mr-2 text-accent-400"></i> {{ config('vitrine.contact.address') }}, {{ config('vitrine.contact.city') }}</li>
                     </ul>
                 </div>
             </div>
             <div class="border-t border-ink-800 mt-12 pt-8 text-center text-sm text-ink-500">
-                <p>&copy; {{ date('Y') }} AluStock. Tous droits réservés.</p>
+                <p>&copy; {{ date('Y') }} {{ $brandName }}. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        // Amplitude et durée des animations au scroll très réduites
-        AOS.init({
-            duration: 350,
-            once: true,
-            offset: 40,
-            easing: 'ease-out'
-        });
+    {{-- Lightbox --}}
+    <div id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Détail de la réalisation">
+        <div class="lb-bar">
+            <span id="lb-count" class="tabular-nums"></span>
+            <button type="button" class="lb-close" aria-label="Fermer"><i class="fas fa-xmark"></i></button>
+        </div>
+        <div class="lb-stage">
+            <button type="button" class="lb-btn lb-prev" aria-label="Précédent"><i class="fas fa-chevron-left"></i></button>
+            <button type="button" class="lb-btn lb-next" aria-label="Suivant"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="lb-caption">
+            <div class="lb-thumbs"></div>
+            <div class="mt-4 flex items-center gap-3">
+                <span id="lb-cat" class="text-xs font-bold uppercase tracking-widest text-accent-400"></span>
+                <span id="lb-meta" class="text-xs text-ink-400"></span>
+            </div>
+            <h3 id="lb-title" class="text-2xl md:text-3xl font-bold mt-1"></h3>
+            <p id="lb-desc" class="text-ink-300 mt-2"></p>
+        </div>
+    </div>
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const counters = document.querySelectorAll('.counter');
+    <script type="application/json" id="ouvrages-data">{!! json_encode($lightboxData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP) !!}</script>
 
-            const animateCounter = (counter) => {
-                const target = parseInt(counter.dataset.target);
-                const duration = 1500;
-                const step = Math.max(1, Math.floor(target / 60));
-                let current = 0;
+    <button id="back-to-top" type="button" aria-label="Remonter en haut"><i class="fas fa-arrow-up"></i></button>
 
-                const updateCounter = () => {
-                    current += step;
-                    if (current >= target) {
-                        counter.textContent = target.toLocaleString();
-                        return;
-                    }
-                    counter.textContent = current.toLocaleString();
-                    requestAnimationFrame(updateCounter);
-                };
+    <script src="{{ asset('js/vitrine.js') }}" defer></script>
 
-                updateCounter();
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const counter = entry.target;
-                        animateCounter(counter);
-                        observer.unobserve(counter);
-                    }
-                });
-            }, { threshold: 0.5 });
-
-            counters.forEach(counter => observer.observe(counter));
-        });
-    </script>
+    @if (config('vitrine.palette_switcher'))
+        @include('partials.palette-switcher')
+    @endif
 </body>
 </html>

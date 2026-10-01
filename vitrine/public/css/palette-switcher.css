@@ -1,0 +1,61 @@
+/* public/css/palette-switcher.css — panneau de test (à retirer en production) */
+
+.pal-toggle {
+    position: fixed; left: 1.25rem; bottom: 1.25rem; z-index: 95;
+    display: inline-flex; align-items: center; gap: .55rem; padding: .7rem 1rem;
+    background: rgb(var(--ink-950)); color: #fff; border: 1px solid rgb(255 255 255 / .25);
+    font: 600 .8rem/1 'Inter', sans-serif; letter-spacing: .04em; cursor: pointer;
+    box-shadow: 0 8px 30px rgb(0 0 0 / .35);
+    transition: border-color .2s, background-color .2s;
+}
+.pal-toggle i { color: rgb(var(--accent-400)); }
+.pal-toggle:hover { border-color: rgb(var(--accent-400)); }
+
+.pal-panel {
+    position: fixed; left: 1.25rem; bottom: 4.5rem; z-index: 95;
+    width: min(21rem, calc(100vw - 2.5rem)); max-height: min(78vh, 40rem);
+    display: flex; flex-direction: column;
+    background: rgb(var(--ink-950) / .97); color: #fff; border: 1px solid rgb(255 255 255 / .18);
+    box-shadow: 0 20px 60px rgb(0 0 0 / .5); font-family: 'Inter', sans-serif;
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+}
+.pal-panel[hidden] { display: none; }
+.pal-head { padding: .9rem 1rem .7rem; border-bottom: 1px solid rgb(255 255 255 / .12); display: flex; flex-direction: column; gap: .15rem; }
+.pal-head strong { font-size: .85rem; }
+.pal-head small { font-size: .7rem; color: rgb(var(--ink-400)); }
+.pal-body { overflow-y: auto; padding: .25rem 1rem 1rem; }
+
+.pal-section { padding-top: .9rem; }
+.pal-title { font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgb(var(--accent-300)); margin-bottom: .5rem; }
+.pal-title small { font-weight: 400; letter-spacing: .02em; text-transform: none; color: rgb(var(--ink-400)); margin-left: .35rem; }
+.pal-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: .4rem; }
+
+.pal-btn {
+    display: flex; align-items: center; gap: .55rem; padding: .4rem; text-align: left;
+    background: rgb(255 255 255 / .04); border: 1px solid rgb(255 255 255 / .1); color: rgb(var(--ink-200));
+    font-size: .75rem; cursor: pointer; transition: border-color .15s, background-color .15s;
+}
+.pal-btn:hover { background: rgb(255 255 255 / .09); }
+.pal-btn.is-on { border-color: rgb(var(--accent-400)); background: rgb(255 255 255 / .1); color: #fff; }
+.pal-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.pal-swatch { display: flex; flex: none; width: 34px; height: 22px; border: 1px solid rgb(255 255 255 / .2); }
+.pal-swatch i { flex: 1; display: block; }
+
+.pal-opts { border-top: 1px solid rgb(255 255 255 / .12); margin-top: .9rem; }
+.pal-check { display: flex; align-items: center; gap: .5rem; font-size: .75rem; color: rgb(var(--ink-200)); cursor: pointer; }
+.pal-check input { accent-color: rgb(var(--accent-500)); }
+.pal-row { display: flex; gap: .4rem; margin-top: .7rem; }
+.pal-action {
+    flex: 1; padding: .6rem .5rem; font: 600 .72rem/1 'Inter', sans-serif; cursor: pointer;
+    background: transparent; color: #fff; border: 1px solid rgb(255 255 255 / .22);
+}
+.pal-action:hover { background: rgb(255 255 255 / .1); }
+.pal-action-main { background: rgb(var(--accent-500)); border-color: rgb(var(--accent-500)); color: rgb(var(--on-accent)); }
+.pal-action-main:hover { background: rgb(var(--accent-400)); }
+.pal-status { min-height: 1rem; margin-top: .5rem; font-size: .7rem; color: rgb(var(--accent-300)); }
+
+@media (max-width: 640px) {
+    .pal-toggle { bottom: 5rem; left: 1rem; }
+    .pal-panel { left: 1rem; bottom: 8.5rem; }
+}

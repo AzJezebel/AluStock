@@ -1,0 +1,379 @@
+/* =====================================================================
+   GÉNÉRÉ par build_palettes.py — ne pas éditer à la main.
+   Valeurs en triplets RGB ("r g b") pour fonctionner avec les classes
+   Tailwind à opacité (bg-ink-950/90, text-accent-400/50, etc.).
+   Défaut : encre « graphite » + accent « bronze ».
+   Palette active = attributs data-ink / data-accent sur <html>.
+   ===================================================================== */
+
+:root {
+  --ink-50: 246 247 248;
+  --ink-100: 233 235 238;
+  --ink-200: 211 215 221;
+  --ink-300: 170 177 187;
+  --ink-400: 124 132 146;
+  --ink-500: 91 100 114;
+  --ink-600: 67 75 87;
+  --ink-700: 49 56 66;
+  --ink-800: 32 37 45;
+  --ink-900: 20 23 28;
+  --ink-950: 10 12 15;
+}
+
+:root {
+  --accent-50: 250 246 238;
+  --accent-100: 241 227 200;
+  --accent-200: 227 199 142;
+  --accent-300: 209 168 102;
+  --accent-400: 187 141 71;
+  --accent-500: 169 122 58;
+  --accent-600: 143 101 48;
+  --accent-700: 115 80 38;
+  --accent-800: 87 61 30;
+  --accent-900: 60 42 21;
+  --accent-950: 36 26 14;
+  --on-accent: var(--ink-950);
+}
+
+/* Encre — Graphite */
+:root[data-ink="graphite"] {
+  --ink-50: 246 247 248;
+  --ink-100: 233 235 238;
+  --ink-200: 211 215 221;
+  --ink-300: 170 177 187;
+  --ink-400: 124 132 146;
+  --ink-500: 91 100 114;
+  --ink-600: 67 75 87;
+  --ink-700: 49 56 66;
+  --ink-800: 32 37 45;
+  --ink-900: 20 23 28;
+  --ink-950: 10 12 15;
+}
+
+/* Encre — Ardoise */
+:root[data-ink="ardoise"] {
+  --ink-50: 246 247 249;
+  --ink-100: 230 234 239;
+  --ink-200: 208 215 225;
+  --ink-300: 162 176 195;
+  --ink-400: 112 133 164;
+  --ink-500: 80 98 124;
+  --ink-600: 60 74 93;
+  --ink-700: 44 54 68;
+  --ink-800: 30 37 47;
+  --ink-900: 18 22 28;
+  --ink-950: 10 12 16;
+}
+
+/* Encre — Charbon chaud */
+:root[data-ink="charbon"] {
+  --ink-50: 248 247 247;
+  --ink-100: 236 235 233;
+  --ink-200: 220 217 213;
+  --ink-300: 185 178 172;
+  --ink-400: 148 138 127;
+  --ink-500: 111 102 93;
+  --ink-600: 83 76 70;
+  --ink-700: 61 56 51;
+  --ink-800: 42 38 35;
+  --ink-900: 25 23 21;
+  --ink-950: 14 13 12;
+}
+
+/* Encre — Marine */
+:root[data-ink="marine"] {
+  --ink-50: 244 246 251;
+  --ink-100: 226 231 243;
+  --ink-200: 201 210 233;
+  --ink-300: 146 166 211;
+  --ink-400: 88 118 187;
+  --ink-500: 59 85 145;
+  --ink-600: 44 64 109;
+  --ink-700: 33 47 80;
+  --ink-800: 22 32 54;
+  --ink-900: 13 19 33;
+  --ink-950: 7 11 18;
+}
+
+/* Encre — Pétrole */
+:root[data-ink="petrole"] {
+  --ink-50: 244 249 250;
+  --ink-100: 227 239 242;
+  --ink-200: 202 225 231;
+  --ink-300: 149 196 208;
+  --ink-400: 93 164 182;
+  --ink-500: 63 125 141;
+  --ink-600: 47 94 106;
+  --ink-700: 35 69 77;
+  --ink-800: 24 47 53;
+  --ink-900: 14 28 32;
+  --ink-950: 8 16 18;
+}
+
+/* Encre — Forêt */
+:root[data-ink="foret"] {
+  --ink-50: 246 249 247;
+  --ink-100: 230 239 235;
+  --ink-200: 208 226 217;
+  --ink-300: 160 197 178;
+  --ink-400: 110 166 138;
+  --ink-500: 78 126 102;
+  --ink-600: 58 95 77;
+  --ink-700: 43 70 56;
+  --ink-800: 29 47 38;
+  --ink-900: 17 28 23;
+  --ink-950: 10 16 13;
+}
+
+/* Encre — Aubergine */
+:root[data-ink="aubergine"] {
+  --ink-50: 248 246 249;
+  --ink-100: 237 231 239;
+  --ink-200: 222 209 224;
+  --ink-300: 189 163 194;
+  --ink-400: 153 114 161;
+  --ink-500: 116 82 122;
+  --ink-600: 87 61 92;
+  --ink-700: 64 45 67;
+  --ink-800: 43 31 46;
+  --ink-900: 26 18 28;
+  --ink-950: 14 10 15;
+}
+
+/* Encre — Bordeaux */
+:root[data-ink="bordeaux"] {
+  --ink-50: 249 245 246;
+  --ink-100: 240 229 231;
+  --ink-200: 227 207 210;
+  --ink-300: 198 159 165;
+  --ink-400: 168 107 117;
+  --ink-500: 129 75 84;
+  --ink-600: 96 57 63;
+  --ink-700: 71 42 46;
+  --ink-800: 48 28 32;
+  --ink-900: 29 17 19;
+  --ink-950: 16 9 11;
+}
+
+/* Encre — Noir neutre */
+:root[data-ink="noir"] {
+  --ink-50: 247 247 247;
+  --ink-100: 235 235 235;
+  --ink-200: 217 217 217;
+  --ink-300: 178 178 178;
+  --ink-400: 138 138 138;
+  --ink-500: 102 102 102;
+  --ink-600: 76 76 76;
+  --ink-700: 56 56 56;
+  --ink-800: 38 38 38;
+  --ink-900: 23 23 23;
+  --ink-950: 13 13 13;
+}
+
+/* Accent — Bronze */
+:root[data-accent="bronze"] {
+  --accent-50: 250 246 238;
+  --accent-100: 241 227 200;
+  --accent-200: 227 199 142;
+  --accent-300: 209 168 102;
+  --accent-400: 187 141 71;
+  --accent-500: 169 122 58;
+  --accent-600: 143 101 48;
+  --accent-700: 115 80 38;
+  --accent-800: 87 61 30;
+  --accent-900: 60 42 21;
+  --accent-950: 36 26 14;
+  --on-accent: var(--ink-950);
+}
+
+/* Accent — Cuivre */
+:root[data-accent="cuivre"] {
+  --accent-50: 247 240 238;
+  --accent-100: 234 210 199;
+  --accent-200: 223 168 144;
+  --accent-300: 216 135 100;
+  --accent-400: 208 102 57;
+  --accent-500: 186 86 44;
+  --accent-600: 151 72 38;
+  --accent-700: 115 57 33;
+  --accent-800: 85 45 27;
+  --accent-900: 56 31 21;
+  --accent-950: 32 19 14;
+  --on-accent: 255 255 255;
+}
+
+/* Accent — Or */
+:root[data-accent="or"] {
+  --accent-50: 248 245 236;
+  --accent-100: 241 227 192;
+  --accent-200: 240 208 127;
+  --accent-300: 241 194 76;
+  --accent-400: 240 179 25;
+  --accent-500: 215 158 14;
+  --accent-600: 174 129 14;
+  --accent-700: 133 99 15;
+  --accent-800: 97 74 15;
+  --accent-900: 63 49 14;
+  --accent-950: 36 28 10;
+  --on-accent: var(--ink-950);
+}
+
+/* Accent — Orange */
+:root[data-accent="orange"] {
+  --accent-50: 249 241 236;
+  --accent-100: 242 212 191;
+  --accent-200: 242 172 125;
+  --accent-300: 244 141 72;
+  --accent-400: 245 110 20;
+  --accent-500: 220 94 10;
+  --accent-600: 178 78 11;
+  --accent-700: 135 62 13;
+  --accent-800: 99 48 13;
+  --accent-900: 64 33 13;
+  --accent-950: 36 20 10;
+  --on-accent: var(--ink-950);
+}
+
+/* Accent — Rouge */
+:root[data-accent="rouge"] {
+  --accent-50: 247 237 237;
+  --accent-100: 237 198 197;
+  --accent-200: 230 141 138;
+  --accent-300: 226 95 91;
+  --accent-400: 221 50 45;
+  --accent-500: 197 38 33;
+  --accent-600: 160 33 29;
+  --accent-700: 122 29 26;
+  --accent-800: 90 25 23;
+  --accent-900: 58 19 18;
+  --accent-950: 33 13 13;
+  --on-accent: 255 255 255;
+}
+
+/* Accent — Rose */
+:root[data-accent="rose"] {
+  --accent-50: 247 237 241;
+  --accent-100: 236 197 213;
+  --accent-200: 228 139 176;
+  --accent-300: 224 92 147;
+  --accent-400: 218 47 118;
+  --accent-500: 195 35 101;
+  --accent-600: 158 31 84;
+  --accent-700: 121 27 66;
+  --accent-800: 89 24 51;
+  --accent-900: 58 19 35;
+  --accent-950: 33 13 21;
+  --on-accent: 255 255 255;
+}
+
+/* Accent — Violet */
+:root[data-accent="violet"] {
+  --accent-50: 242 238 246;
+  --accent-100: 216 200 234;
+  --accent-200: 181 145 222;
+  --accent-300: 154 102 214;
+  --accent-400: 128 59 206;
+  --accent-500: 110 46 183;
+  --accent-600: 91 40 149;
+  --accent-700: 71 34 114;
+  --accent-800: 54 28 84;
+  --accent-900: 37 21 55;
+  --accent-950: 22 14 32;
+  --on-accent: 255 255 255;
+}
+
+/* Accent — Indigo */
+:root[data-accent="indigo"] {
+  --accent-50: 238 237 247;
+  --accent-100: 200 198 236;
+  --accent-200: 145 140 227;
+  --accent-300: 101 94 222;
+  --accent-400: 58 49 216;
+  --accent-500: 45 37 192;
+  --accent-600: 39 33 156;
+  --accent-700: 33 29 119;
+  --accent-800: 28 25 88;
+  --accent-900: 21 19 57;
+  --accent-950: 14 13 33;
+  --on-accent: 255 255 255;
+}
+
+/* Accent — Cobalt */
+:root[data-accent="cobalt"] {
+  --accent-50: 237 240 248;
+  --accent-100: 194 209 239;
+  --accent-200: 133 167 235;
+  --accent-300: 83 133 233;
+  --accent-400: 35 100 230;
+  --accent-500: 23 84 206;
+  --accent-600: 22 70 167;
+  --accent-700: 21 56 127;
+  --accent-800: 19 44 93;
+  --accent-900: 16 31 61;
+  --accent-950: 11 19 35;
+  --on-accent: 255 255 255;
+}
+
+/* Accent — Glacier */
+:root[data-accent="cyan"] {
+  --accent-50: 237 246 248;
+  --accent-100: 195 231 239;
+  --accent-200: 134 217 233;
+  --accent-300: 85 207 231;
+  --accent-400: 37 196 228;
+  --accent-500: 26 174 204;
+  --accent-600: 23 142 165;
+  --accent-700: 22 109 126;
+  --accent-800: 20 80 92;
+  --accent-900: 16 53 60;
+  --accent-950: 12 30 34;
+  --on-accent: var(--ink-950);
+}
+
+/* Accent — Émeraude */
+:root[data-accent="emeraude"] {
+  --accent-50: 238 247 243;
+  --accent-100: 198 235 220;
+  --accent-200: 141 226 192;
+  --accent-300: 96 220 170;
+  --accent-400: 52 213 149;
+  --accent-500: 39 190 130;
+  --accent-600: 34 154 106;
+  --accent-700: 30 118 83;
+  --accent-800: 25 87 62;
+  --accent-900: 20 57 42;
+  --accent-950: 13 32 25;
+  --on-accent: var(--ink-950);
+}
+
+/* Accent — Citron */
+:root[data-accent="citron"] {
+  --accent-50: 244 247 237;
+  --accent-100: 225 237 197;
+  --accent-200: 202 230 138;
+  --accent-300: 185 226 91;
+  --accent-400: 168 221 45;
+  --accent-500: 148 197 33;
+  --accent-600: 121 160 29;
+  --accent-700: 93 122 26;
+  --accent-800: 69 90 23;
+  --accent-900: 46 58 18;
+  --accent-950: 27 33 13;
+  --on-accent: var(--ink-950);
+}
+
+/* Accent — Acier */
+:root[data-accent="acier"] {
+  --accent-50: 241 242 243;
+  --accent-100: 212 217 221;
+  --accent-200: 173 184 194;
+  --accent-300: 143 158 173;
+  --accent-400: 113 133 152;
+  --accent-500: 96 115 133;
+  --accent-600: 80 94 109;
+  --accent-700: 63 74 85;
+  --accent-800: 49 56 64;
+  --accent-900: 34 38 43;
+  --accent-950: 21 23 25;
+  --on-accent: 255 255 255;
+}
