@@ -24,13 +24,11 @@
     $stats = collect([
         ['value' => $stats['ouvrages'] ?? $items->count(), 'label' => 'Réalisations'],
         ['value' => $stats['categories'] ?? $cats->count(), 'label' => 'Domaines'],
-        ['value' => $stats['gammes'] ?? collect($gammes ?? [])->count(), 'label' => 'Gammes'],
         ['value' => $years, 'label' => "Années d'expérience"],
     ])->filter(fn ($s) => (int) $s['value'] > 0)->values();
 
     // --- Bandeau défilant
     $marquee = collect($categories ?? [])->pluck('nom')
-        ->merge(collect($gammes ?? [])->pluck('nom'))
         ->merge($cats)->filter()->unique()->values();
     if ($marquee->count() < 5) {
         $marquee = $marquee->merge(config('vitrine.marquee'))->unique()->values();
@@ -38,7 +36,7 @@
 
     // --- Données JSON pour la lightbox
     $lightboxData = $items->map(fn ($it) => \Illuminate\Support\Arr::only(
-        $it, ['titre', 'description', 'categorie', 'gamme', 'lieu', 'annee', 'images']
+        $it, ['titre', 'description', 'categorie', 'lieu', 'annee', 'images']
     ))->values();
 @endphp
 <!DOCTYPE html>
@@ -109,9 +107,9 @@
 
         {{-- Effets décoratifs (désactivables depuis le panneau de palettes) --}}
         <div class="hero-fx absolute inset-0 -z-10 pointer-events-none overflow-hidden" aria-hidden="true">
-            <div data-depth="-60" class="absolute -top-[10%] -left-[8%]"><div class="aurora-blob aurora-a"></div></div>
-            <div data-depth="80" class="absolute top-[30%] -right-[10%]"><div class="aurora-blob aurora-b"></div></div>
-            <div data-depth="-40" class="absolute -bottom-[20%] left-[25%]"><div class="aurora-blob aurora-c"></div></div>
+            <div class="absolute -top-[10%] -left-[8%]"><div class="aurora-blob aurora-a"></div></div>
+            <div class="absolute top-[30%] -right-[10%]"><div class="aurora-blob aurora-b"></div></div>
+            <div class="absolute -bottom-[20%] left-[25%]"><div class="aurora-blob aurora-c"></div></div>
         </div>
         <div class="hero-fx hero-grid absolute inset-0 -z-10 pointer-events-none" aria-hidden="true"></div>
         <div class="hero-fx hero-spot absolute inset-0 -z-10 pointer-events-none" aria-hidden="true"></div>
@@ -119,7 +117,7 @@
 
         {{-- Contenu --}}
         <div class="container mx-auto px-4 pt-28 pb-32 relative">
-            <div class="max-w-5xl mx-auto text-center" data-depth="8">
+            <div class="max-w-5xl mx-auto text-center">
 
                 <div class="hero-fade mb-8" style="--d: 100ms">
                     <span class="inline-flex items-center gap-3 text-accent-400 text-xs font-semibold tracking-[.25em] uppercase">
@@ -305,7 +303,7 @@
                                 @endif
                                 <div class="flex items-center justify-between mt-3">
                                     <span class="text-xs text-ink-300">
-                                        @if ($it['gamme'])<i class="fas fa-tag mr-1"></i>{{ $it['gamme'] }}@endif
+                                        @if ($it['lieu'] || $it['annee'])<i class="fas fa-location-dot mr-1"></i>{{ collect([$it['lieu'], $it['annee']])->filter()->implode(' · ') }}@endif
                                     </span>
                                     <span class="ouvrage-more">Voir <i class="fas fa-arrow-right"></i></span>
                                 </div>

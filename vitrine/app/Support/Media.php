@@ -93,14 +93,12 @@ class Media
         }
 
         $categorie = self::get($o, 'categorie');
-        $gamme = self::get($o, 'gamme');
 
         return [
             'id'          => self::get($o, 'id') ?? $index,
             'titre'       => (string) (self::get($o, 'titre') ?? self::get($o, 'nom') ?? 'Ouvrage sans titre'),
             'description' => (string) (self::get($o, 'description') ?? ''),
             'categorie'   => self::label($categorie),
-            'gamme'       => self::label($gamme),
             'lieu'        => (string) (self::get($o, 'lieu') ?? ''),
             'annee'       => (string) (self::get($o, 'annee') ?? ''),
             'images'      => $images,
@@ -110,23 +108,23 @@ class Media
     public static function demo(): array
     {
         $rows = [
-            ['Façade vitrée — Centre d\'affaires', 'Façades', 'Gamme Structure', 'Lyon', '2024',
+            ['Façade vitrée — Centre d\'affaires', 'Façades', 'Lyon', '2024',
                 'Mur-rideau en aluminium thermolaqué, grandes trames vitrées et finitions affleurantes.'],
-            ['Verrière d\'atelier', 'Verrières', 'Gamme Design', 'Paris', '2023',
+            ['Verrière d\'atelier', 'Verrières', 'Paris', '2023',
                 'Verrière à profilés fins séparant l\'espace de travail tout en laissant passer la lumière.'],
-            ['Garde-corps résidentiel', 'Garde-corps', 'Gamme 45', 'Nantes', '2024',
+            ['Garde-corps résidentiel', 'Garde-corps', 'Nantes', '2024',
                 'Garde-corps vitré sur mesure, fixation discrète et lignes épurées.'],
-            ['Pergola bioclimatique', 'Extérieur', 'Gamme 55', 'Bordeaux', '2023',
+            ['Pergola bioclimatique', 'Extérieur', 'Bordeaux', '2023',
                 'Lames orientables motorisées pour moduler soleil et ventilation.'],
-            ['Mur-rideau — Siège social', 'Façades', 'Gamme Structure', 'Lille', '2022',
+            ['Mur-rideau — Siège social', 'Façades', 'Lille', '2022',
                 'Enveloppe vitrée haute performance thermique sur quatre niveaux.'],
-            ['Escalier suspendu', 'Intérieur', 'Gamme Design', 'Marseille', '2024',
+            ['Escalier suspendu', 'Intérieur', 'Marseille', '2024',
                 'Limon central et marches en aluminium brossé, rampe filante.'],
         ];
 
         return array_map(fn ($r, $i) => [
-            'id' => 'demo-' . $i, 'titre' => $r[0], 'categorie' => $r[1], 'gamme' => $r[2],
-            'lieu' => $r[3], 'annee' => $r[4], 'description' => $r[5], 'images' => [],
+            'id' => 'demo-' . $i, 'titre' => $r[0], 'categorie' => $r[1],
+            'lieu' => $r[2], 'annee' => $r[3], 'description' => $r[4], 'images' => [],
         ], $rows, array_keys($rows));
     }
 

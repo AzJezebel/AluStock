@@ -104,10 +104,9 @@
         document.addEventListener('visibilitychange', () => (document.hidden ? stop() : play()));
         play();
 
-        /* -------------------------------------------------------- hero : souris (projecteur + parallaxe) */
+        /* -------------------------------------------------------- hero : souris (projecteur lumineux) */
         if (finePointer && !reduce) {
             let tx = 0.5, ty = 0.4, x = 0.5, y = 0.4, heroVisible = true;
-            const layers = $$('[data-depth]', hero);
 
             new IntersectionObserver((es) => { heroVisible = es[0].isIntersecting; }).observe(hero);
 
@@ -124,10 +123,6 @@
                     y += (ty - y) * 0.08;
                     hero.style.setProperty('--mx', (x * 100).toFixed(2) + '%');
                     hero.style.setProperty('--my', (y * 100).toFixed(2) + '%');
-                    layers.forEach((l) => {
-                        const d = parseFloat(l.dataset.depth) || 0;
-                        l.style.transform = `translate3d(${((x - 0.5) * d).toFixed(2)}px, ${((y - 0.5) * d).toFixed(2)}px, 0)`;
-                    });
                 }
                 requestAnimationFrame(loop);
             })();
@@ -214,7 +209,7 @@
             els.cat.textContent = item.categorie || '';
             els.title.textContent = item.titre;
             els.desc.textContent = item.description || '';
-            els.meta.textContent = [item.gamme, item.lieu, item.annee].filter(Boolean).join('  ·  ');
+            els.meta.textContent = [item.lieu, item.annee].filter(Boolean).join('  ·  ');
             els.count.textContent = `${pos + 1} / ${order.length}`;
 
             // on ne vide pas toute la scène : les boutons précédent/suivant y vivent aussi
