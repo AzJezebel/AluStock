@@ -387,11 +387,10 @@ Refactor UI components for improved consistency and accessibility
 - Refined sidebar menu layout with numbered categories and improved hover effects.
 - Enhanced search page design for better readability and user experience, including updated filter styles and result displays.
 - Introduced reusable component cards for both components and ouvrages, ensuring a consistent look and feel across various pages.
-- Added .gitignore file to exclude sensitive and environment-specific files from version control.
 
 
 --------------------------------------------------------------------------------------------------------------------------------
-01/10
+01/10                                               
 
 feat: add palette management and switching functionality
 
@@ -400,3 +399,16 @@ feat: add palette management and switching functionality
 - Created media-image.blade.php component for image handling with placeholders.
 - Added partial view palette-switcher.blade.php for integrating palette switcher in the layout.
 - Enhanced vitrine.js with scroll reveal, navigation, and lightbox functionalities.
+
+--------------------------------------------------------------------------------------------------------------------------------
+02/10                                               
+
+feat: Refactor admin layout and add site images management
+
+- Updated admin layout to remove sidebar and integrate Tailwind CSS for styling.
+- Introduced a new SiteImageController for managing site images (hero and about).
+- Implemented image upload functionality with validation and error handling.
+- Created a new view for site images management with drag-and-drop support.
+- Added SiteImages support class for handling image storage without a database.
+- Updated routes to include site images management.
+- Enhanced public view to utilize site images for hero and about sections.
