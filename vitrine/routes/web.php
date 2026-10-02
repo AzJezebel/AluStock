@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\GammeController as AdminGammeController;
 use App\Http\Controllers\Admin\OuvrageController as AdminOuvrageController;
 use App\Http\Controllers\Admin\MediaController as AdminMediaController;
 use App\Http\Controllers\Admin\SettingsController as AdminSettingsController;
+use App\Http\Controllers\Admin\SiteImageController as AdminSiteImageController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -99,6 +100,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::get('settings', [AdminSettingsController::class, 'index'])->name('settings.index');
     Route::post('settings', [AdminSettingsController::class, 'update'])->name('settings.update');
     Route::get('settings/{key}', [AdminSettingsController::class, 'get'])->name('settings.get');
+
+    Route::prefix('site-images')->name('site-images.')->controller(AdminSiteImageController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('{slot}', 'store')->name('store');
+    Route::delete('{slot}', 'destroy')->name('destroy');
+    Route::post('{slot}/ordre', 'reorder')->name('reorder');
+});
 });
 
 

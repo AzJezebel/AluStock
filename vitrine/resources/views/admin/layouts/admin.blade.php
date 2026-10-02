@@ -1,53 +1,173 @@
 {{-- resources/views/admin/layouts/admin.blade.php --}}
+{{-- Même gabarit que l'admin du catalogue (header + contenu + footer), sans sidebar ni Alpine. --}}
+@php
+    $brand = trim(config('vitrine.brand.first') . config('vitrine.brand.second'));
+    $nav = [
+        ['admin.dashboard',         'admin.dashboard',         'Dashboard'],
+        ['admin.ouvrages.index',    'admin.ouvrages.*',        'Ouvrages'],
+        ['admin.categories.index',  'admin.categories.*',      'Catégories'],
+        ['admin.medias.index',      'admin.medias.*',          'Médias'],
+        ['admin.site-images.index', 'admin.site-images.*',     'Images du site'],
+        ['admin.settings.index',    'admin.settings.*',        'Paramètres'],
+    ];
+@endphp
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Administration AluStock')</title>
-    
-    <!-- Tailwind CSS -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>@yield('title', 'Administration - ' . $brand)</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Alpine.js pour les interactions -->
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- Dropzone pour l'upload d'images -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css">
-    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        admin: {
+                            50:  '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html, body { height: 100%; }
+        body { display: flex; flex-direction: column; min-height: 100vh; }
+        .admin-content { flex: 1 0 auto; }
+        .admin-footer { flex-shrink: 0; }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Drag & drop */
+        .sortable-ghost { opacity: 0.4; background: #f1f5f9; }
+        .sortable-chosen { background: #e2e8f0; }
+    </style>
+
     @stack('styles')
 </head>
-<body class="bg-gray-100">
-    <div class="flex h-screen">
-        <!-- Sidebar -->
-        @include('admin.partials.sidebar')
-        
-        <!-- Main Content -->
-        <div class="flex-1 flex flex-col overflow-hidden">
-            <!-- Top Bar -->
-            @include('admin.partials.topbar')
-            
-            <!-- Page Content -->
-            <main class="flex-1 overflow-y-auto p-6">
-                @if(session('success'))
-                    <div class="mb-6 p-4 bg-green-100 border-l-4 border-green-500 text-green-700 rounded">
-                        {{ session('success') }}
-                    </div>
-                @endif
-                
-                @if(session('error'))
-                    <div class="mb-6 p-4 bg-red-100 border-l-4 border-red-500 text-red-700 rounded">
-                        {{ session('error') }}
-                    </div>
-                @endif
-                
-                @yield('content')
-            </main>
-        </div>
-    </div>
+<body class="font-sans antialiased bg-admin-50 text-admin-800">
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com
+    {{-- ============================================================
+         HEADER ADMIN
+         ============================================================ --}}
+    <header class="bg-admin-900 text-white flex-shrink-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-14">
+
+                {{-- Logo --}}
+                <div class="flex items-center space-x-6">
+                    <a href="{{ route('admin.dashboard') }}" class="flex items-center space-x-2">
+                        <div class="w-7 h-7 bg-amber-500 rounded flex items-center justify-center text-admin-900 font-bold text-sm">
+                            {{ strtoupper(mb_substr($brand, 0, 1)) }}
+                        </div>
+                        <span class="text-sm font-semibold tracking-tight">{{ $brand }} Admin</span>
+                    </a>
+
+                    {{-- Navigation principale --}}
+                    <nav class="hidden md:flex items-center space-x-1">
+                        @foreach ($nav as [$route, $pattern, $label])
+                            <a href="{{ route($route) }}"
+                               class="px-3 py-1.5 text-sm rounded transition {{ request()->routeIs($pattern) ? 'bg-admin-800 text-white' : 'text-admin-300 hover:text-white hover:bg-admin-800' }}">
+                                {{ $label }}
+                            </a>
+                        @endforeach
+                    </nav>
+                </div>
+
+                {{-- Actions droite --}}
+                <div class="flex items-center space-x-3">
+                    @auth
+                        <span class="hidden lg:inline text-xs text-admin-400">{{ Auth::user()->name }}</span>
+                    @endauth
+                    <a href="{{ route('vitrine.index') }}" target="_blank"
+                       class="text-xs text-admin-400 hover:text-white transition">
+                        Voir le site ↗
+                    </a>
+                    <form action="{{ route('logout') }}" method="POST" class="inline">
+                        @csrf
+                        <button type="submit"
+                                class="px-3 py-1.5 text-xs bg-admin-800 hover:bg-admin-700 text-admin-300 hover:text-white rounded transition">
+                            Déconnexion
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {{-- Menu mobile --}}
+        <div class="md:hidden border-t border-admin-800">
+            <div class="px-4 py-2 flex items-center space-x-2 overflow-x-auto">
+                @foreach ($nav as [$route, $pattern, $label])
+                    <a href="{{ route($route) }}"
+                       class="whitespace-nowrap px-3 py-1.5 text-xs rounded {{ request()->routeIs($pattern) ? 'bg-admin-800 text-white' : 'text-admin-300' }}">{{ $label }}</a>
+                @endforeach
+            </div>
+        </div>
+    </header>
+
+    {{-- ============================================================
+         CONTENU
+         ============================================================ --}}
+    <main class="admin-content py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            {{-- Messages flash --}}
+            @if(session('success'))
+                <div class="mb-4 p-3 bg-green-50 border border-green-200 text-green-700 rounded text-sm flex items-center justify-between">
+                    <span>{{ session('success') }}</span>
+                    <button onclick="this.parentElement.remove()" class="text-green-500 hover:text-green-700">✕</button>
+                </div>
+            @endif
+            @if(session('error'))
+                <div class="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 rounded text-sm flex items-center justify-between">
+                    <span>{{ session('error') }}</span>
+                    <button onclick="this.parentElement.remove()" class="text-red-500 hover:text-red-700">✕</button>
+                </div>
+            @endif
+            @if(session('warning'))
+                <div class="mb-4 p-3 bg-yellow-50 border border-yellow-200 text-yellow-700 rounded text-sm flex items-center justify-between">
+                    <span>{{ session('warning') }}</span>
+                    <button onclick="this.parentElement.remove()" class="text-yellow-500 hover:text-yellow-700">✕</button>
+                </div>
+            @endif
+
+            @yield('content')
+        </div>
+    </main>
+
+    {{-- ============================================================
+         FOOTER
+         ============================================================ --}}
+    <footer class="admin-footer bg-white border-t border-admin-200 py-3 flex-shrink-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-admin-400">
+            &copy; {{ date('Y') }} {{ $brand }} — Administration
+        </div>
+    </footer>
+
+    @stack('scripts')
+</body>
+</html>

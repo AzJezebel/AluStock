@@ -14,7 +14,9 @@
     $cats = $items->pluck('categorie')->filter()->unique()->values();
 
     // --- Hero
-    $heroImages = \App\Support\Media::urls($hero['images'] ?? []);
+    // Images gérées depuis l'admin (SiteImages) ; sinon celles de config/vitrine.php ; sinon placeholders
+    $heroImages = \App\Support\SiteImages::urls('hero') ?: \App\Support\Media::urls($hero['images'] ?? []);
+    $aboutImage = \App\Support\SiteImages::first('about');
     $heroCount = count($heroImages) ?: 3;
     $titleWords1 = preg_split('/\s+/', trim($hero['title_1']));
     $titleWords2 = preg_split('/\s+/', trim($hero['title_2']));
@@ -238,7 +240,7 @@
                 </div>
 
                 <div class="relative reveal" style="--d: 150ms">
-                    <x-media-image :seed="2" label="Photo atelier / équipe" class="aspect-[4/5] w-full" />
+                    <x-media-image :src="$aboutImage" :alt="'À propos de ' . $brandName" :seed="2" label="Photo atelier / équipe" class="aspect-[4/5] w-full" />
                     <div class="absolute -bottom-6 -left-4 md:-left-8 bg-ink-950 text-white p-6 shadow-2xl">
                         <div class="text-4xl font-bold text-accent-400 tabular-nums">{{ $years }}+</div>
                         <div class="text-xs uppercase tracking-widest text-ink-300">ans de savoir-faire</div>
