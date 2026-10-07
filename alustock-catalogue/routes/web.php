@@ -6,6 +6,7 @@ use App\Http\Controllers\Public\GammeController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\OuvrageController;
 use App\Http\Controllers\Public\SearchController;
+use App\Http\Controllers\Public\ContactController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -61,7 +62,12 @@ Route::prefix('composants')->name('composants.')->group(function () {
     Route::get('/{composant:slug}', [ComposantController::class, 'show'])->name('show');
 });
 
-
+Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
+ 
+Route::post('/contact', [ContactController::class, 'send'])
+    ->middleware('throttle:' . config('contact.throttle_per_minute', 3) . ',1')
+    ->name('contact.send');
+ 
 
 // Recherche
 Route::prefix('search')->name('search.')->group(function () {

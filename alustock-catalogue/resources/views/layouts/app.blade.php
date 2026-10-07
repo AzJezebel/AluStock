@@ -345,7 +345,7 @@
             <span class="hidden sm:inline truncate">CATALOGUE DE RÉFÉRENCE — ALUMINIUM INDUSTRIEL</span>
             <div class="flex items-center gap-5 ml-auto">
                 <a href="#" class="hover:text-amber-400 transition">DOCUMENTATION</a>
-                <a href="#" class="hover:text-amber-400 transition">CONTACT</a>
+                <a href="{{ route('contact.show') }}" class="hover:text-amber-400 transition {{ request()->routeIs('contact.*') ? 'text-amber-400' : '' }}">CONTACT</a>
             </div>
         </div>
     </div>
@@ -382,7 +382,7 @@
 
             <div class="font-mono text-[11px] text-ink-400 tracking-wide whitespace-nowrap">
                 N={{ number_format(
-                    \Illuminate\Support\Facades\Cache::remember('layout_references_count', 3600, fn () => \App\Models\Composant::count() + \App\Models\Ouvrage::count()),
+                    \Illuminate\Support\Facades\Cache::remember('layout_references_count_v2', 3600, fn () => \App\Models\Composant::count() + \App\Models\Ouvrage::count()),
                     0, '', ' '
                 ) }} REFS
             </div>
