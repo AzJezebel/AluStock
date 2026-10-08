@@ -412,3 +412,41 @@ feat: Refactor admin layout and add site images management
 - Added SiteImages support class for handling image storage without a database.
 - Updated routes to include site images management.
 - Enhanced public view to utilize site images for hero and about sections.
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+05/10         
+Cleanup Task/project
+Testing diffrent mock-up for scroll hero page + review orga repos vitrine
+
+--------------------------------------------------------------------------------------------------------------------------------
+06/10         
+
+Mini lean-up
+Meetup Benjamin
+
+--------------------------------------------------------------------------------------------------------------------------------
+07/10                         
+                      
+feat: implement contact form with email notifications and validation on catalogue
+Logged
+Not ent via smtp
+Need to debug POST when smpt in .env
+
+--------------------------------------------------------------------------------------------------------------------------------
+08/10                         
+
+Research on mailing
+Attempting to debug failure to send to personnal mail address
+Mail is seen in log but cant send smtp
+
+feat: Implement contact form with email notifications and validation
+
+- Created ContactController to handle form submissions and send emails.
+- Added ContactRequest for form validation.
+- Implemented ContactMessage model to store messages in the database.
+- Created email templates for contact messages and acknowledgements.
+- Added routes for displaying and processing the contact form.
+- Updated views to include a contact form with validation feedback.
+- Configured contact settings in a new config file.
+- Created migration for the contact_messages table to store submitted messages.
