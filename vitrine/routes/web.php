@@ -5,6 +5,7 @@ use App\Http\Controllers\Public\VitrineController;
 use App\Http\Controllers\Public\CatalogueController;
 
 use App\Http\Controllers\Public\OuvrageController as PublicOuvrageController;
+use App\Http\Controllers\Public\ContactController;
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategorieController as AdminCategorieController;
@@ -148,3 +149,10 @@ Route::post('/logout', function () {
     Auth::logout();
     return redirect('/login');
 })->name('logout');
+
+Route::get('/contact', fn () => redirect()->to(route('vitrine.index') . '#contact'))->name('contact.show');
+ 
+Route::post('/contact', [ContactController::class, 'send'])
+    ->middleware('throttle:' . config('contact.throttle_per_minute', 3) . ',1')
+    ->name('contact.send');
+ 

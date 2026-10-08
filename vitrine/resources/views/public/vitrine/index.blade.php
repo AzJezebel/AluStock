@@ -322,48 +322,176 @@
     </section>
 
     {{-- =================================================================
-         4. CONTACT
+         4. CONTACT — formulaire (POST contact.send), ancre #contact conservée
          ================================================================= --}}
+    @php
+        // Classes communes des champs (fond sombre) ; bordure rouge si erreur
+        $fieldBase = 'w-full bg-white/5 border text-white placeholder-ink-400 px-4 py-3 outline-none transition '
+                   . 'focus:border-accent-400 focus:bg-white/[.08]';
+        $fieldClass = fn (string $name) => $fieldBase . ' ' . ($errors->has($name) ? 'border-red-400/70' : 'border-white/15');
+        $labelClass = 'block text-xs font-semibold uppercase tracking-widest text-ink-300 mb-2';
+    @endphp
     <section id="contact" class="relative py-28 px-4 bg-ink-950 overflow-hidden">
         <div class="hero-fx absolute inset-0 pointer-events-none" aria-hidden="true">
             <div class="aurora-blob aurora-a absolute -top-1/3 left-1/4"></div>
         </div>
-        <div class="container mx-auto max-w-4xl text-center relative z-10">
-            <span class="inline-flex items-center gap-3 text-accent-400 text-xs font-semibold tracking-[.25em] uppercase mb-6 reveal">
-                <span class="w-8 h-px bg-accent-400"></span> Votre projet <span class="w-8 h-px bg-accent-400"></span>
-            </span>
-            <h2 class="text-4xl md:text-6xl font-bold text-white mb-6 reveal">
-                Parlons de votre <span class="font-display italic font-medium text-accent-400">prochain ouvrage</span>
-            </h2>
-            <p class="text-xl text-ink-300 mb-12 max-w-2xl mx-auto reveal">
-                Décrivez-nous votre projet : nous revenons vers vous avec une étude et un devis détaillé.
-            </p>
 
-            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-14 reveal">
-                <a href="mailto:{{ config('vitrine.contact.email') }}" class="btn btn-primary btn-shine px-8 py-4 text-lg">
-                    <i class="fas fa-envelope"></i> Écrire un message
-                </a>
-                <a href="tel:{{ preg_replace('/[^+\d]/', '', config('vitrine.contact.phone')) }}" class="btn btn-ghost px-8 py-4 text-lg">
-                    <i class="fas fa-phone"></i> {{ config('vitrine.contact.phone') }}
-                </a>
+        <div class="container mx-auto max-w-6xl relative z-10">
+
+            {{-- En-tête --}}
+            <div class="text-center mb-14">
+                <span class="inline-flex items-center gap-3 text-accent-400 text-xs font-semibold tracking-[.25em] uppercase mb-6 reveal">
+                    <span class="w-8 h-px bg-accent-400"></span> Votre projet <span class="w-8 h-px bg-accent-400"></span>
+                </span>
+                <h2 class="text-4xl md:text-6xl font-bold text-white mb-6 reveal">
+                    Parlons de votre <span class="font-display italic font-medium text-accent-400">prochain ouvrage</span>
+                </h2>
+                <p class="text-xl text-ink-300 max-w-2xl mx-auto reveal">
+                    Décrivez-nous votre projet : nous revenons vers vous avec une étude et un devis détaillé.
+                </p>
             </div>
 
-            <div class="grid sm:grid-cols-3 gap-4 text-left reveal">
-                <div class="stat-card p-5">
-                    <i class="fas fa-envelope text-accent-400 mb-3"></i>
-                    <div class="text-sm text-ink-300 break-words">{{ config('vitrine.contact.email') }}</div>
+            {{-- Messages après envoi (la page se recharge sur #contact) --}}
+            @if (session('success'))
+                <div role="status" class="max-w-3xl mx-auto mb-8 flex items-start gap-3 border border-green-400/40 bg-green-400/10 text-green-300 px-5 py-4">
+                    <i class="fas fa-circle-check mt-1"></i>
+                    <p>{{ session('success') }}</p>
                 </div>
-                <div class="stat-card p-5">
-                    <i class="fas fa-phone text-accent-400 mb-3"></i>
-                    <div class="text-sm text-ink-300">{{ config('vitrine.contact.phone') }}</div>
+            @endif
+            @if (session('error'))
+                <div role="alert" class="max-w-3xl mx-auto mb-8 flex items-start gap-3 border border-red-400/40 bg-red-400/10 text-red-300 px-5 py-4">
+                    <i class="fas fa-triangle-exclamation mt-1"></i>
+                    <p>{{ session('error') }}</p>
                 </div>
-                <div class="stat-card p-5">
-                    <i class="fas fa-location-dot text-accent-400 mb-3"></i>
-                    <div class="text-sm text-ink-300">{{ config('vitrine.contact.address') }}<br>{{ config('vitrine.contact.city') }}</div>
+            @endif
+            @if ($errors->any() && ! session('error'))
+                <div role="alert" class="max-w-3xl mx-auto mb-8 flex items-start gap-3 border border-red-400/40 bg-red-400/10 text-red-300 px-5 py-4">
+                    <i class="fas fa-triangle-exclamation mt-1"></i>
+                    <p>Le message n'a pas été envoyé : vérifiez les champs en rouge ci-dessous.</p>
                 </div>
+            @endif
+
+            <div class="grid lg:grid-cols-5 gap-8 items-start">
+
+                {{-- Coordonnées --}}
+                <aside class="lg:col-span-2 space-y-4 reveal">
+                    <a href="mailto:{{ config('vitrine.contact.email') }}" class="stat-card p-5 flex items-start gap-4 hover:border-accent-400/60 transition">
+                        <i class="fas fa-envelope text-accent-400 mt-1"></i>
+                        <div>
+                            <div class="text-xs uppercase tracking-widest text-ink-400 mb-1">Courriel</div>
+                            <div class="text-sm text-ink-200 break-words">{{ config('vitrine.contact.email') }}</div>
+                        </div>
+                    </a>
+                    <a href="tel:{{ preg_replace('/[^+\d]/', '', config('vitrine.contact.phone')) }}" class="stat-card p-5 flex items-start gap-4 hover:border-accent-400/60 transition">
+                        <i class="fas fa-phone text-accent-400 mt-1"></i>
+                        <div>
+                            <div class="text-xs uppercase tracking-widest text-ink-400 mb-1">Téléphone</div>
+                            <div class="text-sm text-ink-200">{{ config('vitrine.contact.phone') }}</div>
+                        </div>
+                    </a>
+                    <div class="stat-card p-5 flex items-start gap-4">
+                        <i class="fas fa-location-dot text-accent-400 mt-1"></i>
+                        <div>
+                            <div class="text-xs uppercase tracking-widest text-ink-400 mb-1">Atelier</div>
+                            <div class="text-sm text-ink-200">{{ config('vitrine.contact.address') }}<br>{{ config('vitrine.contact.city') }}</div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-ink-400 pt-2">
+                        <i class="fas fa-clock text-accent-400 mr-2"></i>
+                        Réponse sous 1 à 2 jours ouvrables. Une copie de votre message vous est envoyée par courriel.
+                    </p>
+                </aside>
+
+                {{-- Formulaire.
+                     #contact dans l'action : le navigateur réutilise l'ancre après la redirection
+                     (erreurs de validation comme succès) et ramène l'utilisateur ici. --}}
+                <form id="contact-form" method="POST" action="{{ route('contact.send') }}#contact" novalidate
+                      class="lg:col-span-3 reveal bg-white/[.04] border border-white/10 p-6 md:p-8 space-y-5"
+                      style="--d: 120ms">
+                    @csrf
+
+                    {{-- Honeypot : invisible pour les humains, les robots le remplissent --}}
+                    <div class="hidden" aria-hidden="true">
+                        <label for="website">Ne pas remplir</label>
+                        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 gap-5">
+                        <div>
+                            <label for="nom" class="{{ $labelClass }}">Nom <span class="text-accent-400">*</span></label>
+                            <input type="text" id="nom" name="nom" value="{{ old('nom') }}" required maxlength="120"
+                                   autocomplete="name" placeholder="Votre nom"
+                                   @error('nom') aria-invalid="true" aria-describedby="nom-err" @enderror
+                                   class="{{ $fieldClass('nom') }}">
+                            @error('nom') <p id="nom-err" class="mt-1.5 text-sm text-red-300">{{ $message }}</p> @enderror
+                        </div>
+                        <div>
+                            <label for="email" class="{{ $labelClass }}">Courriel <span class="text-accent-400">*</span></label>
+                            <input type="email" id="email" name="email" value="{{ old('email') }}" required maxlength="190"
+                                   autocomplete="email" placeholder="vous@exemple.com"
+                                   @error('email') aria-invalid="true" aria-describedby="email-err" @enderror
+                                   class="{{ $fieldClass('email') }}">
+                            @error('email') <p id="email-err" class="mt-1.5 text-sm text-red-300">{{ $message }}</p> @enderror
+                        </div>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 gap-5">
+                        <div>
+                            <label for="entreprise" class="{{ $labelClass }}">Entreprise <span class="text-ink-500 normal-case tracking-normal">(optionnel)</span></label>
+                            <input type="text" id="entreprise" name="entreprise" value="{{ old('entreprise') }}" maxlength="150"
+                                   autocomplete="organization" placeholder="Votre société"
+                                   @error('entreprise') aria-invalid="true" aria-describedby="entreprise-err" @enderror
+                                   class="{{ $fieldClass('entreprise') }}">
+                            @error('entreprise') <p id="entreprise-err" class="mt-1.5 text-sm text-red-300">{{ $message }}</p> @enderror
+                        </div>
+                        <div>
+                            <label for="sujet" class="{{ $labelClass }}">Sujet <span class="text-accent-400">*</span></label>
+                            <input type="text" id="sujet" name="sujet" value="{{ old('sujet', request('sujet')) }}" required maxlength="190"
+                                   placeholder="Ex. : garde-corps, verrière…"
+                                   @error('sujet') aria-invalid="true" aria-describedby="sujet-err" @enderror
+                                   class="{{ $fieldClass('sujet') }}">
+                            @error('sujet') <p id="sujet-err" class="mt-1.5 text-sm text-red-300">{{ $message }}</p> @enderror
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="message" class="{{ $labelClass }}">Votre projet <span class="text-accent-400">*</span></label>
+                        <textarea id="message" name="message" rows="6" required maxlength="5000"
+                                  placeholder="Type d'ouvrage, dimensions approximatives, délai souhaité…"
+                                  @error('message') aria-invalid="true" aria-describedby="message-err" @enderror
+                                  class="{{ $fieldClass('message') }} resize-y">{{ old('message') }}</textarea>
+                        @error('message') <p id="message-err" class="mt-1.5 text-sm text-red-300">{{ $message }}</p> @enderror
+                    </div>
+
+                    <div class="flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-4 pt-1">
+                        <p class="text-xs text-ink-500">* champs obligatoires</p>
+                        <button type="submit" class="btn btn-primary btn-shine px-8 py-4 text-lg disabled:opacity-60 disabled:cursor-not-allowed">
+                            <i class="fas fa-paper-plane"></i> <span class="submit-label">Envoyer le message</span>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </section>
+
+    {{-- Anti double-envoi (et réactivation si l'utilisateur revient en arrière) --}}
+    <script>
+        (function () {
+            var form = document.getElementById('contact-form');
+            if (!form) return;
+            var btn = form.querySelector('[type="submit"]');
+            var label = btn.querySelector('.submit-label');
+            var idle = label.textContent;
+            form.addEventListener('submit', function () {
+                btn.disabled = true;
+                label.textContent = 'Envoi en cours…';
+            });
+            window.addEventListener('pageshow', function () {
+                btn.disabled = false;
+                label.textContent = idle;
+            });
+        })();
+    </script>
 
     {{-- =================================================================
          5. FOOTER
