@@ -450,3 +450,12 @@ feat: Implement contact form with email notifications and validation
 - Updated views to include a contact form with validation feedback.
 - Configured contact settings in a new config file.
 - Created migration for the contact_messages table to store submitted messages.
+
+--------------------------------------------------------------------------------------------------------------------------------
+09/10 
+
+Recherche smtp how to debug mail + deploiement services
+IRL problem
+
+--------------------------------------------------------------------------------------------------------------------------------
+/10 
