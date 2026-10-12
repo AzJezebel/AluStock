@@ -377,7 +377,6 @@ Mini deploy on Railway debug .json .env variable to port care for duplciate rout
 feat: Refactor admin dashboard navbar + view for type composant + placeholders + added joints from new catalogue data + backup seeder and update deployed version
 Done integration + starting cleanup 
 
-
 --------------------------------------------------------------------------------------------------------------------------------
 30/09
 
@@ -387,7 +386,6 @@ Refactor UI components for improved consistency and accessibility
 - Refined sidebar menu layout with numbered categories and improved hover effects.
 - Enhanced search page design for better readability and user experience, including updated filter styles and result displays.
 - Introduced reusable component cards for both components and ouvrages, ensuring a consistent look and feel across various pages.
-
 
 --------------------------------------------------------------------------------------------------------------------------------
 01/10                                               
@@ -413,16 +411,16 @@ feat: Refactor admin layout and add site images management
 - Updated routes to include site images management.
 - Enhanced public view to utilize site images for hero and about sections.
 
-
 --------------------------------------------------------------------------------------------------------------------------------
 05/10         
+
 Cleanup Task/project
 Testing diffrent mock-up for scroll hero page + review orga repos vitrine
 
 --------------------------------------------------------------------------------------------------------------------------------
 06/10         
 
-Mini lean-up
+Mini clean-up
 Meetup Benjamin
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -432,7 +430,7 @@ feat: implement contact form with email notifications and validation on catalogu
 Logged
 Not ent via smtp
 Need to debug POST when smpt in .env
-
+    
 --------------------------------------------------------------------------------------------------------------------------------
 08/10                         
 
@@ -458,4 +456,11 @@ Recherche smtp how to debug mail + deploiement services
 IRL problem
 
 --------------------------------------------------------------------------------------------------------------------------------
-/10 
+12/10 
+
+Mails Benjamin, Mme. Livety + Debug mail SMTP + new google account new attempt mailable
+Stuck on 2FA enabling can't try with application password on google account + redo composition ouvrage view with estimate if dimension is there + homegenizing routes
+feat: Update routes and controllers for public and admin sections, remove unused CatalogueController, and enhance composition view with weight estimation
+
+--------------------------------------------------------------------------------------------------------------------------------
+13/10 

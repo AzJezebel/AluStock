@@ -23,6 +23,75 @@ Login admin	                -	                                            /admin
 
 
 
+/                                          home                  Site\HomeController@index
+
+PUBLIC
+├─ /categories                             categories.
+│   ├─ GET  /                              index                 Site\CategorieController
+│   └─ GET  /{categorie:slug}              show
+├─ /ouvrages                               ouvrages.
+│   ├─ GET  /                              index                 Site\OuvrageController
+│   ├─ GET  /{ouvrage:slug}                show
+│   ├─ GET  /{ouvrage:slug}/composition    composition
+│   └─ GET  /{ouvrage:slug}/print          print
+├─ /composants                             composants.
+│   ├─ GET  /                              index                 Site\ComposantController
+│   └─ GET  /{composant:slug}              show
+├─ /search                                 search.
+│   ├─ GET  /                              index                 Site\SearchController
+│   └─ GET  /autocomplete                  autocomplete
+└─ /contact                                contact.
+    ├─ GET  /                              show                  Site\ContactController
+    └─ POST /                              send        (throttle)
+
+ADMIN  /admin                              admin.
+├─ AUTH (public)
+│   ├─ GET  /login                         login                 Admin\AuthController@showLogin
+│   ├─ POST /login                         login.post            @login
+│   └─ POST /logout                        logout                @logout
+└─ [middleware admin.auth]
+    ├─ GET  /                              dashboard             Admin\DashboardController@index
+    ├─ /ouvrages                           ouvrages.             (resource, binding {ouvrage:slug}, sans show)
+    │   ├─ GET    /                        index                 Admin\OuvrageController
+    │   ├─ GET    /create                  create
+    │   ├─ POST   /                        store
+    │   ├─ GET    /{ouvrage}/edit          edit
+    │   ├─ PUT    /{ouvrage}               update
+    │   ├─ DELETE /{ouvrage}               destroy
+    │   ├─ /{ouvrage}/composition          composition.          Admin\CompositionController
+    │   │   ├─ POST   /                    store
+    │   │   ├─ POST   /nouveau             store-new             @storeNew
+    │   │   ├─ POST   /reorder             reorder
+    │   │   ├─ PUT    /{composant}         update
+    │   │   └─ DELETE /{composant}         destroy
+    │   └─ /{ouvrage}/caracteristiques     caracteristiques.     Admin\CaracteristiqueController
+    │       ├─ POST   /                    store
+    │       ├─ POST   /reorder             reorder
+    │       ├─ PUT    /{caracteristique}   update
+    │       └─ DELETE /{caracteristique}   destroy
+    ├─ /composants                         composants.           (resource complet, 7 routes, binding id)
+    │   └─ index · create · store · show · edit · update · destroy     Admin\ComposantController
+    ├─ /categories                         categories.           (resource, binding {categorie}, sans show)
+    │   └─ index · create · store · edit · update · destroy            Admin\CategorieController
+    ├─ /types-composant                    types-composant.      (resource, binding {typeComposant}, sans show)
+    │   └─ index · create · store · edit · update · destroy            Admin\TypeComposantController
+    ├─ /medias                             medias.               Admin\MediaController
+    │   ├─ POST   /ouvrages/{ouvrage:slug}/upload     ouvrages.upload     @storeForOuvrage
+    │   ├─ POST   /composants/{composant:slug}/upload composants.upload   @storeForComposant
+    │   ├─ PUT    /{media}                 update
+    │   ├─ DELETE /{media}                 destroy
+    │   └─ POST   /{media}/principal       principal             @setPrincipal
+    └─ /gammes                             gammes.
+        └─ GET  /                          index                 Admin\DashboardController@gammes                   // NOPE
+
+
+
+
+
+
+
+
+
 
 
 <?php
