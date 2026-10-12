@@ -15,6 +15,49 @@
 @endsection
 
 @section('content')
+@php
+    /*
+     * Poids estimé d'une ligne = Kg/m (composant) × longueur en mètres × quantité.
+     * La longueur vient, dans l'ordre :
+     *   1. de la longueur de coupe de la ligne (pivot.longueur_coupe_mm) ;
+     *   2. de la quantité elle-même si l'unité est le mètre (m / ml) ;
+     *   3. de la longueur de barre du composant si l'unité est "barre".
+     * Sinon la ligne n'est pas calculable (vis, joints, accessoires…) et est exclue du total.
+     */
+    $poidsLigne = function ($c) {
+        $kgm   = (float) ($c->poids_lineaire_kg_m ?? 0);
+        $qte   = (float) ($c->pivot->quantite ?? 0);
+        $coupe = (float) ($c->pivot->longueur_coupe_mm ?? 0);
+        $barre = (float) ($c->longueur_barre_mm ?? 0);
+        $unite = \Illuminate\Support\Str::of((string) ($c->pivot->unite ?? ''))->ascii()->lower()->trim()->toString();
+
+        if ($kgm <= 0) {
+            return ['kg' => null, 'raison' => 'Kg/m non renseigné', 'detail' => null, 'formule' => null];
+        }
+        if ($coupe > 0) {
+            $m = $coupe / 1000;
+            return ['kg' => $kgm * $m * $qte, 'raison' => null,
+                    'formule' => rtrim(rtrim(number_format($kgm, 3, '.', ''), '0'), '.') . ' kg/m × ' . rtrim(rtrim(number_format($m, 3, '.', ''), '0'), '.') . ' m × ' . rtrim(rtrim(number_format($qte, 2, '.', ''), '0'), '.')];
+        }
+        if (in_array($unite, ['m', 'ml', 'metre', 'metres'], true)) {
+            return ['kg' => $kgm * $qte, 'raison' => null,
+                    'formule' => rtrim(rtrim(number_format($kgm, 3, '.', ''), '0'), '.') . ' kg/m × ' . rtrim(rtrim(number_format($qte, 2, '.', ''), '0'), '.') . ' m'];
+        }
+        if (in_array($unite, ['barre', 'barres'], true) && $barre > 0) {
+            $m = $barre / 1000;
+            return ['kg' => $kgm * $m * $qte, 'raison' => null,
+                    'formule' => rtrim(rtrim(number_format($kgm, 3, '.', ''), '0'), '.') . ' kg/m × ' . rtrim(rtrim(number_format($m, 3, '.', ''), '0'), '.') . ' m (barre) × ' . rtrim(rtrim(number_format($qte, 2, '.', ''), '0'), '.')];
+        }
+        return ['kg' => null, 'raison' => 'Longueur inconnue', 'detail' => '(ni coupe, ni mètres, ni barre)', 'formule' => null];
+    };
+
+    $poids = [];
+    foreach ($composition as $c) {
+        $poids[$c->id] = $poidsLigne($c);
+    }
+    $poidsCalcule = collect($poids)->sum(fn ($p) => $p['kg'] ?? 0);
+    $nbSansPoids  = collect($poids)->filter(fn ($p) => $p['kg'] === null)->count();
+@endphp
 <div>
     {{-- En-tête --}}
     <div class="relative bg-ink-900 border border-ink-700 p-6 mb-6">
@@ -34,9 +77,9 @@
                 <span class="text-ink-500">
                     <span class="font-medium text-ink-200">{{ $composition->count() }}</span> composant(s)
                 </span>
-                @if(isset($poidsTotal) && $poidsTotal > 0)
+                @if($poidsCalcule > 0)
                     <span class="text-ink-500">
-                        Poids estimé : <span class="font-medium text-ink-200">{{ number_format($poidsTotal, 2) }} kg</span>
+                        Poids estimé : <span class="font-medium text-ink-200">{{ number_format($poidsCalcule, 2, ',', ' ') }} kg</span>
                     </span>
                 @endif
                 <a href="{{ route('ouvrages.show', $ouvrage->slug) }}"
@@ -56,72 +99,58 @@
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-ink-800">
                     <thead class="bg-ink-950">
-                        <tr>
-                            <th class="px-4 py-3 text-left font-mono text-[10px] font-medium text-ink-500 uppercase tracking-wider">#</th>
-                            <th class="px-4 py-3 text-left font-mono text-[10px] font-medium text-ink-500 uppercase tracking-wider">Composant</th>
-                            <th class="px-4 py-3 text-left font-mono text-[10px] font-medium text-ink-500 uppercase tracking-wider">Référence</th>
-                            <th class="px-4 py-3 text-left font-mono text-[10px] font-medium text-ink-500 uppercase tracking-wider">Type</th>
-                            <th class="px-4 py-3 text-left font-mono text-[10px] font-medium text-ink-500 uppercase tracking-wider">Matière</th>
-                            <th class="px-4 py-3 text-center font-mono text-[10px] font-medium text-ink-500 uppercase tracking-wider">Quantité</th>
-                            <th class="px-4 py-3 text-center font-mono text-[10px] font-medium text-ink-500 uppercase tracking-wider">Unité</th>
-                            <th class="px-4 py-3 text-center font-mono text-[10px] font-medium text-ink-500 uppercase tracking-wider">Longueur coupe</th>
-                            <th class="px-4 py-3 text-left font-mono text-[10px] font-medium text-ink-500 uppercase tracking-wider">Finition</th>
-                            <th class="px-4 py-3 text-left font-mono text-[10px] font-medium text-ink-500 uppercase tracking-wider">Action</th>
+                        <tr class="font-mono text-[10px] font-medium text-ink-500 uppercase tracking-wider">
+                            <th class="pl-3 pr-1 py-2 text-left">#</th>
+                            <th class="px-2.5 py-2 text-left">Composant</th>
+                            <th class="px-2.5 py-2 text-left">Matière</th>
+                            <th class="px-2.5 py-2 text-center">Qté</th>
+                            <th class="px-2.5 py-2 text-center">Coupe</th>
+                            <th class="px-2.5 py-2 text-left">Finition</th>
+                            <th class="pl-2.5 pr-3 py-2 text-right">Poids est.</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-ink-800">
                         @foreach($composition as $composant)
-                            <tr class="hover:bg-ink-800/40 transition">
+                            @php
+                                $p = $poids[$composant->id];
+                                $fin = $composant->finitions->first();
+                            @endphp
+                            <tr class="hover:bg-ink-800/40 transition align-top">
                                 {{-- # --}}
-                                <td class="px-4 py-3 text-sm text-ink-600 font-mono">
-                                    {{ $loop->iteration }}
-                                </td>
+                                <td class="pl-3 pr-1 py-2 text-xs text-ink-600 font-mono">{{ $loop->iteration }}</td>
 
-                                {{-- Désignation --}}
-                                <td class="px-4 py-3">
-                                    <div>
-                                        <span class="text-sm font-medium text-ink-100">{{ $composant->designation }}</span>
-                                        @if($composant->pivot->commentaire)
-                                            <span class="block text-xs text-ink-500 mt-0.5 italic">
-                                                {{ $composant->pivot->commentaire }}
+                                {{-- Composant : désignation (lien) + référence + type --}}
+                                <td class="px-2.5 py-2">
+                                    <a href="{{ route('composants.show', $composant->slug) }}"
+                                       class="text-[13px] font-medium text-ink-100 hover:text-amber-600 transition leading-snug">
+                                        {{ $composant->designation }}
+                                    </a>
+                                    <div class="flex flex-wrap items-center gap-x-2 gap-y-0.5 mt-0.5 font-mono text-[11px] text-ink-500">
+                                        <span>{{ $composant->reference }}</span>
+                                        @if($composant->typeComposant)
+                                            <span class="px-1.5 text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                                                {{ $composant->typeComposant->nom }}
                                             </span>
                                         @endif
                                     </div>
-                                </td>
-
-                                {{-- Référence --}}
-                                <td class="px-4 py-3 text-sm text-ink-400 font-mono">
-                                    {{ $composant->reference }}
-                                </td>
-
-                                {{-- Type --}}
-                                <td class="px-4 py-3">
-                                    @if($composant->typeComposant)
-                                        <span class="font-mono inline-flex items-center px-2.5 py-0.5 text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                                            {{ $composant->typeComposant->nom }}
-                                        </span>
-                                    @else
-                                        <span class="text-xs text-ink-600">—</span>
+                                    @if($composant->pivot->commentaire)
+                                        <span class="block text-[11px] text-ink-500 mt-0.5 italic">{{ $composant->pivot->commentaire }}</span>
                                     @endif
                                 </td>
 
                                 {{-- Matière --}}
-                                <td class="px-4 py-3 text-sm text-ink-400">
-                                    {{ $composant->matiere ?? '—' }}
-                                </td>
+                                <td class="px-2.5 py-2 text-xs text-ink-400">{{ $composant->matiere ?? '—' }}</td>
 
-                                {{-- Quantité --}}
-                                <td class="px-4 py-3 text-center text-sm font-semibold font-mono text-ink-100">
-                                    {{ $composant->pivot->quantite }}
-                                </td>
-
-                                {{-- Unité --}}
-                                <td class="px-4 py-3 text-center text-sm text-ink-400">
-                                    {{ $composant->pivot->unite }}
+                                {{-- Quantité + unité --}}
+                                <td class="px-2.5 py-2 text-center font-mono whitespace-nowrap">
+                                    <span class="text-sm font-semibold text-ink-100">{{ $composant->pivot->quantite }}</span>
+                                    @if($composant->pivot->unite)
+                                        <span class="text-[11px] text-ink-500">{{ $composant->pivot->unite }}</span>
+                                    @endif
                                 </td>
 
                                 {{-- Longueur de coupe --}}
-                                <td class="px-4 py-3 text-center text-sm text-ink-400 font-mono">
+                                <td class="px-2.5 py-2 text-center text-xs text-ink-400 font-mono whitespace-nowrap">
                                     @if($composant->pivot->longueur_coupe_mm)
                                         {{ $composant->pivot->longueur_coupe_mm }} mm
                                     @else
@@ -130,27 +159,30 @@
                                 </td>
 
                                 {{-- Finition par défaut --}}
-                                <td class="px-4 py-3 text-sm text-ink-400">
-                                    @if($composant->finitions->first())
+                                <td class="px-2.5 py-2 text-xs text-ink-400">
+                                    @if($fin)
                                         <span class="inline-flex items-center gap-1.5">
-                                            <span class="w-3 h-3 border border-ink-600"
-                                                  style="background-color: {{ $composant->finitions->first()->code_ral ? '#' . $composant->finitions->first()->code_ral : '#4D4D4D' }}"></span>
-                                            {{ $composant->finitions->first()->nom }}
+                                            <span class="w-2.5 h-2.5 shrink-0 border border-ink-600"
+                                                  style="background-color: {{ $fin->code_ral ? '#' . $fin->code_ral : '#4D4D4D' }}"></span>
+                                            {{ $fin->nom }}
                                         </span>
                                     @else
                                         <span class="text-ink-700">—</span>
                                     @endif
                                 </td>
 
-                                {{-- Action --}}
-                                <td class="px-4 py-3">
-                                    <a href="{{ route('composants.show', $composant->slug) }}"
-                                       class="text-sm font-medium text-amber-400 hover:text-amber-600 transition">
-                                        Voir
-                                        <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                                        </svg>
-                                    </a>
+                                {{-- Poids estimé de la ligne (le texte secondaire passe à la ligne) --}}
+                                <td class="pl-2.5 pr-3 py-2 text-right font-mono">
+                                    @if($p['kg'] !== null)
+                                        <span class="text-sm font-semibold text-ink-100 whitespace-nowrap">{{ number_format($p['kg'], 2, ',', ' ') }} kg</span>
+                                        <span class="block ml-auto max-w-[11rem] text-[10px] leading-tight text-ink-600">{{ $p['formule'] }}</span>
+                                    @else
+                                        <span class="text-ink-700" title="{{ $p['raison'] }} {{ $p['detail'] ?? '' }}">—</span>
+                                        <span class="block ml-auto max-w-[11rem] text-[10px] leading-tight text-ink-600">
+                                            {{ $p['raison'] }}
+                                            @if(!empty($p['detail']))<br>{{ $p['detail'] }}@endif
+                                        </span>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -158,14 +190,17 @@
                     {{-- Pied de tableau avec récapitulatif --}}
                     <tfoot class="bg-ink-950 border-t border-ink-800">
                         <tr>
-                            <td colspan="10" class="px-4 py-3">
+                            <td colspan="7" class="px-3 py-2.5">
                                 <div class="flex flex-wrap items-center justify-between gap-2 font-mono text-[12px] text-ink-400">
                                     <span>
                                         <span class="font-medium text-ink-200">{{ $composition->count() }}</span> composant(s) au total
                                     </span>
-                                    @if(isset($poidsTotal) && $poidsTotal > 0)
+                                    @if($poidsCalcule > 0)
                                         <span>
-                                            Poids total estimé : <span class="font-bold text-ink-100">{{ number_format($poidsTotal, 2) }} kg</span>
+                                            Poids total estimé : <span class="font-bold text-ink-100">{{ number_format($poidsCalcule, 2, ',', ' ') }} kg</span>
+                                            @if($nbSansPoids > 0)
+                                                <span class="text-amber-600 text-[11px] ml-1">({{ $nbSansPoids }} ligne(s) non comptée(s))</span>
+                                            @endif
                                         </span>
                                     @endif
                                     <span class="text-ink-600 text-[11px]">
@@ -206,8 +241,8 @@
                 <ul class="space-y-1.5 text-sm text-ink-400">
                     <li>• Les quantités sont données par ouvrage fini.</li>
                     <li>• Les longueurs de coupe sont indiquées en millimètres (mm).</li>
-                    @if(isset($poidsTotal) && $poidsTotal > 0)
-                        <li>• Le poids total est une estimation basée sur les données fournies.</li>
+                    @if($poidsCalcule > 0)
+                        <li>• Poids estimé = Kg/m × longueur (m) × quantité. Les lignes sans Kg/m ou sans longueur (visserie, joints…) ne sont pas comptées.</li>
                     @endif
                     <li>• Cliquez sur "Voir" pour accéder à la fiche technique du composant.</li>
                 </ul>
