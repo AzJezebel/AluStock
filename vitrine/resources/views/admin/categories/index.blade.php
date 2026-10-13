@@ -1,137 +1,123 @@
 {{-- resources/views/admin/categories/index.blade.php --}}
-
 @extends('admin.layouts.admin')
 
-@section('title', 'Gestion des catégories - AluStock Admin')
-@section('page-title', 'Gestion des catégories')
-@section('page-subtitle', 'Organisez vos ouvrages par catégories')
+@section('title', 'Catégories - Administration')
 
 @section('content')
-<div class="space-y-6">
-    <!-- Barre d'outils -->
-    <div class="bg-white rounded-lg shadow-sm p-4">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div class="flex flex-col sm:flex-row gap-3">
-                <!-- Recherche -->
-                <form action="{{ route('admin.categories.index') }}" method="GET" class="flex gap-2">
-                    <input type="text" 
-                           name="search" 
-                           value="{{ request('search') }}"
-                           placeholder="Rechercher une catégorie..."
-                           class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent w-64">
-                    <button type="submit" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </form>
-            </div>
-            
-            <a href="{{ route('admin.categories.create') }}" class="px-6 py-2 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg transition-colors inline-flex items-center">
-                <i class="fas fa-plus mr-2"></i>
-                Ajouter une catégorie
-            </a>
+<div>
+    {{-- En-tête --}}
+    <div class="flex items-center justify-between mb-4">
+        <div>
+            <h1 class="text-lg font-semibold text-admin-900">Catégories</h1>
+            <p class="text-xs text-admin-500 mt-0.5">{{ $categories->total() }} catégorie(s)</p>
         </div>
+        <a href="{{ route('admin.categories.create') }}"
+           class="px-3 py-1.5 bg-admin-900 hover:bg-admin-800 text-white text-sm rounded transition">
+            + Nouvelle catégorie
+        </a>
     </div>
 
-    <!-- Tableau des catégories -->
-    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+    {{-- Recherche --}}
+    <div class="bg-white rounded border border-admin-200 p-3 mb-4">
+        <form method="GET" action="{{ route('admin.categories.index') }}" class="flex flex-wrap items-center gap-3">
+            <input type="text" name="search" value="{{ request('search') }}"
+                   placeholder="Rechercher une catégorie..."
+                   class="flex-1 min-w-[200px] px-3 py-1.5 text-sm border border-admin-200 rounded focus:outline-none focus:ring-1 focus:ring-admin-400">
+            <button type="submit" class="px-3 py-1.5 bg-admin-100 hover:bg-admin-200 text-admin-700 text-sm rounded transition">
+                Filtrer
+            </button>
+            @if(request()->filled('search'))
+                <a href="{{ route('admin.categories.index') }}" class="text-xs text-admin-400 hover:text-admin-600">Réinitialiser</a>
+            @endif
+        </form>
+    </div>
+
+    {{-- Tableau --}}
+    <div class="bg-white rounded border border-admin-200 overflow-hidden">
         <div class="overflow-x-auto">
-            <table class="w-full">
-                <thead class="bg-gray-50">
+            <table class="min-w-full divide-y divide-admin-200">
+                <thead class="bg-admin-50">
                     <tr>
-                        <th class="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase w-16">#</th>
-                        <th class="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Nom</th>
-                        <th class="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Slug</th>
-                        <th class="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Icône</th>
-                        <th class="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Statut</th>
-                        <th class="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Ordre</th>
-                        <th class="text-right py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Actions</th>
+                        <th class="px-4 py-2 text-left text-xs font-medium text-admin-500 uppercase tracking-wider">Nom</th>
+                        <th class="px-4 py-2 text-left text-xs font-medium text-admin-500 uppercase tracking-wider">Slug</th>
+                        <th class="px-4 py-2 text-left text-xs font-medium text-admin-500 uppercase tracking-wider">Icône</th>
+                        <th class="px-4 py-2 text-center text-xs font-medium text-admin-500 uppercase tracking-wider">Ordre</th>
+                        <th class="px-4 py-2 text-center text-xs font-medium text-admin-500 uppercase tracking-wider">Statut</th>
+                        <th class="px-4 py-2 text-right text-xs font-medium text-admin-500 uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100">
+                <tbody class="divide-y divide-admin-100">
                     @forelse($categories as $categorie)
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="py-3 px-4 text-sm text-gray-500">{{ $categorie->id }}</td>
-                        <td class="py-3 px-4">
-                            <span class="text-gray-800 font-medium">{{ $categorie->nom }}</span>
-                            @if($categorie->description)
-                                <p class="text-xs text-gray-400">{{ Str::limit($categorie->description, 50) }}</p>
-                            @endif
-                        </td>
-                        <td class="py-3 px-4 text-sm text-gray-500">{{ $categorie->slug }}</td>
-                        <td class="py-3 px-4 text-sm text-gray-500">
-                            @if($categorie->icone)
-                                <i class="fas {{ $categorie->icone }} text-xl text-amber-500"></i>
-                            @else
-                                <i class="fas fa-tag text-gray-300"></i>
-                            @endif
-                        </td>
-                        <td class="py-3 px-4">
-                            <button onclick="toggleStatus({{ $categorie->id }})" 
-                                    class="px-3 py-1 text-xs rounded-full transition-colors {{ $categorie->is_active ? 'bg-emerald-100 text-emerald-700 hover:bg-emerald-200' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}">
-                                {{ $categorie->is_active ? 'Actif' : 'Inactif' }}
-                            </button>
-                        </td>
-                        <td class="py-3 px-4 text-sm text-gray-500">{{ $categorie->ordre }}</td>
-                        <td class="py-3 px-4 text-right">
-                            <div class="flex items-center justify-end space-x-2">
-                                {{-- CORRECTION : Route avec le bon paramètre --}}
-                                <a href="{{ route('admin.categories.edit', $categorie) }}" class="p-2 text-amber-500 hover:bg-amber-50 rounded-lg transition-colors" title="Modifier">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                {{-- CORRECTION : Formulaire de suppression avec le bon paramètre --}}
-                                <form action="{{ route('admin.categories.destroy', $categorie) }}" method="POST" class="inline" onsubmit="return confirmDelete()">
+                        <tr class="hover:bg-admin-50 transition">
+                            <td class="px-4 py-2">
+                                <a href="{{ route('admin.categories.edit', $categorie) }}"
+                                   class="text-sm font-medium text-admin-900 hover:text-amber-700 transition">{{ $categorie->nom }}</a>
+                                @if($categorie->description)
+                                    <p class="text-xs text-admin-400 truncate max-w-xs">{{ Str::limit($categorie->description, 60) }}</p>
+                                @endif
+                            </td>
+                            <td class="px-4 py-2 text-sm text-admin-500 font-mono whitespace-nowrap">{{ $categorie->slug }}</td>
+                            <td class="px-4 py-2 text-xs text-admin-500 font-mono whitespace-nowrap">
+                                {{ $categorie->icone ?: '—' }}
+                            </td>
+                            <td class="px-4 py-2 text-center text-sm text-admin-500">{{ $categorie->ordre ?? 0 }}</td>
+                            <td class="px-4 py-2 text-center">
+                                <button type="button"
+                                        data-toggle-url="{{ route('admin.categories.toggle-status', $categorie) }}"
+                                        title="Cliquer pour {{ $categorie->is_active ? 'désactiver' : 'activer' }}"
+                                        class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium transition {{ $categorie->is_active ? 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100' : 'bg-admin-100 text-admin-500 hover:bg-admin-200' }}">
+                                    {{ $categorie->is_active ? 'Actif' : 'Inactif' }}
+                                </button>
+                            </td>
+                            <td class="px-4 py-2 text-right whitespace-nowrap">
+                                <a href="{{ route('admin.categories.edit', $categorie) }}"
+                                   class="text-xs text-admin-500 hover:text-admin-900 mr-3">Éditer</a>
+                                <form action="{{ route('admin.categories.destroy', $categorie) }}" method="POST" class="inline"
+                                      onsubmit="return confirm('Supprimer cette catégorie ?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors" title="Supprimer">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+                                    <button type="submit" class="text-xs text-red-400 hover:text-red-600">Supprimer</button>
                                 </form>
-                            </div>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
                     @empty
-                    <tr>
-                        <td colspan="7" class="py-12 text-center text-gray-500">
-                            <i class="fas fa-inbox text-4xl block mb-3"></i>
-                            <p>Aucune catégorie trouvée</p>
-                            <a href="{{ route('admin.categories.create') }}" class="mt-2 inline-block text-amber-500 hover:text-amber-600">
-                                Créer votre première catégorie
-                            </a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td colspan="6" class="px-4 py-12 text-center text-sm text-admin-400">
+                                <svg class="w-10 h-10 mx-auto mb-3 text-admin-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+                                </svg>
+                                Aucune catégorie trouvée.
+                                <a href="{{ route('admin.categories.create') }}" class="text-admin-600 hover:text-admin-800 underline ml-1">Créer la première</a>
+                            </td>
+                        </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
-        
-        <!-- Pagination -->
-        <div class="px-4 py-3 border-t border-gray-100">
-            {{ $categories->links() }}
-        </div>
     </div>
+
+    @if($categories->hasPages())
+        <div class="mt-4">{{ $categories->withQueryString()->links() }}</div>
+    @endif
 </div>
+@endsection
 
 @push('scripts')
 <script>
-    function toggleStatus(id) {
-        fetch(`/admin/categories/${id}/toggle-status`, {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                location.reload();
-            }
+document.addEventListener('DOMContentLoaded', function () {
+    const csrf = document.querySelector('meta[name="csrf-token"]').content;
+    document.querySelectorAll('[data-toggle-url]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            btn.disabled = true;
+            fetch(btn.dataset.toggleUrl, {
+                method: 'POST',
+                headers: { 'X-CSRF-TOKEN': csrf, 'Accept': 'application/json' },
+            })
+                .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+                .then(function (data) { if (data.success) location.reload(); else btn.disabled = false; })
+                .catch(function () { btn.disabled = false; alert('Le changement a échoué, réessayez.'); });
         });
-    }
-
-    function confirmDelete() {
-        return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');
-    }
+    });
+});
 </script>
 @endpush
-@endsection

@@ -92,7 +92,7 @@
     @include('partials.vitrine-nav')
 
     {{-- =================================================================
-         1. HERO — diaporama Ken Burns + aurore + grille + projecteur + grain
+         1. HERO — diaporama + aurore + grille + projecteur + grain
          ================================================================= --}}
     <section id="accueil" class="hero relative min-h-screen flex items-center overflow-hidden"
              data-interval="{{ $hero['interval'] ?? 6500 }}" style="--interval: {{ $hero['interval'] ?? 6500 }}ms;">

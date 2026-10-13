@@ -6,7 +6,6 @@
         ['admin.dashboard',         'admin.dashboard',         'Dashboard'],
         ['admin.ouvrages.index',    'admin.ouvrages.*',        'Ouvrages'],
         ['admin.categories.index',  'admin.categories.*',      'Catégories'],
-        ['admin.medias.index',      'admin.medias.*',          'Médias'],
         ['admin.site-images.index', 'admin.site-images.*',     'Images du site'],
         ['admin.settings.index',    'admin.settings.*',        'Paramètres'],
     ];
@@ -152,6 +151,16 @@
                 <div class="mb-4 p-3 bg-yellow-50 border border-yellow-200 text-yellow-700 rounded text-sm flex items-center justify-between">
                     <span>{{ session('warning') }}</span>
                     <button onclick="this.parentElement.remove()" class="text-yellow-500 hover:text-yellow-700">✕</button>
+                </div>
+            @endif
+
+            {{-- Titre de page (optionnel) : les vues qui définissent page-title / page-subtitle le gardent --}}
+            @hasSection('page-title')
+                <div class="mb-4">
+                    <h1 class="text-lg font-semibold text-admin-900">@yield('page-title')</h1>
+                    @hasSection('page-subtitle')
+                        <p class="text-xs text-admin-500 mt-0.5">@yield('page-subtitle')</p>
+                    @endif
                 </div>
             @endif
 

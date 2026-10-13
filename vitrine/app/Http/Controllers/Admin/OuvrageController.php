@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\OuvrageRequest;
 use App\Models\Ouvrage;
 use App\Models\Categorie;
-use App\Models\Gamme;
 use App\Models\Media;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -16,7 +15,7 @@ class OuvrageController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Ouvrage::with(['categorie', 'gamme']);
+        $query = Ouvrage::with(['categorie', 'mainImage']);
 
         // Filtres
         if ($request->filled('search')) {
@@ -30,10 +29,6 @@ class OuvrageController extends Controller
             $query->where('categorie_id', $request->categorie);
         }
 
-        if ($request->filled('gamme')) {
-            $query->where('gamme_id', $request->gamme);
-        }
-
         if ($request->filled('status')) {
             $query->where('is_active', $request->status == 'active');
         }
@@ -45,16 +40,14 @@ class OuvrageController extends Controller
         $ouvrages = $query->orderBy('created_at', 'desc')->paginate(10);
         
         $categories = Categorie::orderBy('nom')->get();
-        $gammes = Gamme::orderBy('nom')->get();
 
-        return view('admin.ouvrages.index', compact('ouvrages', 'categories', 'gammes'));
+        return view('admin.ouvrages.index', compact('ouvrages', 'categories'));
     }
 
     public function create()
     {
         $categories = Categorie::orderBy('nom')->get();
-        $gammes = Gamme::orderBy('nom')->get();
-        return view('admin.ouvrages.create', compact('categories', 'gammes'));
+        return view('admin.ouvrages.create', compact('categories'));
     }
 
     public function store(OuvrageRequest $request)
@@ -81,16 +74,15 @@ class OuvrageController extends Controller
 
     public function show(Ouvrage $ouvrage)
     {
-        $ouvrage->load(['categorie', 'gamme', 'medias']);
+        $ouvrage->load(['categorie', 'mainImage', 'gallery']);
         return view('admin.ouvrages.show', compact('ouvrage'));
     }
 
     public function edit(Ouvrage $ouvrage)
     {
         $categories = Categorie::orderBy('nom')->get();
-        $gammes = Gamme::orderBy('nom')->get();
-        $ouvrage->load('medias');
-        return view('admin.ouvrages.edit', compact('ouvrage', 'categories', 'gammes'));
+        $ouvrage->load(['mainImage', 'gallery']);
+        return view('admin.ouvrages.edit', compact('ouvrage', 'categories'));
     }
 
     public function update(OuvrageRequest $request, Ouvrage $ouvrage)
@@ -99,9 +91,11 @@ class OuvrageController extends Controller
 
         if ($request->filled('titre') && $ouvrage->titre != $data['titre']) {
             $data['slug'] = Str::slug($data['titre']);
-            $data['is_active'] = $request->has('is_active');
-            $data['is_featured'] = $request->has('is_featured');
         }
+
+        // Cases à cocher : une case décochée n'envoie rien, on la lit donc toujours explicitement
+        $data['is_active'] = $request->has('is_active');
+        $data['is_featured'] = $request->has('is_featured');
 
         $ouvrage->update($data);
 
@@ -152,6 +146,11 @@ class OuvrageController extends Controller
 
     public function deleteImage(Ouvrage $ouvrage, Media $media)
     {
+        abort_unless(
+            $media->model_type === Ouvrage::class && (int) $media->model_id === $ouvrage->id,
+            404
+        );
+
         Storage::disk('public')->delete($media->file_path);
         $media->delete();
 

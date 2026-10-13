@@ -28,7 +28,6 @@ class OuvrageRequest extends FormRequest
             'reference' => 'required|string|max:255|unique:ouvrages,reference,' . $id,
             'description' => 'nullable|string',
             'categorie_id' => 'nullable|exists:categories,id',
-            'gamme_id' => 'nullable|exists:gammes,id',
             'date_realisation' => 'nullable|date',
             'client' => 'nullable|string|max:255',
             'localisation' => 'nullable|string|max:255',

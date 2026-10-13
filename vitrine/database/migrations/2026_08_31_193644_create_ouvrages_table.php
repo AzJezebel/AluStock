@@ -19,7 +19,6 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('reference')->unique();
             $table->foreignId('categorie_id')->nullable()->constrained()->onDelete('set null');
-            $table->foreignId('gamme_id')->nullable()->constrained()->onDelete('set null');
             $table->string('image')->nullable();
             $table->text('images')->nullable(); // Pour stocker plusieurs images en JSON
             $table->date('date_realisation')->nullable();
@@ -32,7 +31,6 @@ return new class extends Migration
             $table->timestamps();
             
             // Index pour les recherches
-            $table->index(['categorie_id', 'gamme_id']);
             $table->index('is_active');
             $table->index('date_realisation');
         });

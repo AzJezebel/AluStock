@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Ouvrage;
 use App\Models\Categorie;
-use App\Models\Gamme;
-use App\Models\Media;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -18,17 +16,17 @@ class DashboardController extends Controller
             'total_ouvrages' => Ouvrage::count(),
             'active_ouvrages' => Ouvrage::actif()->count(),
             'total_categories' => Categorie::count(),
-            'total_gammes' => Gamme::count(),
-            'total_medias' => Media::count(),
             'total_users' => User::count(),
-            'latest_ouvrages' => Ouvrage::recent(5)->get(),
             'featured_ouvrages' => Ouvrage::featured()->count(),
             'total_views' => Ouvrage::sum('views')
         ];
 
+        // Derniers ouvrages ajoutés (liste du dashboard)
+        $latestOuvrages = Ouvrage::with('categorie')->recent(5)->get();
+
         $chartData = $this->getChartData();
 
-        return view('admin.dashboard.index', compact('stats', 'chartData'));
+        return view('admin.dashboard.index', compact('stats', 'latestOuvrages', 'chartData'));
     }
 
     private function getChartData()

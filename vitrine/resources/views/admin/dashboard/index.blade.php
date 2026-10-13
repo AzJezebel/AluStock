@@ -29,7 +29,7 @@
             <div class="flex-1 border-t border-admin-200"></div>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
             {{-- Ouvrages --}}
             <a href="{{ route('admin.ouvrages.index') }}"
                class="bg-white rounded border border-admin-200 p-4 hover:border-admin-400 hover:shadow-sm transition group">
@@ -45,22 +45,6 @@
                             Ouvrages
                             <span class="text-emerald-600">· {{ $stats['active_ouvrages'] ?? 0 }} actifs</span>
                         </div>
-                    </div>
-                </div>
-            </a>
-
-            {{-- Médias --}}
-            <a href="{{ route('admin.medias.index') }}"
-               class="bg-white rounded border border-admin-200 p-4 hover:border-admin-400 hover:shadow-sm transition group">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded bg-amber-50 flex items-center justify-center text-amber-700">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <div class="text-2xl font-bold text-admin-900">{{ $stats['total_medias'] ?? 0 }}</div>
-                        <div class="text-xs text-admin-500">Médias</div>
                     </div>
                 </div>
             </a>

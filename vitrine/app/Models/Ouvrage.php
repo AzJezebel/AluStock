@@ -16,7 +16,6 @@ class Ouvrage extends Model
         'description',
         'reference',
         'categorie_id',
-        'gamme_id',
         'date_realisation',
         'client',
         'localisation',
@@ -44,11 +43,6 @@ class Ouvrage extends Model
         return $this->belongsTo(Categorie::class);
     }
 
-    public function gamme()
-    {
-        return $this->belongsTo(Gamme::class);
-    }
-
     public function medias()
     {
         return $this->morphMany(Media::class, 'model')->ordered();
@@ -56,9 +50,14 @@ class Ouvrage extends Model
 
     public function mainImage()
     {
+        // Le OR est groupé : sans parenthèses, « orWhere('is_primary') » annulait le filtre
+        // model_type / model_id et renvoyait l'image principale d'un AUTRE ouvrage.
         return $this->morphOne(Media::class, 'model')
-            ->where('collection_name', 'main')
-            ->orWhere('is_primary', true);
+            ->where(function ($q) {
+                $q->where('collection_name', 'main')->orWhere('is_primary', true);
+            })
+            ->orderByDesc('is_primary')
+            ->orderBy('order');
     }
 
     public function gallery()

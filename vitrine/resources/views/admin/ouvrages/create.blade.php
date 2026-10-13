@@ -2,7 +2,7 @@
 
 @extends('admin.layouts.admin')
 
-@section('title', 'Ajouter un ouvrage - AluStock Admin')
+@section('title', 'Ajouter un ouvrage - Administration')
 @section('page-title', 'Ajouter un ouvrage')
 @section('page-subtitle', 'Créer une nouvelle réalisation')
 
@@ -10,7 +10,7 @@
 <div class="bg-white rounded-lg shadow-sm p-6">
     <form action="{{ route('admin.ouvrages.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Colonne gauche -->
             <div class="space-y-4">
@@ -42,19 +42,6 @@
                         @foreach($categories as $categorie)
                             <option value="{{ $categorie->id }}" {{ old('categorie_id') == $categorie->id ? 'selected' : '' }}>
                                 {{ $categorie->nom }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <!-- Gamme -->
-                <div>
-                    <label for="gamme_id" class="block text-sm font-medium text-gray-700 mb-1">Gamme</label>
-                    <select id="gamme_id" name="gamme_id" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
-                        <option value="">Sélectionner une gamme</option>
-                        @foreach($gammes as $gamme)
-                            <option value="{{ $gamme->id }}" {{ old('gamme_id') == $gamme->id ? 'selected' : '' }}>
-                                {{ $gamme->nom }}
                             </option>
                         @endforeach
                     </select>
@@ -100,26 +87,21 @@
             </div>
         </div>
 
-        <!-- Image principale -->
-        <div class="mt-6">
-            <label for="main_image" class="block text-sm font-medium text-gray-700 mb-1">Image principale</label>
-            <input type="file" id="main_image" name="main_image" accept="image/*"
-                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
-            <p class="text-xs text-gray-500 mt-1">Format: JPG, PNG, GIF. Max: 2MB</p>
-            @error('main_image')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
-        </div>
+        <!-- Images -->
+        <div class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+            @include('admin.ouvrages.partials.image-uploader', [
+                'name'     => 'main_image',
+                'multiple' => false,
+                'label'    => 'Image principale',
+                'help'     => 'Image de couverture : affichée en premier sur le site.',
+            ])
 
-        <!-- Galerie -->
-        <div class="mt-6">
-            <label for="gallery_images" class="block text-sm font-medium text-gray-700 mb-1">Galerie d'images</label>
-            <input type="file" id="gallery_images" name="gallery_images[]" multiple accept="image/*"
-                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
-            <p class="text-xs text-gray-500 mt-1">Sélectionnez plusieurs images (JPG, PNG, GIF). Max: 2MB par image</p>
-            @error('gallery_images.*')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
+            @include('admin.ouvrages.partials.image-uploader', [
+                'name'     => 'gallery_images',
+                'multiple' => true,
+                'label'    => "Galerie d'images",
+                'help'     => 'Images supplémentaires, visibles dans la visionneuse du site.',
+            ])
         </div>
 
         <!-- Options -->
@@ -142,7 +124,6 @@
                 Annuler
             </a>
             <button type="submit" class="px-6 py-2 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg transition-colors">
-                <i class="fas fa-save mr-2"></i>
                 Créer l'ouvrage
             </button>
         </div>

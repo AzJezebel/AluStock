@@ -10,8 +10,8 @@ return [
     | couleur d'accent. Change-les ici ou via le .env.
     */
     'brand' => [
-        'first'  => env('VITRINE_BRAND_FIRST', 'Votre'),
-        'second' => env('VITRINE_BRAND_SECOND', 'Marque'),
+        'first'  => env('VITRINE_BRAND_FIRST', 'CMS'),
+        'second' => env('VITRINE_BRAND_SECOND', 'Vitrine'),
     ],
 
     'tagline' => env('VITRINE_TAGLINE', "Ouvrages en aluminium sur mesure : conception, fabrication et pose."),
@@ -36,9 +36,9 @@ return [
 
     'contact' => [
         'phone'   => env('VITRINE_PHONE', '+33 (0)1 23 45 67 89'),
-        'email'   => env('VITRINE_EMAIL', 'contact@exemple.fr'),
-        'address' => env('VITRINE_ADDRESS', "123 Avenue de l'Industrie"),
-        'city'    => env('VITRINE_CITY', '75001 Paris, France'),
+        'email'   => env('VITRINE_EMAIL', 'alustock@orange.fr'),
+        'address' => env('VITRINE_ADDRESS', "Impasse du Tonnelier, Ducos"),
+        'city'    => env('VITRINE_CITY', '97224 Ducos, Martinique'),
     ],
 
     /*

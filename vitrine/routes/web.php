@@ -2,14 +2,12 @@
 // routes/web.php
 
 use App\Http\Controllers\Public\VitrineController;
-use App\Http\Controllers\Public\CatalogueController;
 
 use App\Http\Controllers\Public\OuvrageController as PublicOuvrageController;
 use App\Http\Controllers\Public\ContactController;
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategorieController as AdminCategorieController;
-use App\Http\Controllers\Admin\GammeController as AdminGammeController;
 use App\Http\Controllers\Admin\OuvrageController as AdminOuvrageController;
 use App\Http\Controllers\Admin\MediaController as AdminMediaController;
 use App\Http\Controllers\Admin\SettingsController as AdminSettingsController;
@@ -24,27 +22,6 @@ use Illuminate\Http\Request;
 Route::get('/', [VitrineController::class, 'index'])->name('vitrine.index');
 
 // =============================================
-// ROUTES DU CATALOGUE TECHNIQUE
-// =============================================
-
-Route::prefix('catalogue')->name('catalogue.')->group(function () {
-    // Page principale du catalogue
-    Route::get('/', [CatalogueController::class, 'index'])->name('index');
-    
-    // Recherche dans le catalogue
-    Route::get('/recherche', [CatalogueController::class, 'search'])->name('search');
-    
-    // Filtres du catalogue
-    Route::get('/filtres', [CatalogueController::class, 'filters'])->name('filters');
-    
-    // Détail d'un produit
-    Route::get('/produit/{slug}', [CatalogueController::class, 'show'])->name('show');
-    
-    // Téléchargement de fiche technique
-    Route::get('/produit/{id}/fiche-technique', [CatalogueController::class, 'downloadFiche'])->name('download.fiche');
-});
-
-// =============================================
 // ROUTES DES OUVRAGES (réalisations)
 // =============================================
 
@@ -57,9 +34,6 @@ Route::prefix('realisations')->name('ouvrages.')->group(function () {
     
     // Filtrer par catégorie
     Route::get('/categorie/{slug}', [PublicOuvrageController::class, 'byCategorie'])->name('byCategorie');
-    
-    // Filtrer par gamme
-    Route::get('/gamme/{slug}', [PublicOuvrageController::class, 'byGamme'])->name('byGamme');
 });
 
 
@@ -84,11 +58,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::resource('categories', AdminCategorieController::class)->parameters(['categories' => 'categorie']);
     Route::post('categories/reorder', [AdminCategorieController::class, 'reorder'])->name('categories.reorder');
     Route::post('categories/{categorie}/toggle-status', [AdminCategorieController::class, 'toggleStatus'])->name('categories.toggle-status');
-
-    // Gestion des gammes
-    Route::resource('gammes', AdminGammeController::class);
-    Route::post('gammes/reorder', [AdminGammeController::class, 'reorder'])->name('gammes.reorder');
-    Route::post('gammes/{gamme}/toggle-status', [AdminGammeController::class, 'toggleStatus'])->name('gammes.toggle-status');
 
     // Gestion des médias
     Route::get('medias', [AdminMediaController::class, 'index'])->name('medias.index');
@@ -155,4 +124,3 @@ Route::get('/contact', fn () => redirect()->to(route('vitrine.index') . '#contac
 Route::post('/contact', [ContactController::class, 'send'])
     ->middleware('throttle:' . config('contact.throttle_per_minute', 3) . ',1')
     ->name('contact.send');
- 

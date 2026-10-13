@@ -2,7 +2,7 @@
 
 @extends('admin.layouts.admin')
 
-@section('title', 'Modifier l\'ouvrage - AluStock Admin')
+@section('title', 'Modifier l\'ouvrage - Administration')
 @section('page-title', 'Modifier l\'ouvrage')
 @section('page-subtitle', 'Mettre à jour la réalisation')
 
@@ -11,7 +11,7 @@
     <form action="{{ route('admin.ouvrages.update', $ouvrage) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-        
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Colonne gauche -->
             <div class="space-y-4">
@@ -43,19 +43,6 @@
                         @foreach($categories as $categorie)
                             <option value="{{ $categorie->id }}" {{ old('categorie_id', $ouvrage->categorie_id) == $categorie->id ? 'selected' : '' }}>
                                 {{ $categorie->nom }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <!-- Gamme -->
-                <div>
-                    <label for="gamme_id" class="block text-sm font-medium text-gray-700 mb-1">Gamme</label>
-                    <select id="gamme_id" name="gamme_id" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
-                        <option value="">Sélectionner une gamme</option>
-                        @foreach($gammes as $gamme)
-                            <option value="{{ $gamme->id }}" {{ old('gamme_id', $ouvrage->gamme_id) == $gamme->id ? 'selected' : '' }}>
-                                {{ $gamme->nom }}
                             </option>
                         @endforeach
                     </select>
@@ -101,46 +88,24 @@
             </div>
         </div>
 
-        <!-- Image principale -->
-        <div class="mt-6">
-            @if($ouvrage->mainImage)
-                <div class="mb-2">
-                    <p class="text-sm text-gray-600">Image actuelle :</p>
-                    <img src="{{ asset('storage/' . $ouvrage->mainImage->file_path) }}" alt="Image actuelle" class="h-32 w-auto object-cover rounded-lg">
-                </div>
-            @endif
-            <label for="main_image" class="block text-sm font-medium text-gray-700 mb-1">Changer l'image principale</label>
-            <input type="file" id="main_image" name="main_image" accept="image/*"
-                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
-            <p class="text-xs text-gray-500 mt-1">Format: JPG, PNG, GIF. Max: 2MB</p>
-        </div>
+        <!-- Images -->
+        <div class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+            @include('admin.ouvrages.partials.image-uploader', [
+                'name'     => 'main_image',
+                'multiple' => false,
+                'label'    => 'Image principale',
+                'help'     => 'Image de couverture : affichée en premier sur le site. En envoyer une nouvelle remplace l\'actuelle.',
+                'existing' => $ouvrage->mainImage ? [$ouvrage->mainImage] : [],
+            ])
 
-        <!-- Galerie -->
-        <div class="mt-6">
-            <label for="gallery_images" class="block text-sm font-medium text-gray-700 mb-1">Ajouter à la galerie</label>
-            <input type="file" id="gallery_images" name="gallery_images[]" multiple accept="image/*"
-                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
-            <p class="text-xs text-gray-500 mt-1">Ajouter des images supplémentaires (JPG, PNG, GIF). Max: 2MB par image</p>
-            
-            @if($ouvrage->gallery->count() > 0)
-                <div class="mt-3">
-                    <p class="text-sm text-gray-600 mb-2">Images existantes :</p>
-                    <div class="flex flex-wrap gap-2">
-                        @foreach($ouvrage->gallery as $image)
-                            <div class="relative">
-                                <img src="{{ asset('storage/' . $image->file_path) }}" alt="Galerie" class="h-20 w-20 object-cover rounded-lg">
-                                <form action="{{ route('admin.ouvrages.delete-image', [$ouvrage, $image]) }}" method="POST" class="absolute -top-2 -right-2">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="w-5 h-5 bg-red-500 text-white rounded-full text-xs hover:bg-red-600" onclick="return confirm('Supprimer cette image ?')">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            @endif
+            @include('admin.ouvrages.partials.image-uploader', [
+                'name'      => 'gallery_images',
+                'multiple'  => true,
+                'label'     => "Galerie d'images",
+                'help'      => 'Images supplémentaires, visibles dans la visionneuse du site.',
+                'existing'  => $ouvrage->gallery,
+                'deletable' => true,
+            ])
         </div>
 
         <!-- Options -->
@@ -163,10 +128,18 @@
                 Annuler
             </a>
             <button type="submit" class="px-6 py-2 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg transition-colors">
-                <i class="fas fa-save mr-2"></i>
                 Mettre à jour
             </button>
         </div>
     </form>
+
+    {{-- Formulaires de suppression d'image : HORS du formulaire principal (un <form> ne peut pas
+         être imbriqué dans un autre). Les croix de la galerie les déclenchent via l'attribut form="…". --}}
+    @foreach($ouvrage->gallery as $image)
+        <form id="del-img-{{ $image->id }}" action="{{ route('admin.ouvrages.delete-image', [$ouvrage, $image]) }}" method="POST" class="hidden">
+            @csrf
+            @method('DELETE')
+        </form>
+    @endforeach
 </div>
 @endsection
