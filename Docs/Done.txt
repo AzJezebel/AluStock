@@ -464,3 +464,9 @@ feat: Update routes and controllers for public and admin sections, remove unused
 
 --------------------------------------------------------------------------------------------------------------------------------
 13/10 
+
+Trying again with new gmail, still stuck on enabling 2FA + trying with Outlook can't add new APP PASSWORD after 2FA
+Redo image management + style homogenizing in admin dashboard + remove all gammes references + debug and remove sleeping code
+
+--------------------------------------------------------------------------------------------------------------------------------
+14/10 
