@@ -3,7 +3,7 @@
      Honeypot "website" (caché) + validation côté serveur (ContactRequest). --}}
 @extends('layouts.app')
 
-@section('title', 'Contact — AluStock')
+@section('title', 'Contact — ' . config('vitrine.brand.first') . config('vitrine.brand.second'))
 
 @section('breadcrumb')
     <a href="#" class="hover:text-fg transition">Accueil</a>

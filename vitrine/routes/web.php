@@ -1,126 +1,76 @@
 <?php
 // routes/web.php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Public\ContactController;
+use App\Http\Controllers\Public\OuvrageController as PublicOuvrageController;
 use App\Http\Controllers\Public\VitrineController;
 
-use App\Http\Controllers\Public\OuvrageController as PublicOuvrageController;
-use App\Http\Controllers\Public\ContactController;
-
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategorieController as AdminCategorieController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OuvrageController as AdminOuvrageController;
-use App\Http\Controllers\Admin\MediaController as AdminMediaController;
-use App\Http\Controllers\Admin\SettingsController as AdminSettingsController;
 use App\Http\Controllers\Admin\SiteImageController as AdminSiteImageController;
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 
+// =============================================
+// SITE PUBLIC
+// =============================================
 
-
-// Page d'accueil
 Route::get('/', [VitrineController::class, 'index'])->name('vitrine.index');
 
-// =============================================
-// ROUTES DES OUVRAGES (réalisations)
-// =============================================
-
-Route::prefix('realisations')->name('ouvrages.')->group(function () {
-    // Liste des réalisations
-    Route::get('/', [PublicOuvrageController::class, 'index'])->name('index');
-    
-    // Détail d'une réalisation
-    Route::get('/{slug}', [PublicOuvrageController::class, 'show'])->name('show');
-    
-    // Filtrer par catégorie
-    Route::get('/categorie/{slug}', [PublicOuvrageController::class, 'byCategorie'])->name('byCategorie');
-});
-
-
-
-// // =============================================
-// // ROUTES ADMIN 
-// // =============================================
-
-
-Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
-    // Dashboard
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-
-    // Gestion des ouvrages
-    Route::resource('ouvrages', AdminOuvrageController::class);
-    Route::post('ouvrages/{ouvrage}/toggle-status', [AdminOuvrageController::class, 'toggleStatus'])->name('ouvrages.toggle-status');
-    Route::post('ouvrages/{ouvrage}/toggle-featured', [AdminOuvrageController::class, 'toggleFeatured'])->name('ouvrages.toggle-featured');
-    Route::delete('ouvrages/{ouvrage}/media/{media}', [AdminOuvrageController::class, 'deleteImage'])->name('ouvrages.delete-image');
-    Route::post('ouvrages/{ouvrage}/reorder-images', [AdminOuvrageController::class, 'reorderImages'])->name('ouvrages.reorder-images');
-
-    // Gestion des catégories
-    Route::resource('categories', AdminCategorieController::class)->parameters(['categories' => 'categorie']);
-    Route::post('categories/reorder', [AdminCategorieController::class, 'reorder'])->name('categories.reorder');
-    Route::post('categories/{categorie}/toggle-status', [AdminCategorieController::class, 'toggleStatus'])->name('categories.toggle-status');
-
-    // Gestion des médias
-    Route::get('medias', [AdminMediaController::class, 'index'])->name('medias.index');
-    Route::post('medias/upload', [AdminMediaController::class, 'upload'])->name('medias.upload');
-    Route::delete('medias/{media}', [AdminMediaController::class, 'destroy'])->name('medias.destroy');
-    Route::post('medias/bulk-delete', [AdminMediaController::class, 'bulkDestroy'])->name('medias.bulk-destroy');
-    Route::post('medias/{media}/set-primary', [AdminMediaController::class, 'setPrimary'])->name('medias.set-primary');
-
-    // Paramètres du site
-    Route::get('settings', [AdminSettingsController::class, 'index'])->name('settings.index');
-    Route::post('settings', [AdminSettingsController::class, 'update'])->name('settings.update');
-    Route::get('settings/{key}', [AdminSettingsController::class, 'get'])->name('settings.get');
-
-    Route::prefix('site-images')->name('site-images.')->controller(AdminSiteImageController::class)->group(function () {
+// Réalisations (ouvrages) — les vues public.ouvrages.* restent à créer
+Route::prefix('realisations')->name('ouvrages.')->controller(PublicOuvrageController::class)->group(function () {
     Route::get('/', 'index')->name('index');
-    Route::post('{slot}', 'store')->name('store');
-    Route::delete('{slot}', 'destroy')->name('destroy');
-    Route::post('{slot}/ordre', 'reorder')->name('reorder');
-});
+    Route::get('/categorie/{slug}', 'byCategorie')->name('byCategorie');
+    Route::get('/{slug}', 'show')->name('show');
 });
 
-
-// =============================================
-// ROUTE DE REDIRECTION (404)
-// =============================================
-
-// Route::fallback(function () {
-//     return view('errors.404');
-// });
-
-
-
-// =============================================
-// ROUTES ADMIN
-// =============================================
-
-// =============================================
-// ROUTES DE LOGIN (Simples)
-// =============================================
-
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
-
-Route::post('/login', function (Request $request) {
-    $credentials = $request->only('email', 'password');
-    
-    if (Auth::attempt($credentials)) {
-        return redirect()->route('admin.dashboard');
-    }
-    
-    return back()->withErrors([
-        'email' => 'Identifiants incorrects.',
-    ]);
-})->name('login');
-
-Route::post('/logout', function () {
-    Auth::logout();
-    return redirect('/login');
-})->name('logout');
-
+// Contact (le formulaire est dans la page d'accueil, ancre #contact)
 Route::get('/contact', fn () => redirect()->to(route('vitrine.index') . '#contact'))->name('contact.show');
- 
 Route::post('/contact', [ContactController::class, 'send'])
     ->middleware('throttle:' . config('contact.throttle_per_minute', 3) . ',1')
     ->name('contact.send');
+
+// =============================================
+// AUTHENTIFICATION
+// =============================================
+
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/login', 'showLogin')->name('login');
+    Route::post('/login', 'login')->middleware('throttle:5,1')->name('login.attempt');
+    Route::post('/logout', 'logout')->name('logout');
+});
+
+// =============================================
+// ADMIN (connecté + rôle admin / super_admin)
+// =============================================
+
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Ouvrages
+    Route::resource('ouvrages', AdminOuvrageController::class);
+    Route::controller(AdminOuvrageController::class)->prefix('ouvrages/{ouvrage}')->name('ouvrages.')->group(function () {
+        Route::post('toggle-status', 'toggleStatus')->name('toggle-status');
+        Route::post('toggle-featured', 'toggleFeatured')->name('toggle-featured');
+        Route::delete('media/{media}', 'deleteImage')->name('delete-image');
+        Route::post('reorder-images', 'reorderImages')->name('reorder-images');
+    });
+
+    // Catégories
+    Route::post('categories/reorder', [AdminCategorieController::class, 'reorder'])->name('categories.reorder');
+    Route::post('categories/{categorie}/toggle-status', [AdminCategorieController::class, 'toggleStatus'])->name('categories.toggle-status');
+    Route::resource('categories', AdminCategorieController::class)
+        ->parameters(['categories' => 'categorie'])
+        ->except('show');
+
+    // Images du site (hero + « À propos »), stockées dans un JSON
+    Route::prefix('site-images')->name('site-images.')->controller(AdminSiteImageController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('{slot}', 'store')->name('store');
+        Route::delete('{slot}', 'destroy')->name('destroy');
+        Route::post('{slot}/ordre', 'reorder')->name('reorder');
+    });
+});

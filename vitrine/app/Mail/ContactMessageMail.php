@@ -25,8 +25,13 @@ class ContactMessageMail extends Mailable
     {
         return new Envelope(
             replyTo: [new Address($this->contact->email, $this->contact->nom)],
-            subject: '[Contact AluStock] ' . $this->contact->sujet,
+            subject: '[Contact ' . $this->brand() . '] ' . $this->contact->sujet,
         );
+    }
+
+    private function brand(): string
+    {
+        return config('vitrine.brand.first') . config('vitrine.brand.second');
     }
 
     public function content(): Content

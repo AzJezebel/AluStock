@@ -18,7 +18,7 @@ use Throwable;
  * est absent, le navigateur échoue à le charger et <x-media-image> retombe
  * automatiquement sur le placeholder.
  */
-class Media
+class VitrineMedia
 {
     public static function url(?string $path): ?string
     {
@@ -60,7 +60,7 @@ class Media
                 $url = self::url($entry);
             } else {
                 $url = null;
-                foreach (['path', 'chemin', 'url', 'fichier', 'file', 'image', 'photo'] as $key) {
+                foreach (['file_path', 'path', 'chemin_fichier', 'chemin', 'url', 'fichier', 'file', 'image', 'photo'] as $key) {
                     $candidate = self::get($entry, $key);
                     if (is_string($candidate) && $candidate !== '') {
                         $url = self::url($candidate);
@@ -83,24 +83,37 @@ class Media
      */
     public static function ouvrage($o, int $index = 0): array
     {
-        $images = [];
-        foreach (['images', 'photos', 'image', 'photo', 'image_principale', 'cover'] as $key) {
-            $found = self::urls(self::get($o, $key));
-            if ($found) {
-                $images = $found;
-                break;
+        // 1. Modèle Ouvrage de l'admin : image principale d'abord, puis la galerie (colonne file_path)
+        $images = array_values(array_unique(array_merge(
+            self::urls(self::get($o, 'mainImage')),
+            self::urls(self::get($o, 'gallery'))
+        )));
+
+        // 2. Sinon, d'autres noms courants (tableaux, anciennes données, démo...)
+        if (! $images) {
+            foreach (['medias', 'images', 'photos', 'image', 'photo', 'image_principale', 'cover'] as $key) {
+                $found = self::urls(self::get($o, $key));
+                if ($found) {
+                    $images = array_values(array_unique($found));
+                    break;
+                }
             }
         }
 
         $categorie = self::get($o, 'categorie');
+
+        // Lieu et année : champs de l'admin (localisation, date_realisation) ou lieu/annee directs
+        $date  = self::get($o, 'date_realisation');
+        $annee = self::get($o, 'annee')
+            ?? ($date instanceof \DateTimeInterface ? $date->format('Y') : ($date ? substr((string) $date, 0, 4) : ''));
 
         return [
             'id'          => self::get($o, 'id') ?? $index,
             'titre'       => (string) (self::get($o, 'titre') ?? self::get($o, 'nom') ?? 'Ouvrage sans titre'),
             'description' => (string) (self::get($o, 'description') ?? ''),
             'categorie'   => self::label($categorie),
-            'lieu'        => (string) (self::get($o, 'lieu') ?? ''),
-            'annee'       => (string) (self::get($o, 'annee') ?? ''),
+            'lieu'        => (string) (self::get($o, 'lieu') ?? self::get($o, 'localisation') ?? ''),
+            'annee'       => (string) $annee,
             'images'      => $images,
         ];
     }

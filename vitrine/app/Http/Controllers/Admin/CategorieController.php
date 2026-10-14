@@ -4,21 +4,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\CategorieRequest;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class CategorieController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Categorie::query();
+        $categories = Categorie::query()
+            ->when($request->filled('search'), fn ($q) => $q->where('nom', 'LIKE', '%' . $request->search . '%'))
+            ->ordered()
+            ->paginate(10);
 
-        if ($request->filled('search')) {
-            $query->where('nom', 'LIKE', '%' . $request->search . '%');
-        }
-
-        $categories = $query->orderBy('ordre')->paginate(10);
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -27,55 +25,30 @@ class CategorieController extends Controller
         return view('admin.categories.create');
     }
 
-    public function store(Request $request)
+    public function store(CategorieRequest $request)
     {
-        $request->validate([
-            'nom' => 'required|string|max:255|unique:categories,nom',
-            'description' => 'nullable|string',
-            'icone' => 'nullable|string|max:100',
-            'is_active' => 'boolean',
-            'ordre' => 'integer'
-        ]);
-
-        $data = $request->all();
-        $data['slug'] = Str::slug($request->nom);
-        $data['is_active'] = $request->has('is_active');
-
-        Categorie::create($data);
+        Categorie::create($this->payload($request));
 
         return redirect()->route('admin.categories.index')
             ->with('success', 'Catégorie créée avec succès.');
     }
 
-    public function edit(Categorie $categorie) // Utiliser le model binding
+    public function edit(Categorie $categorie)
     {
         return view('admin.categories.edit', compact('categorie'));
     }
 
-    public function update(Request $request, Categorie $categorie) // Utiliser le model binding
+    public function update(CategorieRequest $request, Categorie $categorie)
     {
-        $request->validate([
-            'nom' => 'required|string|max:255|unique:categories,nom,' . $categorie->id,
-            'description' => 'nullable|string',
-            'icone' => 'nullable|string|max:100',
-            'is_active' => 'boolean',
-            'ordre' => 'integer'
-        ]);
-
-        $data = $request->all();
-        $data['slug'] = Str::slug($request->nom);
-        $data['is_active'] = $request->has('is_active');
-
-        $categorie->update($data);
+        $categorie->update($this->payload($request));
 
         return redirect()->route('admin.categories.index')
             ->with('success', 'Catégorie mise à jour avec succès.');
     }
 
-    public function destroy(Categorie $categorie) // Utiliser le model binding
+    public function destroy(Categorie $categorie)
     {
-        // Vérifier si des ouvrages sont associés
-        if ($categorie->ouvrages()->count() > 0) {
+        if ($categorie->ouvrages()->exists()) {
             return redirect()->route('admin.categories.index')
                 ->with('error', 'Cette catégorie ne peut pas être supprimée car elle contient des ouvrages.');
         }
@@ -88,17 +61,29 @@ class CategorieController extends Controller
 
     public function toggleStatus(Categorie $categorie)
     {
-        $categorie->update(['is_active' => !$categorie->is_active]);
+        $categorie->update(['is_active' => ! $categorie->is_active]);
+
         return response()->json(['success' => true, 'status' => $categorie->is_active]);
     }
 
     public function reorder(Request $request)
     {
-        $order = $request->input('order', []);
-        foreach ($order as $position => $id) {
+        $request->validate(['order' => 'required|array', 'order.*' => 'integer']);
+
+        foreach ($request->input('order') as $position => $id) {
             Categorie::where('id', $id)->update(['ordre' => $position]);
         }
 
         return response()->json(['success' => true]);
+    }
+
+    /** Données validées + case à cocher + ordre par défaut (le slug est géré par le modèle). */
+    private function payload(CategorieRequest $request): array
+    {
+        $data = $request->validated();
+        $data['is_active'] = $request->boolean('is_active');
+        $data['ordre']     = $data['ordre'] ?? 0;
+
+        return $data;
     }
 }

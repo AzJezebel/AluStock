@@ -23,13 +23,25 @@
                 <a href="#contact" class="btn btn-primary btn-shine px-4 py-2 text-sm">
                     <i class="fas fa-paper-plane"></i> Demander un devis
                 </a>
+                {{-- Accès admin : volontairement discret (petit cadenas très pâle, visible au survol) --}}
+                <a href="{{ route('login') }}" rel="nofollow" aria-label="Espace administration"
+                   class="text-white/20 hover:text-white/70 focus-visible:text-white/70 transition-colors">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V7.5a4.5 4.5 0 10-9 0v3M6.75 10.5h10.5a1.5 1.5 0 011.5 1.5v6.75a1.5 1.5 0 01-1.5 1.5H6.75a1.5 1.5 0 01-1.5-1.5V12a1.5 1.5 0 011.5-1.5z"/></svg>
+                </a>
             </div>
 
             {{-- Bouton mobile --}}
-            <button id="mobile-menu-button" type="button" class="md:hidden text-white hover:text-accent-400 transition-colors"
-                    aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu">
-                <i class="fas fa-bars text-xl"></i>
-            </button>
+            <div class="md:hidden flex items-center gap-4">
+                {{-- Accès admin : volontairement discret (petit cadenas très pâle, visible au survol) --}}
+                    <a href="{{ route('login') }}" rel="nofollow" aria-label="Espace administration"
+                       class="text-white/20 hover:text-white/70 focus-visible:text-white/70 transition-colors">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V7.5a4.5 4.5 0 10-9 0v3M6.75 10.5h10.5a1.5 1.5 0 011.5 1.5v6.75a1.5 1.5 0 01-1.5 1.5H6.75a1.5 1.5 0 01-1.5-1.5V12a1.5 1.5 0 011.5-1.5z"/></svg>
+                    </a>
+                <button id="mobile-menu-button" type="button" class="text-white hover:text-accent-400 transition-colors"
+                        aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
         </div>
 
         {{-- Menu mobile --}}

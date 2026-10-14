@@ -5,17 +5,17 @@
 
     // --- Ouvrages normalisés (placeholders si pas d'image, démo si base vide)
     $items = collect($featuredOuvrages ?? [])->values()
-        ->map(fn ($o, $i) => \App\Support\Media::ouvrage($o, $i));
+        ->map(fn ($o, $i) => \App\Support\VitrineMedia::ouvrage($o, $i));
     $isDemo = false;
     if ($items->isEmpty() && config('vitrine.demo_when_empty')) {
-        $items = collect(\App\Support\Media::demo());
+        $items = collect(\App\Support\VitrineMedia::demo());
         $isDemo = true;
     }
     $cats = $items->pluck('categorie')->filter()->unique()->values();
 
     // --- Hero
     // Images gérées depuis l'admin (SiteImages) ; sinon celles de config/vitrine.php ; sinon placeholders
-    $heroImages = \App\Support\SiteImages::urls('hero') ?: \App\Support\Media::urls($hero['images'] ?? []);
+    $heroImages = \App\Support\SiteImages::urls('hero') ?: \App\Support\VitrineMedia::urls($hero['images'] ?? []);
     $aboutImage = \App\Support\SiteImages::first('about');
     $heroCount = count($heroImages) ?: 3;
     $titleWords1 = preg_split('/\s+/', trim($hero['title_1']));

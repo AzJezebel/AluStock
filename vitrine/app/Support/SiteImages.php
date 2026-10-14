@@ -35,7 +35,7 @@ class SiteImages
         return collect(self::load()[$slot] ?? [])->map(fn ($i) => [
             'path' => $i['path'],
             'alt'  => $i['alt'] ?? '',
-            'url'  => Media::url($i['path']),
+            'url'  => VitrineMedia::url($i['path']),
         ])->values()->all();
     }
 
@@ -70,7 +70,7 @@ class SiteImages
         $data[$slot][] = ['path' => $path, 'alt' => $alt];
         self::save($data);
 
-        return ['path' => $path, 'alt' => $alt, 'url' => Media::url($path)];
+        return ['path' => $path, 'alt' => $alt, 'url' => VitrineMedia::url($path)];
     }
 
     /** Retire l'image de l'emplacement et supprime le fichier. */

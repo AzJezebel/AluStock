@@ -7,7 +7,6 @@
         ['admin.ouvrages.index',    'admin.ouvrages.*',        'Ouvrages'],
         ['admin.categories.index',  'admin.categories.*',      'Catégories'],
         ['admin.site-images.index', 'admin.site-images.*',     'Images du site'],
-        ['admin.settings.index',    'admin.settings.*',        'Paramètres'],
     ];
 @endphp
 <!DOCTYPE html>

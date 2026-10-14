@@ -1,4 +1,5 @@
 <?php
+// app/Models/Ouvrage.php
 
 namespace App\Models;
 
@@ -23,19 +24,14 @@ class Ouvrage extends Model
         'is_active',
         'is_featured',
         'views',
-        'meta_title',
-        'meta_description',
-        'seo_keywords'
     ];
 
     protected $casts = [
         'date_realisation' => 'date',
-        'is_active' => 'boolean',
-        'is_featured' => 'boolean',
-        'views' => 'integer'
+        'is_active'        => 'boolean',
+        'is_featured'      => 'boolean',
+        'views'            => 'integer',
     ];
-
-    protected $appends = ['main_image_url'];
 
     // Relations
     public function categorie()
@@ -48,35 +44,26 @@ class Ouvrage extends Model
         return $this->morphMany(Media::class, 'model')->ordered();
     }
 
+    /** Image de couverture : le média marqué is_primary. */
     public function mainImage()
     {
-        // Le OR est groupé : sans parenthèses, « orWhere('is_primary') » annulait le filtre
-        // model_type / model_id et renvoyait l'image principale d'un AUTRE ouvrage.
         return $this->morphOne(Media::class, 'model')
-            ->where(function ($q) {
-                $q->where('collection_name', 'main')->orWhere('is_primary', true);
-            })
-            ->orderByDesc('is_primary')
+            ->where('is_primary', true)
             ->orderBy('order');
     }
 
+    /** Images supplémentaires : les médias non principaux. */
     public function gallery()
     {
         return $this->morphMany(Media::class, 'model')
-            ->where('collection_name', 'gallery')
+            ->where('is_primary', false)
             ->ordered();
     }
 
     // Accesseurs
-    public function getMainImageUrlAttribute()
+    public function getFormattedDateAttribute()
     {
-        $mainImage = $this->mainImage;
-        return $mainImage ? $mainImage->url : asset('images/placeholder-ouvrage.jpg');
-    }
-
-    public function getImagesAttribute()
-    {
-        return $this->gallery()->get();
+        return $this->date_realisation?->format('d/m/Y');
     }
 
     // Scopes
@@ -95,27 +82,37 @@ class Ouvrage extends Model
         return $query->orderBy('created_at', 'desc')->limit($limit);
     }
 
-    // Méthodes
-    public function getFormattedDateAttribute()
+    // Slug unique + nettoyage des fichiers à la suppression
+    protected static function booted(): void
     {
-        return $this->date_realisation ? $this->date_realisation->format('d/m/Y') : null;
+        static::creating(function (Ouvrage $ouvrage) {
+            if (empty($ouvrage->slug)) {
+                $ouvrage->slug = static::uniqueSlug($ouvrage->titre);
+            }
+        });
+
+        static::updating(function (Ouvrage $ouvrage) {
+            if ($ouvrage->isDirty('titre') && ! $ouvrage->isDirty('slug')) {
+                $ouvrage->slug = static::uniqueSlug($ouvrage->titre, $ouvrage->id);
+            }
+        });
+
+        // Chaque Media supprimé efface aussi son fichier (voir Media::booted)
+        static::deleting(function (Ouvrage $ouvrage) {
+            $ouvrage->medias()->get()->each->delete();
+        });
     }
 
-    // Auto-génération du slug
-    protected static function boot()
+    public static function uniqueSlug(string $titre, ?int $ignoreId = null): string
     {
-        parent::boot();
+        $base = Str::slug($titre) ?: 'ouvrage';
+        $slug = $base;
+        $i = 2;
 
-        static::creating(function ($ouvrage) {
-            if (empty($ouvrage->slug)) {
-                $ouvrage->slug = Str::slug($ouvrage->titre);
-            }
-        });
+        while (static::where('slug', $slug)->when($ignoreId, fn ($q) => $q->where('id', '!=', $ignoreId))->exists()) {
+            $slug = $base . '-' . $i++;
+        }
 
-        static::updating(function ($ouvrage) {
-            if ($ouvrage->isDirty('titre') && empty($ouvrage->slug)) {
-                $ouvrage->slug = Str::slug($ouvrage->titre);
-            }
-        });
+        return $slug;
     }
 }

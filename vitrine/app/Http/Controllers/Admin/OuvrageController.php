@@ -1,72 +1,50 @@
 <?php
+// app/Http/Controllers/Admin/OuvrageController.php
 
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\OuvrageRequest;
-use App\Models\Ouvrage;
 use App\Models\Categorie;
 use App\Models\Media;
+use App\Models\Ouvrage;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
 
 class OuvrageController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Ouvrage::with(['categorie', 'mainImage']);
+        $ouvrages = Ouvrage::with(['categorie', 'mainImage'])
+            ->when($request->filled('search'), function ($q) use ($request) {
+                $q->where(function ($q) use ($request) {
+                    $q->where('titre', 'LIKE', '%' . $request->search . '%')
+                      ->orWhere('reference', 'LIKE', '%' . $request->search . '%');
+                });
+            })
+            ->when($request->filled('categorie'), fn ($q) => $q->where('categorie_id', $request->categorie))
+            ->when($request->filled('status'), fn ($q) => $q->where('is_active', $request->status === 'active'))
+            ->when($request->filled('featured'), fn ($q) => $q->where('is_featured', $request->featured === 'true'))
+            ->latest()
+            ->paginate(10);
 
-        // Filtres
-        if ($request->filled('search')) {
-            $query->where(function($q) use ($request) {
-                $q->where('titre', 'LIKE', '%' . $request->search . '%')
-                  ->orWhere('reference', 'LIKE', '%' . $request->search . '%');
-            });
-        }
-
-        if ($request->filled('categorie')) {
-            $query->where('categorie_id', $request->categorie);
-        }
-
-        if ($request->filled('status')) {
-            $query->where('is_active', $request->status == 'active');
-        }
-
-        if ($request->filled('featured')) {
-            $query->where('is_featured', $request->featured == 'true');
-        }
-
-        $ouvrages = $query->orderBy('created_at', 'desc')->paginate(10);
-        
-        $categories = Categorie::orderBy('nom')->get();
+        $categories = Categorie::ordered()->get();
 
         return view('admin.ouvrages.index', compact('ouvrages', 'categories'));
     }
 
     public function create()
     {
-        $categories = Categorie::orderBy('nom')->get();
+        $categories = Categorie::ordered()->get();
+
         return view('admin.ouvrages.create', compact('categories'));
     }
 
     public function store(OuvrageRequest $request)
     {
-        $data = $request->validated();
-        $data['slug'] = Str::slug($data['titre']);
-        $data['is_active'] = $request->has('is_active');
-        $data['is_featured'] = $request->has('is_featured');
+        $ouvrage = Ouvrage::create($this->payload($request)); // slug : géré par le modèle
 
-        $ouvrage = Ouvrage::create($data);
-
-        // Gestion des images
-        if ($request->hasFile('main_image')) {
-            $this->handleMainImage($request->file('main_image'), $ouvrage);
-        }
-
-        if ($request->hasFile('gallery_images')) {
-            $this->handleGalleryImages($request->file('gallery_images'), $ouvrage);
-        }
+        $this->saveImages($request, $ouvrage);
 
         return redirect()->route('admin.ouvrages.index')
             ->with('success', 'Ouvrage créé avec succès.');
@@ -75,38 +53,23 @@ class OuvrageController extends Controller
     public function show(Ouvrage $ouvrage)
     {
         $ouvrage->load(['categorie', 'mainImage', 'gallery']);
+
         return view('admin.ouvrages.show', compact('ouvrage'));
     }
 
     public function edit(Ouvrage $ouvrage)
     {
-        $categories = Categorie::orderBy('nom')->get();
+        $categories = Categorie::ordered()->get();
         $ouvrage->load(['mainImage', 'gallery']);
+
         return view('admin.ouvrages.edit', compact('ouvrage', 'categories'));
     }
 
     public function update(OuvrageRequest $request, Ouvrage $ouvrage)
     {
-        $data = $request->validated();
+        $ouvrage->update($this->payload($request));
 
-        if ($request->filled('titre') && $ouvrage->titre != $data['titre']) {
-            $data['slug'] = Str::slug($data['titre']);
-        }
-
-        // Cases à cocher : une case décochée n'envoie rien, on la lit donc toujours explicitement
-        $data['is_active'] = $request->has('is_active');
-        $data['is_featured'] = $request->has('is_featured');
-
-        $ouvrage->update($data);
-
-        // Gestion des images
-        if ($request->hasFile('main_image')) {
-            $this->handleMainImage($request->file('main_image'), $ouvrage, true);
-        }
-
-        if ($request->hasFile('gallery_images')) {
-            $this->handleGalleryImages($request->file('gallery_images'), $ouvrage);
-        }
+        $this->saveImages($request, $ouvrage, replaceMain: true);
 
         return redirect()->route('admin.ouvrages.index')
             ->with('success', 'Ouvrage mis à jour avec succès.');
@@ -114,13 +77,7 @@ class OuvrageController extends Controller
 
     public function destroy(Ouvrage $ouvrage)
     {
-        // Supprimer les médias associés
-        foreach ($ouvrage->medias as $media) {
-            Storage::disk('public')->delete($media->file_path);
-            $media->delete();
-        }
-
-        $ouvrage->delete();
+        $ouvrage->delete(); // les médias (lignes + fichiers) partent avec, voir Ouvrage::booted()
 
         return redirect()->route('admin.ouvrages.index')
             ->with('success', 'Ouvrage supprimé avec succès.');
@@ -128,89 +85,87 @@ class OuvrageController extends Controller
 
     public function toggleStatus(Ouvrage $ouvrage)
     {
-        $ouvrage->update(['is_active' => !$ouvrage->is_active]);
-        return response()->json([
-            'success' => true,
-            'status' => $ouvrage->is_active
-        ]);
+        $ouvrage->update(['is_active' => ! $ouvrage->is_active]);
+
+        return response()->json(['success' => true, 'status' => $ouvrage->is_active]);
     }
 
     public function toggleFeatured(Ouvrage $ouvrage)
     {
-        $ouvrage->update(['is_featured' => !$ouvrage->is_featured]);
-        return response()->json([
-            'success' => true,
-            'featured' => $ouvrage->is_featured
-        ]);
+        $ouvrage->update(['is_featured' => ! $ouvrage->is_featured]);
+
+        return response()->json(['success' => true, 'featured' => $ouvrage->is_featured]);
     }
 
     public function deleteImage(Ouvrage $ouvrage, Media $media)
     {
-        abort_unless(
-            $media->model_type === Ouvrage::class && (int) $media->model_id === $ouvrage->id,
-            404
-        );
+        $this->assertOwnedBy($ouvrage, $media);
 
-        Storage::disk('public')->delete($media->file_path);
-        $media->delete();
+        $media->delete(); // le fichier est supprimé par Media::booted()
 
-        return redirect()->back()->with('success', 'Image supprimée avec succès.');
+        return back()->with('success', 'Image supprimée avec succès.');
     }
 
     public function reorderImages(Request $request, Ouvrage $ouvrage)
     {
-        $order = $request->input('order', []);
-        foreach ($order as $position => $id) {
-            Media::where('id', $id)->update(['order' => $position]);
+        $request->validate(['order' => 'required|array', 'order.*' => 'integer']);
+
+        foreach ($request->input('order') as $position => $id) {
+            // limité aux médias de CET ouvrage
+            $ouvrage->medias()->where('id', $id)->update(['order' => $position]);
         }
 
         return response()->json(['success' => true]);
     }
 
-    // Méthodes privées pour la gestion des images
-    private function handleMainImage($file, Ouvrage $ouvrage, $replace = false)
+    // ------------------------------------------------------------------ privé
+
+    /** Données validées + cases à cocher (une case décochée n'envoie rien). */
+    private function payload(OuvrageRequest $request): array
     {
-        if ($replace && $ouvrage->mainImage) {
-            Storage::disk('public')->delete($ouvrage->mainImage->file_path);
-            $ouvrage->mainImage->delete();
+        $data = collect($request->validated())->except(['main_image', 'gallery_images'])->all();
+        $data['is_active']   = $request->boolean('is_active');
+        $data['is_featured'] = $request->boolean('is_featured');
+
+        return $data;
+    }
+
+    private function saveImages(OuvrageRequest $request, Ouvrage $ouvrage, bool $replaceMain = false): void
+    {
+        if ($request->hasFile('main_image')) {
+            if ($replaceMain) {
+                $ouvrage->mainImage?->delete();
+            }
+            $this->storeMedia($request->file('main_image'), $ouvrage, primary: true, order: 0);
         }
 
-        $path = $file->store('ouvrages/main/' . $ouvrage->id, 'public');
-        
-        Media::create([
-            'model_type' => Ouvrage::class,
-            'model_id' => $ouvrage->id,
-            'collection_name' => 'main',
-            'file_name' => $file->getClientOriginalName(),
-            'file_path' => $path,
-            'file_size' => $file->getSize(),
-            'mime_type' => $file->getMimeType(),
-            'is_primary' => true,
-            'order' => 0
+        if ($request->hasFile('gallery_images')) {
+            $next = $ouvrage->gallery()->count();
+            foreach ($request->file('gallery_images') as $file) {
+                $this->storeMedia($file, $ouvrage, primary: false, order: $next++);
+            }
+        }
+    }
+
+    private function storeMedia(UploadedFile $file, Ouvrage $ouvrage, bool $primary, int $order): Media
+    {
+        $folder = $primary ? 'main' : 'gallery'; // simple rangement disque, sans rôle en base
+
+        return $ouvrage->medias()->create([
+            'file_name'  => $file->getClientOriginalName(),
+            'file_path'  => $file->store("ouvrages/{$folder}/{$ouvrage->id}", Media::disk()),
+            'file_size'  => $file->getSize(),
+            'mime_type'  => $file->getMimeType(),
+            'is_primary' => $primary,
+            'order'      => $order,
         ]);
     }
 
-    private function handleGalleryImages($files, Ouvrage $ouvrage)
+    private function assertOwnedBy(Ouvrage $ouvrage, Media $media): void
     {
-        $order = Media::where('model_type', Ouvrage::class)
-            ->where('model_id', $ouvrage->id)
-            ->where('collection_name', 'gallery')
-            ->count();
-
-        foreach ($files as $file) {
-            $path = $file->store('ouvrages/gallery/' . $ouvrage->id, 'public');
-            
-            Media::create([
-                'model_type' => Ouvrage::class,
-                'model_id' => $ouvrage->id,
-                'collection_name' => 'gallery',
-                'file_name' => $file->getClientOriginalName(),
-                'file_path' => $path,
-                'file_size' => $file->getSize(),
-                'mime_type' => $file->getMimeType(),
-                'is_primary' => false,
-                'order' => $order++
-            ]);
-        }
+        abort_unless(
+            $media->model_type === Ouvrage::class && (int) $media->model_id === $ouvrage->id,
+            404
+        );
     }
 }

@@ -22,7 +22,7 @@ class ContactAcknowledgementMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Nous avons bien reçu votre message — AluStock',
+            subject: 'Nous avons bien reçu votre message — ' . config('vitrine.brand.first') . config('vitrine.brand.second'),
         );
     }
 

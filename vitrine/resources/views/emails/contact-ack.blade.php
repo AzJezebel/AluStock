@@ -8,7 +8,7 @@
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:640px;margin:0 auto;background:#ffffff;border:1px solid #d1d5db;">
         <tr>
             <td style="background:#0B1220;padding:16px 24px;color:#ffffff;font-size:13px;letter-spacing:2px;text-transform:uppercase;">
-                ALUSTOCK &nbsp;·&nbsp; Accusé de réception
+                {{ config('vitrine.brand.first') }}{{ config('vitrine.brand.second') }} &nbsp;·&nbsp; Accusé de réception
             </td>
         </tr>
         <tr>
