@@ -470,3 +470,29 @@ Redo image management + style homogenizing in admin dashboard + remove all gamme
 
 --------------------------------------------------------------------------------------------------------------------------------
 14/10 
+
+Refactor routes and add authentication controller
+
+- Homogenisation du code + clean-up
+- Updated routes in web.php to streamline public and admin routes.
+- Introduced AuthController for handling authentication logic including login, logout, and redirection for authenticated users.
+- Added VitrineMedia class for media management related to the public display of works.
+- Implemented methods for handling media URLs and normalizing Ouvrage models for views.
+
+À faire avant la mise en ligne (priorité haute)
+Configuration de production : APP_ENV=production et APP_DEBUG=false. Avec le debug activé, les pages d’erreur montrent le code, les chemins et parfois des variables d’environnement.
+HTTPS partout : ajoute SESSION_SECURE_COOKIE=true dans le .env, et redirige le HTTP vers HTTPS sur le serveur.
+Racine web : le serveur doit pointer sur public/ uniquement, pour que .env, vendor/ et storage/ ne soient jamais accessibles par URL.
+Comptes admin : remplace le mot de passe password du seeder par un vrai mot de passe long, et ne le commite pas. Un « mot de passe oublié » n’existe pas encore (le lien du login pointe sur #), prévois-le ou retire le lien.
+Mise en ligne propre : mets VITRINE_PALETTE_SWITCHER=false et VITRINE_DEMO=false pour retirer le panneau de test et les ouvrages fictifs.
+Dépendances : lance composer audit et npm audit, et garde PHP et Laravel à jour.
+
+Important mais plus technique (priorité moyenne)
+En-têtes HTTP de sécurité : Strict-Transport-Security, X-Content-Type-Options, Referrer-Policy, X-Frame-Options, et surtout une Content-Security-Policy. Ton site charge Tailwind, Font Awesome et les polices depuis des CDN. Le CDN Tailwind n’est d’ailleurs pas prévu pour la production. En compilant avec Vite (déjà présent dans le projet) et en hébergeant polices et icônes toi-même, la CSP devient simple à écrire et le site gagne en vitesse.
+Uploads d’images : tu valides déjà le type et la taille, et Laravel renomme les fichiers. Ajoute si possible une liste explicite de formats (mimes:jpg,jpeg,png,webp,gif) et vérifie que storage/app/public n’exécute jamais de PHP.
+Sauvegardes : sauvegarde régulière de la base et du dossier storage (images, vitrine-media.json), avec un test de restauration.
+Logs : surveille storage/logs, sans y écrire de mots de passe ni de données personnelles.
+Session : durée de vie raisonnable (SESSION_LIFETIME) et SESSION_SAME_SITE=lax (valeur par défaut).
+
+--------------------------------------------------------------------------------------------------------------------------------
+15/10 
