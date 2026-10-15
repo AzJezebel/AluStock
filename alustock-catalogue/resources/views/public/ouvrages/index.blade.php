@@ -1,5 +1,5 @@
 {{-- resources/views/public/ouvrages/index.blade.php
-     Direction "Blueprint" — filtre par gamme retiré (ne reste que catégorie). --}}
+     Direction "Blueprint". --}}
 @extends('layouts.app')
 
 @section('title', isset($categorieCourante) ? $categorieCourante->nom . ' - AluStock' : 'Tous les ouvrages - AluStock')

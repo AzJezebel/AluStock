@@ -1,5 +1,5 @@
 {{-- resources/views/public/composants/show.blade.php
-     Direction "Blueprint" — panneaux sombres, tableaux mono, badge gamme retiré. --}}
+     Direction "Blueprint" — panneaux sombres, tableaux mono. --}}
 @extends('layouts.app')
 
 @section('title', $composant->designation . ' - AluStock')

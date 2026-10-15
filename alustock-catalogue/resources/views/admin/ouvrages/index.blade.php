@@ -24,15 +24,6 @@
                    placeholder="Rechercher par nom ou référence..." 
                    class="flex-1 min-w-[200px] px-3 py-1.5 text-sm border border-admin-200 rounded focus:outline-none focus:ring-1 focus:ring-admin-400">
             
-            <select name="gamme" class="px-3 py-1.5 text-sm border border-admin-200 rounded focus:outline-none focus:ring-1 focus:ring-admin-400">
-                <option value="">Toutes les gammes</option>
-                @foreach($gammes as $gamme)
-                    <option value="{{ $gamme->id }}" {{ request('gamme') == $gamme->id ? 'selected' : '' }}>
-                        {{ $gamme->nom }}
-                    </option>
-                @endforeach
-            </select>
-
             <select name="categorie" class="px-3 py-1.5 text-sm border border-admin-200 rounded focus:outline-none focus:ring-1 focus:ring-admin-400">
                 <option value="">Toutes les catégories</option>
                 @foreach($categories as $cat)
@@ -52,7 +43,7 @@
                 Filtrer
             </button>
             
-            @if(request()->hasAny(['q', 'gamme', 'categorie', 'statut']))
+            @if(request()->hasAny(['q', 'categorie', 'statut']))
                 <a href="{{ route('admin.ouvrages.index') }}" class="text-xs text-admin-400 hover:text-admin-600">
                     Réinitialiser
                 </a>
@@ -83,7 +74,6 @@
                             @endif
                         </a>
                     </th>
-                    <th class="px-4 py-2 text-left text-xs font-medium text-admin-500 uppercase tracking-wider">Gamme</th>
                     <th class="px-4 py-2 text-left text-xs font-medium text-admin-500 uppercase tracking-wider">Catégorie</th>
                     <th class="px-4 py-2 text-center text-xs font-medium text-admin-500 uppercase tracking-wider">Composition</th>
                     <th class="px-4 py-2 text-center text-xs font-medium text-admin-500 uppercase tracking-wider">Statut</th>
@@ -98,15 +88,6 @@
                         </td>
                         <td class="px-4 py-2 text-sm text-admin-900 font-medium">
                             {{ $ouvrage->nom }}
-                        </td>
-                        <td class="px-4 py-2 text-sm text-admin-500">
-                            @if($ouvrage->gamme)
-                                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-admin-100 text-admin-600">
-                                    {{ $ouvrage->gamme->nom }}
-                                </span>
-                            @else
-                                <span class="text-admin-300">—</span>
-                            @endif
                         </td>
                         <td class="px-4 py-2 text-sm text-admin-500">
                             @if($ouvrage->categorie)

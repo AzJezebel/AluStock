@@ -34,7 +34,6 @@ class UpdateComposantRequest extends FormRequest
             // CLASSIFICATION
             // ============================================================
             'type_composant_id' => 'nullable|exists:types_composant,id',
-            'gamme_id' => 'nullable|exists:gammes,id',
             'matiere' => 'nullable|string|max:100',
 
             // ============================================================
@@ -86,7 +85,6 @@ class UpdateComposantRequest extends FormRequest
 
             // Classification
             'type_composant_id.exists' => 'Le type de composant sélectionné n\'existe pas.',
-            'gamme_id.exists' => 'La gamme sélectionnée n\'existe pas.',
 
             // Dimensions
             'longueur_barre_mm.integer' => 'La longueur de barre doit être un nombre entier.',
@@ -129,7 +127,6 @@ class UpdateComposantRequest extends FormRequest
             'moment_inertie_cm4',
             'perimetre_mm',
             'type_composant_id',
-            'gamme_id',
         ];
 
         $data = [];

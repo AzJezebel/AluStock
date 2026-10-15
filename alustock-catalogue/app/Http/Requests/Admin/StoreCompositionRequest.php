@@ -18,7 +18,6 @@ class StoreCompositionRequest extends FormRequest
             'quantite' => 'required|numeric|min:0.01',
             'unite' => 'required|string|max:20',
             'ordre' => 'nullable|integer|min:0',
-            'longueur_coupe_mm' => 'nullable|integer|min:0',
             'commentaire' => 'nullable|string',
         ];
     }

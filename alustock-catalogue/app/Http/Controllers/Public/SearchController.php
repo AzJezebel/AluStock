@@ -3,191 +3,112 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
-use App\Models\Ouvrage;
-use App\Models\Composant;
 use App\Models\Categorie;
-use App\Models\Gamme;
+use App\Models\Composant;
+use App\Models\Ouvrage;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
-    /**
-     * Page de recherche avancée
-     */
+    /** Page de recherche avancée. */
     public function index(Request $request)
     {
-        $query = $request->get('q', '');
-        $type = $request->get('type', 'all'); // all, ouvrages, composants
+        $query     = trim((string) $request->get('q', ''));
+        $type      = $request->get('type', 'all'); // all | ouvrages | composants
         $categorie = $request->get('categorie');
-        $gamme = $request->get('gamme');
-        $sort = $request->get('sort', 'relevance');
+        $sort      = $request->get('sort', 'relevance');
 
-        // Résultats par défaut
-        $ouvrages = collect();
+        $ouvrages   = collect();
         $composants = collect();
 
-        if (!empty($query) || $categorie || $gamme) {
-            // 1. Recherche des ouvrages
-            $ouvragesQuery = Ouvrage::with(['gamme', 'categorie'])
-                ->actif();
+        if ($query !== '' || $categorie) {
+            $categorieId = $categorie ? Categorie::where('slug', $categorie)->value('id') : null;
 
-            if (!empty($query)) {
-                $ouvragesQuery->where(function ($q) use ($query) {
-                    $q->where('nom', 'LIKE', "%{$query}%")
-                      ->orWhere('reference', 'LIKE', "%{$query}%")
-                      ->orWhere('description_courte', 'LIKE', "%{$query}%")
-                      ->orWhere('description_technique', 'LIKE', "%{$query}%");
-                });
-            }
+            $ouvragesQuery = Ouvrage::with('categorie')
+                ->actif()
+                ->recherche($query)
+                ->when($categorieId, fn ($q) => $q->where('categorie_id', $categorieId))
+            ;
 
-            if ($categorie) {
-                $categorieModel = Categorie::where('slug', $categorie)->first();
-                if ($categorieModel) {
-                    $ouvragesQuery->where('categorie_id', $categorieModel->id);
-                }
-            }
-
-            if ($gamme) {
-                $gammeModel = Gamme::where('slug', $gamme)->first();
-                if ($gammeModel) {
-                    $ouvragesQuery->where('gamme_id', $gammeModel->id);
-                }
-            }
-
-            // Tri
-            if ($sort === 'relevance' && !empty($query)) {
+            if ($sort === 'relevance' && $query !== '') {
+                $like = "%{$query}%";
                 $ouvragesQuery->orderByRaw(
-                    "CASE 
-                        WHEN nom LIKE ? THEN 1 
-                        WHEN reference LIKE ? THEN 2 
-                        WHEN description_courte LIKE ? THEN 3 
-                        ELSE 4 
-                    END",
-                    ["%{$query}%", "%{$query}%", "%{$query}%"]
+                    'CASE WHEN nom LIKE ? THEN 1 WHEN reference LIKE ? THEN 2 WHEN description_courte LIKE ? THEN 3 ELSE 4 END',
+                    [$like, $like, $like]
                 );
             } elseif ($sort === 'nom') {
                 $ouvragesQuery->orderBy('nom');
             } elseif ($sort === 'created_at') {
-                $ouvragesQuery->orderBy('created_at', 'desc');
+                $ouvragesQuery->orderByDesc('created_at');
             }
 
-            // 2. Recherche des composants (si type = all ou composants)
             if ($type === 'all' || $type === 'composants') {
-                $composantsQuery = Composant::with(['typeComposant', 'gamme'])
-                    ->disponible();
-
-                if (!empty($query)) {
-                    $composantsQuery->where(function ($q) use ($query) {
-                        $q->where('designation', 'LIKE', "%{$query}%")
-                          ->orWhere('reference', 'LIKE', "%{$query}%")
-                          ->orWhere('matiere', 'LIKE', "%{$query}%");
-                    });
-                }
-
-                if ($gamme) {
-                    $gammeModel = Gamme::where('slug', $gamme)->first();
-                    if ($gammeModel) {
-                        $composantsQuery->where('gamme_id', $gammeModel->id);
-                    }
-                }
-
-                $composants = $composantsQuery->limit(20)->get();
+                $composants = Composant::with('typeComposant')
+                    ->disponible()
+                    ->recherche($query)
+                    ->limit(20)
+                    ->get();
             }
 
-            // Pagination des ouvrages
-            $ouvrages = $ouvragesQuery->paginate(20);
+            $ouvrages = $ouvragesQuery->paginate(20)->withQueryString();
         }
 
-        // Récupérer les filtres disponibles
-        $categories = Categorie::orderBy('nom')->get();
-        $gammes = Gamme::orderBy('ordre_affichage')->get();
-
-        return view('public.search.index', compact(
-            'ouvrages',
-            'composants',
-            'query',
-            'type',
-            'categorie',
-            'gamme',
-            'sort',
-            'categories',
-            'gammes'
-        ));
+        return view('public.search.index', [
+            'ouvrages'   => $ouvrages,
+            'composants' => $composants,
+            'query'      => $query,
+            'type'       => $type,
+            'categorie'  => $categorie,
+            'sort'       => $sort,
+            'categories' => Categorie::orderBy('nom')->get(),
+        ]);
     }
 
-    /**
-     * Autocomplétion pour la barre de recherche (AJAX)
-     */
+    /** Autocomplétion (AJAX) : ouvrages + composants. */
     public function autocomplete(Request $request)
     {
-        $query = $request->get('q', '');
+        $query = trim((string) $request->get('q', ''));
 
-        if (strlen($query) < 2) {
+        if (mb_strlen($query) < 2) {
             return response()->json([]);
         }
 
-        // Recherche dans les ouvrages
-        $ouvrages = Ouvrage::actif()
-            ->where('nom', 'LIKE', "%{$query}%")
-            ->orWhere('reference', 'LIKE', "%{$query}%")
-            ->limit(5)
+        // Les OR sont groupés dans scopeRecherche : actif()/disponible() restent appliqués.
+        $ouvrages = Ouvrage::actif()->recherche($query, false)->limit(5)
             ->get(['id', 'nom', 'reference', 'slug', 'image_principale']);
 
-        // Recherche dans les composants
-        $composants = Composant::disponible()
-            ->where('designation', 'LIKE', "%{$query}%")
-            ->orWhere('reference', 'LIKE', "%{$query}%")
-            ->limit(5)
+        $composants = Composant::disponible()->recherche($query, false)->limit(5)
             ->get(['id', 'designation', 'reference', 'slug']);
 
-        // Formatage des résultats
         $results = [];
 
-        foreach ($ouvrages as $ouvrage) {
+        foreach ($ouvrages as $o) {
             $results[] = [
-                'type' => 'ouvrage',
-                'label' => $ouvrage->nom,
-                'reference' => $ouvrage->reference,
-                'url' => route('ouvrages.show', $ouvrage->slug),
-                'image' => $ouvrage->image_principale ? asset('storage/' . $ouvrage->image_principale) : null,
-                'badge' => 'Ouvrage',
+                'type'      => 'ouvrage',
+                'label'     => $o->nom,
+                'reference' => $o->reference,
+                'url'       => route('ouvrages.show', $o),
+                'image'     => $o->image_principale ? asset('storage/' . $o->image_principale) : null,
+                'badge'     => 'Ouvrage',
             ];
         }
 
-        foreach ($composants as $composant) {
+        foreach ($composants as $c) {
             $results[] = [
-                'type' => 'composant',
-                'label' => $composant->designation,
-                'reference' => $composant->reference,
-                'url' => route('composants.show', $composant->slug),
-                'image' => null,
-                'badge' => 'Composant',
+                'type'      => 'composant',
+                'label'     => $c->designation,
+                'reference' => $c->reference,
+                'url'       => route('composants.show', $c),
+                'image'     => null,
+                'badge'     => 'Composant',
             ];
         }
 
-        // Trier par pertinence (priorité aux références exactes)
-        usort($results, function ($a, $b) use ($query) {
-            $aExact = strpos($a['reference'], $query) === 0;
-            $bExact = strpos($b['reference'], $query) === 0;
-            if ($aExact && !$bExact) return -1;
-            if (!$aExact && $bExact) return 1;
-            return 0;
-        });
+        // Références commençant par la saisie en premier (tri stable)
+        usort($results, fn ($a, $b) =>
+            (int) str_starts_with((string) $b['reference'], $query) <=> (int) str_starts_with((string) $a['reference'], $query)
+        );
 
         return response()->json($results);
-    }
-
-    /**
-     * Recherche rapide (redirect vers la page de recherche)
-     */
-    public function quickSearch(Request $request)
-    {
-        $query = $request->get('q', '');
-        
-        if (empty($query)) {
-            return redirect()->route('home');
-        }
-
-        return redirect()->route('search.index', ['q' => $query]);
     }
 }

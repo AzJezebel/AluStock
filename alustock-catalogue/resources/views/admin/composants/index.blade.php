@@ -76,7 +76,6 @@
                             </a>
                         </th>
                         <th class="px-4 py-2 text-left text-xs font-medium text-admin-500 uppercase tracking-wider">Type</th>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-admin-500 uppercase tracking-wider">Gamme</th>
                         <th class="px-4 py-2 text-right text-xs font-medium text-admin-500 uppercase tracking-wider">KG/M</th>
                         <th class="px-4 py-2 text-right text-xs font-medium text-admin-500 uppercase tracking-wider">WT/FT</th>
                         <th class="px-4 py-2 text-center text-xs font-medium text-admin-500 uppercase tracking-wider">Statut</th>
@@ -100,9 +99,6 @@
                                 @else
                                     <span class="text-admin-300">—</span>
                                 @endif
-                            </td>
-                            <td class="px-4 py-2 text-sm text-admin-500">
-                                {{ $composant->gamme?->nom ?? '—' }}
                             </td>
                             <td class="px-4 py-2 text-sm text-admin-600 text-right font-mono">
                                 {{ $composant->poids_lineaire_kg_m ?? '—' }}

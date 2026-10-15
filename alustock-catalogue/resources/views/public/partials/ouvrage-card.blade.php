@@ -1,6 +1,6 @@
 {{-- resources/views/public/partials/ouvrage-card.blade.php
      Carte ouvrage réutilisable — ouvrages/index, categories/show, search/index.
-     Passer $ouvrage. Pas de badge gamme (retiré du modèle de présentation). --}}
+     Passer $ouvrage. --}}
 @php
     $media = $ouvrage->medias->firstWhere('est_principal', true)
           ?? $ouvrage->medias->sortBy('pivot.ordre')->first();

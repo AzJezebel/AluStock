@@ -496,3 +496,15 @@ Session : durée de vie raisonnable (SESSION_LIFETIME) et SESSION_SAME_SITE=lax 
 
 --------------------------------------------------------------------------------------------------------------------------------
 15/10 
+
+refactor: retire les gammes, nettoie le code mort et durcit l'admin
+
+- Supprime les gammes (modèle, contrôleurs, routes, vues, seeders, gamme_id)
+- Retire longueur_coupe_mm et la colonne « Coupe » de la composition
+- Allège CategorieController, CompositionController et DashboardController
+- Supprime les vues et fichiers orphelins (welcome, print admin, etc.)
+- Modèles Ouvrage/Composant : scopeRecherche, slug unique
+- Sidebar : SidebarComposer lié à la vue
+- AuthController : rate limit, hash_equals, régénération de session
+- config/app.php : admin_password lu depuis ADMIN_PASSWORD, sans défaut
+- Clean routes/web.php (55 routes)

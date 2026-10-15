@@ -18,7 +18,6 @@ class UpdateOuvrageRequest extends FormRequest
         return [
             'reference' => 'required|string|max:50|unique:ouvrages,reference,' . $ouvrageId,
             'nom' => 'required|string|max:200',
-            'gamme_id' => 'nullable|exists:gammes,id',
             'categorie_id' => 'nullable|exists:categories,id',
             'description_courte' => 'nullable|string',
             'description_technique' => 'nullable|string',

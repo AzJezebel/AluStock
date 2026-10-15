@@ -1,7 +1,6 @@
 {{-- resources/views/public/home.blade.php
      Direction "Blueprint" — hero "cartouche", catégories en vedette,
-     puis deux grandes cartes d'entrée vers les index complets.
-     Section "Gammes" retirée. --}}
+     puis deux grandes cartes d'entrée vers les index complets. --}}
 @extends('layouts.app')
 
 @section('title', 'AluStock — Catalogue de référence aluminium industriel')

@@ -21,7 +21,6 @@ class StoreComposantRequest extends FormRequest
             // CLASSIFICATION
             // ============================================================
             'type_composant_id' => 'nullable|exists:types_composant,id',
-            'gamme_id' => 'nullable|exists:gammes,id',
             'matiere' => 'nullable|string|max:100',
 
             // ============================================================

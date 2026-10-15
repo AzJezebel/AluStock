@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreComposantRequest;
 use App\Http\Requests\Admin\UpdateComposantRequest;
 use App\Models\Composant;
-use App\Models\Gamme;
 use App\Models\TypeComposant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -15,7 +14,7 @@ class ComposantController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Composant::with(['typeComposant', 'gamme']);
+        $query = Composant::with(['typeComposant']);
 
         if ($request->filled('q')) {
             $search = $request->q;
@@ -45,9 +44,8 @@ class ComposantController extends Controller
     public function create()
     {
         $typesComposant = TypeComposant::orderBy('nom')->get();
-        $gammes = Gamme::orderBy('ordre_affichage')->get();
 
-        return view('admin.composants.create', compact('typesComposant', 'gammes'));
+        return view('admin.composants.create', compact('typesComposant'));
     }
 
     public function store(StoreComposantRequest $request)
@@ -100,9 +98,8 @@ class ComposantController extends Controller
     public function edit(Composant $composant)
     {
         $typesComposant = TypeComposant::orderBy('nom')->get();
-        $gammes = Gamme::orderBy('ordre_affichage')->get();
 
-        return view('admin.composants.edit', compact('composant', 'typesComposant', 'gammes'));
+        return view('admin.composants.edit', compact('composant', 'typesComposant'));
     }
 
     public function update(UpdateComposantRequest $request, Composant $composant)

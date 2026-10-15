@@ -21,53 +21,10 @@ class OuvragesTableSeeder extends Seeder
         \DB::table('ouvrages')->insert(array (
             0 => 
             array (
-                'id' => 1,
-                'reference' => 'FEN-001-TEST',
-                'nom' => 'Fenêtre coulissante 2 vantaux TEST',
-                'slug' => 'fen-001-test-fenetre-coulissante-2-vantaux-test',
-                'gamme_id' => 1,
-                'categorie_id' => 1,
-                'description_courte' => 'Fenêtre coulissante aluminium 2 vantaux - Gamme 45',
-                'description_technique' => 'Fenêtre coulissante à 2 vantaux avec système de roulement silencieux. Profilés en aluminium 6060-T6.',
-                'largeur_min_mm' => 800,
-                'largeur_max_mm' => 2400,
-                'hauteur_min_mm' => 600,
-                'hauteur_max_mm' => 2400,
-                'performance_thermique' => 'Uw = 1.8 W/m²K',
-                'performance_acoustique' => 'Rw = 38 dB',
-                'image_principale' => NULL,
-                'est_actif' => 1,
-                'created_at' => '2026-09-11 21:57:20',
-                'updated_at' => '2026-09-23 17:42:57',
-            ),
-            1 => 
-            array (
-                'id' => 6,
-                'reference' => 'PORTE-TEST-123',
-                'nom' => 'PORTE-TEST',
-                'slug' => 'porte-test-123-porte-test',
-                'gamme_id' => NULL,
-                'categorie_id' => 2,
-                'description_courte' => 'garwgarwegawergaw',
-                'description_technique' => 'fawgfawgaw',
-                'largeur_min_mm' => NULL,
-                'largeur_max_mm' => NULL,
-                'hauteur_min_mm' => NULL,
-                'hauteur_max_mm' => NULL,
-                'performance_thermique' => NULL,
-                'performance_acoustique' => NULL,
-                'image_principale' => NULL,
-                'est_actif' => 1,
-                'created_at' => '2026-09-11 21:59:20',
-                'updated_at' => '2026-09-23 17:42:57',
-            ),
-            2 => 
-            array (
                 'id' => 7,
                 'reference' => 'BAR009',
                 'nom' => 'MODULO SAN ANDRES',
                 'slug' => 'bar009-modulo-san-andres',
-                'gamme_id' => NULL,
                 'categorie_id' => 2,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -82,13 +39,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-15 19:06:18',
                 'updated_at' => '2026-09-23 17:42:57',
             ),
-            3 => 
+            1 => 
             array (
                 'id' => 8,
                 'reference' => 'BAR020',
                 'nom' => 'MODULO ROMANA',
                 'slug' => 'bar020-modulo-romana',
-                'gamme_id' => NULL,
                 'categorie_id' => 5,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -103,13 +59,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-15 19:41:39',
                 'updated_at' => '2026-09-23 17:42:57',
             ),
-            4 => 
+            2 => 
             array (
                 'id' => 9,
                 'reference' => 'PORTE-001',
                 'nom' => 'PORTAIL UN BATTANT',
                 'slug' => 'porte-001-portail-un-battant',
-                'gamme_id' => NULL,
                 'categorie_id' => 2,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -124,13 +79,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-15 20:33:44',
                 'updated_at' => '2026-09-23 17:42:57',
             ),
-            5 => 
+            3 => 
             array (
                 'id' => 10,
                 'reference' => 'PORTE-002',
                 'nom' => 'PUERTA BATIENTE RANCH',
                 'slug' => 'porte-002-puerta-batiente-ranch',
-                'gamme_id' => NULL,
                 'categorie_id' => 2,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -145,13 +99,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-15 20:42:48',
                 'updated_at' => '2026-09-23 17:42:57',
             ),
-            6 => 
+            4 => 
             array (
                 'id' => 12,
                 'reference' => 'PORTE-021',
                 'nom' => 'PORTAIL DOUBLE BATTANT',
                 'slug' => 'porte-021-portail-double-battant',
-                'gamme_id' => NULL,
                 'categorie_id' => 2,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -166,13 +119,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-15 21:37:10',
                 'updated_at' => '2026-09-23 17:42:57',
             ),
-            7 => 
+            5 => 
             array (
                 'id' => 13,
                 'reference' => 'REJA RANCH',
                 'nom' => 'REJA RANCH',
                 'slug' => 'reja-ranch-reja-ranch',
-                'gamme_id' => NULL,
                 'categorie_id' => 5,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -187,13 +139,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-18 18:29:21',
                 'updated_at' => '2026-09-23 17:42:57',
             ),
-            8 => 
+            6 => 
             array (
                 'id' => 14,
                 'reference' => 'SYSTEME ENROULABLE',
                 'nom' => 'SYSTEME ENROULABLE',
                 'slug' => 'systeme-enroulable-systeme-enroulable',
-                'gamme_id' => NULL,
                 'categorie_id' => NULL,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -208,13 +159,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-21 17:15:14',
                 'updated_at' => '2026-09-23 17:42:57',
             ),
-            9 => 
+            7 => 
             array (
                 'id' => 15,
                 'reference' => 'SCHEMA-001',
                 'nom' => 'SCHEMA DE PERFORATION POUR BARREAU',
                 'slug' => 'schema-001-schema-de-perforation-pour-barreau',
-                'gamme_id' => NULL,
                 'categorie_id' => 5,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -229,13 +179,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-22 20:35:58',
                 'updated_at' => '2026-09-23 17:42:57',
             ),
-            10 => 
+            8 => 
             array (
                 'id' => 16,
                 'reference' => 'SCHEMA-002',
                 'nom' => 'SCHEMA DE PERFORATION POUR BARREAU OVALE',
                 'slug' => 'schema-002-schema-de-perforation-pour-barreau-ovale',
-                'gamme_id' => NULL,
                 'categorie_id' => 5,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -250,13 +199,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-23 17:26:50',
                 'updated_at' => '2026-09-23 17:55:34',
             ),
-            11 => 
+            9 => 
             array (
                 'id' => 19,
                 'reference' => 'SCHEMA-003',
                 'nom' => 'SCHEMA DE PERFORATION POUR BARREAU',
                 'slug' => 'schema-003-schema-de-perforation-pour-barreau',
-                'gamme_id' => NULL,
                 'categorie_id' => 5,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -271,13 +219,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-23 17:46:09',
                 'updated_at' => '2026-09-23 17:55:40',
             ),
-            12 => 
+            10 => 
             array (
                 'id' => 20,
                 'reference' => 'SCHEMA-004',
                 'nom' => 'SCHEMA DE PERFORATION POUR BARREAU',
                 'slug' => 'schema-004-schema-de-perforation-pour-barreau',
-                'gamme_id' => NULL,
                 'categorie_id' => 5,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -292,13 +239,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-23 17:51:43',
                 'updated_at' => '2026-09-23 17:51:43',
             ),
-            13 => 
+            11 => 
             array (
                 'id' => 21,
                 'reference' => 'SCHEMA-005',
                 'nom' => 'SCHEMA DE PERFORATION POUR BARREAU',
                 'slug' => 'schema-005-schema-de-perforation-pour-barreau',
-                'gamme_id' => NULL,
                 'categorie_id' => 5,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -313,13 +259,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-23 17:56:13',
                 'updated_at' => '2026-09-23 17:56:13',
             ),
-            14 => 
+            12 => 
             array (
                 'id' => 22,
                 'reference' => 'SCHEMA-006',
                 'nom' => 'SCHEMA DE PERFORATION POUR BARREAU',
                 'slug' => 'schema-006-schema-de-perforation-pour-barreau',
-                'gamme_id' => NULL,
                 'categorie_id' => 5,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -334,13 +279,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-23 17:57:35',
                 'updated_at' => '2026-09-23 17:57:35',
             ),
-            15 => 
+            13 => 
             array (
                 'id' => 23,
                 'reference' => 'SCHEMA-007',
                 'nom' => 'SCHEMA DE PERFORATION POUR BARREAU',
                 'slug' => 'schema-007-schema-de-perforation-pour-barreau',
-                'gamme_id' => NULL,
                 'categorie_id' => 5,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -355,13 +299,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-23 17:58:14',
                 'updated_at' => '2026-09-23 17:58:14',
             ),
-            16 => 
+            14 => 
             array (
                 'id' => 24,
                 'reference' => 'SCHEMA-008',
                 'nom' => 'SCHEMA DE PERFORATION POUR BARREAU',
                 'slug' => 'schema-008-schema-de-perforation-pour-barreau',
-                'gamme_id' => NULL,
                 'categorie_id' => 5,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -376,13 +319,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-23 17:59:21',
                 'updated_at' => '2026-09-23 17:59:21',
             ),
-            17 => 
+            15 => 
             array (
                 'id' => 25,
                 'reference' => 'F-DI-003',
                 'nom' => 'ESCALIER 780 RAMPE OVALE',
                 'slug' => 'f-di-003-escalier-780-rampe-ovale',
-                'gamme_id' => NULL,
                 'categorie_id' => NULL,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -397,13 +339,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-24 19:17:52',
                 'updated_at' => '2026-09-24 19:17:52',
             ),
-            18 => 
+            16 => 
             array (
                 'id' => 26,
                 'reference' => 'FEN-001',
                 'nom' => 'FENETRE COULISSANT 3 VANTAUX RENFORCE',
                 'slug' => 'fen-001-fenetre-coulissant-3-vantaux-renforce',
-                'gamme_id' => NULL,
                 'categorie_id' => 1,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -418,13 +359,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-24 19:26:27',
                 'updated_at' => '2026-09-24 19:26:27',
             ),
-            19 => 
+            17 => 
             array (
                 'id' => 27,
                 'reference' => 'FEN-002',
                 'nom' => 'FENETRE COULISSANT 3 VANTAUX SIMPLE',
                 'slug' => 'fen-002-fenetre-coulissant-3-vantaux-simple',
-                'gamme_id' => NULL,
                 'categorie_id' => 1,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -439,13 +379,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-24 19:28:50',
                 'updated_at' => '2026-09-24 19:28:50',
             ),
-            20 => 
+            18 => 
             array (
                 'id' => 28,
                 'reference' => 'FEN-003',
                 'nom' => 'FENETRE COULISSANT 3 VANTAUX SIMPLE',
                 'slug' => 'fen-003-fenetre-coulissant-3-vantaux-simple',
-                'gamme_id' => NULL,
                 'categorie_id' => 1,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -460,13 +399,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-24 19:30:42',
                 'updated_at' => '2026-09-24 19:30:42',
             ),
-            21 => 
+            19 => 
             array (
                 'id' => 29,
                 'reference' => 'EMPTY-001',
                 'nom' => 'DEROULANT',
                 'slug' => 'empty-001-deroulant',
-                'gamme_id' => NULL,
                 'categorie_id' => NULL,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -481,13 +419,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-24 19:35:56',
                 'updated_at' => '2026-09-24 19:35:56',
             ),
-            22 => 
+            20 => 
             array (
                 'id' => 30,
                 'reference' => 'OJL-3015-1',
                 'nom' => 'ACCOUPLEMENT JALOUSIE ET PORTE-FENETRE',
                 'slug' => 'ojl-3015-1-accouplement-jalousie-et-porte-fenetre',
-                'gamme_id' => NULL,
                 'categorie_id' => NULL,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -502,13 +439,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-24 19:39:58',
                 'updated_at' => '2026-09-24 19:39:58',
             ),
-            23 => 
+            21 => 
             array (
                 'id' => 31,
                 'reference' => 'OJL-3015-2',
                 'nom' => 'ACCOUPLEMENT JALOUSIE ET PORTE-FENETRE',
                 'slug' => 'ojl-3015-2-accouplement-jalousie-et-porte-fenetre',
-                'gamme_id' => NULL,
                 'categorie_id' => NULL,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -523,13 +459,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-24 19:41:26',
                 'updated_at' => '2026-09-24 19:41:26',
             ),
-            24 => 
+            22 => 
             array (
                 'id' => 32,
                 'reference' => 'OJL-3015-3',
                 'nom' => 'ACCOUPLEMENT JALOUSIE ET PORTE-FENETRE',
                 'slug' => 'ojl-3015-3-accouplement-jalousie-et-porte-fenetre',
-                'gamme_id' => NULL,
                 'categorie_id' => NULL,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -544,13 +479,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-24 19:43:29',
                 'updated_at' => '2026-09-24 19:43:29',
             ),
-            25 => 
+            23 => 
             array (
                 'id' => 33,
                 'reference' => 'PORTE-004',
                 'nom' => 'PORTE LEGERE 1 VANTAIL',
                 'slug' => 'porte-004-porte-legere-1-vantail',
-                'gamme_id' => NULL,
                 'categorie_id' => 2,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -565,13 +499,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-24 19:48:13',
                 'updated_at' => '2026-09-24 19:48:13',
             ),
-            26 => 
+            24 => 
             array (
                 'id' => 34,
                 'reference' => 'PORTE-005',
                 'nom' => 'PORTE LEGERE 1 VANTAIL',
                 'slug' => 'porte-005-porte-legere-1-vantail',
-                'gamme_id' => NULL,
                 'categorie_id' => 2,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -586,13 +519,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-24 19:55:00',
                 'updated_at' => '2026-09-24 19:55:00',
             ),
-            27 => 
+            25 => 
             array (
                 'id' => 35,
                 'reference' => 'FRAPPE-001',
                 'nom' => 'FRAPPE CHASSIS 1 VANTAIL OF',
                 'slug' => 'frappe-001-frappe-chassis-1-vantail-of',
-                'gamme_id' => NULL,
                 'categorie_id' => NULL,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -607,13 +539,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-24 19:57:08',
                 'updated_at' => '2026-09-24 19:57:08',
             ),
-            28 => 
+            26 => 
             array (
                 'id' => 36,
                 'reference' => 'FRAPPE-002',
                 'nom' => 'FRAPPE CHASSIS 1 VANTAIL OF',
                 'slug' => 'frappe-002-frappe-chassis-1-vantail-of',
-                'gamme_id' => NULL,
                 'categorie_id' => NULL,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -628,13 +559,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-24 20:00:54',
                 'updated_at' => '2026-09-24 20:00:54',
             ),
-            29 => 
+            27 => 
             array (
                 'id' => 37,
                 'reference' => 'FRAPPE-003',
                 'nom' => 'FRAPPE CHASSIS 2 VANTAIL OF',
                 'slug' => 'frappe-003-frappe-chassis-2-vantail-of',
-                'gamme_id' => NULL,
                 'categorie_id' => NULL,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -649,13 +579,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-24 20:04:01',
                 'updated_at' => '2026-09-24 20:04:01',
             ),
-            30 => 
+            28 => 
             array (
                 'id' => 38,
                 'reference' => 'FEN-004',
                 'nom' => 'FENETRE A TREILLIS SECTION HORIZONTALE',
                 'slug' => 'fen-004-fenetre-a-treillis-section-horizontale',
-                'gamme_id' => NULL,
                 'categorie_id' => 1,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -670,13 +599,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-24 20:08:53',
                 'updated_at' => '2026-09-24 20:09:21',
             ),
-            31 => 
+            29 => 
             array (
                 'id' => 39,
                 'reference' => 'FEN-005',
                 'nom' => 'FENETRE A TREILLIS SECTION VERTICALE VERRE 6mm',
                 'slug' => 'fen-005-fenetre-a-treillis-section-verticale-verre-6mm',
-                'gamme_id' => NULL,
                 'categorie_id' => 1,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -691,13 +619,12 @@ class OuvragesTableSeeder extends Seeder
                 'created_at' => '2026-09-24 20:11:39',
                 'updated_at' => '2026-09-24 20:13:31',
             ),
-            32 => 
+            30 => 
             array (
                 'id' => 40,
                 'reference' => 'FEN-006',
                 'nom' => 'FENETRE A TREILLIS SECTION VERTICALE LAME ALU',
                 'slug' => 'fen-006-fenetre-a-treillis-section-verticale-lame-alu',
-                'gamme_id' => NULL,
                 'categorie_id' => 1,
                 'description_courte' => NULL,
                 'description_technique' => NULL,

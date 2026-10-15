@@ -3,8 +3,6 @@
      (01 — CATÉGORIE), fond sombre, séparateurs fins, accent cyan sur l'état actif. --}}
 
 @php
-    $sidebarCategories = \App\Models\Categorie::withCount('ouvrages')->orderBy('nom')->get();
-
     $currentRoute = Route::currentRouteName();
     $currentParams = Route::current()->parameters();
 
@@ -50,7 +48,7 @@
         <li>
             <a href="{{ route('ouvrages.index') }}"
                class="flex items-center gap-2.5 px-2.5 py-1.5 text-sm border-l-2 transition-colors
-                      {{ $currentRoute === 'ouvrages.index' && !request()->has('categorie') && !request()->has('gamme') ? 'border-amber-400 bg-ink-800/60 text-amber-600 font-semibold' : 'border-transparent text-ink-300 hover:border-ink-600 hover:bg-ink-800/40 hover:text-fg' }}">
+                      {{ $currentRoute === 'ouvrages.index' && !request()->has('categorie') ? 'border-amber-400 bg-ink-800/60 text-amber-600 font-semibold' : 'border-transparent text-ink-300 hover:border-ink-600 hover:bg-ink-800/40 hover:text-fg' }}">
                 <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
                 </svg>

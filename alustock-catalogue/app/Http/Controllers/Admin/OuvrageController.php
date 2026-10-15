@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreOuvrageRequest;
 use App\Http\Requests\Admin\UpdateOuvrageRequest;
 use App\Models\Ouvrage;
-use App\Models\Gamme;
 use App\Models\Categorie;
 use App\Models\Composant;
 use App\Models\TypeComposant;
@@ -19,7 +18,7 @@ class OuvrageController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Ouvrage::with(['gamme', 'categorie']);
+        $query = Ouvrage::with('categorie');
 
         // Recherche
         if ($request->filled('q')) {
@@ -31,9 +30,6 @@ class OuvrageController extends Controller
         }
 
         // Filtres
-        if ($request->filled('gamme')) {
-            $query->where('gamme_id', $request->gamme);
-        }
         if ($request->filled('categorie')) {
             $query->where('categorie_id', $request->categorie);
         }
@@ -50,10 +46,9 @@ class OuvrageController extends Controller
         }
 
         $ouvrages = $query->paginate(20)->withQueryString();
-        $gammes = Gamme::orderBy('ordre_affichage')->get();
         $categories = Categorie::orderBy('nom')->get();
 
-        return view('admin.ouvrages.index', compact('ouvrages', 'gammes', 'categories', 'sort', 'direction'));
+        return view('admin.ouvrages.index', compact('ouvrages', 'categories', 'sort', 'direction'));
     }
 
     /**
@@ -61,7 +56,6 @@ class OuvrageController extends Controller
      */
     public function create()
     {
-        $gammes = Gamme::orderBy('ordre_affichage')->get();
         $categories = Categorie::orderBy('nom')->get();
         $composantsDisponibles = Composant::with('typeComposant')
             ->disponible()
@@ -70,7 +64,6 @@ class OuvrageController extends Controller
         $typesComposant = TypeComposant::orderBy('nom')->get();
     
         return view('admin.ouvrages.create', compact(
-            'gammes', 
             'categories', 
             'composantsDisponibles', 
             'typesComposant'
@@ -186,7 +179,6 @@ class OuvrageController extends Controller
     public function edit(Ouvrage $ouvrage)
     {
         $ouvrage->load([
-            'gamme',
             'categorie',
             'composants' => fn($q) => $q->orderBy('pivot_ordre'),
             'composants.typeComposant',
@@ -195,7 +187,6 @@ class OuvrageController extends Controller
             'medias' => fn($q) => $q->orderBy('media_morph.ordre'),
         ]);
 
-        $gammes = Gamme::orderBy('ordre_affichage')->get();
         $categories = Categorie::orderBy('nom')->get();
         $composantsDisponibles = Composant::with('typeComposant')
             ->disponible()
@@ -205,7 +196,6 @@ class OuvrageController extends Controller
 
         return view('admin.ouvrages.edit', compact(
             'ouvrage',
-            'gammes',
             'categories',
             'composantsDisponibles',
             'typesComposant'

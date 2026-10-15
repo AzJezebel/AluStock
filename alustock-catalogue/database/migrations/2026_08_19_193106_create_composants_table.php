@@ -19,10 +19,6 @@ return new class extends Migration
                 ->nullable()
                 ->constrained('types_composant')
                 ->nullOnDelete();
-            $table->foreignId('gamme_id')
-                ->nullable()
-                ->constrained('gammes')
-                ->nullOnDelete();
             
             // Informations générales
             $table->string('matiere', 100)->nullable();
@@ -53,7 +49,6 @@ return new class extends Migration
 
             // Index composites pour optimiser les filtres
             $table->index(['type_composant_id', 'est_disponible']);
-            $table->index(['gamme_id', 'est_disponible']);
             $table->index('reference');
         });
     }

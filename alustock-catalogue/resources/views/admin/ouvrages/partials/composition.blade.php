@@ -35,11 +35,6 @@
                                     {{ $composant->typeComposant->nom }}
                                 </span>
                             @endif
-                            @if($composant->gamme)
-                                <span class="text-xs px-1.5 py-0.5 rounded bg-amber-50 text-amber-700">
-                                    {{ $composant->gamme->nom }}
-                                </span>
-                            @endif
                         </div>
                         <div class="text-xs text-admin-500 mt-0.5 flex items-center gap-3 flex-wrap">
                             <span>Quantité : <strong>{{ $composant->pivot->quantite }}</strong> {{ $composant->pivot->unite }}</span>

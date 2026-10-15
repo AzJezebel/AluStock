@@ -98,10 +98,6 @@
                 </div>
             </a>
 
-            
-            <div class="bg-admin-50 rounded border border-dashed border-admin-200 p-4 flex items-center justify-center text-admin-300 text-xs">
-                Futur : Gammes
-            </div>
 
             <a href="{{ route('admin.types-composant.index') }}" 
                class="bg-white rounded border border-admin-200 p-4 hover:border-admin-400 hover:shadow-sm transition group">

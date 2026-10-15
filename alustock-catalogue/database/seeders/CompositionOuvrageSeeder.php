@@ -9,7 +9,7 @@ class CompositionOuvrageSeeder extends Seeder
 {
     public function run(): void
     {
-        // Ordre des colonnes : ouvrage_id, composant_id, quantite, unite, ordre, longueur_coupe_mm
+        // Ordre des colonnes : ouvrage_id, composant_id, quantite, unite, ordre
         DB::table('composition_ouvrage')->insert([
             // Fenêtre coulissante 2 vantaux (ouvrage_id = 1)
             [

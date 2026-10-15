@@ -11,7 +11,6 @@
             <h1 class="text-lg font-semibold text-admin-900">{{ $ouvrage->nom }}</h1>
             <p class="text-xs text-admin-500 mt-0.5">
                 Réf. <span class="font-mono">{{ $ouvrage->reference }}</span>
-                @if($ouvrage->gamme) — {{ $ouvrage->gamme->nom }} @endif
                 @if($ouvrage->categorie) — {{ $ouvrage->categorie->nom }} @endif
             </p>
         </div>
@@ -70,19 +69,6 @@
                 Classification
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label for="gamme_id" class="block text-xs font-medium text-admin-600 mb-1">Gamme</label>
-                    <select name="gamme_id" id="gamme_id"
-                            class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
-                        <option value="">— Aucune —</option>
-                        @foreach($gammes as $gamme)
-                            <option value="{{ $gamme->id }}" {{ old('gamme_id', $ouvrage->gamme_id) == $gamme->id ? 'selected' : '' }}>
-                                {{ $gamme->nom }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
                 <div>
                     <label for="categorie_id" class="block text-xs font-medium text-admin-600 mb-1">Catégorie</label>
                     <select name="categorie_id" id="categorie_id"

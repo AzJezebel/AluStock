@@ -13,7 +13,6 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call([
         //     // 1. Tables indépendantes
-        //     GammeSeeder::class,
         //     CategorieSeeder::class,
         //     TypeComposantSeeder::class,
 
@@ -30,9 +29,8 @@ class DatabaseSeeder extends Seeder
         //     CaracteristiqueSeeder::class,
         // ]);
 
-        //php artisan iseed gammes,categories,types_composant,ouvrages,composants,composition_ouvrage,finitions,composant_finition,caracteristiques,medias,media_morph --force
+        //php artisan iseed categories,types_composant,ouvrages,composants,composition_ouvrage,finitions,composant_finition,caracteristiques,medias,media_morph --force
 
-        $this->call(GammesTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
         $this->call(TypesComposantTableSeeder::class);
         $this->call(OuvragesTableSeeder::class);

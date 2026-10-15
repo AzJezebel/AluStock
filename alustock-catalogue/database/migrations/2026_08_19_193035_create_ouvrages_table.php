@@ -13,10 +13,6 @@ return new class extends Migration
             $table->string('reference', 50)->unique();
             $table->string('nom', 200);
             $table->string('slug', 220)->unique();
-            $table->foreignId('gamme_id')
-                ->nullable()
-                ->constrained('gammes')
-                ->nullOnDelete();
             $table->foreignId('categorie_id')
                 ->nullable()
                 ->constrained('categories')
@@ -34,7 +30,6 @@ return new class extends Migration
             $table->timestamps();
 
             // Index composites pour optimiser les filtres
-            $table->index(['gamme_id', 'est_actif']);
             $table->index(['categorie_id', 'est_actif']);
             $table->index('reference');
         });

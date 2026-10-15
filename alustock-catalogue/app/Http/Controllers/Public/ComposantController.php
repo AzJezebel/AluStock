@@ -13,7 +13,7 @@ class ComposantController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Composant::with(['typeComposant', 'gamme', 'medias'])
+        $query = Composant::with(['typeComposant', 'medias'])
                          ->disponible();
 
         // Filtre par recherche
@@ -23,11 +23,6 @@ class ComposantController extends Controller
                 $q->where('designation', 'LIKE', "%{$search}%")
                   ->orWhere('reference', 'LIKE', "%{$search}%");
             });
-        }
-
-        // Filtre par gamme
-        if ($request->has('gamme')) {
-            $query->where('gamme_id', $request->gamme);
         }
 
         // Filtre par type de composant
@@ -48,7 +43,6 @@ class ComposantController extends Controller
         // Charger les relations
         $composant->load([
             'typeComposant',
-            'gamme',
             'finitions' => function ($query) {
                 $query->orderBy('nom');
             },
@@ -61,7 +55,7 @@ class ComposantController extends Controller
 
         // Ouvrages qui utilisent ce composant
         $ouvrages = $composant->ouvrages()
-                              ->with(['gamme', 'categorie'])
+                              ->with('categorie')
                               ->actif()
                               ->limit(6)
                               ->get();

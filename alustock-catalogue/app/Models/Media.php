@@ -60,13 +60,6 @@ class Media extends Model
                     ->withTimestamps();
     }
 
-    public function gammes(): MorphToMany
-    {
-        return $this->morphedByMany(Gamme::class, 'mediable', 'media_morph')
-                    ->withPivot('ordre')
-                    ->withTimestamps();
-    }
-
     public function categories(): MorphToMany
     {
         return $this->morphedByMany(Categorie::class, 'mediable', 'media_morph')

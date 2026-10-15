@@ -10,19 +10,6 @@ use Illuminate\Http\Request;
 class CompositionController extends Controller
 {
     /**
-     * Liste la composition d'un ouvrage
-     */
-    public function index(Ouvrage $ouvrage)
-    {
-        $composition = $ouvrage->composants()
-            ->with(['typeComposant', 'finitions'])
-            ->orderBy('pivot_ordre')
-            ->get();
-
-        return view('admin.ouvrages.composition', compact('ouvrage', 'composition'));
-    }
-
-    /**
      * Ajouter un composant à la composition
      */
     public function store(Request $request, Ouvrage $ouvrage)

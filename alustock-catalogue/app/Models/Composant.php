@@ -2,31 +2,23 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Str;
 
 class Composant extends Model
 {
     protected $table = 'composants';
 
     protected $fillable = [
-        'reference',
-        'designation',
-        'slug',
-        'type_composant_id',
-        'gamme_id',
-        'matiere',
-        'longueur_barre_mm',
-        'poids_lineaire_kg_m',
-        'poids_lineaire_lbs_ft',
-        'section_largeur_mm',
-        'section_hauteur_mm',
-        'epaisseur_paroi_mm',
-        'moment_inertie_cm4',
-        'perimetre_mm',
-        'image_coupe',
-        'est_disponible',
+        'reference', 'designation', 'slug', 'type_composant_id', 'matiere',
+        'longueur_barre_mm', 'poids_lineaire_kg_m', 'poids_lineaire_lbs_ft',
+        'section_largeur_mm', 'section_hauteur_mm', 'epaisseur_paroi_mm',
+        'moment_inertie_cm4', 'perimetre_mm', 'image_coupe', 'est_disponible',
     ];
 
     protected $casts = [
@@ -44,115 +36,72 @@ class Composant extends Model
     {
         parent::boot();
 
-        static::creating(function ($composant) {
-            if (empty($composant->slug)) {
-                $composant->slug = self::generateUniqueSlug(
-                    $composant->reference,
-                    $composant->designation
-                );
+        static::creating(function (self $c) {
+            if (empty($c->slug)) {
+                $c->slug = self::uniqueSlug($c->reference, $c->designation);
             }
         });
 
-        static::updating(function ($composant) {
-            if ($composant->isDirty(['reference', 'designation'])) {
-                $composant->slug = self::generateUniqueSlug(
-                    $composant->reference,
-                    $composant->designation,
-                    $composant->id
-                );
+        static::updating(function (self $c) {
+            if ($c->isDirty(['reference', 'designation'])) {
+                $c->slug = self::uniqueSlug($c->reference, $c->designation, $c->id);
             }
         });
     }
 
-    /**
-     * Génère un slug unique à partir de la référence + désignation
-     */
-    protected static function generateUniqueSlug(string $reference, string $designation, ?int $ignoreId = null): string
+    protected static function uniqueSlug(string $reference, string $designation, ?int $ignoreId = null): string
     {
-        $baseSlug = \Str::slug($reference . '-' . $designation);
-        $slug = $baseSlug;
-        $counter = 1;
+        $base = Str::slug($reference . '-' . $designation);
+        $slug = $base;
+        $i = 1;
 
-        while (self::slugExists($slug, $ignoreId)) {
-            $slug = $baseSlug . '-' . $counter;
-            $counter++;
+        while (self::where('slug', $slug)->when($ignoreId, fn ($q) => $q->where('id', '!=', $ignoreId))->exists()) {
+            $slug = $base . '-' . $i++;
         }
 
         return $slug;
     }
 
-    /**
-     * Vérifie si un slug existe déjà (en ignorant l'ID en cours)
-     */
-    protected static function slugExists(string $slug, ?int $ignoreId = null): bool
-    {
-        $query = self::where('slug', $slug);
-
-        if ($ignoreId) {
-            $query->where('id', '!=', $ignoreId);
-        }
-
-        return $query->exists();
-    }
-
-    // ============================================================
-    // RELATIONS
-    // ============================================================
-
+    // ------------------------------------------------------------
+    // Relations
+    // ------------------------------------------------------------
     public function typeComposant(): BelongsTo
     {
         return $this->belongsTo(TypeComposant::class, 'type_composant_id');
     }
 
-    public function gamme(): BelongsTo
-    {
-        return $this->belongsTo(Gamme::class, 'gamme_id');
-    }
-
     public function ouvrages(): BelongsToMany
     {
         return $this->belongsToMany(Ouvrage::class, 'composition_ouvrage')
-                    ->withPivot('quantite', 'unite', 'ordre', 'commentaire')
-                    ->withTimestamps();
+            ->withPivot(Ouvrage::PIVOT_COMPOSITION)
+            ->withTimestamps();
     }
 
     public function finitions(): BelongsToMany
     {
         return $this->belongsToMany(Finition::class, 'composant_finition')
-                    ->withPivot('est_par_defaut')
-                    ->withTimestamps();
+            ->withPivot('est_par_defaut')
+            ->withTimestamps();
     }
 
-    public function caracteristiques()
+    public function caracteristiques(): MorphMany
     {
         return $this->morphMany(Caracteristique::class, 'caracterisable')
-                    ->orderBy('ordre_affichage');
+            ->orderBy('ordre_affichage');
     }
 
-    public function medias()
+    public function medias(): MorphToMany
     {
         return $this->morphToMany(Media::class, 'mediable', 'media_morph')
-                    ->withPivot('ordre')
-                    ->withTimestamps()
-                    ->orderBy('pivot_ordre');
+            ->withPivot('ordre')
+            ->withTimestamps()
+            ->orderBy('pivot_ordre');
     }
 
     public function documents(): BelongsToMany
     {
         return $this->belongsToMany(Document::class, 'document_association')
-                    ->withTimestamps();
-    }
-
-    public function scopeDisponible($query)
-    {
-        return $query->where('est_disponible', true);
-    }
-
-    public function scopeProfile($query)
-    {
-        return $query->whereHas('typeComposant', function ($q) {
-            $q->where('slug', 'profile');
-        });
+            ->withTimestamps();
     }
 
     public function getRouteKeyName(): string
@@ -160,6 +109,39 @@ class Composant extends Model
         return 'slug';
     }
 
+    // ------------------------------------------------------------
+    // Scopes
+    // ------------------------------------------------------------
+    public function scopeDisponible(Builder $query): Builder
+    {
+        return $query->where('est_disponible', true);
+    }
+
+    public function scopeProfile(Builder $query): Builder
+    {
+        return $query->whereHas('typeComposant', fn ($q) => $q->where('slug', 'profile'));
+    }
+
+    /** Pendant de Ouvrage::scopeRecherche — OR groupés. */
+    public function scopeRecherche(Builder $query, ?string $terme, bool $complet = true): Builder
+    {
+        if ($terme === null || $terme === '') {
+            return $query;
+        }
+
+        $like = '%' . addcslashes($terme, '%_\\') . '%';
+
+        return $query->where(function (Builder $q) use ($like, $complet) {
+            $q->where('designation', 'LIKE', $like)->orWhere('reference', 'LIKE', $like);
+            if ($complet) {
+                $q->orWhere('matiere', 'LIKE', $like);
+            }
+        });
+    }
+
+    // ------------------------------------------------------------
+    // Accesseurs / helpers
+    // ------------------------------------------------------------
     public function getNomCompletAttribute(): string
     {
         return $this->reference . ' - ' . $this->designation;

@@ -3,24 +3,16 @@
 namespace App\Http\ViewComposers;
 
 use App\Models\Categorie;
-use App\Models\Gamme;
 use Illuminate\View\View;
 
+/**
+ * Alimente public/partials/sidebar-menu.blade.php (enregistré dans AppServiceProvider).
+ * La requête n'est plus faite dans la vue.
+ */
 class SidebarComposer
 {
-    public function compose(View $view)
+    public function compose(View $view): void
     {
-        $categories = Categorie::withCount('ouvrages')
-                               ->orderBy('nom')
-                               ->get();
-        
-        $gammes = Gamme::withCount('ouvrages')
-                       ->orderBy('ordre_affichage')
-                       ->get();
-
-        $view->with([
-            'sidebarCategories' => $categories,
-            'sidebarGammes' => $gammes,
-        ]);
+        $view->with('sidebarCategories', Categorie::withCount('ouvrages')->orderBy('nom')->get());
     }
 }

@@ -2,55 +2,69 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Str;
 
 class Ouvrage extends Model
 {
     protected $table = 'ouvrages';
+
     protected $fillable = [
-        'reference',
-        'nom',
-        'slug',
-        'gamme_id',
-        'categorie_id',
-        'description_courte',
-        'description_technique',
-        'largeur_min_mm',
-        'largeur_max_mm',
-        'hauteur_min_mm',
-        'hauteur_max_mm',
-        'performance_thermique',
-        'performance_acoustique',
-        'image_principale',
-        'est_actif',
+        'reference', 'nom', 'slug', 'categorie_id',
+        'description_courte', 'description_technique',
+        'largeur_min_mm', 'largeur_max_mm', 'hauteur_min_mm', 'hauteur_max_mm',
+        'performance_thermique', 'performance_acoustique',
+        'image_principale', 'est_actif',
     ];
 
     protected $casts = [
         'est_actif' => 'boolean',
     ];
+
+    /** Colonnes du pivot composition_ouvrage (une seule définition, partagée avec Composant). */
+    public const PIVOT_COMPOSITION = ['quantite', 'unite', 'ordre', 'commentaire'];
+
+    // ------------------------------------------------------------
+    // Slug : même logique unique que Composant (suffixe -1, -2…)
+    // ------------------------------------------------------------
     protected static function boot()
     {
         parent::boot();
 
-        static::creating(function ($ouvrage) {
-            $ouvrage->slug = \Str::slug($ouvrage->reference . '-' . $ouvrage->nom);
+        static::creating(function (self $o) {
+            if (empty($o->slug)) {
+                $o->slug = self::uniqueSlug($o->reference, $o->nom);
+            }
         });
 
-        static::updating(function ($ouvrage) {
-            if ($ouvrage->isDirty(['reference', 'nom'])) {
-                $ouvrage->slug = \Str::slug($ouvrage->reference . '-' . $ouvrage->nom);
+        static::updating(function (self $o) {
+            if ($o->isDirty(['reference', 'nom'])) {
+                $o->slug = self::uniqueSlug($o->reference, $o->nom, $o->id);
             }
         });
     }
 
-    // Relations
-    public function gamme(): BelongsTo
+    protected static function uniqueSlug(string $reference, string $nom, ?int $ignoreId = null): string
     {
-        return $this->belongsTo(Gamme::class);
+        $base = Str::slug($reference . '-' . $nom);
+        $slug = $base;
+        $i = 1;
+
+        while (self::where('slug', $slug)->when($ignoreId, fn ($q) => $q->where('id', '!=', $ignoreId))->exists()) {
+            $slug = $base . '-' . $i++;
+        }
+
+        return $slug;
     }
 
+    // ------------------------------------------------------------
+    // Relations
+    // ------------------------------------------------------------
     public function categorie(): BelongsTo
     {
         return $this->belongsTo(Categorie::class);
@@ -59,42 +73,60 @@ class Ouvrage extends Model
     public function composants(): BelongsToMany
     {
         return $this->belongsToMany(Composant::class, 'composition_ouvrage')
-                ->withPivot('quantite', 'unite', 'ordre', 'commentaire')
-                ->withTimestamps()
-                ->orderBy('composition_ouvrage.ordre');
+            ->withPivot(self::PIVOT_COMPOSITION)
+            ->withTimestamps()
+            ->orderBy('composition_ouvrage.ordre');
     }
 
-    public function medias()
+    public function medias(): MorphToMany
     {
-        return $this->morphToMany(
-            Media::class,          // Modèle cible
-            'mediable',            // Nom de la relation polymorphique
-            'media_morph',         // Nom de la table pivot
-            'mediable_id',         // Clé étrangère sur l'entité cible (dans media_morph)
-            'media_id'             // Clé étrangère sur le média (dans media_morph)
-        )->withPivot('ordre')      // Attribut supplémentaire dans la table pivot
-         ->orderBy('pivot_ordre'); // Ordre par la colonne pivot
+        // Même définition que Composant::medias()
+        return $this->morphToMany(Media::class, 'mediable', 'media_morph')
+            ->withPivot('ordre')
+            ->withTimestamps()
+            ->orderBy('pivot_ordre');
     }
 
-    public function documents()
+    public function documents(): BelongsToMany
     {
-        return $this->belongsToMany(Document::class, 'document_association');
+        return $this->belongsToMany(Document::class, 'document_association')
+            ->withTimestamps();
     }
 
-    public function caracteristiques()
+    public function caracteristiques(): MorphMany
     {
-        return $this->morphMany(Caracteristique::class, 'caracterisable');
+        return $this->morphMany(Caracteristique::class, 'caracterisable')
+            ->orderBy('ordre_affichage');
     }
 
-    public function getRouteKeyName()
+    public function getRouteKeyName(): string
     {
         return 'slug';
     }
 
+    // ------------------------------------------------------------
     // Scopes
-    public function scopeActif($query)
+    // ------------------------------------------------------------
+    public function scopeActif(Builder $query): Builder
     {
         return $query->where('est_actif', true);
     }
-}
 
+    /** Recherche texte unique (index, search, autocomplete) — les OR sont groupés. */
+    public function scopeRecherche(Builder $query, ?string $terme, bool $complet = true): Builder
+    {
+        if ($terme === null || $terme === '') {
+            return $query;
+        }
+
+        $like = '%' . addcslashes($terme, '%_\\') . '%';
+
+        return $query->where(function (Builder $q) use ($like, $complet) {
+            $q->where('nom', 'LIKE', $like)->orWhere('reference', 'LIKE', $like);
+            if ($complet) {
+                $q->orWhere('description_courte', 'LIKE', $like)
+                  ->orWhere('description_technique', 'LIKE', $like);
+            }
+        });
+    }
+}

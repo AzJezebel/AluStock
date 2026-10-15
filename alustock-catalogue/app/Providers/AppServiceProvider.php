@@ -2,25 +2,20 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\View;
 use App\Http\ViewComposers\SidebarComposer;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
-        View::composer('partials.sidebar-menu', SidebarComposer::class);
+        // Nom réel de la vue (l'ancien 'partials.sidebar-menu' ne correspondait à rien).
+        View::composer('public.partials.sidebar-menu', SidebarComposer::class);
     }
 }

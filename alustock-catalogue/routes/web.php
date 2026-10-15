@@ -103,7 +103,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
 
         // Composants
-        Route::resource('composants', Admin\ComposantController::class);
+        Route::resource('composants', Admin\ComposantController::class)
+            ->except(['show']);
 
         // Catégories
         Route::resource('categories', Admin\CategorieController::class)

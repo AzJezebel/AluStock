@@ -130,7 +130,6 @@ class MediaController extends Controller
         // Détacher de toutes les entités
         $media->ouvrages()->detach();
         $media->composants()->detach();
-        $media->gammes()->detach();
         $media->categories()->detach();
 
         // Supprimer le média

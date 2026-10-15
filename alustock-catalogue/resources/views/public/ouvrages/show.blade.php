@@ -1,5 +1,5 @@
 {{-- resources/views/public/ouvrages/show.blade.php
-     Direction "Blueprint" — badge gamme retiré, panneaux sombres cohérents
+     Direction "Blueprint" — panneaux sombres cohérents
      avec composants/show, composition réutilise le partial composant-card. --}}
 @extends('layouts.app')
 

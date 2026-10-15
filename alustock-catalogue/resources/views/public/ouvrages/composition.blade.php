@@ -19,25 +19,18 @@
     /*
      * Poids estimé d'une ligne = Kg/m (composant) × longueur en mètres × quantité.
      * La longueur vient, dans l'ordre :
-     *   1. de la longueur de coupe de la ligne (pivot.longueur_coupe_mm) ;
-     *   2. de la quantité elle-même si l'unité est le mètre (m / ml) ;
-     *   3. de la longueur de barre du composant si l'unité est "barre".
+     *   1. de la quantité elle-même si l'unité est le mètre (m / ml) ;
+     *   2. de la longueur de barre du composant si l'unité est "barre".
      * Sinon la ligne n'est pas calculable (vis, joints, accessoires…) et est exclue du total.
      */
     $poidsLigne = function ($c) {
         $kgm   = (float) ($c->poids_lineaire_kg_m ?? 0);
         $qte   = (float) ($c->pivot->quantite ?? 0);
-        $coupe = (float) ($c->pivot->longueur_coupe_mm ?? 0);
         $barre = (float) ($c->longueur_barre_mm ?? 0);
         $unite = \Illuminate\Support\Str::of((string) ($c->pivot->unite ?? ''))->ascii()->lower()->trim()->toString();
 
         if ($kgm <= 0) {
             return ['kg' => null, 'raison' => 'Kg/m non renseigné', 'detail' => null, 'formule' => null];
-        }
-        if ($coupe > 0) {
-            $m = $coupe / 1000;
-            return ['kg' => $kgm * $m * $qte, 'raison' => null,
-                    'formule' => rtrim(rtrim(number_format($kgm, 3, '.', ''), '0'), '.') . ' kg/m × ' . rtrim(rtrim(number_format($m, 3, '.', ''), '0'), '.') . ' m × ' . rtrim(rtrim(number_format($qte, 2, '.', ''), '0'), '.')];
         }
         if (in_array($unite, ['m', 'ml', 'metre', 'metres'], true)) {
             return ['kg' => $kgm * $qte, 'raison' => null,
@@ -48,7 +41,7 @@
             return ['kg' => $kgm * $m * $qte, 'raison' => null,
                     'formule' => rtrim(rtrim(number_format($kgm, 3, '.', ''), '0'), '.') . ' kg/m × ' . rtrim(rtrim(number_format($m, 3, '.', ''), '0'), '.') . ' m (barre) × ' . rtrim(rtrim(number_format($qte, 2, '.', ''), '0'), '.')];
         }
-        return ['kg' => null, 'raison' => 'Longueur inconnue', 'detail' => '(ni coupe, ni mètres, ni barre)', 'formule' => null];
+        return ['kg' => null, 'raison' => 'Longueur inconnue', 'detail' => '(ni mètres, ni barre)', 'formule' => null];
     };
 
     $poids = [];
@@ -104,7 +97,6 @@
                             <th class="px-2.5 py-2 text-left">Composant</th>
                             <th class="px-2.5 py-2 text-left">Matière</th>
                             <th class="px-2.5 py-2 text-center">Qté</th>
-                            <th class="px-2.5 py-2 text-center">Coupe</th>
                             <th class="px-2.5 py-2 text-left">Finition</th>
                             <th class="pl-2.5 pr-3 py-2 text-right">Poids est.</th>
                         </tr>
@@ -149,14 +141,6 @@
                                     @endif
                                 </td>
 
-                                {{-- Longueur de coupe --}}
-                                <td class="px-2.5 py-2 text-center text-xs text-ink-400 font-mono whitespace-nowrap">
-                                    @if($composant->pivot->longueur_coupe_mm)
-                                        {{ $composant->pivot->longueur_coupe_mm }} mm
-                                    @else
-                                        <span class="text-ink-700">—</span>
-                                    @endif
-                                </td>
 
                                 {{-- Finition par défaut --}}
                                 <td class="px-2.5 py-2 text-xs text-ink-400">
@@ -190,7 +174,7 @@
                     {{-- Pied de tableau avec récapitulatif --}}
                     <tfoot class="bg-ink-950 border-t border-ink-800">
                         <tr>
-                            <td colspan="7" class="px-3 py-2.5">
+                            <td colspan="6" class="px-3 py-2.5">
                                 <div class="flex flex-wrap items-center justify-between gap-2 font-mono text-[12px] text-ink-400">
                                     <span>
                                         <span class="font-medium text-ink-200">{{ $composition->count() }}</span> composant(s) au total
@@ -240,7 +224,6 @@
                 <h3 class="font-mono text-[10px] font-semibold text-ink-500 uppercase tracking-widest mb-2">Informations</h3>
                 <ul class="space-y-1.5 text-sm text-ink-400">
                     <li>• Les quantités sont données par ouvrage fini.</li>
-                    <li>• Les longueurs de coupe sont indiquées en millimètres (mm).</li>
                     @if($poidsCalcule > 0)
                         <li>• Poids estimé = Kg/m × longueur (m) × quantité. Les lignes sans Kg/m ou sans longueur (visserie, joints…) ne sont pas comptées.</li>
                     @endif

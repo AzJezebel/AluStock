@@ -11,14 +11,13 @@ class ComposantSeeder extends Seeder
     {
         $composants = [
             // ============================================================
-            // GAMME 45 — PROFILÉS
+            // PROFILÉS 45
             // ============================================================
             [
                 'reference' => 'PRO-001-45',
                 'designation' => 'Rail haut 45mm',
                 'slug' => 'rail-haut-45mm',
                 'type_composant_id' => 1, // Profilé
-                'gamme_id' => 1,          // Gamme 45
                 'matiere' => 'Alu 6060-T6',
                 'longueur_barre_mm' => 6000,
                 'section_largeur_mm' => 45.00,
@@ -36,7 +35,6 @@ class ComposantSeeder extends Seeder
                 'designation' => 'Rail bas 45mm',
                 'slug' => 'rail-bas-45mm',
                 'type_composant_id' => 1,
-                'gamme_id' => 1,
                 'matiere' => 'Alu 6060-T6',
                 'longueur_barre_mm' => 6000,
                 'section_largeur_mm' => 45.00,
@@ -54,7 +52,6 @@ class ComposantSeeder extends Seeder
                 'designation' => 'Montant 45mm',
                 'slug' => 'montant-45mm',
                 'type_composant_id' => 1,
-                'gamme_id' => 1,
                 'matiere' => 'Alu 6060-T6',
                 'longueur_barre_mm' => 6000,
                 'section_largeur_mm' => 45.00,
@@ -69,14 +66,13 @@ class ComposantSeeder extends Seeder
             ],
 
             // ============================================================
-            // GAMME 55 — PROFILÉS
+            // PROFILÉS 55
             // ============================================================
             [
                 'reference' => 'PRO-001-55',
                 'designation' => 'Rail haut 55mm',
                 'slug' => 'rail-haut-55mm',
                 'type_composant_id' => 1,
-                'gamme_id' => 2,          // Gamme 55
                 'matiere' => 'Alu 6060-T6',
                 'longueur_barre_mm' => 6000,
                 'section_largeur_mm' => 55.00,
@@ -94,7 +90,6 @@ class ComposantSeeder extends Seeder
                 'designation' => 'Rail bas 55mm',
                 'slug' => 'rail-bas-55mm',
                 'type_composant_id' => 1,
-                'gamme_id' => 2,
                 'matiere' => 'Alu 6060-T6',
                 'longueur_barre_mm' => 6000,
                 'section_largeur_mm' => 55.00,
@@ -116,7 +111,6 @@ class ComposantSeeder extends Seeder
                 'designation' => "Joint d'étanchéité EPDM 8mm",
                 'slug' => 'joint-epdm-8mm',
                 'type_composant_id' => 2, // Joint
-                'gamme_id' => null,
                 'matiere' => 'EPDM',
                 'longueur_barre_mm' => null,
                 'section_largeur_mm' => 8.00,
@@ -138,7 +132,6 @@ class ComposantSeeder extends Seeder
                 'designation' => 'Serrure multipoints 45mm',
                 'slug' => 'serrure-multipoints-45mm',
                 'type_composant_id' => 3, // Quincaillerie
-                'gamme_id' => 1,
                 'matiere' => 'Acier zingué',
                 'longueur_barre_mm' => null,
                 'section_largeur_mm' => null,
@@ -156,7 +149,6 @@ class ComposantSeeder extends Seeder
                 'designation' => 'Roulement à billes pour coulissant',
                 'slug' => 'roulement-billes-coulissant',
                 'type_composant_id' => 3,
-                'gamme_id' => null,
                 'matiere' => 'Acier inoxydable',
                 'longueur_barre_mm' => null,
                 'section_largeur_mm' => null,
