@@ -508,3 +508,25 @@ refactor: retire les gammes, nettoie le code mort et durcit l'admin
 - AuthController : rate limit, hash_equals, régénération de session
 - config/app.php : admin_password lu depuis ADMIN_PASSWORD, sans défaut
 - Clean routes/web.php (55 routes)
+
+--------------------------------------------------------------------------------------------------------------------------------
+16/10 
+
+Priorité 1 :
+Remplacer document_association (deux colonnes nullables, aucune clé primaire) par une relation polymorphe documentables, comme tu l’as déjà fait pour les médias.
+Ajouter un morphMap pour ne plus stocker les noms de classes PHP en base.
+Garder une seule source pour l’image principale, aujourd’hui répartie entre image_principale, image_coupe et medias.est_principal.
+Priorité 2 :
+Séparer la géométrie des profils (section, paroi, inertie, périmètre) du reste de composants.
+Utiliser un enum pour l’unité dans composition_ouvrage.
+Créer un référentiel pour les clés de caracteristiques.
+Donner une clé propre à composition_ouvrage.
+Prévoir softDeletes ou restrict là où une suppression en cascade serait dangereuse.
+Priorité 3 :
+Mettre la validation et le calcul de poids hors des contrôleurs.
+Remplacer le mot de passe admin unique par de vrais comptes si le projet grandit.
+Régler la collation de la recherche.
+Purger régulièrement contact_messages.
+
+--------------------------------------------------------------------------------------------------------------------------------
+/10 
