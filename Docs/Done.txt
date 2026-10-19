@@ -529,4 +529,8 @@ Régler la collation de la recherche.
 Purger régulièrement contact_messages.
 
 --------------------------------------------------------------------------------------------------------------------------------
-/10 
+19/10 
+
+feat: implement SiteImage model and migration for managing site images in the database
+chore: rm storage/app/vitrine-media.json.migrated
+refactor: update SiteImages class to utilize SiteImage model for image management

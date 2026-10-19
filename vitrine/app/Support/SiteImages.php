@@ -2,19 +2,17 @@
 
 namespace App\Support;
 
+use App\Models\SiteImage;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 
 /**
- * Images de la vitrine sans base de données.
+ * Images de la vitrine (hero + « À propos »).
  *
- * Les fichiers sont rangés sur le disque configuré (config('vitrine.media.disk'))
- * et le lien emplacement -> images est gardé dans storage/app/vitrine-media.json :
- *
- *   { "hero":  [ {"path": "vitrine/hero/a.jpg", "alt": ""}, ... ],
- *     "about": [ {"path": "vitrine/about/b.jpg", "alt": ""} ] }
+ * Le lien emplacement → image est dans la table `site_images` (modèle SiteImage) ;
+ * les fichiers sont rangés sur le disque config('vitrine.media.disk') dans vitrine/{emplacement}/.
  *
  * Emplacements : 'hero' (plusieurs, ordonnés) et 'about' (une seule, remplacée à chaque ajout).
+ * L'API (get, urls, first, add, remove, reorder, setAlt) est la même qu'avant : contrôleur et vues inchangés.
  */
 class SiteImages
 {
@@ -23,7 +21,8 @@ class SiteImages
         'about' => ['multiple' => false],
     ];
 
-    private static ?array $cache = null;
+    /** @var array<string, array<int, array{path:string, alt:string, url:string}>> mémo par requête */
+    private static array $cache = [];
 
     // ------------------------------------------------------------- lecture
 
@@ -32,11 +31,11 @@ class SiteImages
     {
         self::assertSlot($slot);
 
-        return collect(self::load()[$slot] ?? [])->map(fn ($i) => [
-            'path' => $i['path'],
-            'alt'  => $i['alt'] ?? '',
-            'url'  => VitrineMedia::url($i['path']),
-        ])->values()->all();
+        return self::$cache[$slot] ??= SiteImage::slot($slot)->get()->map(fn (SiteImage $i) => [
+            'path' => $i->file_path,
+            'alt'  => $i->alt,
+            'url'  => VitrineMedia::url($i->file_path),
+        ])->all();
     }
 
     /** @return string[] URLs publiques, dans l'ordre */
@@ -58,17 +57,19 @@ class SiteImages
         self::assertSlot($slot);
 
         $path = $file->store('vitrine/' . $slot, self::disk());
-        $data = self::load();
 
         if (! self::SLOTS[$slot]['multiple']) {
-            foreach ($data[$slot] ?? [] as $old) {
-                Storage::disk(self::disk())->delete($old['path']);
-            }
-            $data[$slot] = [];
+            SiteImage::slot($slot)->get()->each->delete(); // supprime lignes + anciens fichiers
         }
 
-        $data[$slot][] = ['path' => $path, 'alt' => $alt];
-        self::save($data);
+        SiteImage::create([
+            'slot'      => $slot,
+            'file_path' => $path,
+            'alt'       => $alt,
+            'order'     => (int) SiteImage::where('slot', $slot)->max('order') + 1,
+        ]);
+
+        self::forget($slot);
 
         return ['path' => $path, 'alt' => $alt, 'url' => VitrineMedia::url($path)];
     }
@@ -77,46 +78,40 @@ class SiteImages
     public static function remove(string $slot, string $path): void
     {
         self::assertSlot($slot);
-        $data = self::load();
 
-        $kept = array_values(array_filter($data[$slot] ?? [], fn ($i) => $i['path'] !== $path));
-        if (count($kept) === count($data[$slot] ?? [])) {
-            return; // chemin inconnu : on ne touche à aucun fichier
-        }
+        // chemin inconnu pour cet emplacement : on ne touche à aucun fichier
+        SiteImage::where('slot', $slot)->where('file_path', $path)->get()->each->delete();
 
-        Storage::disk(self::disk())->delete($path);
-        $data[$slot] = $kept;
-        self::save($data);
+        self::forget($slot);
     }
 
-    /** Réordonne selon la liste de chemins reçue (les chemins inconnus sont ignorés). */
+    /** Réordonne selon la liste de chemins reçue (les chemins inconnus sont ignorés, le reste passe à la fin). */
     public static function reorder(string $slot, array $paths): void
     {
         self::assertSlot($slot);
-        $data = self::load();
-        $byPath = collect($data[$slot] ?? [])->keyBy('path');
 
-        $ordered = [];
-        foreach ($paths as $p) {
-            if ($byPath->has($p)) {
-                $ordered[] = $byPath->pull($p);
+        $images = SiteImage::slot($slot)->get()->keyBy('file_path');
+
+        $position = 0;
+        foreach ($paths as $path) {
+            if ($image = $images->pull($path)) {
+                $image->update(['order' => $position++]);
             }
         }
-        // ce qui n'était pas dans la liste reste à la fin
-        $data[$slot] = array_merge($ordered, $byPath->values()->all());
-        self::save($data);
+        foreach ($images as $image) { // ce qui n'était pas dans la liste reste à la fin
+            $image->update(['order' => $position++]);
+        }
+
+        self::forget($slot);
     }
 
     public static function setAlt(string $slot, string $path, string $alt): void
     {
         self::assertSlot($slot);
-        $data = self::load();
-        foreach ($data[$slot] ?? [] as $k => $i) {
-            if ($i['path'] === $path) {
-                $data[$slot][$k]['alt'] = $alt;
-            }
-        }
-        self::save($data);
+
+        SiteImage::where('slot', $slot)->where('file_path', $path)->update(['alt' => $alt]);
+
+        self::forget($slot);
     }
 
     // ------------------------------------------------------------- interne
@@ -126,30 +121,9 @@ class SiteImages
         return config('vitrine.media.disk', 'public');
     }
 
-    private static function file(): string
+    private static function forget(string $slot): void
     {
-        return storage_path('app/vitrine-media.json');
-    }
-
-    private static function load(): array
-    {
-        if (self::$cache !== null) {
-            return self::$cache;
-        }
-
-        $raw = is_file(self::file()) ? file_get_contents(self::file()) : '';
-        $data = json_decode($raw ?: '[]', true);
-
-        return self::$cache = is_array($data) ? $data : [];
-    }
-
-    private static function save(array $data): void
-    {
-        // écriture atomique : fichier temporaire puis rename
-        $tmp = self::file() . '.' . uniqid('', true) . '.tmp';
-        file_put_contents($tmp, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), LOCK_EX);
-        rename($tmp, self::file());
-        self::$cache = $data;
+        unset(self::$cache[$slot]);
     }
 
     private static function assertSlot(string $slot): void
