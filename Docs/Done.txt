@@ -513,7 +513,7 @@ refactor: retire les gammes, nettoie le code mort et durcit l'admin
 16/10 
 
 Priorité 1 :
-Remplacer document_association (deux colonnes nullables, aucune clé primaire) par une relation polymorphe documentables, comme tu l’as déjà fait pour les médias.
+Remplacer document_association (deux colonnes nullables, aucune clé primaire) par une relation polymorphe documentables, comme pour les médias.
 Ajouter un morphMap pour ne plus stocker les noms de classes PHP en base.
 Garder une seule source pour l’image principale, aujourd’hui répartie entre image_principale, image_coupe et medias.est_principal.
 Priorité 2 :
@@ -534,3 +534,13 @@ Purger régulièrement contact_messages.
 feat: implement SiteImage model and migration for managing site images in the database
 chore: rm storage/app/vitrine-media.json.migrated
 refactor: update SiteImages class to utilize SiteImage model for image management
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+20/10
+
+Organizing task trello + mgmnt latest version on railway + starting setup for deployment Vitrine + need to check RGPD
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+21/10 
