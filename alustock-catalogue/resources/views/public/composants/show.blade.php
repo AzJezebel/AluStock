@@ -155,7 +155,7 @@
                     <table class="w-full text-xs">
                         @foreach($composant->caracteristiques as $carac)
                             <tr class="border-b border-ink-800 last:border-0">
-                                <td class="px-3 py-1.5 text-ink-500">{{ $carac->cle }}</td>
+                                <td class="px-3 py-1.5 text-ink-500">{{ $carac->libelle }}</td>
                                 <td class="px-3 py-1.5 text-right font-mono font-semibold text-ink-100">
                                     {{ $carac->valeur }}
                                     @if($carac->unite)<span class="text-ink-500">{{ $carac->unite }}</span>@endif

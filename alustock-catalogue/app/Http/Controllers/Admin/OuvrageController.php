@@ -9,10 +9,14 @@ use App\Models\Ouvrage;
 use App\Models\Categorie;
 use App\Models\Composant;
 use App\Models\TypeComposant;
+use App\Http\Controllers\Admin\Concerns\GereUploadsMedias;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OuvrageController extends Controller
 {
+    use GereUploadsMedias;
+
     /**
      * Liste des ouvrages avec tri et pagination
      */
@@ -78,98 +82,67 @@ class OuvrageController extends Controller
         $validated = $request->validated();
         $validated['est_actif'] = $request->has('est_actif');
 
-        $ouvrage = Ouvrage::create($validated);
+        // Tout ou rien : ouvrage, composition, caractéristiques et médias (fichiers nettoyés si échec)
+        $ouvrage = $this->transactionAvecFichiers(function () use ($request, $validated) {
+            $ouvrage = Ouvrage::create($validated);
 
-        // ============================================================
-        // 1. TRAITEMENT DE LA COMPOSITION
-        // ============================================================
-        $tempComposition = json_decode($request->input('temp_composition', '[]'), true);
+            $this->attacherComposition($ouvrage, json_decode($request->input('temp_composition', '[]'), true) ?: []);
+            $this->creerCaracteristiques($ouvrage, json_decode($request->input('temp_caracteristiques', '[]'), true) ?: []);
 
-        if (!empty($tempComposition)) {
-            $ordre = 0;
-            foreach ($tempComposition as $item) {
-                $composantId = $item['composant_id'];
+            $this->enregistrerMedias(
+                $ouvrage,
+                $request->file('medias_fichiers', []),
+                'images/ouvrages',
+                $request->input('medias_type_media', 'schema')
+            );
 
-                // Si c'est un nouveau composant, on le crée d'abord
-                if (empty($composantId) && !empty($item['is_new'])) {
-                    $composant = Composant::create([
-                        'reference' => $item['reference'],
-                        'designation' => $item['designation'],
-                        'type_composant_id' => $item['type_composant_id'] ?? null,
-                        'matiere' => $item['matiere'] ?? null,
-                        'est_disponible' => true,
-                    ]);
-                    $composantId = $composant->id;
-                }
-
-                if ($composantId) {
-                    $ouvrage->composants()->attach($composantId, [
-                        'quantite' => $item['quantite'] ?? 1,
-                        'unite' => $item['unite'] ?? 'u',
-                        'ordre' => ++$ordre,
-                    ]);
-                }
-            }
-        }
-
-        // ============================================================
-        // 2. TRAITEMENT DES CARACTÉRISTIQUES
-        // ============================================================
-        $tempCaracs = json_decode($request->input('temp_caracteristiques', '[]'), true);
-
-        if (!empty($tempCaracs)) {
-            foreach ($tempCaracs as $index => $carac) {
-                if (empty($carac['cle']) || empty($carac['valeur'])) continue;
-
-                $ouvrage->caracteristiques()->create([
-                    'cle' => $carac['cle'],
-                    'valeur' => $carac['valeur'],
-                    'unite' => $carac['unite'] ?? null,
-                    'ordre_affichage' => $index + 1,
-                ]);
-            }
-        }
-
-        // ============================================================
-        // 3. TRAITEMENT DES MÉDIAS
-        // ============================================================
-        if ($request->hasFile('medias_fichiers')) {
-            $this->handleMedias($ouvrage, $request);
-        }
+            return $ouvrage;
+        });
 
         return redirect()
             ->route('admin.ouvrages.edit', $ouvrage)
             ->with('success', 'Ouvrage créé avec succès.');
     }
 
-    protected function handleMedias(Ouvrage $ouvrage, Request $request): void
+    /** Lignes de composition saisies dans le formulaire (crée les composants "nouveaux" au passage). */
+    protected function attacherComposition(Ouvrage $ouvrage, array $lignes): void
     {
-        $files = $request->file('medias_fichiers', []);
-        $typeMedia = $request->input('medias_type_media', 'schema');
+        $ordre = 0;
 
-        if (empty($files)) return;
+        foreach ($lignes as $item) {
+            $composantId = $item['composant_id'] ?? null;
 
-        $maxOrdre = 0;
-        $count = 0;
+            if (empty($composantId) && !empty($item['is_new'])) {
+                $composantId = Composant::create([
+                    'reference' => $item['reference'],
+                    'designation' => $item['designation'],
+                    'type_composant_id' => $item['type_composant_id'] ?? null,
+                    'matiere' => $item['matiere'] ?? null,
+                    'est_disponible' => true,
+                ])->id;
+            }
 
-        foreach ($files as $file) {
-            $filename = \Str::uuid() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('images/ouvrages', $filename, 'public');
+            if ($composantId) {
+                $ouvrage->composants()->attach($composantId, [
+                    'quantite' => $item['quantite'] ?? 1,
+                    'unite' => $item['unite'] ?? 'u',
+                    'ordre' => ++$ordre,
+                ]);
+            }
+        }
+    }
 
-            $media = \App\Models\Media::create([
-                'chemin_fichier' => $path,
-                'titre' => $file->getClientOriginalName(),
-                'type_media' => $typeMedia,
-                'taille_octets' => $file->getSize(),
-                'mime_type' => $file->getMimeType(),
-                'est_principal' => $count === 0,
+    protected function creerCaracteristiques(Ouvrage $ouvrage, array $caracs): void
+    {
+        foreach ($caracs as $index => $carac) {
+            if (empty($carac['cle']) || empty($carac['valeur'])) continue;
+
+            $ouvrage->caracteristiques()->create([
+                'cle' => $carac['cle'],
+                'valeur' => $carac['valeur'],
+                'unite' => $carac['unite'] ?? null,
+                'ordre_affichage' => $index + 1,
             ]);
-
-            $ouvrage->medias()->attach($media->id, [
-                'ordre' => $maxOrdre + $count + 1,
-            ]);
-
-            $count++;
         }
     }
 
@@ -180,7 +153,7 @@ class OuvrageController extends Controller
     {
         $ouvrage->load([
             'categorie',
-            'composants' => fn($q) => $q->orderBy('pivot_ordre'),
+            'composants' => fn($q) => $q->orderBy('composition_ouvrage.ordre'),
             'composants.typeComposant',
             'composants.finitions',
             'caracteristiques' => fn($q) => $q->orderBy('ordre_affichage'),
@@ -222,7 +195,7 @@ class OuvrageController extends Controller
      */
     public function destroy(Ouvrage $ouvrage)
     {
-        $ouvrage->delete();
+        $this->supprimerAvecMedias($ouvrage);
 
         return redirect()
             ->route('admin.ouvrages.index')

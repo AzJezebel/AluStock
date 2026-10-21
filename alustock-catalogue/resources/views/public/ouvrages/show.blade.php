@@ -91,7 +91,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 divide-x divide-y divide-ink-800">
                 @foreach($ouvrage->caracteristiques as $carac)
                     <div class="flex items-center justify-between px-3 py-2">
-                        <span class="text-xs text-ink-500">{{ $carac->cle }}</span>
+                        <span class="text-xs text-ink-500">{{ $carac->libelle }}</span>
                         <span class="text-xs font-mono font-medium text-ink-100">
                             {{ $carac->valeur }}
                             @if($carac->unite)<span class="text-ink-500 ml-0.5">{{ $carac->unite }}</span>@endif

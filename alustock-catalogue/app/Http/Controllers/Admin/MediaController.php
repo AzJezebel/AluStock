@@ -6,51 +6,27 @@ use App\Http\Controllers\Controller;
 use App\Models\Media;
 use App\Models\Ouvrage;
 use App\Models\Composant;
+use App\Http\Requests\Admin\StoreMediaRequest;
+use App\Http\Controllers\Admin\Concerns\GereUploadsMedias;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class MediaController extends Controller
 {
+    use GereUploadsMedias;
+
     /**
      * Upload pour un ouvrage
      */
-    public function storeForOuvrage(Request $request, Ouvrage $ouvrage)
+    public function storeForOuvrage(StoreMediaRequest $request, Ouvrage $ouvrage)
     {
-        $request->validate([
-            'fichiers' => 'required|array',
-            'fichiers.*' => 'file|mimes:png,jpg,jpeg|max:5120',
-            'type_media' => 'nullable|in:schema,photo,rendu_3d',
-        ]);
-
-        $files = $request->file('fichiers', []);
-        $typeMedia = $request->input('type_media', 'schema');
-
-        $maxOrdre = $ouvrage->medias()->max('media_morph.ordre') ?? 0;
-        $count = 0;
-
-        foreach ($files as $file) {
-            // 1. Upload du fichier
-            $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('images/ouvrages', $filename, 'public');
-
-            // 2. Créer le média
-            $media = Media::create([
-                'chemin_fichier' => $path,
-                'titre' => $file->getClientOriginalName(),
-                'type_media' => $typeMedia,
-                'taille_octets' => $file->getSize(),
-                'mime_type' => $file->getMimeType(),
-                'est_principal' => $ouvrage->medias()->count() === 0 && $count === 0,
-            ]);
-
-            // 3. Attacher à l'ouvrage
-            $ouvrage->medias()->attach($media->id, [
-                'ordre' => $maxOrdre + $count + 1,
-            ]);
-
-            $count++;
-        }
+        $count = $this->transactionAvecFichiers(fn () => $this->enregistrerMedias(
+            $ouvrage,
+            $request->file('fichiers', []),
+            'images/ouvrages',
+            $request->input('type_media', 'schema')
+        ));
 
         return back()->with('success', $count . ' image(s) ajoutée(s).');
     }
@@ -58,39 +34,14 @@ class MediaController extends Controller
     /**
      * Upload pour un composant
      */
-    public function storeForComposant(Request $request, Composant $composant)
+    public function storeForComposant(StoreMediaRequest $request, Composant $composant)
     {
-        $request->validate([
-            'fichiers' => 'required|array',
-            'fichiers.*' => 'file|mimes:png,jpg,jpeg|max:5120',
-            'type_media' => 'nullable|in:schema,photo,rendu_3d',
-        ]);
-
-        $files = $request->file('fichiers', []);
-        $typeMedia = $request->input('type_media', 'schema');
-
-        $maxOrdre = $composant->medias()->max('media_morph.ordre') ?? 0;
-        $count = 0;
-
-        foreach ($files as $file) {
-            $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('images/composants', $filename, 'public');
-
-            $media = Media::create([
-                'chemin_fichier' => $path,
-                'titre' => $file->getClientOriginalName(),
-                'type_media' => $typeMedia,
-                'taille_octets' => $file->getSize(),
-                'mime_type' => $file->getMimeType(),
-                'est_principal' => $composant->medias()->count() === 0 && $count === 0,
-            ]);
-
-            $composant->medias()->attach($media->id, [
-                'ordre' => $maxOrdre + $count + 1,
-            ]);
-
-            $count++;
-        }
+        $count = $this->transactionAvecFichiers(fn () => $this->enregistrerMedias(
+            $composant,
+            $request->file('fichiers', []),
+            'images/composants',
+            $request->input('type_media', 'schema')
+        ));
 
         return back()->with('success', $count . ' image(s) ajoutée(s).');
     }
@@ -122,18 +73,20 @@ class MediaController extends Controller
      */
     public function destroy(Request $request, Media $media)
     {
-        // Supprimer le fichier physique
-        if ($media->chemin_fichier && Storage::disk('public')->exists($media->chemin_fichier)) {
-            Storage::disk('public')->delete($media->chemin_fichier);
+        $chemin = $media->chemin_fichier;
+
+        // Base d'abord, en une transaction : si ça échoue, le fichier est encore là.
+        DB::transaction(function () use ($media) {
+            $media->ouvrages()->detach();
+            $media->composants()->detach();
+            $media->categories()->detach();
+            $media->forceDelete();
+        });
+
+        // Fichier ensuite : un échec ici laisse au pire un fichier orphelin, jamais une image cassée.
+        if ($chemin && Storage::disk('public')->exists($chemin)) {
+            Storage::disk('public')->delete($chemin);
         }
-
-        // Détacher de toutes les entités
-        $media->ouvrages()->detach();
-        $media->composants()->detach();
-        $media->categories()->detach();
-
-        // Supprimer le média
-        $media->forceDelete();
 
         return back()->with('success', 'Image supprimée.');
     }

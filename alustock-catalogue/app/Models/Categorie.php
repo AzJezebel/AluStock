@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Categorie extends Model
@@ -12,7 +14,7 @@ class Categorie extends Model
         'nom',
         'slug',
         'description',
-        'icone',
+        'image',
     ];
 
     public function ouvrages(): HasMany
@@ -20,11 +22,27 @@ class Categorie extends Model
         return $this->hasMany(Ouvrage::class);
     }
 
-    // Comptage des composants via les ouvrages de la catégorie
-    public function getComposantsCountAttribute()
+    /**
+     * Ajoute `ouvrages_count`, `composants_count` (composants distincts utilisés par
+     * les ouvrages de la catégorie) et `references_count` (la somme des deux, même
+     * logique que le compteur "N=… REFS" du header) en une seule requête.
+     */
+    public function scopeWithReferencesCount(Builder $query): Builder
     {
-        return $this->ouvrages()->withCount('composants')->get()->sum('composants_count');
+        return $query
+            ->withCount('ouvrages')
+            ->addSelect(['composants_count' => DB::table('composition_ouvrage as co')
+                ->join('ouvrages as o', 'o.id', '=', 'co.ouvrage_id')
+                ->whereColumn('o.categorie_id', 'categories.id')
+                ->selectRaw('COUNT(DISTINCT co.composant_id)')]);
     }
+
+    public function getReferencesCountAttribute(): int
+    {
+        return (int) ($this->attributes['ouvrages_count'] ?? 0)
+             + (int) ($this->attributes['composants_count'] ?? 0);
+    }
+
     public function medias()
     {
         return $this->morphToMany(
@@ -34,7 +52,13 @@ class Categorie extends Model
             'mediable_id',
             'media_id'
         )->withPivot('ordre')
-         ->orderBy('pivot_ordre');
+         ->orderBy('media_morph.ordre');
+    }
+
+    // URL publique de la miniature (null si aucune image)
+    public function getImageUrlAttribute(): ?string
+    {
+        return $this->image ? asset('storage/' . $this->image) : null;
     }
 
     public function getRouteKeyName()

@@ -296,7 +296,7 @@
             <form action="{{ route('admin.ouvrages.caracteristiques.store', $ouvrage) }}" method="POST">
                 @csrf
                 <div class="flex items-center gap-2">
-                    <input type="text" name="cle" placeholder="Clé (ex: Épaisseur)" required
+                    <input type="text" name="cle" placeholder="Clé (ex: epaisseur_paroi)" required
                            class="flex-1 px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
                     <input type="text" name="valeur" placeholder="Valeur" required
                            class="flex-1 px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">

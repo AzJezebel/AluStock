@@ -102,6 +102,9 @@
                à un fond clair). Survol = couleurs d'origine. */
             --schema-filter: invert(0.93) brightness(0.92) contrast(1.05);
             --schema-filter-hover: invert(0) brightness(1) contrast(1);
+            /* Miniatures de catégories : l'inverse de .schema-img (fond clair en sombre, fond sombre en clair) */
+            --schema-filter-rev: none;
+            --schema-filter-rev-hover: invert(0.93) brightness(0.92) contrast(1.05);
         }
 
         /* Ambre sécurité — plan annoté au marqueur orange */
@@ -222,6 +225,8 @@
 
             --fg: #14181B;
             --schema-filter: none;
+            --schema-filter-rev: invert(0.93) brightness(0.92) contrast(1.05);
+            --schema-filter-rev-hover: none;
             --schema-filter-hover: none;
         }
 
@@ -237,6 +242,8 @@
 
             --fg: #12161A;
             --schema-filter: none;
+            --schema-filter-rev: invert(0.93) brightness(0.92) contrast(1.05);
+            --schema-filter-rev-hover: none;
             --schema-filter-hover: none;
         }
 
@@ -252,6 +259,8 @@
 
             --fg: #101010;
             --schema-filter: none;
+            --schema-filter-rev: invert(0.93) brightness(0.92) contrast(1.05);
+            --schema-filter-rev-hover: none;
             --schema-filter-hover: none;
         }
     </style>
@@ -327,6 +336,8 @@
         /* Schémas techniques — voir --schema-filter dans :root */
         .schema-img { filter: var(--schema-filter); transition: filter .3s ease, transform .3s ease; }
         .group:hover .schema-img { filter: var(--schema-filter-hover); }
+        .schema-img-rev { filter: var(--schema-filter-rev); transition: filter .3s ease, transform .3s ease; }
+        .group:hover .schema-img-rev { filter: var(--schema-filter-rev-hover); }
 
         #search-results::-webkit-scrollbar { width: 4px; }
         #search-results::-webkit-scrollbar-track { background: theme('colors.ink.800'); }
@@ -346,6 +357,19 @@
             <div class="flex items-center gap-5 ml-auto">
                 <a href="#" class="hover:text-amber-400 transition">DOCUMENTATION</a>
                 <a href="{{ route('contact.show') }}" class="hover:text-amber-400 transition {{ request()->routeIs('contact.*') ? 'text-amber-400' : '' }}">CONTACT</a>
+
+                {{-- Accès admin discret : cadenas quasi invisible (login), ambre vers le dashboard si connecté --}}
+                @php $adminConnecte = session()->has('admin_logged_in'); @endphp
+                <a href="{{ $adminConnecte ? route('admin.dashboard') : route('admin.login') }}"
+                   rel="nofollow"
+                   title="{{ $adminConnecte ? 'Administration' : 'Connexion' }}"
+                   aria-label="{{ $adminConnecte ? 'Administration' : 'Connexion administrateur' }}"
+                   class="-ml-2 p-1 transition {{ $adminConnecte ? 'text-amber-400 opacity-80 hover:opacity-100' : 'text-ink-400 opacity-20 hover:opacity-70 focus:opacity-70' }}">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="5" y="11" width="14" height="9" rx="1" stroke-width="2"/>
+                        <path stroke-linecap="round" stroke-width="2" d="{{ $adminConnecte ? 'M8 11V8a4 4 0 017.5-2' : 'M8 11V8a4 4 0 018 0v3' }}"/>
+                    </svg>
+                </a>
             </div>
         </div>
     </div>

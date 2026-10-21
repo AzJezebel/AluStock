@@ -10,11 +10,11 @@ class CategorieSeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            ['nom' => 'Fenêtre', 'slug' => 'fenetre', 'description' => 'Ouvrages de type fenêtre', 'icone' => 'window'],
-            ['nom' => 'Porte', 'slug' => 'porte', 'description' => 'Ouvrages de type porte', 'icone' => 'door'],
-            ['nom' => 'Véranda', 'slug' => 'veranda', 'description' => 'Ouvrages de type véranda', 'icone' => 'sun'],
-            ['nom' => 'Verrière', 'slug' => 'verriere', 'description' => 'Ouvrages de type verrière', 'icone' => 'glass'],
-            ['nom' => 'Garde-corps', 'slug' => 'garde-corps', 'description' => 'Ouvrages de type garde-corps', 'icone' => 'barrier'],
+            ['nom' => 'Fenêtre', 'slug' => 'fenetre', 'description' => 'Ouvrages de type fenêtre', 'image' => 'images/categories/fenetre.png'],
+            ['nom' => 'Porte', 'slug' => 'porte', 'description' => 'Ouvrages de type porte', 'image' => 'images/categories/porte.png'],
+            ['nom' => 'Véranda', 'slug' => 'veranda', 'description' => 'Ouvrages de type véranda', 'image' => 'images/categories/veranda.png'],
+            ['nom' => 'Verrière', 'slug' => 'verriere', 'description' => 'Ouvrages de type verrière', 'image' => 'images/categories/verriere.png'],
+            ['nom' => 'Garde-corps', 'slug' => 'garde-corps', 'description' => 'Ouvrages de type garde-corps', 'image' => 'images/categories/garde-corps.png'],
         ];
 
         foreach ($categories as $categorie) {

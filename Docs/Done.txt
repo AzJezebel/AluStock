@@ -540,7 +540,37 @@ refactor: update SiteImages class to utilize SiteImage model for image managemen
 20/10
 
 Organizing task trello + mgmnt latest version on railway + starting setup for deployment Vitrine + need to check RGPD
-
+vcvcrhcvlyuxwhsu app password
 
 --------------------------------------------------------------------------------------------------------------------------------
 21/10 
+
+feat: miniatures de catégories, transactions, morphMap et nettoyage
+
+Catégories
+- Remplace categories.icone par categories.image (miniature, upload admin)
+- Images schéma (porte, fenêtre, véranda, verrière, garde-corps) avec
+  filtre CSS qui suit le thème (schema-img-rev)
+- Compteur « réf. » corrigé via Categorie::withReferencesCount()
+- Retire les miniatures des en-têtes, le bloc subcategories mort
+
+Données
+- Transactions (DB::transaction) sur la création d'ouvrage, de composant,
+  d'une ligne de composition et sur l'upload/suppression de médias
+- Trait GereUploadsMedias : nettoyage des fichiers si échec,
+  suppression d'une entité avec ses médias et caractéristiques
+- Commande media:purger-orphelins (--dry-run)
+- morphMap (ouvrage, composant, categorie) à la place des noms de classe
+- Clés de caractéristiques normalisées en snake_case (Caracteristique::libelle)
+- orderBy('pivot_ordre') remplacé par media_morph.ordre / composition_ouvrage.ordre
+
+FormRequests
+- Utilise Store/UpdateCaracteristique, Store/UpdateComposition, StoreMedia
+- Champs médias unifiés : medias_fichiers / medias_type_media
+
+Admin
+- Cadenas discret vers la connexion admin dans le bandeau
+- Verrou progressif (5/10/15/20 échecs) et journalisation des connexions
+- ADMIN_PASSWORD ajouté à .env.example
+
+Seeders mis à jour (image, alias, clés en minuscules).

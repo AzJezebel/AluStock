@@ -7,11 +7,14 @@ use App\Http\Requests\Admin\StoreComposantRequest;
 use App\Http\Requests\Admin\UpdateComposantRequest;
 use App\Models\Composant;
 use App\Models\TypeComposant;
+use App\Http\Controllers\Admin\Concerns\GereUploadsMedias;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class ComposantController extends Controller
 {
+    use GereUploadsMedias;
+
     public function index(Request $request)
     {
         $query = Composant::with(['typeComposant']);
@@ -53,46 +56,23 @@ class ComposantController extends Controller
         $validated = $request->validated();
         $validated['est_disponible'] = $request->has('est_disponible');
 
-        $composant = Composant::create($validated);
+        // Composant + médias en une transaction (fichiers nettoyés si échec)
+        $composant = $this->transactionAvecFichiers(function () use ($request, $validated) {
+            $composant = Composant::create($validated);
 
-        // Traiter les médias
-        if ($request->hasFile('medias_fichiers')) {
-            $this->handleMedias($composant, $request);
-        }
+            $this->enregistrerMedias(
+                $composant,
+                $request->file('medias_fichiers', []),
+                'images/composants',
+                $request->input('medias_type_media', 'schema')
+            );
+
+            return $composant;
+        });
 
         return redirect()
             ->route('admin.composants.edit', $composant)
             ->with('success', 'Composant créé avec succès.');
-    }
-
-    protected function handleMedias(Composant $composant, Request $request): void
-    {
-        $files = $request->file('medias_fichiers', []);
-        $typeMedia = $request->input('medias_type_media', 'schema');
-
-        if (empty($files)) return;
-
-        $count = 0;
-
-        foreach ($files as $file) {
-            $filename = \Str::uuid() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('images/composants', $filename, 'public');
-
-            $media = \App\Models\Media::create([
-                'chemin_fichier' => $path,
-                'titre' => $file->getClientOriginalName(),
-                'type_media' => $typeMedia,
-                'taille_octets' => $file->getSize(),
-                'mime_type' => $file->getMimeType(),
-                'est_principal' => $count === 0,
-            ]);
-
-            $composant->medias()->attach($media->id, [
-                'ordre' => $count + 1,
-            ]);
-
-            $count++;
-        }
     }
 
     public function edit(Composant $composant)
@@ -116,7 +96,7 @@ class ComposantController extends Controller
 
     public function destroy(Composant $composant)
     {
-        $composant->delete();
+        $this->supprimerAvecMedias($composant);
 
         return redirect()
             ->route('admin.composants.index')

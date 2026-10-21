@@ -26,7 +26,7 @@
     </div>
 
     {{-- Formulaire --}}
-    <form action="{{ route('admin.categories.update', $categorie) }}" method="POST" 
+    <form action="{{ route('admin.categories.update', $categorie) }}" method="POST" enctype="multipart/form-data"
           class="bg-white rounded border border-admin-200 p-6 space-y-5 max-w-2xl">
         @csrf
         @method('PUT')
@@ -50,15 +50,22 @@
                 </div>
 
                 <div>
-                    <label for="icone" class="block text-xs font-medium text-admin-600 mb-1">
-                        Icône (emoji)
+                    <label for="image" class="block text-xs font-medium text-admin-600 mb-1">
+                        Image (miniature)
                     </label>
-                    <input type="text" name="icone" id="icone"
-                           value="{{ old('icone', $categorie->icone) }}"
-                           placeholder="🪟"
-                           maxlength="10"
-                           class="w-full px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
-                    @error('icone')
+                    @if($categorie->image)
+                        <div class="flex items-center gap-3 mb-2">
+                            <img src="{{ $categorie->image_url }}" alt="{{ $categorie->nom }}"
+                                 class="w-16 h-16 object-cover border border-admin-200 rounded">
+                            <label class="flex items-center gap-2 text-xs text-admin-600">
+                                <input type="checkbox" name="supprimer_image" value="1"> Supprimer l'image
+                            </label>
+                        </div>
+                    @endif
+                    <input type="file" name="image" id="image" accept="image/png,image/jpeg,image/webp"
+                           class="w-full text-sm border border-admin-200 rounded file:mr-3 file:px-3 file:py-2 file:border-0 file:bg-admin-100 file:text-xs">
+                    <p class="mt-1 text-xs text-admin-400">PNG, JPG ou WebP, 2 Mo max.</p>
+                    @error('image')
                         <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                     @enderror
                 </div>

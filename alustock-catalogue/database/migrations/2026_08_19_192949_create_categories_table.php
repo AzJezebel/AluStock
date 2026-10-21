@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('nom', 100)->unique();
             $table->string('slug', 120)->unique();
             $table->text('description')->nullable();
-            $table->string('icone', 50)->nullable();
+            $table->string('image')->nullable(); // chemin relatif sur le disque public
             $table->timestamps();
         });
     }

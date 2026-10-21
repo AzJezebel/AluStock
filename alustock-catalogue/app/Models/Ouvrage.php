@@ -84,7 +84,7 @@ class Ouvrage extends Model
         return $this->morphToMany(Media::class, 'mediable', 'media_morph')
             ->withPivot('ordre')
             ->withTimestamps()
-            ->orderBy('pivot_ordre');
+            ->orderBy('media_morph.ordre');
     }
 
     public function documents(): BelongsToMany

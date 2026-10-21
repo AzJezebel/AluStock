@@ -16,7 +16,7 @@ class CaracteristiqueSeeder extends Seeder
         // Caractéristiques pour Rail haut 45mm (composant_id = 1)
         DB::table('caracteristiques')->insert([
             [
-                'caracterisable_type' => 'App\Models\Composant',
+                'caracterisable_type' => 'composant',
                 'caracterisable_id' => 1,
                 'cle' => 'diametre_de_roue',
                 'valeur' => '52',
@@ -24,7 +24,7 @@ class CaracteristiqueSeeder extends Seeder
                 'ordre_affichage' => 1,
             ],
             [
-                'caracterisable_type' => 'App\Models\Composant',
+                'caracterisable_type' => 'composant',
                 'caracterisable_id' => 1,
                 'cle' => 'nombre_de_gorges',
                 'valeur' => '2',
@@ -32,7 +32,7 @@ class CaracteristiqueSeeder extends Seeder
                 'ordre_affichage' => 2,
             ],
             [
-                'caracterisable_type' => 'App\Models\Composant',
+                'caracterisable_type' => 'composant',
                 'caracterisable_id' => 1,
                 'cle' => 'rayon_de_courbure_min',
                 'valeur' => '250',
@@ -40,7 +40,7 @@ class CaracteristiqueSeeder extends Seeder
                 'ordre_affichage' => 3,
             ],
             [
-                'caracterisable_type' => 'App\Models\Composant',
+                'caracterisable_type' => 'composant',
                 'caracterisable_id' => 1,
                 'cle' => 'temperature_max_utilisation',
                 'valeur' => '80',
@@ -52,7 +52,7 @@ class CaracteristiqueSeeder extends Seeder
         // Caractéristiques pour Rail haut 55mm (composant_id = 4)
         DB::table('caracteristiques')->insert([
             [
-                'caracterisable_type' => 'App\Models\Composant',
+                'caracterisable_type' => 'composant',
                 'caracterisable_id' => 4,
                 'cle' => 'diametre_de_roue',
                 'valeur' => '62',
@@ -60,7 +60,7 @@ class CaracteristiqueSeeder extends Seeder
                 'ordre_affichage' => 1,
             ],
             [
-                'caracterisable_type' => 'App\Models\Composant',
+                'caracterisable_type' => 'composant',
                 'caracterisable_id' => 4,
                 'cle' => 'nombre_de_gorges',
                 'valeur' => '3',
@@ -68,7 +68,7 @@ class CaracteristiqueSeeder extends Seeder
                 'ordre_affichage' => 2,
             ],
             [
-                'caracterisable_type' => 'App\Models\Composant',
+                'caracterisable_type' => 'composant',
                 'caracterisable_id' => 4,
                 'cle' => 'rayon_de_courbure_min',
                 'valeur' => '300',
@@ -84,7 +84,7 @@ class CaracteristiqueSeeder extends Seeder
         // Caractéristiques pour Fenêtre coulissante 2 vantaux (ouvrage_id = 1)
         DB::table('caracteristiques')->insert([
             [
-                'caracterisable_type' => 'App\Models\Ouvrage',
+                'caracterisable_type' => 'ouvrage',
                 'caracterisable_id' => 1,
                 'cle' => 'type_ouverture',
                 'valeur' => 'coulissante_2_vantaux',
@@ -92,7 +92,7 @@ class CaracteristiqueSeeder extends Seeder
                 'ordre_affichage' => 1,
             ],
             [
-                'caracterisable_type' => 'App\Models\Ouvrage',
+                'caracterisable_type' => 'ouvrage',
                 'caracterisable_id' => 1,
                 'cle' => 'nombre_de_vantaux',
                 'valeur' => '2',
@@ -100,7 +100,7 @@ class CaracteristiqueSeeder extends Seeder
                 'ordre_affichage' => 2,
             ],
             [
-                'caracterisable_type' => 'App\Models\Ouvrage',
+                'caracterisable_type' => 'ouvrage',
                 'caracterisable_id' => 1,
                 'cle' => 'type_de_fermeture',
                 'valeur' => 'cremone_avec_poignee',
@@ -112,7 +112,7 @@ class CaracteristiqueSeeder extends Seeder
         // Caractéristiques pour Porte d'entrée (ouvrage_id = 3)
         DB::table('caracteristiques')->insert([
             [
-                'caracterisable_type' => 'App\Models\Ouvrage',
+                'caracterisable_type' => 'ouvrage',
                 'caracterisable_id' => 3,
                 'cle' => 'type_ouverture',
                 'valeur' => 'battante_1_vantail',
@@ -120,7 +120,7 @@ class CaracteristiqueSeeder extends Seeder
                 'ordre_affichage' => 1,
             ],
             [
-                'caracterisable_type' => 'App\Models\Ouvrage',
+                'caracterisable_type' => 'ouvrage',
                 'caracterisable_id' => 3,
                 'cle' => 'sens_ouverture',
                 'valeur' => 'interieur_ou_exterieur',
@@ -128,7 +128,7 @@ class CaracteristiqueSeeder extends Seeder
                 'ordre_affichage' => 2,
             ],
             [
-                'caracterisable_type' => 'App\Models\Ouvrage',
+                'caracterisable_type' => 'ouvrage',
                 'caracterisable_id' => 3,
                 'cle' => 'classe_de_resistance',
                 'valeur' => 'RC2',

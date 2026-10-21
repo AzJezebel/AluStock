@@ -19,7 +19,7 @@
         </p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         @forelse($categories as $category)
             <a href="{{ route('categories.show', $category->slug) }}"
                class="card-blueprint group relative bg-ink-900 border border-ink-800 hover:border-amber-500/60 transition-colors flex flex-col">
@@ -27,11 +27,11 @@
                 <span class="tick tick-tl" aria-hidden="true"></span>
                 <span class="tick tick-br" aria-hidden="true"></span>
 
-                <div class="h-36 bg-ink-50 border-b border-ink-800 overflow-hidden">
-                    @if($category->image)
-                        <img src="{{ asset($category->image) }}"
+                <div class="aspect-[4/3] bg-ink-950 border-b border-ink-800 overflow-hidden">
+                    @if($category->image_url)
+                        <img src="{{ $category->image_url }}"
                              alt="{{ $category->nom }}"
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                             class="schema-img-rev w-full h-full object-cover group-hover:scale-105" loading="lazy">
                     @else
                         <div class="w-full h-full flex items-center justify-center text-ink-300">
                             <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -47,7 +47,7 @@
                             {{ $category->nom }}
                         </h3>
                         <span class="shrink-0 font-mono text-[10px] px-2 py-0.5 border border-amber-500/30 bg-amber-500/10 text-amber-400">
-                            {{ number_format($category->composants_count ?? 0, 0, ',', ' ') }} réf.
+                            {{ number_format($category->references_count, 0, ',', ' ') }} réf.
                         </span>
                     </div>
 
@@ -57,20 +57,6 @@
                         </p>
                     @endif
 
-                    @if(($category->subcategories ?? collect())->isNotEmpty())
-                        <div class="flex flex-wrap gap-1.5 mt-4 pt-3 border-t border-ink-800">
-                            @foreach($category->subcategories->take(4) as $sub)
-                                <span class="font-mono px-2 py-1 bg-ink-800 text-ink-400 text-[10.5px]">
-                                    {{ $sub->nom }}
-                                </span>
-                            @endforeach
-                            @if($category->subcategories->count() > 4)
-                                <span class="font-mono px-2 py-1 bg-ink-800 text-ink-500 text-[10.5px]">
-                                    +{{ $category->subcategories->count() - 4 }}
-                                </span>
-                            @endif
-                        </div>
-                    @endif
                 </div>
             </a>
         @empty

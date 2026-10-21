@@ -34,10 +34,9 @@ class StoreOuvrageRequest extends FormRequest
             'temp_caracteristiques' => 'nullable|string',
 
             // Médias (optionnel)
-            'medias' => 'nullable|array',
-            'medias.fichiers' => 'nullable|array|max:10',
-            'medias.fichiers.*' => 'file|mimes:png,jpg,jpeg|max:5120',
-            'medias.type_media' => 'nullable|in:schema,photo,rendu_3d',
+            'medias_fichiers' => 'nullable|array|max:10',
+            'medias_fichiers.*' => 'file|mimes:png,jpg,jpeg|max:5120',
+            'medias_type_media' => 'nullable|in:schema,photo,rendu_3d',
         ];
     }
 
@@ -49,8 +48,8 @@ class StoreOuvrageRequest extends FormRequest
             'nom.required' => 'Le nom est obligatoire.',
             'largeur_max_mm.gte' => 'La largeur max doit être supérieure ou égale à la largeur min.',
             'hauteur_max_mm.gte' => 'La hauteur max doit être supérieure ou égale à la hauteur min.',
-            'medias.fichiers.*.mimes' => 'Formats acceptés : PNG, JPG, JPEG.',
-            'medias.fichiers.*.max' => 'Chaque fichier ne doit pas dépasser 5 Mo.',
+            'medias_fichiers.*.mimes' => 'Formats acceptés : PNG, JPG, JPEG.',
+            'medias_fichiers.*.max' => 'Chaque fichier ne doit pas dépasser 5 Mo.',
         ];
     }
 }

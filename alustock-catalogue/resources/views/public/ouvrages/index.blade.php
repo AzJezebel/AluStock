@@ -22,7 +22,6 @@
     <div class="mb-5 pb-3 border-b border-ink-800">
         @if(isset($categorieCourante))
             <h1 class="font-display text-2xl font-bold text-fg flex items-center gap-2">
-                @if($categorieCourante->icone)<span>{{ $categorieCourante->icone }}</span>@endif
                 {{ $categorieCourante->nom }}
             </h1>
             @if($categorieCourante->description)

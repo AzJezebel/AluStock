@@ -32,7 +32,7 @@
                         </a>
                     </th>
                     <th class="px-4 py-2 text-left text-xs font-medium text-admin-500 uppercase tracking-wider">Slug</th>
-                    <th class="px-4 py-2 text-left text-xs font-medium text-admin-500 uppercase tracking-wider">Icône</th>
+                    <th class="px-4 py-2 text-left text-xs font-medium text-admin-500 uppercase tracking-wider">Image</th>
                     <th class="px-4 py-2 text-center text-xs font-medium text-admin-500 uppercase tracking-wider">Ouvrages</th>
                     <th class="px-4 py-2 text-left text-xs font-medium text-admin-500 uppercase tracking-wider">Description</th>
                     <th class="px-4 py-2 text-right text-xs font-medium text-admin-500 uppercase tracking-wider">Actions</th>
@@ -48,8 +48,8 @@
                             {{ $categorie->slug }}
                         </td>
                         <td class="px-4 py-2 text-sm">
-                            @if($categorie->icone)
-                                <span class="text-lg">{{ $categorie->icone }}</span>
+                            @if($categorie->image)
+                                <img src="{{ $categorie->image_url }}" alt="" class="w-8 h-8 object-cover border border-admin-200 rounded">
                             @else
                                 <span class="text-admin-300">—</span>
                             @endif

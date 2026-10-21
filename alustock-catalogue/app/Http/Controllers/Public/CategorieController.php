@@ -13,12 +13,12 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        $categories = Categorie::withCount('ouvrages')
+        $categories = Categorie::withReferencesCount()
                                ->orderBy('nom')
                                ->get();
 
-        $totalCategories = Categorie::count();
-        $totalOuvrages = Categorie::withCount('ouvrages')->get()->sum('ouvrages_count');
+        $totalCategories = $categories->count();
+        $totalOuvrages = $categories->sum('ouvrages_count');
 
         return view('public.categories.index', compact('categories', 'totalCategories', 'totalOuvrages'));
     }
@@ -35,9 +35,9 @@ class CategorieController extends Controller
 
         // Comptage des composants associés à la catégorie
         $composantsCount = $categorie->ouvrages()
-                                     ->withCount('composants')
-                                     ->get()
-                                     ->sum('composants_count');
+                                     ->join('composition_ouvrage as co', 'co.ouvrage_id', '=', 'ouvrages.id')
+                                     ->distinct()
+                                     ->count('co.composant_id');
 
         return view('public.categories.show', compact('categorie', 'ouvrages', 'composantsCount'));
     }

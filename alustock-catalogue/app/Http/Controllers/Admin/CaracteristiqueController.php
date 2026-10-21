@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Ouvrage;
 use App\Models\Caracteristique;
+use App\Http\Requests\Admin\StoreCaracteristiqueRequest;
+use App\Http\Requests\Admin\UpdateCaracteristiqueRequest;
 use Illuminate\Http\Request;
 
 class CaracteristiqueController extends Controller
@@ -12,14 +14,9 @@ class CaracteristiqueController extends Controller
     /**
      * Ajouter une caractéristique à un ouvrage
      */
-    public function store(Request $request, Ouvrage $ouvrage)
+    public function store(StoreCaracteristiqueRequest $request, Ouvrage $ouvrage)
     {
-        $validated = $request->validate([
-            'cle' => 'required|string|max:100',
-            'valeur' => 'required|string',
-            'unite' => 'nullable|string|max:20',
-            'ordre_affichage' => 'nullable|integer|min:0',
-        ]);
+        $validated = $request->validated();
 
         // Définir l'ordre par défaut
         if (empty($validated['ordre_affichage'])) {
@@ -37,20 +34,15 @@ class CaracteristiqueController extends Controller
     /**
      * Mettre à jour une caractéristique
      */
-    public function update(Request $request, Ouvrage $ouvrage, Caracteristique $caracteristique)
+    public function update(UpdateCaracteristiqueRequest $request, Ouvrage $ouvrage, Caracteristique $caracteristique)
     {
         // Vérifier que la caractéristique appartient bien à l'ouvrage
         if ($caracteristique->caracterisable_id !== $ouvrage->id 
-            || $caracteristique->caracterisable_type !== Ouvrage::class) {
+            || $caracteristique->caracterisable_type !== $ouvrage->getMorphClass()) {
             abort(403);
         }
 
-        $validated = $request->validate([
-            'cle' => 'required|string|max:100',
-            'valeur' => 'required|string',
-            'unite' => 'nullable|string|max:20',
-            'ordre_affichage' => 'nullable|integer|min:0',
-        ]);
+        $validated = $request->validated();
 
         $caracteristique->update($validated);
 
@@ -65,7 +57,7 @@ class CaracteristiqueController extends Controller
     public function destroy(Ouvrage $ouvrage, Caracteristique $caracteristique)
     {
         if ($caracteristique->caracterisable_id !== $ouvrage->id 
-            || $caracteristique->caracterisable_type !== Ouvrage::class) {
+            || $caracteristique->caracterisable_type !== $ouvrage->getMorphClass()) {
             abort(403);
         }
 
@@ -89,7 +81,7 @@ class CaracteristiqueController extends Controller
         foreach ($request->ordre as $position => $caracId) {
             Caracteristique::where('id', $caracId)
                 ->where('caracterisable_id', $ouvrage->id)
-                ->where('caracterisable_type', Ouvrage::class)
+                ->where('caracterisable_type', $ouvrage->getMorphClass())
                 ->update(['ordre_affichage' => $position + 1]);
         }
 

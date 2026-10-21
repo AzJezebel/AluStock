@@ -60,13 +60,6 @@ class UpdateComposantRequest extends FormRequest
             // STATUT
             // ============================================================
             'est_disponible' => 'boolean',
-
-            // ============================================================
-            // MÉDIAS (optionnel — peut être géré séparément)
-            // ============================================================
-            'medias_fichiers' => 'nullable|array|max:10',
-            'medias_fichiers.*' => 'file|mimes:png,jpg,jpeg|max:5120',
-            'medias_type_media' => 'nullable|in:schema,photo,rendu_3d',
         ];
     }
 
@@ -100,14 +93,6 @@ class UpdateComposantRequest extends FormRequest
             // Inertie & Périmètre
             'moment_inertie_cm4.numeric' => 'Le moment d\'inertie doit être un nombre.',
             'perimetre_mm.numeric' => 'Le périmètre doit être un nombre.',
-
-            // Médias
-            'medias_fichiers.array' => 'Les fichiers doivent être un tableau.',
-            'medias_fichiers.max' => 'Maximum 10 fichiers à la fois.',
-            'medias_fichiers.*.file' => 'Chaque élément doit être un fichier.',
-            'medias_fichiers.*.mimes' => 'Formats acceptés : PNG, JPG, JPEG.',
-            'medias_fichiers.*.max' => 'Chaque fichier ne doit pas dépasser 5 Mo.',
-            'medias_type_media.in' => 'Le type de média est invalide.',
         ];
     }
 

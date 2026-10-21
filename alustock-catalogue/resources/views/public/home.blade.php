@@ -157,8 +157,12 @@
                 <span class="tick tick-tl" aria-hidden="true"></span>
                 <span class="tick tick-br" aria-hidden="true"></span>
 
-                <div class="h-20 bg-ink-950 border-b border-ink-800 flex items-center justify-center">
-                    <span class="text-2xl">{{ $category->icone ?? '▦' }}</span>
+                <div class="aspect-[4/3] bg-ink-950 border-b border-ink-800 flex items-center justify-center overflow-hidden">
+                    @if($category->image_url)
+                        <img src="{{ $category->image_url }}" alt="{{ $category->nom }}" class="schema-img-rev w-full h-full object-cover group-hover:scale-105" loading="lazy">
+                    @else
+                        <span class="text-2xl text-ink-600">▦</span>
+                    @endif
                 </div>
 
                 <div class="p-4 flex flex-col flex-1">

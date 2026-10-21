@@ -15,7 +15,6 @@
 <div>
     <div class="mb-6 pb-3 border-b border-ink-800">
         <h1 class="font-display text-2xl font-bold text-fg flex items-center gap-3">
-            @if($categorie->icone)<span>{{ $categorie->icone }}</span>@endif
             {{ $categorie->nom }}
         </h1>
         @if($categorie->description)
