@@ -574,3 +574,8 @@ Admin
 - ADMIN_PASSWORD ajouté à .env.example
 
 Seeders mis à jour (image, alias, clés en minuscules).
+
+feat: images de catégories (thème-aware), transactions et morphMap Remplace categories.icone par image, enveloppe les créations/uploads dans des transactions, passe les types polymorphes en alias et durcit la connexion admin.
+
+--------------------------------------------------------------------------------------------------------------------------------
+22/10 
