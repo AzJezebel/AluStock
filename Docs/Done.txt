@@ -597,3 +597,16 @@ chore: Remove unused component images
 - Deleted obsolete image files from the components directory to clean up storage.
 
 Refactor database seeders: remove unused seeders and update OuvragesTableSeeder with corrected names and timestamps.
+
+feat: add legal pages and routes for mentions légales and politique de confidentialité
+
+feat: implement category ordering and update related views
+
+- Added 'ordre' field to categories for display order.
+- Updated Categorie model with scope for ordered categories.
+- Modified CategorieController to handle sorting by 'ordre'.
+- Adjusted views for creating, editing, and listing categories to include 'ordre' input and display.
+- Updated seeders to set 'ordre' for existing categories.
+- Refactored document associations to use polymorphic relationships.
+- Removed obsolete document_association migration and created document_morph migration.
+- Updated public views to reflect changes in category routing and display.
