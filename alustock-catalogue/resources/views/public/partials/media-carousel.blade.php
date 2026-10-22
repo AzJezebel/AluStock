@@ -14,7 +14,18 @@
         })->values()->toJson();
     @endphp
 
-    <div class="bg-white border border-ink-200 overflow-hidden">
+    @once
+        @push('styles')
+        <style>
+            .carousel-dot { width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; }
+            .carousel-dot::before { content: ""; width: 7px; height: 7px; border-radius: 9999px; background: #c3c9ce; transition: background .2s, transform .2s; }
+            .carousel-dot:hover::before { background: var(--amber-400); }
+            .carousel-dot[aria-current="true"]::before { background: var(--amber-600); transform: scale(1.3); }
+        </style>
+        @endpush
+    @endonce
+
+    <div class="bg-white border border-ink-700 overflow-hidden">
         <div class="relative">
             {{-- Slides --}}
             <div id="{{ $uniqueId }}"
@@ -31,12 +42,6 @@
                              data-lightbox-index="{{ $index }}"
                              class="w-full h-full object-contain cursor-zoom-in hover:opacity-95 transition"
                              draggable="false">
-
-                        @if($media->titre)
-                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 pointer-events-none">
-                                <p class="text-white text-sm font-medium truncate">{{ $media->titre }}</p>
-                            </div>
-                        @endif
                     </div>
                 @endforeach
             </div>
@@ -65,19 +70,16 @@
             @endif
         </div>
 
-        {{-- Miniatures --}}
+        {{-- Pagination par points (pas de bandeau de miniatures) --}}
         @if($medias->count() > 1)
-            <div class="flex gap-2 p-3 bg-ink-50 border-t border-ink-100 overflow-x-auto">
+            <div class="flex items-center justify-center gap-1 py-1.5 bg-white" role="tablist" aria-label="Médias">
                 @foreach($medias as $index => $media)
                     <button type="button"
                             onclick="carouselGoTo('{{ $carouselId }}', {{ $index }})"
                             aria-label="Voir le média {{ $index + 1 }}"
-                            class="carousel-thumb-{{ $carouselId }} flex-shrink-0 w-16 h-16 border-2 {{ $index === 0 ? 'border-amber-600' : 'border-transparent' }} overflow-hidden hover:border-amber-400 transition bg-white"
-                            data-index="{{ $index }}">
-                        <img src="{{ asset('storage/' . $media->chemin_fichier) }}"
-                             alt="{{ $media->titre }}"
-                             class="w-full h-full object-contain">
-                    </button>
+                            aria-current="{{ $index === 0 ? 'true' : 'false' }}"
+                            class="carousel-thumb-{{ $carouselId }} carousel-dot"
+                            data-index="{{ $index }}"></button>
                 @endforeach
             </div>
         @endif
@@ -102,8 +104,7 @@
                 });
                 
                 thumbs.forEach((thumb, i) => {
-                    thumb.classList.toggle('border-amber-600', i === index);
-                    thumb.classList.toggle('border-transparent', i !== index);
+                    thumb.setAttribute('aria-current', i === index ? 'true' : 'false');
                 });
 
                 if (counter) counter.textContent = index + 1;

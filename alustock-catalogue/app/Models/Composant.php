@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -102,6 +103,17 @@ class Composant extends Model
     {
         return $this->belongsToMany(Document::class, 'document_association')
             ->withTimestamps();
+    }
+
+    /**
+     * Référence normalisée à l'enregistrement : espaces superflus retirés, majuscules.
+     * Évite "aln-877 " et "ALN-877" comme deux références distinctes.
+     */
+    protected function reference(): Attribute
+    {
+        return Attribute::make(
+            set: fn (string $valeur) => mb_strtoupper(trim(preg_replace('/\s+/', ' ', $valeur))),
+        );
     }
 
     public function getRouteKeyName(): string

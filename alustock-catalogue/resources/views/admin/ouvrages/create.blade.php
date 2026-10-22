@@ -185,6 +185,10 @@
                 </div>
             </div>
 
+            @error('temp_composition')
+                <p class="mb-3 px-3 py-2 text-xs text-red-600 bg-red-50 border border-red-200 rounded">{{ $message }}</p>
+            @enderror
+
             <div id="temp-composition-list" class="divide-y divide-admin-100"></div>
 
             <div id="temp-composition-empty" class="text-center py-6 text-xs text-admin-400 border border-dashed border-admin-200 rounded">
@@ -470,8 +474,9 @@
 // ============================================================
 // ÉTAT GLOBAL
 // ============================================================
-window.tempComposition = [];
-window.tempCaracteristiques = [];
+// Repris depuis la requête précédente si la validation a échoué (sinon la saisie serait perdue)
+window.tempComposition = @json(json_decode(old('temp_composition', '[]'), true) ?: []);
+window.tempCaracteristiques = @json(json_decode(old('temp_caracteristiques', '[]'), true) ?: []);
 
 // ============================================================
 // DONNÉES COMPOSANTS
@@ -795,6 +800,10 @@ window.removeTempCaracteristique = function(index) {
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
     initComposantSearch();
+
+    // Réaffiche la composition et les caractéristiques restaurées
+    if (tempComposition.length) renderTempComposition();
+    if (tempCaracteristiques.length) renderTempCaracteristiques();
 
     // Conditionnel profilé
     const typeSelect = document.getElementById('new-composant-type');

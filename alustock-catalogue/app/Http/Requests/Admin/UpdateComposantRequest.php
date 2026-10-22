@@ -27,7 +27,7 @@ class UpdateComposantRequest extends FormRequest
             // ============================================================
             // IDENTIFICATION
             // ============================================================
-            'reference' => 'required|string|max:50',
+            'reference' => 'required|string|max:50|unique:composants,reference,' . $composantId,
             'designation' => 'required|string|max:200',
 
             // ============================================================

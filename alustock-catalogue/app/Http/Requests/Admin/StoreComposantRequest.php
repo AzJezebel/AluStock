@@ -14,7 +14,7 @@ class StoreComposantRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'reference' => 'required|string|max:50',
+            'reference' => 'required|string|max:50|unique:composants,reference',
             'designation' => 'required|string|max:200',
             
             // ============================================================
@@ -54,6 +54,15 @@ class StoreComposantRequest extends FormRequest
             'medias_fichiers' => 'nullable|array|max:10',
             'medias_fichiers.*' => 'file|mimes:png,jpg,jpeg|max:5120',
             'medias_type_media' => 'nullable|in:schema,photo,rendu_3d',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'reference.required' => 'La référence est obligatoire.',
+            'reference.unique' => 'Cette référence existe déjà.',
+            'reference.max' => 'La référence ne doit pas dépasser 50 caractères.',
         ];
     }
 }

@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('composants', function (Blueprint $table) {
             $table->id();
-            $table->string('reference', 50);
+            $table->string('reference', 50)->unique();
             $table->string('designation', 200);
             $table->string('slug', 220)->unique();
             
@@ -49,7 +49,6 @@ return new class extends Migration
 
             // Index composites pour optimiser les filtres
             $table->index(['type_composant_id', 'est_disponible']);
-            $table->index('reference');
         });
     }
 

@@ -12,6 +12,7 @@ use App\Models\TypeComposant;
 use App\Http\Controllers\Admin\Concerns\GereUploadsMedias;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class OuvrageController extends Controller
 {
@@ -113,6 +114,14 @@ class OuvrageController extends Controller
             $composantId = $item['composant_id'] ?? null;
 
             if (empty($composantId) && !empty($item['is_new'])) {
+                // Référence déjà prise : on annule tout (transaction) avec un message clair
+                $reference = mb_strtoupper(trim(preg_replace('/\s+/', ' ', (string) ($item['reference'] ?? ''))));
+                if ($reference === '' || Composant::where('reference', $reference)->exists()) {
+                    throw ValidationException::withMessages([
+                        'temp_composition' => "La référence de composant « {$reference} » est vide ou existe déjà.",
+                    ]);
+                }
+
                 $composantId = Composant::create([
                     'reference' => $item['reference'],
                     'designation' => $item['designation'],
