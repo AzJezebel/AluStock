@@ -112,6 +112,12 @@
                     @error('message') <p class="mt-1 font-mono text-[11px] text-red-400">{{ $message }}</p> @enderror
                 </div>
 
+                <p class="font-mono text-[10px] text-ink-500 leading-relaxed">
+                    Les données saisies sont utilisées uniquement pour répondre à votre demande. Pour en savoir plus et
+                    exercer vos droits, consultez notre
+                    <a href="{{ route('legal.confidentialite') }}" class="text-amber-400 hover:underline">politique de confidentialité</a>.
+                </p>
+
                 <div class="flex items-center justify-between gap-4 pt-1">
                     <p class="font-mono text-[10px] text-ink-500">* champs obligatoires</p>
                     <button type="submit"

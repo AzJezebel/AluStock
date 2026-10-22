@@ -52,6 +52,10 @@ Route::prefix('search')->name('search.')->group(function () {
     Route::get('/autocomplete', [Site\SearchController::class, 'autocomplete'])->name('autocomplete');
 });
 
+// Pages légales
+Route::get('/mentions-legales', [Site\LegalController::class, 'mentions'])->name('legal.mentions');
+Route::get('/confidentialite', [Site\LegalController::class, 'confidentialite'])->name('legal.confidentialite');
+
 // Contact
 Route::prefix('contact')->name('contact.')->group(function () {
     Route::get('/', [Site\ContactController::class, 'show'])->name('show');

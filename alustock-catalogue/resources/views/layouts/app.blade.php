@@ -487,15 +487,15 @@
                 <div>
                     <h4 class="font-mono text-ink-200 font-semibold text-[11px] uppercase tracking-widest">Légal</h4>
                     <ul class="mt-2 space-y-1 text-sm">
-                        <li><a href="#" class="hover:text-amber-400 transition">Mentions légales</a></li>
-                        <li><a href="#" class="hover:text-amber-400 transition">Confidentialité</a></li>
+                        <li><a href="{{ route('legal.mentions') }}" class="hover:text-amber-400 transition">Mentions légales</a></li>
+                        <li><a href="{{ route('legal.confidentialite') }}" class="hover:text-amber-400 transition">Confidentialité</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-mono text-ink-200 font-semibold text-[11px] uppercase tracking-widest">Contact</h4>
                     <ul class="mt-2 space-y-1 text-sm">
-                        <li class="text-ink-400">contact@alustock.fr</li>
-                        <li class="text-ink-400">+33 (0)1 23 45 67 89</li>
+                        <li><a href="mailto:{{ config('legal.editeur.email') }}" class="text-ink-400 hover:text-amber-400 transition">{{ config('legal.editeur.email') }}</a></li>
+                        <li class="text-ink-400">{{ config('legal.editeur.telephone') }}</li>
                     </ul>
                 </div>
             </div>
