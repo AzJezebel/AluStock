@@ -11,24 +11,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call([
-        //     // 1. Tables indépendantes
-        //     CategorieSeeder::class,
-        //     TypeComposantSeeder::class,
-
-        //     // 2. Tables dépendantes (FK)
-        //     OuvrageSeeder::class,
-        //     ComposantSeeder::class,
-
-        //     // 3. Tables de liaison
-        //     CompositionOuvrageSeeder::class,
-        //     FinitionSeeder::class,
-        //     ComposantFinitionSeeder::class,
-
-        //     // 4. Caractéristiques (EAV)
-        //     CaracteristiqueSeeder::class,
-        // ]);
-
         //php artisan iseed categories,types_composant,ouvrages,composants,composition_ouvrage,finitions,composant_finition,caracteristiques,medias,media_morph --force
 
         $this->call(CategoriesTableSeeder::class);

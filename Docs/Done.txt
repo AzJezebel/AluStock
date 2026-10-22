@@ -579,3 +579,21 @@ feat: images de catégories (thème-aware), transactions et morphMap Remplace ca
 
 --------------------------------------------------------------------------------------------------------------------------------
 22/10 
+
+feat: Enhance ouvrage creation form with error handling and data persistence
+
+- Added error message display for 'temp_composition' field in the ouvrage creation form.
+- Implemented restoration of 'temp_composition' and 'temp_caracteristiques' data on validation failure.
+- Updated JavaScript to re-render restored composition and characteristics upon page load.
+
+style: Improve media carousel with custom pagination dots
+
+- Introduced custom styles for carousel pagination dots.
+- Replaced thumbnail navigation with dot-based pagination for a cleaner UI.
+- Updated JavaScript to manage active state for pagination dofts.
+
+chore: Remove unused component images
+
+- Deleted obsolete image files from the components directory to clean up storage.
+
+Refactor database seeders: remove unused seeders and update OuvragesTableSeeder with corrected names and timestamps.

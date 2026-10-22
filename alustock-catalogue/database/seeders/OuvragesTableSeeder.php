@@ -23,8 +23,8 @@ class OuvragesTableSeeder extends Seeder
             array (
                 'id' => 7,
                 'reference' => 'BAR009',
-                'nom' => 'MODULO SAN ANDRES',
-                'slug' => 'bar009-modulo-san-andres',
+                'nom' => 'MODULE SAN ANDRES',
+                'slug' => 'bar009-module-san-andres',
                 'categorie_id' => 2,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -37,14 +37,14 @@ class OuvragesTableSeeder extends Seeder
                 'image_principale' => NULL,
                 'est_actif' => 1,
                 'created_at' => '2026-09-15 19:06:18',
-                'updated_at' => '2026-09-23 17:42:57',
+                'updated_at' => '2026-10-22 18:38:19',
             ),
             1 => 
             array (
                 'id' => 8,
                 'reference' => 'BAR020',
-                'nom' => 'MODULO ROMANA',
-                'slug' => 'bar020-modulo-romana',
+                'nom' => 'MODULE ROMANA',
+                'slug' => 'bar020-module-romana',
                 'categorie_id' => 5,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -57,7 +57,7 @@ class OuvragesTableSeeder extends Seeder
                 'image_principale' => NULL,
                 'est_actif' => 1,
                 'created_at' => '2026-09-15 19:41:39',
-                'updated_at' => '2026-09-23 17:42:57',
+                'updated_at' => '2026-10-22 18:38:19',
             ),
             2 => 
             array (
@@ -83,8 +83,8 @@ class OuvragesTableSeeder extends Seeder
             array (
                 'id' => 10,
                 'reference' => 'PORTE-002',
-                'nom' => 'PUERTA BATIENTE RANCH',
-                'slug' => 'porte-002-puerta-batiente-ranch',
+                'nom' => 'PORTE BATTANTE RANCH',
+                'slug' => 'porte-002-porte-battante-ranch',
                 'categorie_id' => 2,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -97,7 +97,7 @@ class OuvragesTableSeeder extends Seeder
                 'image_principale' => NULL,
                 'est_actif' => 1,
                 'created_at' => '2026-09-15 20:42:48',
-                'updated_at' => '2026-09-23 17:42:57',
+                'updated_at' => '2026-10-22 18:38:19',
             ),
             4 => 
             array (
@@ -123,8 +123,8 @@ class OuvragesTableSeeder extends Seeder
             array (
                 'id' => 13,
                 'reference' => 'REJA RANCH',
-                'nom' => 'REJA RANCH',
-                'slug' => 'reja-ranch-reja-ranch',
+                'nom' => 'GRILLE RANCH',
+                'slug' => 'reja-ranch-grille-ranch',
                 'categorie_id' => 5,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
@@ -137,7 +137,7 @@ class OuvragesTableSeeder extends Seeder
                 'image_principale' => NULL,
                 'est_actif' => 1,
                 'created_at' => '2026-09-18 18:29:21',
-                'updated_at' => '2026-09-23 17:42:57',
+                'updated_at' => '2026-10-22 18:38:19',
             ),
             6 => 
             array (
