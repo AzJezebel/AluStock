@@ -88,10 +88,12 @@ class Ouvrage extends Model
             ->orderBy('media_morph.ordre');
     }
 
-    public function documents(): BelongsToMany
+    public function documents(): MorphToMany
     {
-        return $this->belongsToMany(Document::class, 'document_association')
-            ->withTimestamps();
+        return $this->morphToMany(Document::class, 'documentable', 'document_morph')
+            ->withPivot('ordre')
+            ->withTimestamps()
+            ->orderBy('document_morph.ordre');
     }
 
     public function caracteristiques(): MorphMany

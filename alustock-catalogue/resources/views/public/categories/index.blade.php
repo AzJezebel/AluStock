@@ -21,7 +21,7 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         @forelse($categories as $category)
-            <a href="{{ route('categories.show', $category->slug) }}"
+            <a href="{{ route('ouvrages.index', ['categorie' => $category->slug]) }}"
                class="card-blueprint group relative bg-ink-900 border border-ink-800 hover:border-amber-500/60 transition-colors flex flex-col">
 
                 <span class="tick tick-tl" aria-hidden="true"></span>
@@ -47,7 +47,7 @@
                             {{ $category->nom }}
                         </h3>
                         <span class="shrink-0 font-mono text-[10px] px-2 py-0.5 border border-amber-500/30 bg-amber-500/10 text-amber-400">
-                            {{ number_format($category->references_count, 0, ',', ' ') }} réf.
+                            {{ number_format($category->ouvrages_count, 0, ',', ' ') }} {{ $category->ouvrages_count > 1 ? 'ouvrages' : 'ouvrage' }}
                         </span>
                     </div>
 

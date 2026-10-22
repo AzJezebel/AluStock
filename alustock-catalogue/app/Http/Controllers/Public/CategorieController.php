@@ -13,8 +13,8 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        $categories = Categorie::withReferencesCount()
-                               ->orderBy('nom')
+        $categories = Categorie::withCount('ouvrages')
+                               ->ordonnees()
                                ->get();
 
         $totalCategories = $categories->count();

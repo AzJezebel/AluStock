@@ -145,7 +145,7 @@ class OuvragesTableSeeder extends Seeder
                 'reference' => 'SYSTEME ENROULABLE',
                 'nom' => 'SYSTEME ENROULABLE',
                 'slug' => 'systeme-enroulable-systeme-enroulable',
-                'categorie_id' => NULL,
+                'categorie_id' => 6,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
                 'largeur_min_mm' => NULL,
@@ -157,7 +157,7 @@ class OuvragesTableSeeder extends Seeder
                 'image_principale' => NULL,
                 'est_actif' => 1,
                 'created_at' => '2026-09-21 17:15:14',
-                'updated_at' => '2026-09-23 17:42:57',
+                'updated_at' => '2026-10-22 21:07:17',
             ),
             7 => 
             array (
@@ -325,7 +325,7 @@ class OuvragesTableSeeder extends Seeder
                 'reference' => 'F-DI-003',
                 'nom' => 'ESCALIER 780 RAMPE OVALE',
                 'slug' => 'f-di-003-escalier-780-rampe-ovale',
-                'categorie_id' => NULL,
+                'categorie_id' => 5,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
                 'largeur_min_mm' => NULL,
@@ -337,7 +337,7 @@ class OuvragesTableSeeder extends Seeder
                 'image_principale' => NULL,
                 'est_actif' => 1,
                 'created_at' => '2026-09-24 19:17:52',
-                'updated_at' => '2026-09-24 19:17:52',
+                'updated_at' => '2026-10-22 21:02:57',
             ),
             16 => 
             array (
@@ -402,10 +402,10 @@ class OuvragesTableSeeder extends Seeder
             19 => 
             array (
                 'id' => 29,
-                'reference' => 'EMPTY-001',
+                'reference' => 'DEROUL-001',
                 'nom' => 'DEROULANT',
-                'slug' => 'empty-001-deroulant',
-                'categorie_id' => NULL,
+                'slug' => 'deroul-001-deroulant',
+                'categorie_id' => 6,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
                 'largeur_min_mm' => NULL,
@@ -417,7 +417,7 @@ class OuvragesTableSeeder extends Seeder
                 'image_principale' => NULL,
                 'est_actif' => 1,
                 'created_at' => '2026-09-24 19:35:56',
-                'updated_at' => '2026-09-24 19:35:56',
+                'updated_at' => '2026-10-22 21:07:23',
             ),
             20 => 
             array (
@@ -425,7 +425,7 @@ class OuvragesTableSeeder extends Seeder
                 'reference' => 'OJL-3015-1',
                 'nom' => 'ACCOUPLEMENT JALOUSIE ET PORTE-FENETRE',
                 'slug' => 'ojl-3015-1-accouplement-jalousie-et-porte-fenetre',
-                'categorie_id' => NULL,
+                'categorie_id' => 2,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
                 'largeur_min_mm' => NULL,
@@ -437,7 +437,7 @@ class OuvragesTableSeeder extends Seeder
                 'image_principale' => NULL,
                 'est_actif' => 1,
                 'created_at' => '2026-09-24 19:39:58',
-                'updated_at' => '2026-09-24 19:39:58',
+                'updated_at' => '2026-10-22 21:03:36',
             ),
             21 => 
             array (
@@ -445,7 +445,7 @@ class OuvragesTableSeeder extends Seeder
                 'reference' => 'OJL-3015-2',
                 'nom' => 'ACCOUPLEMENT JALOUSIE ET PORTE-FENETRE',
                 'slug' => 'ojl-3015-2-accouplement-jalousie-et-porte-fenetre',
-                'categorie_id' => NULL,
+                'categorie_id' => 2,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
                 'largeur_min_mm' => NULL,
@@ -457,7 +457,7 @@ class OuvragesTableSeeder extends Seeder
                 'image_principale' => NULL,
                 'est_actif' => 1,
                 'created_at' => '2026-09-24 19:41:26',
-                'updated_at' => '2026-09-24 19:41:26',
+                'updated_at' => '2026-10-22 21:03:45',
             ),
             22 => 
             array (
@@ -465,7 +465,7 @@ class OuvragesTableSeeder extends Seeder
                 'reference' => 'OJL-3015-3',
                 'nom' => 'ACCOUPLEMENT JALOUSIE ET PORTE-FENETRE',
                 'slug' => 'ojl-3015-3-accouplement-jalousie-et-porte-fenetre',
-                'categorie_id' => NULL,
+                'categorie_id' => 2,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
                 'largeur_min_mm' => NULL,
@@ -477,7 +477,7 @@ class OuvragesTableSeeder extends Seeder
                 'image_principale' => NULL,
                 'est_actif' => 1,
                 'created_at' => '2026-09-24 19:43:29',
-                'updated_at' => '2026-09-24 19:43:29',
+                'updated_at' => '2026-10-22 21:03:49',
             ),
             23 => 
             array (
@@ -525,7 +525,7 @@ class OuvragesTableSeeder extends Seeder
                 'reference' => 'FRAPPE-001',
                 'nom' => 'FRAPPE CHASSIS 1 VANTAIL OF',
                 'slug' => 'frappe-001-frappe-chassis-1-vantail-of',
-                'categorie_id' => NULL,
+                'categorie_id' => 1,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
                 'largeur_min_mm' => NULL,
@@ -537,7 +537,7 @@ class OuvragesTableSeeder extends Seeder
                 'image_principale' => NULL,
                 'est_actif' => 1,
                 'created_at' => '2026-09-24 19:57:08',
-                'updated_at' => '2026-09-24 19:57:08',
+                'updated_at' => '2026-10-22 21:04:56',
             ),
             26 => 
             array (
@@ -545,7 +545,7 @@ class OuvragesTableSeeder extends Seeder
                 'reference' => 'FRAPPE-002',
                 'nom' => 'FRAPPE CHASSIS 1 VANTAIL OF',
                 'slug' => 'frappe-002-frappe-chassis-1-vantail-of',
-                'categorie_id' => NULL,
+                'categorie_id' => 1,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
                 'largeur_min_mm' => NULL,
@@ -557,7 +557,7 @@ class OuvragesTableSeeder extends Seeder
                 'image_principale' => NULL,
                 'est_actif' => 1,
                 'created_at' => '2026-09-24 20:00:54',
-                'updated_at' => '2026-09-24 20:00:54',
+                'updated_at' => '2026-10-22 21:05:01',
             ),
             27 => 
             array (
@@ -565,7 +565,7 @@ class OuvragesTableSeeder extends Seeder
                 'reference' => 'FRAPPE-003',
                 'nom' => 'FRAPPE CHASSIS 2 VANTAIL OF',
                 'slug' => 'frappe-003-frappe-chassis-2-vantail-of',
-                'categorie_id' => NULL,
+                'categorie_id' => 1,
                 'description_courte' => NULL,
                 'description_technique' => NULL,
                 'largeur_min_mm' => NULL,
@@ -577,7 +577,7 @@ class OuvragesTableSeeder extends Seeder
                 'image_principale' => NULL,
                 'est_actif' => 1,
                 'created_at' => '2026-09-24 20:04:01',
-                'updated_at' => '2026-09-24 20:04:01',
+                'updated_at' => '2026-10-22 21:05:05',
             ),
             28 => 
             array (

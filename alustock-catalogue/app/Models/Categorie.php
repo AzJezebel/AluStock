@@ -15,7 +15,16 @@ class Categorie extends Model
         'slug',
         'description',
         'image',
+        'ordre',
     ];
+
+    /**
+     * Ordre d'affichage choisi dans l'admin ; à égalité, ordre alphabétique.
+     */
+    public function scopeOrdonnees(Builder $query): Builder
+    {
+        return $query->orderBy('ordre')->orderBy('nom');
+    }
 
     public function ouvrages(): HasMany
     {

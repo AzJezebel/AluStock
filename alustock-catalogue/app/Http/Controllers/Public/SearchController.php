@@ -60,7 +60,7 @@ class SearchController extends Controller
             'type'       => $type,
             'categorie'  => $categorie,
             'sort'       => $sort,
-            'categories' => Categorie::orderBy('nom')->get(),
+            'categories' => Categorie::ordonnees()->get(),
         ]);
     }
 

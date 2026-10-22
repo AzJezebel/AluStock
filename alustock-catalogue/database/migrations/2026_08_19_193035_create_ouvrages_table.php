@@ -31,7 +31,6 @@ return new class extends Migration
 
             // Index composites pour optimiser les filtres
             $table->index(['categorie_id', 'est_actif']);
-            $table->index('reference');
         });
     }
 

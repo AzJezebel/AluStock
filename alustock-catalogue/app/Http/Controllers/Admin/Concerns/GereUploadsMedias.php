@@ -105,6 +105,11 @@ trait GereUploadsMedias
                 $entite->caracteristiques()->delete();
             }
 
+            // Pas de clé étrangère sur documentable_id : on détache à la main.
+            if (method_exists($entite, 'documents')) {
+                $entite->documents()->detach();
+            }
+
             $entite->delete();
         });
 

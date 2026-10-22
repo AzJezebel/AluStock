@@ -14,7 +14,10 @@ return new class extends Migration
             $table->string('slug', 120)->unique();
             $table->text('description')->nullable();
             $table->string('image')->nullable(); // chemin relatif sur le disque public
+            $table->unsignedSmallInteger('ordre')->default(0); // ordre d'affichage (le plus petit d'abord)
             $table->timestamps();
+
+            $table->index('ordre');
         });
     }
 

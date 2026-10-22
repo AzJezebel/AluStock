@@ -51,7 +51,7 @@ class OuvrageController extends Controller
         }
 
         $ouvrages = $query->paginate(20)->withQueryString();
-        $categories = Categorie::orderBy('nom')->get();
+        $categories = Categorie::ordonnees()->get();
 
         return view('admin.ouvrages.index', compact('ouvrages', 'categories', 'sort', 'direction'));
     }
@@ -61,7 +61,7 @@ class OuvrageController extends Controller
      */
     public function create()
     {
-        $categories = Categorie::orderBy('nom')->get();
+        $categories = Categorie::ordonnees()->get();
         $composantsDisponibles = Composant::with('typeComposant')
             ->disponible()
             ->orderBy('designation')
@@ -169,7 +169,7 @@ class OuvrageController extends Controller
             'medias' => fn($q) => $q->orderBy('media_morph.ordre'),
         ]);
 
-        $categories = Categorie::orderBy('nom')->get();
+        $categories = Categorie::ordonnees()->get();
         $composantsDisponibles = Composant::with('typeComposant')
             ->disponible()
             ->orderBy('designation')

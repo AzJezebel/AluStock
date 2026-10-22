@@ -52,6 +52,20 @@
                 </div>
 
                 <div>
+                    <label for="ordre" class="block text-xs font-medium text-admin-600 mb-1">
+                        Ordre d'affichage
+                    </label>
+                    <input type="number" name="ordre" id="ordre" min="0" max="65535" step="1"
+                           value="{{ old('ordre', '') }}"
+                           placeholder="Ex. 3"
+                           class="w-32 px-3 py-2 text-sm border border-admin-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    <p class="mt-1 text-xs text-admin-400">Le plus petit nombre s'affiche en premier. Vide : en dernier.</p>
+                    @error('ordre')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div>
                     <label for="description" class="block text-xs font-medium text-admin-600 mb-1">
                         Description
                     </label>

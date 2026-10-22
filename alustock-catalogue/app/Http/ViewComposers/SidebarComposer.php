@@ -13,6 +13,6 @@ class SidebarComposer
 {
     public function compose(View $view): void
     {
-        $view->with('sidebarCategories', Categorie::withCount('ouvrages')->orderBy('nom')->get());
+        $view->with('sidebarCategories', Categorie::withCount('ouvrages')->ordonnees()->get());
     }
 }

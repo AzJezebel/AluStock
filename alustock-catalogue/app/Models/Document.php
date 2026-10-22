@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Document extends Model
 {
@@ -16,14 +16,18 @@ class Document extends Model
         'taille_octets',
     ];
 
-    public function ouvrages(): BelongsToMany
+    public function ouvrages(): MorphToMany
     {
-        return $this->belongsToMany(Ouvrage::class, 'document_association');
+        return $this->morphedByMany(Ouvrage::class, 'documentable', 'document_morph')
+            ->withPivot('ordre')
+            ->withTimestamps();
     }
 
-    public function composants(): BelongsToMany
+    public function composants(): MorphToMany
     {
-        return $this->belongsToMany(Composant::class, 'document_association');
+        return $this->morphedByMany(Composant::class, 'documentable', 'document_morph')
+            ->withPivot('ordre')
+            ->withTimestamps();
     }
 
     public function getTailleFormattedAttribute()

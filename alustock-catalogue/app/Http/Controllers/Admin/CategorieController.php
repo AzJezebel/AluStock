@@ -25,13 +25,18 @@ class CategorieController extends Controller
             });
         }
 
-        $sort = $request->get('sort', 'nom');
+        $sort = $request->get('sort', 'ordre');
         $direction = $request->get('direction', 'asc');
-        $allowedSorts = ['nom', 'created_at', 'ouvrages_count'];
+        $direction = $direction === 'desc' ? 'desc' : 'asc';
+        $allowedSorts = ['ordre', 'nom', 'created_at', 'ouvrages_count'];
         if (in_array($sort, $allowedSorts)) {
             $query->orderBy($sort, $direction);
+            if ($sort === 'ordre') {
+                $query->orderBy('nom');
+            }
         } else {
-            $query->orderBy('nom');
+            $sort = 'ordre';
+            $query->ordonnees();
         }
 
         $categories = $query->paginate(20)->withQueryString();
@@ -57,9 +62,12 @@ class CategorieController extends Controller
             'image' => 'nullable|image|mimes:png,jpg,jpeg,webp|max:2048',
             'supprimer_image' => 'nullable|boolean',
             'description' => 'nullable|string',
+            'ordre' => 'nullable|integer|min:0|max:65535',
         ]);
 
         $validated['slug'] = Str::slug($request->nom);
+        // Ordre vide : la catégorie est placée en dernier.
+        $validated['ordre'] = $validated['ordre'] ?? ((int) Categorie::max('ordre') + 1);
 
         unset($validated['supprimer_image']);
         if ($request->hasFile('image')) {
@@ -96,10 +104,15 @@ class CategorieController extends Controller
             'image' => 'nullable|image|mimes:png,jpg,jpeg,webp|max:2048',
             'supprimer_image' => 'nullable|boolean',
             'description' => 'nullable|string',
+            'ordre' => 'nullable|integer|min:0|max:65535',
         ]);
 
         if ($request->nom !== $categorie->nom) {
             $validated['slug'] = Str::slug($request->nom);
+        }
+        // Ordre vide : on garde l'ordre actuel.
+        if (! isset($validated['ordre'])) {
+            unset($validated['ordre']);
         }
 
         unset($validated['supprimer_image']);

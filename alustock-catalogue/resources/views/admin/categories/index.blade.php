@@ -22,6 +22,15 @@
         <table class="min-w-full divide-y divide-admin-200">
             <thead class="bg-admin-50">
                 <tr>
+                    <th class="px-4 py-2 text-left text-xs font-medium text-admin-500 uppercase tracking-wider w-16">
+                        <a href="{{ request()->fullUrlWithQuery(['sort' => 'ordre', 'direction' => $sort === 'ordre' && $direction === 'asc' ? 'desc' : 'asc']) }}"
+                           class="hover:text-admin-700 inline-flex items-center gap-1">
+                            Ordre
+                            @if($sort === 'ordre')
+                                <span class="text-admin-400">{{ $direction === 'asc' ? '↑' : '↓' }}</span>
+                            @endif
+                        </a>
+                    </th>
                     <th class="px-4 py-2 text-left text-xs font-medium text-admin-500 uppercase tracking-wider">
                         <a href="{{ request()->fullUrlWithQuery(['sort' => 'nom', 'direction' => $sort === 'nom' && $direction === 'asc' ? 'desc' : 'asc']) }}" 
                            class="hover:text-admin-700 inline-flex items-center gap-1">
@@ -41,6 +50,7 @@
             <tbody class="divide-y divide-admin-100">
                 @forelse($categories as $categorie)
                     <tr class="hover:bg-admin-50 transition">
+                        <td class="px-4 py-2 text-xs text-admin-400 font-mono">{{ $categorie->ordre }}</td>
                         <td class="px-4 py-2 text-sm text-admin-900 font-medium">
                             {{ $categorie->nom }}
                         </td>
@@ -75,7 +85,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="px-4 py-12 text-center text-sm text-admin-400">
+                        <td colspan="7" class="px-4 py-12 text-center text-sm text-admin-400">
                             <svg class="w-10 h-10 mx-auto mb-3 text-admin-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
                             </svg>
