@@ -7,8 +7,8 @@
         
         $mediasJson = $medias->map(function($m) {
             return [
-                'src' => asset('storage/' . $m->chemin_fichier),
-                'thumb' => asset('storage/' . ($m->thumbnail ?? $m->chemin_fichier)),
+                'src' => \App\Support\MediaStorage::url($m->chemin_fichier),
+                'thumb' => \App\Support\MediaStorage::url(($m->thumbnail ?? $m->chemin_fichier)),
                 'title' => $m->titre ?? '',
             ];
         })->values()->toJson();
@@ -35,7 +35,7 @@
                     <div class="carousel-slide absolute inset-0 transition-opacity duration-300 {{ $index === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none' }}"
                          data-index="{{ $index }}">
 
-                        <img src="{{ asset('storage/' . $media->chemin_fichier) }}"
+                        <img src="{{ \App\Support\MediaStorage::url($media->chemin_fichier) }}"
                              alt="{{ $media->titre }}"
                              data-lightbox-trigger
                              data-lightbox-carousel="{{ $carouselId }}"

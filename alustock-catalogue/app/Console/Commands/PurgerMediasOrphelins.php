@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Support\MediaStorage;
 use App\Models\Media;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -86,7 +87,7 @@ class PurgerMediasOrphelins extends Command
         });
 
         foreach (array_unique($chemins) as $chemin) {
-            Storage::disk('public')->delete($chemin);
+            MediaStorage::disk()->delete($chemin);
         }
 
         $this->info('Purge terminée.');
@@ -116,7 +117,7 @@ class PurgerMediasOrphelins extends Command
             ->filter()
             ->flip();
 
-        $disque = Storage::disk('public');
+        $disque = MediaStorage::disk();
         $orphelins = [];
 
         foreach (self::DOSSIERS as $dossier) {

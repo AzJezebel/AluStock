@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Concerns;
 
+use App\Support\MediaStorage;
 use App\Models\Media;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -32,7 +33,7 @@ trait GereUploadsMedias
             return DB::transaction($operation);
         } catch (Throwable $e) {
             foreach ($this->fichiersEcrits as $chemin) {
-                Storage::disk('public')->delete($chemin);
+                MediaStorage::disk()->delete($chemin);
             }
             $this->fichiersEcrits = [];
 
@@ -58,7 +59,7 @@ trait GereUploadsMedias
 
         foreach ($fichiers as $fichier) {
             $nom = Str::uuid() . '.' . $fichier->getClientOriginalExtension();
-            $chemin = $fichier->storeAs($dossier, $nom, 'public');
+            $chemin = MediaStorage::disk()->putFileAs($dossier, $fichier, $nom);
             $this->fichiersEcrits[] = $chemin;
 
             $media = Media::create([
@@ -114,7 +115,7 @@ trait GereUploadsMedias
         });
 
         foreach ($chemins as $chemin) {
-            Storage::disk('public')->delete($chemin);
+            MediaStorage::disk()->delete($chemin);
         }
     }
 }

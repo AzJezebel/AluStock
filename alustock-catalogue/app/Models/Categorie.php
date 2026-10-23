@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\MediaStorage;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -67,7 +68,7 @@ class Categorie extends Model
     // URL publique de la miniature (null si aucune image)
     public function getImageUrlAttribute(): ?string
     {
-        return $this->image ? asset('storage/' . $this->image) : null;
+        return MediaStorage::url($this->image);
     }
 
     public function getRouteKeyName()

@@ -610,3 +610,5 @@ feat: implement category ordering and update related views
 - Refactored document associations to use polymorphic relationships.
 - Removed obsolete document_association migration and created document_morph migration.
 - Updated public views to reflect changes in category routing and display.
+
+Refactor code structure for improved readability and maintainability + deployement with bucket s3

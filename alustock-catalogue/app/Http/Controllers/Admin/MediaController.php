@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Support\MediaStorage;
 use App\Http\Controllers\Controller;
 use App\Models\Media;
 use App\Models\Ouvrage;
@@ -84,8 +85,8 @@ class MediaController extends Controller
         });
 
         // Fichier ensuite : un échec ici laisse au pire un fichier orphelin, jamais une image cassée.
-        if ($chemin && Storage::disk('public')->exists($chemin)) {
-            Storage::disk('public')->delete($chemin);
+        if ($chemin && MediaStorage::disk()->exists($chemin)) {
+            MediaStorage::disk()->delete($chemin);
         }
 
         return back()->with('success', 'Image supprimée.');

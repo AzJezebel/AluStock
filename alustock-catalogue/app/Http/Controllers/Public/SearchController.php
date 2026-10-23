@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Public;
 
+use App\Support\MediaStorage;
 use App\Http\Controllers\Controller;
 use App\Models\Categorie;
 use App\Models\Composant;
@@ -88,7 +89,7 @@ class SearchController extends Controller
                 'label'     => $o->nom,
                 'reference' => $o->reference,
                 'url'       => route('ouvrages.show', $o),
-                'image'     => $o->image_principale ? asset('storage/' . $o->image_principale) : null,
+                'image'     => MediaStorage::url($o->image_principale),
                 'badge'     => 'Ouvrage',
             ];
         }

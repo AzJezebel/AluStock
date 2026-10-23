@@ -4,6 +4,7 @@
 
 namespace App\Models;
 
+use App\Support\MediaStorage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -69,15 +70,13 @@ class Media extends Model
 
     public function getUrlAttribute(): string
     {
-        return $this->chemin_fichier 
-            ? asset('storage/' . $this->chemin_fichier)
-            : '';
+        return MediaStorage::url($this->chemin_fichier) ?? '';
     }
 
     public function getThumbnailUrlAttribute(): string
     {
         if ($this->thumbnail) {
-            return asset('storage/' . $this->thumbnail);
+            return MediaStorage::url($this->thumbnail);
         }
         // Fallback sur l'image principale
         return $this->url;

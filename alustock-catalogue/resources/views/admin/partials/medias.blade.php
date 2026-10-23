@@ -102,7 +102,7 @@
 
                         {{-- Image --}}
                         <div class="aspect-square bg-white flex items-center justify-center overflow-hidden">
-                            <img src="{{ asset('storage/' . $media->chemin_fichier) }}" 
+                            <img src="{{ \App\Support\MediaStorage::url($media->chemin_fichier) }}" 
                                  alt="{{ $media->titre }}"
                                  class="w-full h-full object-contain">
                         </div>

@@ -28,6 +28,14 @@ return [
     |
     */
 
+    /*
+    |--------------------------------------------------------------------------
+    | Disque des images du catalogue
+    |--------------------------------------------------------------------------
+    | "public" en local ; le nom du disque S3 / bucket en production (voir App\Support\MediaStorage).
+    */
+    'media_disk' => env('MEDIA_DISK', 'public'),
+
     'disks' => [
 
         'local' => [

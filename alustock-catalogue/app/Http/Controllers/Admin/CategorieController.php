@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Support\MediaStorage;
 use App\Http\Controllers\Controller;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
@@ -71,8 +72,7 @@ class CategorieController extends Controller
 
         unset($validated['supprimer_image']);
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')
-                ->storeAs('images/categories', Str::uuid() . '.' . $request->file('image')->extension(), 'public');
+            $validated['image'] = MediaStorage::disk()->putFileAs('images/categories', $request->file('image'), Str::uuid() . '.' . $request->file('image')->extension());
         }
 
         Categorie::create($validated);
@@ -118,8 +118,7 @@ class CategorieController extends Controller
         unset($validated['supprimer_image']);
         if ($request->hasFile('image')) {
             $this->supprimerImage($categorie);
-            $validated['image'] = $request->file('image')
-                ->storeAs('images/categories', Str::uuid() . '.' . $request->file('image')->extension(), 'public');
+            $validated['image'] = MediaStorage::disk()->putFileAs('images/categories', $request->file('image'), Str::uuid() . '.' . $request->file('image')->extension());
         } elseif ($request->boolean('supprimer_image')) {
             $this->supprimerImage($categorie);
             $validated['image'] = null;
@@ -149,8 +148,8 @@ class CategorieController extends Controller
 
     private function supprimerImage(Categorie $categorie): void
     {
-        if ($categorie->image && Storage::disk('public')->exists($categorie->image)) {
-            Storage::disk('public')->delete($categorie->image);
+        if ($categorie->image && MediaStorage::disk()->exists($categorie->image)) {
+            MediaStorage::disk()->delete($categorie->image);
         }
     }
 }

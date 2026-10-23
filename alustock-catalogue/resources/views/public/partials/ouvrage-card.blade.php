@@ -13,7 +13,7 @@
 
     <div class="aspect-square bg-ink-950 border-b border-ink-800 overflow-hidden flex items-center justify-center">
         @if($media)
-            <img src="{{ asset('storage/' . $media->chemin_fichier) }}"
+            <img src="{{ \App\Support\MediaStorage::url($media->chemin_fichier) }}"
                  alt="{{ $media->titre ?? $ouvrage->nom }}"
                  class="schema-img w-full h-full object-contain p-2 group-hover:scale-105">
         @else
