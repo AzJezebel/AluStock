@@ -517,11 +517,15 @@
 
             if (!searchInput || !resultsContainer || !resultsList) return;
 
+            // Échappe le texte avant de l'insérer dans du HTML (protection XSS)
+            const esc = s => String(s ?? '').replace(/[&<>"']/g,
+                c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
             function renderResults(data) {
                 if (data.length === 0) {
                     resultsList.innerHTML = `
                         <div class="px-4 py-4 text-sm text-ink-400 text-center">
-                            AUCUN RÉSULTAT POUR "<span class="text-ink-100">${searchInput.value.trim()}</span>"
+                            AUCUN RÉSULTAT POUR "<span class="text-ink-100">${esc(searchInput.value.trim())}</span>"
                         </div>
                     `;
                     resultsContainer.classList.remove('hidden');
@@ -535,15 +539,15 @@
                         : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>';
 
                     html += `
-                        <a href="${item.url}" class="flex items-center gap-3 px-4 py-3 hover:bg-ink-800 transition group">
+                        <a href="${esc(item.url)}" class="flex items-center gap-3 px-4 py-3 hover:bg-ink-800 transition group">
                             <div class="w-8 h-8 flex-shrink-0 border border-ink-600 flex items-center justify-center text-ink-400 group-hover:border-amber-500 group-hover:text-amber-500 transition">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">${icon}</svg>
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="text-sm font-medium text-ink-100 group-hover:text-amber-400 transition truncate">
-                                    ${item.label}
+                                    ${esc(item.label)}
                                 </div>
-                                <span class="text-xs text-ink-500 font-mono">RÉF. ${item.reference}</span>
+                                <span class="text-xs text-ink-500 font-mono">RÉF. ${esc(item.reference)}</span>
                             </div>
                             <svg class="w-4 h-4 text-ink-500 group-hover:text-amber-500 transition flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
