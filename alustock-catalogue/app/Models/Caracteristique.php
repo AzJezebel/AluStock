@@ -31,7 +31,7 @@ class Caracteristique extends Model
     protected function cle(): Attribute
     {
         return Attribute::make(
-            set: fn (string $valeur) => Str::slug($valeur, '_'),
+            set: fn (string $value) => Str::slug($value, '_'),
         );
     }
 

@@ -29,7 +29,7 @@ class ContactMessage extends Model
         'lu_le'     => 'datetime',
     ];
 
-    public function marquerEnvoye(): void
+    public function markSent(): void
     {
         $this->update([
             'statut'    => self::STATUT_ENVOYE,
@@ -38,11 +38,11 @@ class ContactMessage extends Model
         ]);
     }
 
-    public function marquerEchec(string $erreur): void
+    public function markFailed(string $error): void
     {
         $this->update([
             'statut' => self::STATUT_ECHEC,
-            'erreur' => mb_substr($erreur, 0, 1000),
+            'erreur' => mb_substr($error, 0, 1000),
         ]);
     }
 }

@@ -50,9 +50,9 @@ class Ouvrage extends Model
         });
     }
 
-    protected static function uniqueSlug(string $reference, string $nom, ?int $ignoreId = null): string
+    protected static function uniqueSlug(string $reference, string $name, ?int $ignoreId = null): string
     {
-        $base = Str::slug($reference . '-' . $nom);
+        $base = Str::slug($reference . '-' . $name);
         $slug = $base;
         $i = 1;
 
@@ -109,7 +109,7 @@ class Ouvrage extends Model
     protected function reference(): Attribute
     {
         return Attribute::make(
-            set: fn (string $valeur) => mb_strtoupper(trim(preg_replace('/\s+/', ' ', $valeur))),
+            set: fn (string $value) => mb_strtoupper(trim(preg_replace('/\s+/', ' ', $value))),
         );
     }
 
@@ -127,13 +127,13 @@ class Ouvrage extends Model
     }
 
     /** Recherche texte unique (index, search, autocomplete) — les OR sont groupés. */
-    public function scopeRecherche(Builder $query, ?string $terme, bool $complet = true): Builder
+    public function scopeRecherche(Builder $query, ?string $term, bool $complet = true): Builder
     {
-        if ($terme === null || $terme === '') {
+        if ($term === null || $term === '') {
             return $query;
         }
 
-        $like = '%' . addcslashes($terme, '%_\\') . '%';
+        $like = '%' . addcslashes($term, '%_\\') . '%';
 
         return $query->where(function (Builder $q) use ($like, $complet) {
             $q->where('nom', 'LIKE', $like)->orWhere('reference', 'LIKE', $like);

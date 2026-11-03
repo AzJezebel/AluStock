@@ -359,15 +359,15 @@
                 <a href="{{ route('contact.show') }}" class="hover:text-amber-400 transition {{ request()->routeIs('contact.*') ? 'text-amber-400' : '' }}">CONTACT</a>
 
                 {{-- Accès admin discret : cadenas quasi invisible (login), ambre vers le dashboard si connecté --}}
-                @php $adminConnecte = session()->has('admin_logged_in'); @endphp
-                <a href="{{ $adminConnecte ? route('admin.dashboard') : route('admin.login') }}"
+                @php $isAdminLoggedIn = session()->has('admin_logged_in'); @endphp
+                <a href="{{ $isAdminLoggedIn ? route('admin.dashboard') : route('admin.login') }}"
                    rel="nofollow"
-                   title="{{ $adminConnecte ? 'Administration' : 'Connexion' }}"
-                   aria-label="{{ $adminConnecte ? 'Administration' : 'Connexion administrateur' }}"
-                   class="-ml-2 p-1 transition {{ $adminConnecte ? 'text-amber-400 opacity-80 hover:opacity-100' : 'text-ink-400 opacity-20 hover:opacity-70 focus:opacity-70' }}">
+                   title="{{ $isAdminLoggedIn ? 'Administration' : 'Connexion' }}"
+                   aria-label="{{ $isAdminLoggedIn ? 'Administration' : 'Connexion administrateur' }}"
+                   class="-ml-2 p-1 transition {{ $isAdminLoggedIn ? 'text-amber-400 opacity-80 hover:opacity-100' : 'text-ink-400 opacity-20 hover:opacity-70 focus:opacity-70' }}">
                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <rect x="5" y="11" width="14" height="9" rx="1" stroke-width="2"/>
-                        <path stroke-linecap="round" stroke-width="2" d="{{ $adminConnecte ? 'M8 11V8a4 4 0 017.5-2' : 'M8 11V8a4 4 0 018 0v3' }}"/>
+                        <path stroke-linecap="round" stroke-width="2" d="{{ $isAdminLoggedIn ? 'M8 11V8a4 4 0 017.5-2' : 'M8 11V8a4 4 0 018 0v3' }}"/>
                     </svg>
                 </a>
             </div>

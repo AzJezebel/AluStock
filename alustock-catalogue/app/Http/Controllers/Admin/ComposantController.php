@@ -57,10 +57,10 @@ class ComposantController extends Controller
         $validated['est_disponible'] = $request->has('est_disponible');
 
         // Composant + médias en une transaction (fichiers nettoyés si échec)
-        $composant = $this->transactionAvecFichiers(function () use ($request, $validated) {
+        $composant = $this->transactionWithFiles(function () use ($request, $validated) {
             $composant = Composant::create($validated);
 
-            $this->enregistrerMedias(
+            $this->storeMedias(
                 $composant,
                 $request->file('medias_fichiers', []),
                 'images/composants',
@@ -96,7 +96,7 @@ class ComposantController extends Controller
 
     public function destroy(Composant $composant)
     {
-        $this->supprimerAvecMedias($composant);
+        $this->deleteWithMedias($composant);
 
         return redirect()
             ->route('admin.composants.index')

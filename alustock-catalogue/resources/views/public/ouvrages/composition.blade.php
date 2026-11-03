@@ -26,7 +26,7 @@
     $poidsLigne = function ($c) {
         $kgm   = (float) ($c->poids_lineaire_kg_m ?? 0);
         $qte   = (float) ($c->pivot->quantite ?? 0);
-        $barre = (float) ($c->longueur_barre_mm ?? 0);
+        $barLengthMm = (float) ($c->longueur_barre_mm ?? 0);
         $unite = \Illuminate\Support\Str::of((string) ($c->pivot->unite ?? ''))->ascii()->lower()->trim()->toString();
 
         if ($kgm <= 0) {
@@ -36,8 +36,8 @@
             return ['kg' => $kgm * $qte, 'raison' => null,
                     'formule' => rtrim(rtrim(number_format($kgm, 3, '.', ''), '0'), '.') . ' kg/m × ' . rtrim(rtrim(number_format($qte, 2, '.', ''), '0'), '.') . ' m'];
         }
-        if (in_array($unite, ['barre', 'barres'], true) && $barre > 0) {
-            $m = $barre / 1000;
+        if (in_array($unite, ['barre', 'barres'], true) && $barLengthMm > 0) {
+            $m = $barLengthMm / 1000;
             return ['kg' => $kgm * $m * $qte, 'raison' => null,
                     'formule' => rtrim(rtrim(number_format($kgm, 3, '.', ''), '0'), '.') . ' kg/m × ' . rtrim(rtrim(number_format($m, 3, '.', ''), '0'), '.') . ' m (barre) × ' . rtrim(rtrim(number_format($qte, 2, '.', ''), '0'), '.')];
         }
@@ -48,7 +48,7 @@
     foreach ($composition as $c) {
         $poids[$c->id] = $poidsLigne($c);
     }
-    $poidsCalcule = collect($poids)->sum(fn ($p) => $p['kg'] ?? 0);
+    $computedWeight = collect($poids)->sum(fn ($p) => $p['kg'] ?? 0);
     $nbSansPoids  = collect($poids)->filter(fn ($p) => $p['kg'] === null)->count();
 @endphp
 <div>
@@ -70,9 +70,9 @@
                 <span class="text-ink-500">
                     <span class="font-medium text-ink-200">{{ $composition->count() }}</span> composant(s)
                 </span>
-                @if($poidsCalcule > 0)
+                @if($computedWeight > 0)
                     <span class="text-ink-500">
-                        Poids estimé : <span class="font-medium text-ink-200">{{ number_format($poidsCalcule, 2, ',', ' ') }} kg</span>
+                        Poids estimé : <span class="font-medium text-ink-200">{{ number_format($computedWeight, 2, ',', ' ') }} kg</span>
                     </span>
                 @endif
                 <a href="{{ route('ouvrages.show', $ouvrage->slug) }}"
@@ -179,9 +179,9 @@
                                     <span>
                                         <span class="font-medium text-ink-200">{{ $composition->count() }}</span> composant(s) au total
                                     </span>
-                                    @if($poidsCalcule > 0)
+                                    @if($computedWeight > 0)
                                         <span>
-                                            Poids total estimé : <span class="font-bold text-ink-100">{{ number_format($poidsCalcule, 2, ',', ' ') }} kg</span>
+                                            Poids total estimé : <span class="font-bold text-ink-100">{{ number_format($computedWeight, 2, ',', ' ') }} kg</span>
                                             @if($nbSansPoids > 0)
                                                 <span class="text-amber-600 text-[11px] ml-1">({{ $nbSansPoids }} ligne(s) non comptée(s))</span>
                                             @endif
@@ -224,7 +224,7 @@
                 <h3 class="font-mono text-[10px] font-semibold text-ink-500 uppercase tracking-widest mb-2">Informations</h3>
                 <ul class="space-y-1.5 text-sm text-ink-400">
                     <li>• Les quantités sont données par ouvrage fini.</li>
-                    @if($poidsCalcule > 0)
+                    @if($computedWeight > 0)
                         <li>• Poids estimé = Kg/m × longueur (m) × quantité. Les lignes sans Kg/m ou sans longueur (visserie, joints…) ne sont pas comptées.</li>
                     @endif
                     <li>• Cliquez sur "Voir" pour accéder à la fiche technique du composant.</li>

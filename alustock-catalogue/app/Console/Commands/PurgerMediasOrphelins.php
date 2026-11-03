@@ -18,39 +18,39 @@ class PurgerMediasOrphelins extends Command
     protected $description = 'Supprime les liaisons, médias, caractéristiques et fichiers orphelins (entité supprimée).';
 
     /** Dossiers du disque "public" contenant des images gérées par l'application */
-    private const DOSSIERS = ['images/ouvrages', 'images/composants', 'images/categories'];
+    private const DIRECTORIES = ['images/ouvrages', 'images/composants', 'images/categories'];
 
     public function handle(): int
     {
         // 1. Liaisons media_morph et caractéristiques dont l'entité n'existe plus
         $toutesLiaisons = DB::table('media_morph')->get();
-        $estOrpheline = fn ($l) => !$this->entiteExiste($l->mediable_type, $l->mediable_id);
-        $liaisonsOrphelines = $toutesLiaisons->filter($estOrpheline)->values();
-        $caracsOrphelines = DB::table('caracteristiques')->get()
-            ->filter(fn ($c) => !$this->entiteExiste($c->caracterisable_type, $c->caracterisable_id))->values();
+        $estOrpheline = fn ($l) => !$this->entityExists($l->mediable_type, $l->mediable_id);
+        $orphanLinks = $toutesLiaisons->filter($estOrpheline)->values();
+        $orphanCharacteristics = DB::table('caracteristiques')->get()
+            ->filter(fn ($c) => !$this->entityExists($c->caracterisable_type, $c->caracterisable_id))->values();
 
         // 2. Médias qui n'ont plus aucune liaison valide
         $idsAvecLiaisonValide = $toutesLiaisons->reject($estOrpheline)->pluck('media_id')->unique();
-        $mediasOrphelins = Media::withTrashed()->whereNotIn('id', $idsAvecLiaisonValide)->get();
+        $orphanMedias = Media::withTrashed()->whereNotIn('id', $idsAvecLiaisonValide)->get();
 
         // 3. Fichiers du disque non référencés (hors fichiers des médias orphelins, supprimés avec eux)
-        $fichiers = $this->fichiersOrphelins($mediasOrphelins);
+        $files = $this->orphanFiles($orphanMedias);
 
         $this->table(['Élément', 'Nombre'], [
-            ['Liaisons media_morph orphelines', $liaisonsOrphelines->count()],
-            ['Caractéristiques orphelines', $caracsOrphelines->count()],
-            ['Médias sans entité', $mediasOrphelins->count()],
-            ['Autres fichiers non référencés (disque)', count($fichiers)],
+            ['Liaisons media_morph orphelines', $orphanLinks->count()],
+            ['Caractéristiques orphelines', $orphanCharacteristics->count()],
+            ['Médias sans entité', $orphanMedias->count()],
+            ['Autres fichiers non référencés (disque)', count($files)],
         ]);
 
-        foreach (array_slice($fichiers, 0, 15) as $f) {
+        foreach (array_slice($files, 0, 15) as $f) {
             $this->line('  fichier : ' . $f);
         }
-        if (count($fichiers) > 15) {
-            $this->line('  … et ' . (count($fichiers) - 15) . ' autre(s)');
+        if (count($files) > 15) {
+            $this->line('  … et ' . (count($files) - 15) . ' autre(s)');
         }
 
-        if ($liaisonsOrphelines->isEmpty() && $caracsOrphelines->isEmpty() && $mediasOrphelins->isEmpty() && !$fichiers) {
+        if ($orphanLinks->isEmpty() && $orphanCharacteristics->isEmpty() && $orphanMedias->isEmpty() && !$files) {
             $this->info('Rien à purger.');
             return self::SUCCESS;
         }
@@ -66,9 +66,9 @@ class PurgerMediasOrphelins extends Command
         }
 
         // Base : en une transaction. Fichiers : après.
-        $chemins = $fichiers;
-        DB::transaction(function () use ($liaisonsOrphelines, $caracsOrphelines, $mediasOrphelins, &$chemins) {
-            foreach ($liaisonsOrphelines as $l) {
+        $paths = $files;
+        DB::transaction(function () use ($orphanLinks, $orphanCharacteristics, $orphanMedias, &$paths) {
+            foreach ($orphanLinks as $l) {
                 DB::table('media_morph')->where([
                     'media_id' => $l->media_id,
                     'mediable_id' => $l->mediable_id,
@@ -76,18 +76,18 @@ class PurgerMediasOrphelins extends Command
                 ])->delete();
             }
 
-            if ($caracsOrphelines->isNotEmpty()) {
-                DB::table('caracteristiques')->whereIn('id', $caracsOrphelines->pluck('id'))->delete();
+            if ($orphanCharacteristics->isNotEmpty()) {
+                DB::table('caracteristiques')->whereIn('id', $orphanCharacteristics->pluck('id'))->delete();
             }
 
-            foreach ($mediasOrphelins as $media) {
-                $chemins = array_merge($chemins, array_filter([$media->chemin_fichier, $media->thumbnail]));
+            foreach ($orphanMedias as $media) {
+                $paths = array_merge($paths, array_filter([$media->chemin_fichier, $media->thumbnail]));
                 $media->forceDelete();
             }
         });
 
-        foreach (array_unique($chemins) as $chemin) {
-            MediaStorage::disk()->delete($chemin);
+        foreach (array_unique($paths) as $path) {
+            MediaStorage::disk()->delete($path);
         }
 
         $this->info('Purge terminée.');
@@ -95,21 +95,21 @@ class PurgerMediasOrphelins extends Command
     }
 
     /** L'entité pointée par une relation polymorphe existe-t-elle encore ? */
-    private function entiteExiste(string $type, int|string $id): bool
+    private function entityExists(string $type, int|string $id): bool
     {
-        $classe = Relation::getMorphedModel($type) ?? $type;
+        $class = Relation::getMorphedModel($type) ?? $type;
 
-        if (!class_exists($classe)) {
+        if (!class_exists($class)) {
             return false;
         }
 
-        return DB::table((new $classe)->getTable())->where('id', $id)->exists();
+        return DB::table((new $class)->getTable())->where('id', $id)->exists();
     }
 
     /** Fichiers des dossiers d'images qu'aucun média conservé ni aucune catégorie ne référence. */
-    private function fichiersOrphelins($mediasOrphelins): array
+    private function orphanFiles($orphanMedias): array
     {
-        $retires = $mediasOrphelins->flatMap(fn ($m) => [$m->chemin_fichier, $m->thumbnail])->filter();
+        $removed = $orphanMedias->flatMap(fn ($m) => [$m->chemin_fichier, $m->thumbnail])->filter();
 
         $references = Media::withTrashed()->get(['chemin_fichier', 'thumbnail'])
             ->flatMap(fn ($m) => [$m->chemin_fichier, $m->thumbnail])
@@ -117,18 +117,18 @@ class PurgerMediasOrphelins extends Command
             ->filter()
             ->flip();
 
-        $disque = MediaStorage::disk();
-        $orphelins = [];
+        $disk = MediaStorage::disk();
+        $orphans = [];
 
-        foreach (self::DOSSIERS as $dossier) {
-            foreach ($disque->allFiles($dossier) as $chemin) {
-                if (!isset($references[$chemin])) {
-                    $orphelins[] = $chemin;
+        foreach (self::DIRECTORIES as $directory) {
+            foreach ($disk->allFiles($directory) as $path) {
+                if (!isset($references[$path])) {
+                    $orphans[] = $path;
                 }
             }
         }
 
         // Les fichiers référencés par un média orphelin sont supprimés avec lui, on ne les recompte pas
-        return array_values(array_diff($orphelins, $retires->all()));
+        return array_values(array_diff($orphans, $removed->all()));
     }
 }

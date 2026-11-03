@@ -114,7 +114,7 @@ class Composant extends Model
     protected function reference(): Attribute
     {
         return Attribute::make(
-            set: fn (string $valeur) => mb_strtoupper(trim(preg_replace('/\s+/', ' ', $valeur))),
+            set: fn (string $value) => mb_strtoupper(trim(preg_replace('/\s+/', ' ', $value))),
         );
     }
 
@@ -137,13 +137,13 @@ class Composant extends Model
     }
 
     /** Pendant de Ouvrage::scopeRecherche — OR groupés. */
-    public function scopeRecherche(Builder $query, ?string $terme, bool $complet = true): Builder
+    public function scopeRecherche(Builder $query, ?string $term, bool $complet = true): Builder
     {
-        if ($terme === null || $terme === '') {
+        if ($term === null || $term === '') {
             return $query;
         }
 
-        $like = '%' . addcslashes($terme, '%_\\') . '%';
+        $like = '%' . addcslashes($term, '%_\\') . '%';
 
         return $query->where(function (Builder $q) use ($like, $complet) {
             $q->where('designation', 'LIKE', $like)->orWhere('reference', 'LIKE', $like);

@@ -22,7 +22,7 @@ class MediaController extends Controller
      */
     public function storeForOuvrage(StoreMediaRequest $request, Ouvrage $ouvrage)
     {
-        $count = $this->transactionAvecFichiers(fn () => $this->enregistrerMedias(
+        $count = $this->transactionWithFiles(fn () => $this->storeMedias(
             $ouvrage,
             $request->file('fichiers', []),
             'images/ouvrages',
@@ -37,7 +37,7 @@ class MediaController extends Controller
      */
     public function storeForComposant(StoreMediaRequest $request, Composant $composant)
     {
-        $count = $this->transactionAvecFichiers(fn () => $this->enregistrerMedias(
+        $count = $this->transactionWithFiles(fn () => $this->storeMedias(
             $composant,
             $request->file('fichiers', []),
             'images/composants',
@@ -74,7 +74,7 @@ class MediaController extends Controller
      */
     public function destroy(Request $request, Media $media)
     {
-        $chemin = $media->chemin_fichier;
+        $path = $media->chemin_fichier;
 
         // Base d'abord, en une transaction : si ça échoue, le fichier est encore là.
         DB::transaction(function () use ($media) {
@@ -85,8 +85,8 @@ class MediaController extends Controller
         });
 
         // Fichier ensuite : un échec ici laisse au pire un fichier orphelin, jamais une image cassée.
-        if ($chemin && MediaStorage::disk()->exists($chemin)) {
-            MediaStorage::disk()->delete($chemin);
+        if ($path && MediaStorage::disk()->exists($path)) {
+            MediaStorage::disk()->delete($path);
         }
 
         return back()->with('success', 'Image supprimée.');

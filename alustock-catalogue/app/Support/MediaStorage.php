@@ -29,18 +29,18 @@ class MediaStorage
     /**
      * URL publique d'un chemin relatif (ex. "images/ouvrages/xxx.jpg").
      */
-    public static function url(?string $chemin): ?string
+    public static function url(?string $path): ?string
     {
-        if (!$chemin) {
+        if (!$path) {
             return null;
         }
 
         // Disque local : on garde asset(), qui suit l'hôte de la requête (127.0.0.1, domaine…)
         // et ne dépend pas de APP_URL.
         if (config('filesystems.disks.' . self::diskName() . '.driver') === 'local') {
-            return asset('storage/' . ltrim($chemin, '/'));
+            return asset('storage/' . ltrim($path, '/'));
         }
 
-        return self::disk()->url($chemin);
+        return self::disk()->url($path);
     }
 }

@@ -84,13 +84,13 @@ class OuvrageController extends Controller
         $validated['est_actif'] = $request->has('est_actif');
 
         // Tout ou rien : ouvrage, composition, caractéristiques et médias (fichiers nettoyés si échec)
-        $ouvrage = $this->transactionAvecFichiers(function () use ($request, $validated) {
+        $ouvrage = $this->transactionWithFiles(function () use ($request, $validated) {
             $ouvrage = Ouvrage::create($validated);
 
-            $this->attacherComposition($ouvrage, json_decode($request->input('temp_composition', '[]'), true) ?: []);
-            $this->creerCaracteristiques($ouvrage, json_decode($request->input('temp_caracteristiques', '[]'), true) ?: []);
+            $this->attachComposition($ouvrage, json_decode($request->input('temp_composition', '[]'), true) ?: []);
+            $this->createCharacteristics($ouvrage, json_decode($request->input('temp_caracteristiques', '[]'), true) ?: []);
 
-            $this->enregistrerMedias(
+            $this->storeMedias(
                 $ouvrage,
                 $request->file('medias_fichiers', []),
                 'images/ouvrages',
@@ -106,11 +106,11 @@ class OuvrageController extends Controller
     }
 
     /** Lignes de composition saisies dans le formulaire (crée les composants "nouveaux" au passage). */
-    protected function attacherComposition(Ouvrage $ouvrage, array $lignes): void
+    protected function attachComposition(Ouvrage $ouvrage, array $lines): void
     {
         $ordre = 0;
 
-        foreach ($lignes as $item) {
+        foreach ($lines as $item) {
             $composantId = $item['composant_id'] ?? null;
 
             if (empty($composantId) && !empty($item['is_new'])) {
@@ -141,7 +141,7 @@ class OuvrageController extends Controller
         }
     }
 
-    protected function creerCaracteristiques(Ouvrage $ouvrage, array $caracs): void
+    protected function createCharacteristics(Ouvrage $ouvrage, array $caracs): void
     {
         foreach ($caracs as $index => $carac) {
             if (empty($carac['cle']) || empty($carac['valeur'])) continue;
@@ -204,7 +204,7 @@ class OuvrageController extends Controller
      */
     public function destroy(Ouvrage $ouvrage)
     {
-        $this->supprimerAvecMedias($ouvrage);
+        $this->deleteWithMedias($ouvrage);
 
         return redirect()
             ->route('admin.ouvrages.index')

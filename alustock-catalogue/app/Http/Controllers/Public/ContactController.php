@@ -34,13 +34,13 @@ class ContactController extends Controller
             Mail::to(config('contact.to.address'), config('contact.to.name'))
                 ->send(new ContactMessageMail($contact));
 
-            $contact->marquerEnvoye();
+            $contact->markSent();
         } catch (\Throwable $e) {
             Log::error('Contact : échec d\'envoi', [
                 'contact_id' => $contact->id,
                 'error'      => $e->getMessage(),
             ]);
-            $contact->marquerEchec($e->getMessage());
+            $contact->markFailed($e->getMessage());
 
             return back()
                 ->withInput()

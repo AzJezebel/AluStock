@@ -7,7 +7,7 @@
 --}}
 
 @php
-    $routeUpload = $uploadRoute ?? (
+    $resolvedUploadRoute = $uploadRoute ?? (
         $entityType === 'ouvrage' 
             ? route('admin.medias.ouvrages.upload', $entity) 
             : route('admin.medias.composants.upload', $entity)
@@ -155,7 +155,7 @@
 
     {{-- Formulaire d'upload caché (soumis via JS) --}}
     <form data-upload-form 
-          action="{{ $routeUpload }}" 
+          action="{{ $resolvedUploadRoute }}" 
           method="POST" 
           enctype="multipart/form-data"
           class="hidden">

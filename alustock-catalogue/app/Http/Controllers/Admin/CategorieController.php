@@ -117,10 +117,10 @@ class CategorieController extends Controller
 
         unset($validated['supprimer_image']);
         if ($request->hasFile('image')) {
-            $this->supprimerImage($categorie);
+            $this->deleteImage($categorie);
             $validated['image'] = MediaStorage::disk()->putFileAs('images/categories', $request->file('image'), Str::uuid() . '.' . $request->file('image')->extension());
         } elseif ($request->boolean('supprimer_image')) {
-            $this->supprimerImage($categorie);
+            $this->deleteImage($categorie);
             $validated['image'] = null;
         } else {
             unset($validated['image']);
@@ -138,7 +138,7 @@ class CategorieController extends Controller
      */
     public function destroy(Categorie $categorie)
     {
-        $this->supprimerImage($categorie);
+        $this->deleteImage($categorie);
         $categorie->delete();
 
         return redirect()
@@ -146,7 +146,7 @@ class CategorieController extends Controller
             ->with('success', 'Catégorie supprimée.');
     }
 
-    private function supprimerImage(Categorie $categorie): void
+    private function deleteImage(Categorie $categorie): void
     {
         if ($categorie->image && MediaStorage::disk()->exists($categorie->image)) {
             MediaStorage::disk()->delete($categorie->image);

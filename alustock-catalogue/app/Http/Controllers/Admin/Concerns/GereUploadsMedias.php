@@ -19,23 +19,23 @@ use Throwable;
 trait GereUploadsMedias
 {
     /** @var string[] Chemins (disque "public") écrits pendant l'opération en cours */
-    private array $fichiersEcrits = [];
+    private array $writtenFiles = [];
 
     /**
      * Exécute $operation dans une transaction. Si elle échoue : rollback de la base,
      * suppression des fichiers déjà stockés, puis l'exception est relancée.
      */
-    protected function transactionAvecFichiers(callable $operation): mixed
+    protected function transactionWithFiles(callable $operation): mixed
     {
-        $this->fichiersEcrits = [];
+        $this->writtenFiles = [];
 
         try {
             return DB::transaction($operation);
         } catch (Throwable $e) {
-            foreach ($this->fichiersEcrits as $chemin) {
-                MediaStorage::disk()->delete($chemin);
+            foreach ($this->writtenFiles as $path) {
+                MediaStorage::disk()->delete($path);
             }
-            $this->fichiersEcrits = [];
+            $this->writtenFiles = [];
 
             throw $e;
         }
@@ -43,13 +43,13 @@ trait GereUploadsMedias
 
     /**
      * Stocke les fichiers, crée les Media et les attache à l'entité.
-     * À appeler depuis transactionAvecFichiers().
+     * À appeler depuis transactionWithFiles().
      *
      * @return int nombre d'images ajoutées
      */
-    protected function enregistrerMedias(Model $entite, array $fichiers, string $dossier, string $typeMedia = 'schema'): int
+    protected function storeMedias(Model $entite, array $files, string $directory, string $typeMedia = 'schema'): int
     {
-        if (empty($fichiers)) {
+        if (empty($files)) {
             return 0;
         }
 
@@ -57,17 +57,17 @@ trait GereUploadsMedias
         $maxOrdre = $entite->medias()->max('media_morph.ordre') ?? 0;
         $count = 0;
 
-        foreach ($fichiers as $fichier) {
-            $nom = Str::uuid() . '.' . $fichier->getClientOriginalExtension();
-            $chemin = MediaStorage::disk()->putFileAs($dossier, $fichier, $nom);
-            $this->fichiersEcrits[] = $chemin;
+        foreach ($files as $file) {
+            $name = Str::uuid() . '.' . $file->getClientOriginalExtension();
+            $path = MediaStorage::disk()->putFileAs($directory, $file, $name);
+            $this->writtenFiles[] = $path;
 
             $media = Media::create([
-                'chemin_fichier' => $chemin,
-                'titre' => $fichier->getClientOriginalName(),
+                'chemin_fichier' => $path,
+                'titre' => $file->getClientOriginalName(),
                 'type_media' => $typeMedia,
-                'taille_octets' => $fichier->getSize(),
-                'mime_type' => $fichier->getMimeType(),
+                'taille_octets' => $file->getSize(),
+                'mime_type' => $file->getMimeType(),
                 'est_principal' => !$dejaDesMedias && $count === 0,
             ]);
 
@@ -83,11 +83,11 @@ trait GereUploadsMedias
      * Base d'abord, en une transaction ; fichiers ensuite (un échec disque laisse au pire un
      * fichier orphelin). Un média encore utilisé par une autre entité est conservé.
      */
-    protected function supprimerAvecMedias(Model $entite): void
+    protected function deleteWithMedias(Model $entite): void
     {
-        $chemins = [];
+        $paths = [];
 
-        DB::transaction(function () use ($entite, &$chemins) {
+        DB::transaction(function () use ($entite, &$paths) {
             $medias = $entite->medias()->get();
             $entite->medias()->detach();
 
@@ -98,7 +98,7 @@ trait GereUploadsMedias
 
                 if ($encoreUtilise) continue;
 
-                $chemins = array_merge($chemins, array_filter([$media->chemin_fichier, $media->thumbnail]));
+                $paths = array_merge($paths, array_filter([$media->chemin_fichier, $media->thumbnail]));
                 $media->forceDelete();
             }
 
@@ -114,8 +114,8 @@ trait GereUploadsMedias
             $entite->delete();
         });
 
-        foreach ($chemins as $chemin) {
-            MediaStorage::disk()->delete($chemin);
+        foreach ($paths as $path) {
+            MediaStorage::disk()->delete($path);
         }
     }
 }

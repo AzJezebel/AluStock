@@ -21,39 +21,39 @@ class CopierMediasVersDisque extends Command
     public function handle(): int
     {
         $source = Storage::disk($this->option('source'));
-        $cible  = Storage::disk($this->argument('disque'));
+        $target  = Storage::disk($this->argument('disque'));
         $dryRun = (bool) $this->option('dry-run');
 
-        $copies = $ignores = $erreurs = 0;
+        $copies = $ignored = $errors = 0;
 
-        foreach ($source->allFiles('images') as $chemin) {
-            if ($cible->exists($chemin)) {
-                $ignores++;
+        foreach ($source->allFiles('images') as $path) {
+            if ($target->exists($path)) {
+                $ignored++;
                 continue;
             }
 
             if ($dryRun) {
-                $this->line("à copier : {$chemin}");
+                $this->line("à copier : {$path}");
                 $copies++;
                 continue;
             }
 
-            $flux = $source->readStream($chemin);
+            $stream = $source->readStream($path);
 
-            if ($flux !== null && $cible->writeStream($chemin, $flux)) {
+            if ($stream !== null && $target->writeStream($path, $stream)) {
                 $copies++;
             } else {
-                $erreurs++;
-                $this->error("échec : {$chemin}");
+                $errors++;
+                $this->error("échec : {$path}");
             }
 
-            if (is_resource($flux)) {
-                fclose($flux);
+            if (is_resource($stream)) {
+                fclose($stream);
             }
         }
 
-        $this->info(($dryRun ? 'À copier' : 'Copiés') . " : {$copies} · déjà présents : {$ignores} · erreurs : {$erreurs}");
+        $this->info(($dryRun ? 'À copier' : 'Copiés') . " : {$copies} · déjà présents : {$ignored} · erreurs : {$errors}");
 
-        return $erreurs > 0 ? self::FAILURE : self::SUCCESS;
+        return $errors > 0 ? self::FAILURE : self::SUCCESS;
     }
 }
