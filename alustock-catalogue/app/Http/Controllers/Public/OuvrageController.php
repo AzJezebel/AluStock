@@ -42,14 +42,14 @@ class OuvrageController extends Controller
 
         $composantsCount = $ouvrage->composants->count();
 
-        $similaires = Ouvrage::with('categorie')
+        $relatedOuvrages = Ouvrage::with('categorie')
             ->actif()
             ->where('id', '!=', $ouvrage->id)
             ->where('categorie_id', $ouvrage->categorie_id)
             ->limit(6)
             ->get();
 
-        return view('public.ouvrages.show', compact('ouvrage', 'composantsCount', 'similaires'));
+        return view('public.ouvrages.show', compact('ouvrage', 'composantsCount', 'relatedOuvrages'));
     }
 
     /** Composition détaillée (le poids estimé est calculé dans la vue). */

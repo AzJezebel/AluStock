@@ -16,7 +16,7 @@ use Throwable;
  * Une transaction annule la base mais pas le disque : on garde la liste des fichiers
  * écrits pendant l'opération et on les supprime si elle échoue.
  */
-trait GereUploadsMedias
+trait HandlesMediaUploads
 {
     /** @var string[] Chemins (disque "public") écrits pendant l'opération en cours */
     private array $writtenFiles = [];
@@ -47,14 +47,14 @@ trait GereUploadsMedias
      *
      * @return int nombre d'images ajoutées
      */
-    protected function storeMedias(Model $entite, array $files, string $directory, string $typeMedia = 'schema'): int
+    protected function storeMedias(Model $entity, array $files, string $directory, string $typeMedia = 'schema'): int
     {
         if (empty($files)) {
             return 0;
         }
 
-        $dejaDesMedias = $entite->medias()->exists();
-        $maxOrdre = $entite->medias()->max('media_morph.ordre') ?? 0;
+        $hasMedias = $entity->medias()->exists();
+        $maxOrder = $entity->medias()->max('media_morph.ordre') ?? 0;
         $count = 0;
 
         foreach ($files as $file) {
@@ -68,10 +68,10 @@ trait GereUploadsMedias
                 'type_media' => $typeMedia,
                 'taille_octets' => $file->getSize(),
                 'mime_type' => $file->getMimeType(),
-                'est_principal' => !$dejaDesMedias && $count === 0,
+                'est_principal' => !$hasMedias && $count === 0,
             ]);
 
-            $entite->medias()->attach($media->id, ['ordre' => $maxOrdre + $count + 1]);
+            $entity->medias()->attach($media->id, ['ordre' => $maxOrder + $count + 1]);
             $count++;
         }
 
@@ -83,35 +83,35 @@ trait GereUploadsMedias
      * Base d'abord, en une transaction ; fichiers ensuite (un échec disque laisse au pire un
      * fichier orphelin). Un média encore utilisé par une autre entité est conservé.
      */
-    protected function deleteWithMedias(Model $entite): void
+    protected function deleteWithMedias(Model $entity): void
     {
         $paths = [];
 
-        DB::transaction(function () use ($entite, &$paths) {
-            $medias = $entite->medias()->get();
-            $entite->medias()->detach();
+        DB::transaction(function () use ($entity, &$paths) {
+            $medias = $entity->medias()->get();
+            $entity->medias()->detach();
 
             foreach ($medias as $media) {
-                $encoreUtilise = $media->ouvrages()->exists()
+                $stillInUse = $media->ouvrages()->exists()
                     || $media->composants()->exists()
                     || $media->categories()->exists();
 
-                if ($encoreUtilise) continue;
+                if ($stillInUse) continue;
 
                 $paths = array_merge($paths, array_filter([$media->chemin_fichier, $media->thumbnail]));
                 $media->forceDelete();
             }
 
-            if (method_exists($entite, 'caracteristiques')) {
-                $entite->caracteristiques()->delete();
+            if (method_exists($entity, 'caracteristiques')) {
+                $entity->caracteristiques()->delete();
             }
 
             // Pas de clé étrangère sur documentable_id : on détache à la main.
-            if (method_exists($entite, 'documents')) {
-                $entite->documents()->detach();
+            if (method_exists($entity, 'documents')) {
+                $entity->documents()->detach();
             }
 
-            $entite->delete();
+            $entity->delete();
         });
 
         foreach ($paths as $path) {

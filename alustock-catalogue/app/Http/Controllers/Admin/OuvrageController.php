@@ -9,14 +9,14 @@ use App\Models\Ouvrage;
 use App\Models\Categorie;
 use App\Models\Composant;
 use App\Models\TypeComposant;
-use App\Http\Controllers\Admin\Concerns\GereUploadsMedias;
+use App\Http\Controllers\Admin\Concerns\HandlesMediaUploads;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class OuvrageController extends Controller
 {
-    use GereUploadsMedias;
+    use HandlesMediaUploads;
 
     /**
      * Liste des ouvrages avec tri et pagination

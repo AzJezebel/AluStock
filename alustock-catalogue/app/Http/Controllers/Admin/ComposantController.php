@@ -7,13 +7,13 @@ use App\Http\Requests\Admin\StoreComposantRequest;
 use App\Http\Requests\Admin\UpdateComposantRequest;
 use App\Models\Composant;
 use App\Models\TypeComposant;
-use App\Http\Controllers\Admin\Concerns\GereUploadsMedias;
+use App\Http\Controllers\Admin\Concerns\HandlesMediaUploads;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class ComposantController extends Controller
 {
-    use GereUploadsMedias;
+    use HandlesMediaUploads;
 
     public function index(Request $request)
     {

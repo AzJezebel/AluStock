@@ -14,9 +14,9 @@ class SearchTest extends TestCase
 {
     use RefreshDatabase;
 
-    private function ouvrage(string $reference, string $name, bool $actif = true): Ouvrage
+    private function ouvrage(string $reference, string $name, bool $isActive = true): Ouvrage
     {
-        return Ouvrage::create(['reference' => $reference, 'nom' => $name, 'est_actif' => $actif]);
+        return Ouvrage::create(['reference' => $reference, 'nom' => $name, 'est_actif' => $isActive]);
     }
 
     public function test_une_saisie_trop_courte_ne_renvoie_rien(): void

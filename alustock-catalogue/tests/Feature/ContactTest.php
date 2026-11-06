@@ -18,14 +18,14 @@ class ContactTest extends TestCase
 {
     use RefreshDatabase;
 
-    private function donnees(array $surcharge = []): array
+    private function payload(array $overrides = []): array
     {
         return array_merge([
             'nom'     => 'Marie Dupont',
             'email'   => 'marie@example.com',
             'sujet'   => 'Devis porte',
             'message' => 'Bonjour, je souhaite un devis pour une porte.',
-        ], $surcharge);
+        ], $overrides);
     }
 
     // Cas 1
@@ -33,7 +33,7 @@ class ContactTest extends TestCase
     {
         Mail::fake();
 
-        $this->post('/contact', $this->donnees())->assertSessionHas('success');
+        $this->post('/contact', $this->payload())->assertSessionHas('success');
 
         $this->assertDatabaseHas('contact_messages', [
             'email'  => 'marie@example.com',
@@ -55,21 +55,21 @@ class ContactTest extends TestCase
     // Cas 3
     public function test_email_invalide_est_refuse(): void
     {
-        $this->post('/contact', $this->donnees(['email' => 'abc']))
+        $this->post('/contact', $this->payload(['email' => 'abc']))
              ->assertSessionHasErrors('email');
     }
 
     // Cas 4
     public function test_message_trop_court_est_refuse(): void
     {
-        $this->post('/contact', $this->donnees(['message' => 'court']))
+        $this->post('/contact', $this->payload(['message' => 'court']))
              ->assertSessionHasErrors('message');
     }
 
     // Cas 5
     public function test_message_trop_long_est_refuse(): void
     {
-        $this->post('/contact', $this->donnees(['message' => str_repeat('a', 5001)]))
+        $this->post('/contact', $this->payload(['message' => str_repeat('a', 5001)]))
              ->assertSessionHasErrors('message');
     }
 
@@ -78,7 +78,7 @@ class ContactTest extends TestCase
     {
         Mail::fake();
 
-        $this->post('/contact', $this->donnees(['website' => 'http://spam.example']))
+        $this->post('/contact', $this->payload(['website' => 'http://spam.example']))
              ->assertSessionHasErrors('website');
 
         $this->assertDatabaseCount('contact_messages', 0);
@@ -89,12 +89,12 @@ class ContactTest extends TestCase
     public function test_balise_script_est_enregistree_sans_etre_executee(): void
     {
         Mail::fake();
-        $texte = '<script>alert(1)</script> bonjour tout le monde';
+        $text = '<script>alert(1)</script> bonjour tout le monde';
 
-        $this->post('/contact', $this->donnees(['message' => $texte]))
+        $this->post('/contact', $this->payload(['message' => $text]))
              ->assertSessionHasNoErrors();
 
-        $this->assertDatabaseHas('contact_messages', ['message' => $texte]);
+        $this->assertDatabaseHas('contact_messages', ['message' => $text]);
     }
 
     // Cas 8 : 3 envois par minute et par IP, le 4e est refusé
@@ -103,10 +103,10 @@ class ContactTest extends TestCase
         Mail::fake();
 
         for ($i = 0; $i < 3; $i++) {
-            $this->post('/contact', $this->donnees());
+            $this->post('/contact', $this->payload());
         }
 
-        $this->post('/contact', $this->donnees())->assertStatus(429);
+        $this->post('/contact', $this->payload())->assertStatus(429);
     }
 
     // Cas 9 : le serveur de messagerie est en panne
@@ -114,7 +114,7 @@ class ContactTest extends TestCase
     {
         Mail::shouldReceive('to')->andThrow(new \RuntimeException('SMTP indisponible'));
 
-        $this->post('/contact', $this->donnees())->assertSessionHas('error');
+        $this->post('/contact', $this->payload())->assertSessionHas('error');
 
         $this->assertDatabaseHas('contact_messages', [
             'email'  => 'marie@example.com',
@@ -125,7 +125,7 @@ class ContactTest extends TestCase
     // Cas 11
     public function test_nom_trop_long_est_refuse(): void
     {
-        $this->post('/contact', $this->donnees(['nom' => str_repeat('a', 121)]))
+        $this->post('/contact', $this->payload(['nom' => str_repeat('a', 121)]))
              ->assertSessionHasErrors('nom');
     }
 
@@ -133,11 +133,11 @@ class ContactTest extends TestCase
     public function test_apostrophes_et_guillemets_sont_acceptes(): void
     {
         Mail::fake();
-        $texte = 'L’ouvrage "ALN-877" et l\'option d\'achat, svp merci';
+        $text = 'L’ouvrage "ALN-877" et l\'option d\'achat, svp merci';
 
-        $this->post('/contact', $this->donnees(['message' => $texte]))
+        $this->post('/contact', $this->payload(['message' => $text]))
              ->assertSessionHasNoErrors();
 
-        $this->assertDatabaseHas('contact_messages', ['message' => $texte]);
+        $this->assertDatabaseHas('contact_messages', ['message' => $text]);
     }
 }

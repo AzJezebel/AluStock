@@ -8,14 +8,14 @@ use App\Models\Media;
 use App\Models\Ouvrage;
 use App\Models\Composant;
 use App\Http\Requests\Admin\StoreMediaRequest;
-use App\Http\Controllers\Admin\Concerns\GereUploadsMedias;
+use App\Http\Controllers\Admin\Concerns\HandlesMediaUploads;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class MediaController extends Controller
 {
-    use GereUploadsMedias;
+    use HandlesMediaUploads;
 
     /**
      * Upload pour un ouvrage

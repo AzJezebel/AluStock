@@ -20,8 +20,8 @@ class CaracteristiqueController extends Controller
 
         // Définir l'ordre par défaut
         if (empty($validated['ordre_affichage'])) {
-            $maxOrdre = $ouvrage->caracteristiques()->max('ordre_affichage') ?? 0;
-            $validated['ordre_affichage'] = $maxOrdre + 1;
+            $maxOrder = $ouvrage->caracteristiques()->max('ordre_affichage') ?? 0;
+            $validated['ordre_affichage'] = $maxOrder + 1;
         }
 
         $ouvrage->caracteristiques()->create($validated);

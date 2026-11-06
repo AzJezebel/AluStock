@@ -26,8 +26,8 @@ class CompositionController extends Controller
 
         // Définir l'ordre par défaut
         if (empty($validated['ordre'])) {
-            $maxOrdre = $ouvrage->composants()->max('composition_ouvrage.ordre') ?? 0;
-            $validated['ordre'] = $maxOrdre + 1;
+            $maxOrder = $ouvrage->composants()->max('composition_ouvrage.ordre') ?? 0;
+            $validated['ordre'] = $maxOrder + 1;
         }
 
         $ouvrage->composants()->attach($validated['composant_id'], [
@@ -85,12 +85,12 @@ class CompositionController extends Controller
             ]);
 
             // Ajouter à la composition
-            $maxOrdre = $ouvrage->composants()->max('composition_ouvrage.ordre') ?? 0;
+            $maxOrder = $ouvrage->composants()->max('composition_ouvrage.ordre') ?? 0;
 
             $ouvrage->composants()->attach($composant->id, [
                 'quantite' => $validated['quantite'],
                 'unite' => $validated['unite'],
-                'ordre' => $maxOrdre + 1,
+                'ordre' => $maxOrder + 1,
             ]);
         });
 
